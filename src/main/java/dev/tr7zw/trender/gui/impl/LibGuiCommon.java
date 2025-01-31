@@ -25,7 +25,7 @@ public final class LibGuiCommon
     @Override
     //#endif
     public void onInitialize() {
-        ScreenNetworkingImpl.init();
+        //        ScreenNetworkingImpl.init();
         ModLoaderUtil.registerConfigScreen((screen) -> new CottonClientScreen(
                 Component.translatable("options.libgui.libgui_settings"), new ConfigGui(screen)));
     }

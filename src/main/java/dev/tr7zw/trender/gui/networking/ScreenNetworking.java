@@ -4,7 +4,6 @@ import com.mojang.serialization.Decoder;
 import com.mojang.serialization.Encoder;
 
 import dev.tr7zw.trender.gui.SyncedGuiDescription;
-import dev.tr7zw.trender.gui.impl.ScreenNetworkingImpl;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -56,7 +55,8 @@ public interface ScreenNetworking {
      * @throws NullPointerException if either parameter is null
      */
     static ScreenNetworking of(SyncedGuiDescription description, NetworkSide networkSide) {
-        return ScreenNetworkingImpl.of(description, networkSide);
+        return null;
+        //        return ScreenNetworkingImpl.of(description, networkSide);
     }
 
     /**
