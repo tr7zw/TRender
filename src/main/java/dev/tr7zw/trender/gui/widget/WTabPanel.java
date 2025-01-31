@@ -1,26 +1,5 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.LibGuiCommon;
-import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.widget.data.Axis;
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.icon.Icon;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,6 +9,26 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Consumer;
+
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
+
+import dev.tr7zw.trender.gui.client.BackgroundPainter;
+import dev.tr7zw.trender.gui.client.RenderContext;
+import dev.tr7zw.trender.gui.client.ScreenDrawing;
+import dev.tr7zw.trender.gui.impl.LibGuiCommon;
+import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
+import dev.tr7zw.trender.gui.widget.data.Axis;
+import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
+import dev.tr7zw.trender.gui.widget.data.InputResult;
+import dev.tr7zw.trender.gui.widget.icon.Icon;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.narration.NarratedElementType;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 
 // TODO: Different tab positions
 
@@ -374,7 +373,7 @@ public class WTabPanel extends WPanel {
         }
 
         @Override
-        public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+        public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
             Font renderer = Minecraft.getInstance().font;
             Component title = data.getTitle();
             Icon icon = data.getIcon();

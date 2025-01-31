@@ -291,7 +291,7 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
      * @param delta   the tick delta
      * @since 9.2.0
      */
-    public void paintDescription(GuiGraphics context, int mouseX, int mouseY, float delta) {
+    public void paintDescription(RenderContext context, int mouseX, int mouseY, float delta) {
         if (description != null) {
             WPanel root = description.getRootPanel();
             if (root != null) {
@@ -307,6 +307,7 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
     @Override
     public void render(GuiGraphics context, int mouseX, int mouseY, float partialTicks) {
         super.render(context, mouseX, mouseY, partialTicks);
+        RenderContext renderContext = new RenderContext(context);
         Lighting.setupForFlatItems(); //Needed because super.render leaves dirty state
 
         if (description != null) {
@@ -314,19 +315,20 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
             if (root != null) {
                 WWidget hitChild = root.hit(mouseX - leftPos, mouseY - topPos);
                 if (hitChild != null)
-                    hitChild.renderTooltip(context, leftPos, topPos, mouseX - leftPos, mouseY - topPos);
+                    hitChild.renderTooltip(renderContext, leftPos, topPos, mouseX - leftPos, mouseY - topPos);
             }
         }
 
         renderTooltip(context, mouseX, mouseY); //Draws the itemstack tooltips
-        VisualLogger.render(context);
+        VisualLogger.render(renderContext);
     }
 
     @Override
     protected void renderLabels(GuiGraphics context, int mouseX, int mouseY) {
         if (description != null && description.isTitleVisible()) {
             int width = description.getRootPanel().getWidth();
-            ScreenDrawing.drawString(context, getTitle().getVisualOrderText(), description.getTitleAlignment(),
+            RenderContext renderContext = new RenderContext(context);
+            ScreenDrawing.drawString(renderContext, getTitle().getVisualOrderText(), description.getTitleAlignment(),
                     titleLabelX, titleLabelY, width - 2 * titleLabelX, description.getTitleColor());
         }
 

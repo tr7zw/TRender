@@ -1,23 +1,22 @@
 package dev.tr7zw.trender.gui.widget;
 
+import java.util.function.Consumer;
+
+import org.jetbrains.annotations.Nullable;
+
+import dev.tr7zw.trender.gui.client.RenderContext;
+import dev.tr7zw.trender.gui.client.ScreenDrawing;
+import dev.tr7zw.trender.gui.impl.LibGuiCommon;
+import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
+import dev.tr7zw.trender.gui.widget.data.InputResult;
+import dev.tr7zw.trender.gui.widget.data.Texture;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.LibGuiCommon;
-import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.data.Texture;
-
-import java.util.function.Consumer;
 
 public class WToggleButton extends WWidget {
     // Default on/off images
@@ -105,7 +104,7 @@ public class WToggleButton extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         ScreenDrawing.texturedRect(context, x, y, 18, 18, isOn ? onImage : offImage, 0xFFFFFFFF);
         if (isFocused()) {
             ScreenDrawing.texturedRect(context, x, y, 18, 18, focusImage, 0xFFFFFFFF);

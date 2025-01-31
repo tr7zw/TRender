@@ -1,7 +1,13 @@
 package dev.tr7zw.trender.gui.widget;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiGraphics;
+
+import dev.tr7zw.trender.gui.client.RenderContext;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -9,11 +15,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
-import com.google.common.collect.ImmutableList;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * A widget that displays an item or a list of items.
@@ -52,7 +53,7 @@ public class WItem extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         RenderSystem.enableDepthTest();
         context.renderFakeItem(items.get(current), x + getWidth() / 2 - 8, y + getHeight() / 2 - 8);
     }

@@ -9,6 +9,7 @@ import net.minecraft.world.inventory.ContainerData;
 import org.jetbrains.annotations.Nullable;
 
 import dev.tr7zw.trender.gui.GuiDescription;
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.widget.data.Texture;
 
@@ -143,7 +144,7 @@ public class WBar extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         if (bg != null) {
             ScreenDrawing.texturedRect(context, x, y, getWidth(), getHeight(), bg, 0xFFFFFFFF);
         } else {

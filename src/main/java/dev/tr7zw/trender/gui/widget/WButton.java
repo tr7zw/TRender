@@ -13,6 +13,7 @@ import net.minecraft.sounds.SoundEvents;
 
 import org.jetbrains.annotations.Nullable;
 
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
@@ -89,7 +90,7 @@ public class WButton extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         boolean hovered = isWithinBounds(mouseX, mouseY);
         WidgetSprites textures = WidgetTextures.getButtonTextures(shouldRenderInDarkMode());
         context.blitSprite(RenderType::guiTextured, textures.get(enabled, hovered || isFocused()), x, y, getWidth(),

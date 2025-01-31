@@ -1,7 +1,7 @@
 package dev.tr7zw.trender.gui.widget;
 
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.Scissors;
-import net.minecraft.client.gui.GuiGraphics;
 
 /**
  * A panel that is clipped to only render widgets inside its bounds.
@@ -9,7 +9,7 @@ import net.minecraft.client.gui.GuiGraphics;
 public class WClippedPanel extends WPanel {
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         if (getBackgroundPainter() != null)
             getBackgroundPainter().paintBackground(context, x, y, this);
 

@@ -1,10 +1,9 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.client.gui.GuiGraphics;
-
 import java.util.function.Supplier;
 
 import dev.tr7zw.trender.gui.client.LibGui;
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.TextAlignment;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
@@ -60,7 +59,7 @@ public class WDynamicLabel extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         int yOffset = TextAlignment.getTextOffsetY(verticalAlignment, height, 1);
 
         String tr = text.get();

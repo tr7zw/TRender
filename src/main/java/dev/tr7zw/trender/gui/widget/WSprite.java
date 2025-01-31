@@ -1,8 +1,8 @@
 package dev.tr7zw.trender.gui.widget;
 
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.widget.data.Texture;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
 public class WSprite extends WWidget {
@@ -185,7 +185,7 @@ public class WSprite extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         if (singleImage) {
             paintFrame(context, x, y, frames[0]);
         } else {
@@ -226,7 +226,7 @@ public class WSprite extends WWidget {
      * @param texture the texture to draw
      */
 
-    protected void paintFrame(GuiGraphics context, int x, int y, Texture texture) {
+    protected void paintFrame(RenderContext context, int x, int y, Texture texture) {
         ScreenDrawing.texturedRect(context, x, y, getWidth(), getHeight(), texture, tint);
     }
 }

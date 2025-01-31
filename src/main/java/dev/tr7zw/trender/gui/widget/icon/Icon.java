@@ -1,6 +1,6 @@
 package dev.tr7zw.trender.gui.widget.icon;
 
-import net.minecraft.client.gui.GuiGraphics;
+import dev.tr7zw.trender.gui.client.RenderContext;
 
 /**
  * A square icon for a widget such as a button.
@@ -18,5 +18,5 @@ public interface Icon {
      * @param y       the Y coordinate
      * @param size    the size of this icon in pixels (size N means a N*N square)
      */
-    void paint(GuiGraphics context, int x, int y, int size);
+    void paint(RenderContext context, int x, int y, int size);
 }

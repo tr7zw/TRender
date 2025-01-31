@@ -1,19 +1,18 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.network.chat.Component;
-
 import org.jetbrains.annotations.Nullable;
 
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
 import dev.tr7zw.trender.gui.impl.mixin.client.SliderWidgetAccessor;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
+import net.minecraft.client.gui.narration.NarratedElementType;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.network.chat.Component;
 
 /**
  * A vanilla-style labeled slider widget.
@@ -152,7 +151,7 @@ public class WLabeledSlider extends WAbstractSlider {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         int aWidth = axis == Axis.HORIZONTAL ? width : height;
         int aHeight = axis == Axis.HORIZONTAL ? height : width;
         int rotMouseX = axis == Axis.HORIZONTAL ? (direction == Direction.LEFT ? width - mouseX : mouseX)

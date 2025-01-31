@@ -30,7 +30,7 @@ public interface BackgroundPainter {
      *                coordinates
      * @param panel   The panel being painted
      */
-    public void paintBackground(GuiGraphics context, int left, int top, WWidget panel);
+    public void paintBackground(RenderContext context, int left, int top, WWidget panel);
 
     /**
      * The {@code VANILLA} background painter draws a vanilla-like GUI panel using

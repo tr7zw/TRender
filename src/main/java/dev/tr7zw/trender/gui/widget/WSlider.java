@@ -1,14 +1,13 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
-
 import org.jetbrains.annotations.Nullable;
 
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 import dev.tr7zw.trender.gui.widget.data.Axis;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * A simple slider widget that can be used to select int values.
@@ -43,10 +42,8 @@ public class WSlider extends WAbstractSlider {
         return ao >= aoCenter - TRACK_WIDTH / 2 - 2 && ao <= aoCenter + TRACK_WIDTH / 2 + 2;
     }
 
-    @SuppressWarnings("SuspiciousNameCombination")
-
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         if (backgroundPainter != null) {
             backgroundPainter.paintBackground(context, x, y, this);
         } else {

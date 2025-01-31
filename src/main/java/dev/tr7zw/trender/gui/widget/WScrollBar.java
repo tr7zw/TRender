@@ -1,11 +1,11 @@
 package dev.tr7zw.trender.gui.widget;
 
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.renderer.RenderType;
@@ -48,7 +48,7 @@ public class WScrollBar extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         var matrices = context.pose();
         boolean darkMode = shouldRenderInDarkMode();
         var textures = WidgetTextures.getScrollBarTextures(darkMode);

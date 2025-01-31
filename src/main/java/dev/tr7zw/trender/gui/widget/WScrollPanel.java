@@ -1,12 +1,11 @@
 package dev.tr7zw.trender.gui.widget;
 
-import dev.tr7zw.trender.gui.TriState;
-import net.minecraft.client.gui.GuiGraphics;
-
 import java.util.Objects;
 
 import dev.tr7zw.trender.gui.GuiDescription;
+import dev.tr7zw.trender.gui.TriState;
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.Scissors;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
@@ -141,7 +140,7 @@ public class WScrollPanel extends WPanel {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         if (verticalScrollBar.getValue() != lastVerticalScroll
                 || horizontalScrollBar.getValue() != lastHorizontalScroll) {
             layout();

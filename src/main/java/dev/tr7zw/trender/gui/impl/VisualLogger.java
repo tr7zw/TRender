@@ -8,10 +8,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.message.ParameterizedMessage;
 
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 
@@ -50,7 +50,7 @@ public final class VisualLogger {
         //        }
     }
 
-    public static void render(GuiGraphics context) {
+    public static void render(RenderContext context) {
         var client = Minecraft.getInstance();
         var textRenderer = client.font;
         int width = client.getWindow().getGuiScaledWidth();

@@ -1,7 +1,5 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.client.gui.GuiGraphics;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +8,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 import dev.tr7zw.trender.gui.GuiDescription;
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.impl.Proxy;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
@@ -87,7 +86,7 @@ public class WListPanel<D, W extends WWidget> extends WClippedPanel {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         if (scrollBar.getValue() != lastScroll) {
             layout();
             lastScroll = scrollBar.getValue();

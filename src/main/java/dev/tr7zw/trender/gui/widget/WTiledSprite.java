@@ -1,5 +1,6 @@
 package dev.tr7zw.trender.gui.widget;
 
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.widget.data.Texture;
 import net.minecraft.client.gui.GuiGraphics;
@@ -126,7 +127,7 @@ public class WTiledSprite extends WSprite {
     }
 
     @Override
-    public void paintFrame(GuiGraphics context, int x, int y, Texture texture) {
+    public void paintFrame(RenderContext context, int x, int y, Texture texture) {
         // Y Direction (down)
         for (int tileYOffset = 0; tileYOffset < height; tileYOffset += tileHeight) {
             // X Direction (right)

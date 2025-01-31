@@ -124,7 +124,7 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         }
     }
 
-    private void paint(GuiGraphics context, int mouseX, int mouseY, float delta) {
+    private void paint(RenderContext context, int mouseX, int mouseY, float delta) {
         if (description != null) {
             WPanel root = description.getRootPanel();
             if (root != null) {
@@ -146,18 +146,19 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     @Override
     public void render(GuiGraphics context, int mouseX, int mouseY, float partialTicks) {
         super.render(context, mouseX, mouseY, partialTicks);
-        paint(context, mouseX, mouseY, partialTicks);
+        RenderContext renderContext = new RenderContext(context);
+        paint(renderContext, mouseX, mouseY, partialTicks);
 
         if (description != null) {
             WPanel root = description.getRootPanel();
             if (root != null) {
                 WWidget hitChild = root.hit(mouseX - left, mouseY - top);
                 if (hitChild != null)
-                    hitChild.renderTooltip(context, left, top, mouseX - left, mouseY - top);
+                    hitChild.renderTooltip(renderContext, left, top, mouseX - left, mouseY - top);
             }
         }
 
-        VisualLogger.render(context);
+        VisualLogger.render(renderContext);
     }
 
     @Override

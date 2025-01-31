@@ -1,14 +1,11 @@
 package dev.tr7zw.trender.gui.client;
 
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
-//import juuxel.libninepatch.NinePatch;
-
 import java.util.function.Consumer;
 
-import dev.tr7zw.trender.gui.impl.client.NinePatchTextureRendererImpl;
 import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.Texture;
+import net.minecraft.resources.ResourceLocation;
+//import juuxel.libninepatch.NinePatch;
 
 /**
  * Nine-patch background painters paint rectangles using a special nine-patch
@@ -99,7 +96,7 @@ public final class NinePatchBackgroundPainter implements BackgroundPainter {
     }
 
     @Override
-    public void paintBackground(GuiGraphics context, int left, int top, WWidget panel) {
+    public void paintBackground(RenderContext context, int left, int top, WWidget panel) {
         var matrices = context.pose();
         matrices.pushPose();
         matrices.translate(left - leftPadding, top - topPadding, 0);

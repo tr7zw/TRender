@@ -1,7 +1,5 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.client.gui.GuiGraphics;
-
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +8,7 @@ import java.util.stream.Stream;
 
 import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.widget.data.Insets;
 
 /**
@@ -141,7 +140,7 @@ public abstract class WPanel extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         if (backgroundPainter != null)
             backgroundPainter.paintBackground(context, x, y, this);
 

@@ -1,7 +1,30 @@
 package dev.tr7zw.trender.gui.widget;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnmodifiableView;
+
+import dev.tr7zw.trender.gui.GuiDescription;
+import dev.tr7zw.trender.gui.ValidatedSlot;
+import dev.tr7zw.trender.gui.client.BackgroundPainter;
+import dev.tr7zw.trender.gui.client.RenderContext;
+import dev.tr7zw.trender.gui.impl.LibGuiCommon;
+import dev.tr7zw.trender.gui.impl.VisualLogger;
+import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
+import dev.tr7zw.trender.gui.widget.data.InputResult;
+import dev.tr7zw.trender.gui.widget.data.Rect2i;
+import dev.tr7zw.trender.gui.widget.focus.Focus;
+import dev.tr7zw.trender.gui.widget.focus.FocusModel;
+import dev.tr7zw.trender.gui.widget.icon.Icon;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
@@ -11,30 +34,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.item.ItemStack;
-
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnmodifiableView;
-
-import dev.tr7zw.trender.gui.GuiDescription;
-import dev.tr7zw.trender.gui.ValidatedSlot;
-import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.impl.LibGuiCommon;
-import dev.tr7zw.trender.gui.impl.VisualLogger;
-import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.data.Rect2i;
-import dev.tr7zw.trender.gui.widget.focus.Focus;
-import dev.tr7zw.trender.gui.widget.focus.FocusModel;
-import dev.tr7zw.trender.gui.widget.icon.Icon;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /**
  * A widget that displays an item that can be interacted with.
@@ -556,7 +555,7 @@ public class WItemSlot extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         if (backgroundPainter != null) {
             backgroundPainter.paintBackground(context, x, y, this);
         }

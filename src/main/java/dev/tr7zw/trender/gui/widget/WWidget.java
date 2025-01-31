@@ -10,6 +10,7 @@ import org.lwjgl.glfw.GLFW;
 
 import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.client.LibGui;
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.impl.VisualLogger;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.ObservableProperty;
@@ -365,7 +366,7 @@ public class WWidget {
      * @since 2.0.0
      */
 
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
     }
 
     /**
@@ -395,7 +396,7 @@ public class WWidget {
      * @param tY      the Y coordinate of the tooltip
      */
 
-    public void renderTooltip(GuiGraphics context, int x, int y, int tX, int tY) {
+    public void renderTooltip(RenderContext context, int x, int y, int tX, int tY) {
         TooltipBuilder builder = new TooltipBuilder();
         addTooltip(builder);
 

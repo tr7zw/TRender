@@ -1,8 +1,8 @@
 package dev.tr7zw.trender.gui.widget.icon;
 
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.widget.data.Texture;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -76,7 +76,7 @@ public class TextureIcon implements Icon {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int size) {
+    public void paint(RenderContext context, int x, int y, int size) {
         ScreenDrawing.texturedRect(context, x, y, size, size, texture, color, opacity);
     }
 }

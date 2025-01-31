@@ -1,5 +1,12 @@
 package dev.tr7zw.trender.gui.widget;
 
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
+import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4f;
+import org.lwjgl.glfw.GLFW;
+
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
@@ -9,6 +16,7 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
@@ -21,13 +29,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.CoreShaders;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-
-import org.jetbrains.annotations.Nullable;
-import org.joml.Matrix4f;
-import org.lwjgl.glfw.GLFW;
-
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public class WTextField extends WWidget {
     public static final int TEXT_PADDING_X = 4;
@@ -195,18 +196,18 @@ public class WTextField extends WWidget {
         return this.editable;
     }
 
-    protected void renderBox(GuiGraphics context, int x, int y) {
+    protected void renderBox(RenderContext context, int x, int y) {
         int borderColor = this.isFocused() ? BORDER_COLOR_SELECTED : BORDER_COLOR_UNSELECTED;
         ScreenDrawing.coloredRect(context, x - 1, y - 1, width + 2, height + 2, borderColor);
         ScreenDrawing.coloredRect(context, x, y, width, height, BACKGROUND_COLOR);
     }
 
-    protected void renderText(GuiGraphics context, int x, int y, String visibleText) {
+    protected void renderText(RenderContext context, int x, int y, String visibleText) {
         int textColor = this.editable ? this.enabledColor : this.disabledColor;
         context.drawString(getTextRenderer(), visibleText, x + TEXT_PADDING_X, y + TEXT_PADDING_Y, textColor, true);
     }
 
-    protected void renderCursor(GuiGraphics context, int x, int y, String visibleText) {
+    protected void renderCursor(RenderContext context, int x, int y, String visibleText) {
         if (this.tickCount / 6 % 2 == 0)
             return;
         if (this.cursor < this.scrollOffset)
@@ -218,14 +219,14 @@ public class WTextField extends WWidget {
                 CURSOR_COLOR);
     }
 
-    protected void renderSuggestion(GuiGraphics context, int x, int y) {
+    protected void renderSuggestion(RenderContext context, int x, int y) {
         if (this.suggestion == null)
             return;
         context.drawString(getTextRenderer(), suggestion, x + TEXT_PADDING_X, y + TEXT_PADDING_Y, this.suggestionColor,
                 true);
     }
 
-    protected void renderSelection(GuiGraphics context, int x, int y, String visibleText) {
+    protected void renderSelection(RenderContext context, int x, int y, String visibleText) {
         if (select == cursor || select == -1)
             return;
 
@@ -247,7 +248,7 @@ public class WTextField extends WWidget {
         invertedRect(context, x + TEXT_PADDING_X + leftCaret, y + CURSOR_PADDING_Y, selectionWidth, CURSOR_HEIGHT);
     }
 
-    protected void renderTextField(GuiGraphics context, int x, int y) {
+    protected void renderTextField(RenderContext context, int x, int y) {
         checkScrollOffset();
         String visibleText = getTextRenderer().plainSubstrByWidth(this.text.substring(this.scrollOffset),
                 this.width - 2 * TEXT_PADDING_X);
@@ -262,7 +263,7 @@ public class WTextField extends WWidget {
         renderSelection(context, x, y, visibleText);
     }
 
-    private void invertedRect(GuiGraphics context, int x, int y, int width, int height) {
+    private void invertedRect(RenderContext context, int x, int y, int width, int height) {
         Matrix4f model = context.pose().last().pose();
         RenderSystem.setShaderColor(0.0F, 0.0F, 1.0F, 1.0F);
         RenderSystem.setShader(CoreShaders.POSITION);
@@ -340,7 +341,7 @@ public class WTextField extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         renderTextField(context, x, y);
     }
 

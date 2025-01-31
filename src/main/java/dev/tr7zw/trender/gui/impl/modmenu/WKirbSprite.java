@@ -1,13 +1,12 @@
 package dev.tr7zw.trender.gui.impl.modmenu;
 
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
-
 import java.util.ArrayList;
 
+import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 import dev.tr7zw.trender.gui.widget.WWidget;
+import net.minecraft.resources.ResourceLocation;
 
 public class WKirbSprite extends WWidget {
     private static final ResourceLocation KIRB = LibGuiCommon.id("textures/widget/kirb.png");
@@ -52,7 +51,7 @@ public class WKirbSprite extends WWidget {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int mouseX, int mouseY) {
+    public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         long now = System.nanoTime() / 1_000_000L;
 
         if (pendingFrames.isEmpty()) {

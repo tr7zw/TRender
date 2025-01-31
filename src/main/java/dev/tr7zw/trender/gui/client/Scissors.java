@@ -1,12 +1,12 @@
 package dev.tr7zw.trender.gui.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import java.util.ArrayDeque;
+import java.util.stream.Collectors;
+
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayDeque;
-import java.util.stream.Collectors;
+import net.minecraft.client.Minecraft;
 
 /**
  * Contains a stack for GL scissors for restricting the drawn area of a widget.
@@ -46,7 +46,7 @@ public final class Scissors {
      * @param height  the frame's height in pixels
      * @return the pushed frame
      */
-    public static Frame push(@Nullable GuiGraphics context, int x, int y, int width, int height) {
+    public static Frame push(@Nullable RenderContext context, int x, int y, int width, int height) {
         Frame frame = new Frame(x, y, width, height, context);
         STACK.push(frame);
         if (context != null)
@@ -129,9 +129,9 @@ public final class Scissors {
         private final int y;
         private final int width;
         private final int height;
-        private final @Nullable GuiGraphics context;
+        private final @Nullable RenderContext context;
 
-        private Frame(int x, int y, int width, int height, @Nullable GuiGraphics context) {
+        private Frame(int x, int y, int width, int height, @Nullable RenderContext context) {
             if (width < 0)
                 throw new IllegalArgumentException("Negative width for a stack frame");
             if (height < 0)

@@ -5,6 +5,9 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import com.mojang.blaze3d.vertex.PoseStack;
+
+import dev.tr7zw.trender.gui.client.RenderContext;
+
 import java.util.Objects;
 
 /**
@@ -41,7 +44,7 @@ public class ItemIcon implements Icon {
     }
 
     @Override
-    public void paint(GuiGraphics context, int x, int y, int size) {
+    public void paint(RenderContext context, int x, int y, int size) {
         float scale = size != 16 ? ((float) size / 16f) : 1f;
         PoseStack matrices = context.pose();
         matrices.pushPose();
