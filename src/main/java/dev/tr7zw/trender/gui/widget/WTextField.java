@@ -19,14 +19,13 @@ import dev.tr7zw.trender.gui.client.BackgroundPainter;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
+import dev.tr7zw.trender.gui.impl.client.VanillaShaders;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.CoreShaders;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 
@@ -266,7 +265,7 @@ public class WTextField extends WWidget {
     private void invertedRect(RenderContext context, int x, int y, int width, int height) {
         Matrix4f model = context.pose().last().pose();
         RenderSystem.setShaderColor(0.0F, 0.0F, 1.0F, 1.0F);
-        RenderSystem.setShader(CoreShaders.POSITION);
+        RenderSystem.setShader(VanillaShaders.POSITION);
         RenderSystem.enableColorLogicOp();
         RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
         BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);

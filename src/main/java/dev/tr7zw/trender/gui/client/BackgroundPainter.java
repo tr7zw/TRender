@@ -1,17 +1,14 @@
 package dev.tr7zw.trender.gui.client;
 
-//import juuxel.libninepatch.NinePatch;
-//import juuxel.libninepatch.TextureRegion;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 import dev.tr7zw.trender.gui.widget.WItemSlot;
 import dev.tr7zw.trender.gui.widget.WWidget;
-import dev.tr7zw.trender.gui.widget.data.Texture;
+//import juuxel.libninepatch.NinePatch;
+//import juuxel.libninepatch.TextureRegion;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Background painters are used to paint the background of a widget. The
@@ -206,7 +203,7 @@ public interface BackgroundPainter {
      */
     static BackgroundPainter createGuiSprite(ResourceLocation texture) {
         Objects.requireNonNull(texture, "Texture cannot be null");
-        return (context, left, top, panel) -> context.blitSprite(RenderType::guiTextured, texture, left, top,
-                panel.getWidth(), panel.getHeight());
+        return (context, left, top, panel) -> context.blitSprite(texture, left, top, panel.getWidth(),
+                panel.getHeight());
     }
 }

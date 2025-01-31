@@ -5,7 +5,6 @@ import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
-import dev.tr7zw.trender.gui.impl.mixin.client.DrawContextAccessor;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.Texture;
 import net.minecraft.client.Minecraft;
@@ -13,6 +12,17 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
+
+//#if MC >= 12103
+//#else
+//$$ import com.mojang.blaze3d.systems.RenderSystem;
+//$$ import com.mojang.blaze3d.vertex.BufferBuilder;
+//$$ import com.mojang.blaze3d.vertex.Tesselator;
+//$$ import net.minecraft.client.renderer.GameRenderer;
+//$$ import com.mojang.blaze3d.vertex.VertexFormat;
+//$$ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+//$$ import com.mojang.blaze3d.vertex.BufferUploader;
+//#endif
 
 /**
  * {@code ScreenDrawing} contains utility methods for drawing contents on a
@@ -34,8 +44,8 @@ public class ScreenDrawing {
      * @param color   a color to tint the texture. This can be transparent! Use
      *                0xFF_FFFFFF if you don't want a color tint
      */
-    public static void texturedRect(RenderContext context, int x, int y, int width, int height, ResourceLocation texture,
-            int color) {
+    public static void texturedRect(RenderContext context, int x, int y, int width, int height,
+            ResourceLocation texture, int color) {
         texturedRect(context, x, y, width, height, texture, 0, 0, 1, 1, color, 1.0f);
     }
 
@@ -54,8 +64,8 @@ public class ScreenDrawing {
      *                fully visible)
      * @since 2.0.0
      */
-    public static void texturedRect(RenderContext context, int x, int y, int width, int height, ResourceLocation texture,
-            int color, float opacity) {
+    public static void texturedRect(RenderContext context, int x, int y, int width, int height,
+            ResourceLocation texture, int color, float opacity) {
         texturedRect(context, x, y, width, height, texture, 0, 0, 1, 1, color, opacity);
     }
 
@@ -75,8 +85,8 @@ public class ScreenDrawing {
      * @param color   a color to tint the texture. This can be transparent! Use
      *                0xFF_FFFFFF if you don't want a color tint
      */
-    public static void texturedRect(RenderContext context, int x, int y, int width, int height, ResourceLocation texture,
-            float u1, float v1, float u2, float v2, int color) {
+    public static void texturedRect(RenderContext context, int x, int y, int width, int height,
+            ResourceLocation texture, float u1, float v1, float u2, float v2, int color) {
         texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, color, 1.0f);
     }
 
@@ -124,7 +134,7 @@ public class ScreenDrawing {
         case GUI_SPRITE -> {
             outer: if (texture.u1() == 0 && texture.u2() == 1 && texture.v1() == 0 && texture.v2() == 1) {
                 // If we're drawing the full texture, just let vanilla do it.
-                context.blitSprite(RenderType::guiTextured, texture.image(), x, y, width, height, color);
+                context.blitSprite(texture.image(), x, y, width, height, color);
             } else {
                 // If we're only drawing a region, draw the full texture in a larger size and clip it
                 // to only show the requested region.
@@ -150,7 +160,7 @@ public class ScreenDrawing {
                 // Clip to the wanted area on the screen...
                 try (var frame = Scissors.push(context, x, y, width, height)) {
                     // ...and draw the texture.
-                    context.blitSprite(RenderType::guiTextured, texture.image(), 0, 0, width, height, color);
+                    context.blitSprite(texture.image(), 0, 0, width, height, color);
                 }
 
                 matrices.popPose();
@@ -178,13 +188,14 @@ public class ScreenDrawing {
      *                fully visible)
      * @since 2.0.0
      */
-    public static void texturedRect(RenderContext context, int x, int y, int width, int height, ResourceLocation texture,
-            float u1, float v1, float u2, float v2, int color, float opacity) {
+    public static void texturedRect(RenderContext context, int x, int y, int width, int height,
+            ResourceLocation texture, float u1, float v1, float u2, float v2, int color, float opacity) {
         if (width <= 0)
             width = 1;
         if (height <= 0)
             height = 1;
 
+        //#if MC >= 12103
         float a = (color >> 24 & 255) / 255.0F;
         color = colorAtOpacity(color, a * opacity);
         Matrix4f model = context.pose().last().pose();
@@ -194,6 +205,25 @@ public class ScreenDrawing {
         buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
         buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
         buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
+        //#else
+        //$$ float r = (color >> 16 & 255) / 255.0F;
+        //$$ float g = (color >> 8 & 255) / 255.0F;
+        //$$ float b = (color & 255) / 255.0F;
+        //$$ float a = (color >> 24 & 255) / 255.0F;
+        //$$ Matrix4f model = context.getPoseStack().last().pose();
+        //$$ RenderSystem.enableBlend();
+        //$$ RenderSystem.setShaderTexture(0, texture);
+        //$$ RenderSystem.setShaderColor(r, g, b, opacity * a);
+        //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        //$$ BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        //$$ buffer.addVertex(model, x,         y + height, 0).setUv(u1, v2);
+        //$$ buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2);
+        //$$ buffer.addVertex(model, x + width, y,          0).setUv(u2, v1);
+        //$$ buffer.addVertex(model, x,         y,          0).setUv(u1, v1);
+        //$$ BufferUploader.drawWithShader(buffer.build());
+        //$$ RenderSystem.disableBlend();
+        //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
+        //#endif
     }
 
     /**
@@ -471,8 +501,8 @@ public class ScreenDrawing {
      * @param width   the width of the string, used for aligning
      * @param color   the text color
      */
-    public static void drawStringWithShadow(RenderContext context, FormattedCharSequence text, HorizontalAlignment align,
-            int x, int y, int width, int color) {
+    public static void drawStringWithShadow(RenderContext context, FormattedCharSequence text,
+            HorizontalAlignment align, int x, int y, int width, int color) {
         var textRenderer = Minecraft.getInstance().font;
         switch (align) {
         case LEFT -> {

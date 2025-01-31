@@ -131,6 +131,16 @@ public class RenderContext {
         //#endif
     }
 
+    public void blitSprite(ResourceLocation hotbarOffhandLeftSprite, int x, int y, int width, int height, int color) {
+        //#if MC >= 12102
+        guiGraphics.blitSprite(t -> RenderType.guiTextured(t), hotbarOffhandLeftSprite, x, y, width, height, color);
+        //#elseif MC >= 12002
+        //$$ guiGraphics.blitSprite(hotbarOffhandLeftSprite, x, y, width, height, color);
+        //#else
+        //$$ throw new java.lang.RuntimeException();
+        //#endif
+    }
+
     public void renderTooltip(Font font, List<FormattedCharSequence> split, int x, int y) {
         //#if MC >= 12000
         guiGraphics.renderTooltip(font, split, x, y);
@@ -207,17 +217,8 @@ public class RenderContext {
         guiGraphics.flush();
     }
 
-    public void blitSprite(Function<ResourceLocation,RenderType> function, ResourceLocation texture, int left, int top, int width, int height) {
-        guiGraphics.blitSprite(function, texture, left, top, width, height);
-    }
-
     public void fill(RenderType guiGhostRecipeOverlay, int i, int j, int k, int l, int ghostOverlayColor) {
         guiGraphics.fill(guiGhostRecipeOverlay, i, j, k, l, ghostOverlayColor);
-    }
-
-    public void blitSprite(Function<ResourceLocation, RenderType> function, ResourceLocation image, int i, int j,
-            int width, int height, int color) {
-        guiGraphics.blitSprite(function, image, i, j, width, height, color);
     }
 
     public void drawString(Font textRenderer, String s, int x, int y, int color, boolean b) {
@@ -245,5 +246,9 @@ public class RenderContext {
     public BufferSource getVertexConsumers() {
         return ((DrawContextAccessor) guiGraphics).libgui$getVertexConsumers();
     }
-    
+
+    public PoseStack getPoseStack() {
+        return guiGraphics.pose();
+    }
+
 }

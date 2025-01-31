@@ -1,16 +1,5 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.WidgetSprites;
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-
 import org.jetbrains.annotations.Nullable;
 
 import dev.tr7zw.trender.gui.client.RenderContext;
@@ -20,6 +9,14 @@ import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.client.gui.narration.NarratedElementType;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 
 public class WButton extends WWidget {
     private static final int ICON_SPACING = 2;
@@ -93,8 +90,7 @@ public class WButton extends WWidget {
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         boolean hovered = isWithinBounds(mouseX, mouseY);
         WidgetSprites textures = WidgetTextures.getButtonTextures(shouldRenderInDarkMode());
-        context.blitSprite(RenderType::guiTextured, textures.get(enabled, hovered || isFocused()), x, y, getWidth(),
-                getHeight());
+        context.blitSprite(textures.get(enabled, hovered || isFocused()), x, y, getWidth(), getHeight());
 
         if (icon != null) {
             icon.paint(context, x + ICON_SPACING, y + (getHeight() - iconSize) / 2, iconSize);

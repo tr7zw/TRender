@@ -34,7 +34,7 @@ public final class CottonHud {
                 if (positioner != null) {
                     positioner.reposition(widget, hudWidth, hudHeight);
                 }
-                
+
                 widget.paint(renderContext, widget.getX(), widget.getY(), -1, -1);
             }
         });

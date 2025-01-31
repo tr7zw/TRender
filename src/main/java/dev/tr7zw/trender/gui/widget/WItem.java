@@ -103,8 +103,13 @@ public class WItem extends WWidget {
      */
     @SuppressWarnings("unchecked")
     private static List<ItemStack> getRenderStacks(TagKey<? extends ItemLike> tag) {
+        //#if MC >= 12103
         Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
                 .getValue(tag.registry().location());
+        //#else
+        //$$Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
+        //$$        .get(tag.registry().location());
+        //#endif
         ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
 
         for (Holder<ItemLike> item : registry.getTagOrEmpty((TagKey<ItemLike>) tag)) {
