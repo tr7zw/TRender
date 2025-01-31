@@ -1,0 +1,32 @@
+version: '0.0.2'
+source: "C:\\Users\\tr7zw\\workspace\\ProcessedModTemplate"
+replacements:
+  name: "TRender"
+  id: "trender"
+  version: "1.0.0"
+  description: "Multi version rendering library based on CottonMC LibGui"
+  homepageUrl: "https://github.com/tr7zw/TRender"
+  sourcesUrl: "https://github.com/tr7zw/TRender"
+  issuesUrl: "https://github.com/tr7zw/TRender/issues"
+  licenseName: "MIT"
+  fabric_entrypoint: "dev.tr7zw.trender.gui.impl.client.LibGuiClient"
+  fabric_modmenu_entrypoint: "dev.tr7zw.trender.gui.impl.modmenu.ModMenuSupport"
+  relocationpackage: "dev.tr7zw.trender"
+  licensename: "LICENSE-TRender"
+  versionlessname: "TRender-Versionless"
+  dependencies: "
+    "
+enabledFlags:
+  - autopublish
+rootProject:
+  template: "."
+subProjects:
+  TRender-Versionless:
+    template: "Versionless"
+    replacements:
+      dependencies: '
+
+      compileOnly "com.google.code.gson:gson:2.10.1"
+
+      compileOnly "org.apache.logging.log4j:log4j-core:2.20.0"
+      '

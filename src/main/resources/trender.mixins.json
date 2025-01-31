@@ -1,0 +1,17 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "dev.tr7zw.trender.gui.impl.mixin",
+    "plugin": "dev.tr7zw.trender.gui.impl.LibGuiMixinPlugin",
+    "compatibilityLevel": "JAVA_16",
+    "client": [
+        "client.DrawContextAccessor",
+        "client.HandledScreenMixin",
+        "client.PressableWidgetAccessor",
+        "client.ScreenAccessor",
+        "client.SliderWidgetAccessor"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
