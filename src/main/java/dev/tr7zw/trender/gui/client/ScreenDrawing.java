@@ -22,6 +22,8 @@ import net.minecraft.util.FormattedCharSequence;
 //$$ import com.mojang.blaze3d.vertex.VertexFormat;
 //$$ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 //$$ import com.mojang.blaze3d.vertex.BufferUploader;
+//$$ import com.mojang.blaze3d.vertex.BufferBuilder;
+//$$ import com.mojang.blaze3d.vertex.Tesselator;
 //#endif
 
 /**
@@ -205,7 +207,7 @@ public class ScreenDrawing {
         buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
         buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
         buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
-        //#else
+        //#elseif MC >= 12100
         //$$ float r = (color >> 16 & 255) / 255.0F;
         //$$ float g = (color >> 8 & 255) / 255.0F;
         //$$ float b = (color & 255) / 255.0F;
@@ -221,6 +223,25 @@ public class ScreenDrawing {
         //$$ buffer.addVertex(model, x + width, y,          0).setUv(u2, v1);
         //$$ buffer.addVertex(model, x,         y,          0).setUv(u1, v1);
         //$$ BufferUploader.drawWithShader(buffer.build());
+        //$$ RenderSystem.disableBlend();
+        //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
+        //#else
+        //$$ float r = (color >> 16 & 255) / 255.0F;
+        //$$ float g = (color >> 8 & 255) / 255.0F;
+        //$$ float b = (color & 255) / 255.0F;
+        //$$ float a = (color >> 24 & 255) / 255.0F;
+        //$$ Matrix4f model = context.getPoseStack().last().pose();
+        //$$ RenderSystem.enableBlend();
+        //$$ RenderSystem.setShaderTexture(0, texture);
+        //$$ RenderSystem.setShaderColor(r, g, b, opacity * a);
+        //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        //$$ BufferBuilder buffer = Tesselator.getInstance().getBuilder();
+        //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        //$$ buffer.vertex(model, x,         y + height, 0).uv(u1, v2).endVertex();
+        //$$ buffer.vertex(model, x + width, y + height, 0).uv(u2, v2).endVertex();
+        //$$ buffer.vertex(model, x + width, y,          0).uv(u2, v1).endVertex();
+        //$$ buffer.vertex(model, x,         y,          0).uv(u1, v1).endVertex();
+        //$$ BufferUploader.drawWithShader(buffer.end());
         //$$ RenderSystem.disableBlend();
         //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
         //#endif

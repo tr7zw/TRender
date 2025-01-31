@@ -268,6 +268,7 @@ public class WTextField extends WWidget {
         RenderSystem.setShader(VanillaShaders.POSITION);
         RenderSystem.enableColorLogicOp();
         RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
+        //#if MC >= 12100
         BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
         buffer.addVertex(model, x, y + height, 0);
         buffer.addVertex(model, x + width, y + height, 0);
@@ -276,6 +277,18 @@ public class WTextField extends WWidget {
         BufferUploader.drawWithShader(buffer.buildOrThrow());
         RenderSystem.disableColorLogicOp();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        //#else
+        //$$ Tesselator tessellator = Tesselator.getInstance();
+        //$$ BufferBuilder buffer = tessellator.getBuilder();
+        //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+        //$$ buffer.vertex(model, x, y + height, 0).endVertex();
+        //$$ buffer.vertex(model, x + width, y + height, 0).endVertex();
+        //$$ buffer.vertex(model, x + width, y, 0).endVertex();
+        //$$ buffer.vertex(model, x, y, 0).endVertex();
+        //$$ BufferUploader.drawWithShader(buffer.end());
+        //$$ RenderSystem.disableColorLogicOp();
+        //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        //#endif
     }
 
     public WTextField setTextPredicate(Predicate<String> predicate_1) {
