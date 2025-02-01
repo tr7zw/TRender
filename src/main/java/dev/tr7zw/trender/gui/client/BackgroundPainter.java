@@ -46,9 +46,15 @@ public interface BackgroundPainter {
      *
      * @since 1.5.0
      */
+    //#if MC >= 12002
     public static BackgroundPainter VANILLA = createLightDarkVariants(
             createGuiSprite(LibGuiCommon.id("widget/panel_light")),
             createGuiSprite(LibGuiCommon.id("widget/panel_dark")));
+    //#else
+    //$$public static BackgroundPainter VANILLA = createLightDarkVariants(
+    //$$        createGuiSprite(LibGuiCommon.id("textures/gui/sprites/widget/panel_light.png")),
+    //$$        createGuiSprite(LibGuiCommon.id("textures/gui/sprites/widget/panel_dark.png")));
+    //#endif
 
     /**
      * The {@code SLOT} background painter draws item slots or slot-like widgets.
@@ -204,6 +210,6 @@ public interface BackgroundPainter {
     static BackgroundPainter createGuiSprite(ResourceLocation texture) {
         Objects.requireNonNull(texture, "Texture cannot be null");
         return (context, left, top, panel) -> context.blitSprite(texture, left, top, panel.getWidth(),
-                panel.getHeight());
+                panel.getHeight(), 4, 4, 16, 16);
     }
 }

@@ -2,6 +2,8 @@ package dev.tr7zw.trender.gui.widget;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
@@ -11,7 +13,6 @@ import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -89,8 +90,8 @@ public class WButton extends WWidget {
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         boolean hovered = isWithinBounds(mouseX, mouseY);
-        WidgetSprites textures = WidgetTextures.getButtonTextures(shouldRenderInDarkMode());
-        context.blitSprite(textures.get(enabled, hovered || isFocused()), x, y, getWidth(), getHeight());
+        var textures = WidgetTextures.getButtonTextures(shouldRenderInDarkMode());
+        context.blitSprite(textures.get(enabled, hovered || isFocused()), x, y, getWidth(), getHeight(), 20, 4, 200, 20);
 
         if (icon != null) {
             icon.paint(context, x + ICON_SPACING, y + (getHeight() - iconSize) / 2, iconSize);
@@ -107,8 +108,16 @@ public class WButton extends WWidget {
             int xOffset = (icon != null && alignment == HorizontalAlignment.LEFT)
                     ? ICON_SPACING + iconSize + ICON_SPACING
                     : 0;
+            // FIXME: WHY?
+            //#if MC <= 12001
+            //$$context.getPoseStack().pushPose();
+            //$$context.getPoseStack().translate(0, 0, 300);
+            //#endif
             ScreenDrawing.drawStringWithShadow(context, label.getVisualOrderText(), alignment, x + xOffset,
                     y + ((getHeight() - 8) / 2), width, color); //LibGuiClient.config.darkMode ? darkmodeColor : color);
+            //#if MC <= 12001
+            //$$context.getPoseStack().popPose();
+            //#endif
         }
     }
 

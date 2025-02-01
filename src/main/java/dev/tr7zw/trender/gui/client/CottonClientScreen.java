@@ -9,6 +9,8 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+
 import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.impl.VisualLogger;
 import dev.tr7zw.trender.gui.impl.client.CottonScreenImpl;
@@ -209,8 +211,14 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
+    //#if MC >= 12002
     public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
         super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
+        //#else
+        //$$ public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount) {
+        //$$    super.mouseScrolled(mouseX, mouseY, horizontalAmount);
+        //$$ double verticalAmount = 0;
+        //#endif
 
         int containerX = (int) mouseX - left;
         int containerY = (int) mouseY - top;

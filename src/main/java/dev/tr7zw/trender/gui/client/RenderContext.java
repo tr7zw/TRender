@@ -2,19 +2,21 @@ package dev.tr7zw.trender.gui.client;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 import org.jetbrains.annotations.Nullable;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Divisor;
 
 import dev.tr7zw.trender.gui.impl.mixin.client.DrawContextAccessor;
+import it.unimi.dsi.fastutil.ints.IntIterator;
 import lombok.AllArgsConstructor;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.client.Minecraft;
@@ -87,19 +89,7 @@ public class RenderContext {
     }
 
     public void blit(ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight) {
-        //#if MC >= 12102
-        guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, (float) uOffset, (float) vOffset, uWidth,
-                vHeight, 64, 64);
-        //#elseif MC >= 12000
-        //$$ guiGraphics.blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight);
-        //#elseif MC > 11700
-        //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        //$$ RenderSystem.setShaderTexture(0, atlasLocation);
-        //$$ screen.blit(pose, x, y, uOffset, vOffset, uWidth, vHeight);
-        //#else
-        //$$ minecraft.getTextureManager().bind(atlasLocation);
-        //$$ screen.blit(pose, x, y, uOffset, vOffset, uWidth, vHeight);
-        //#endif
+        blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight, 64, 64);
     }
 
     public void blit(ResourceLocation atlasLocation, int x, int y, int blitOffset, float uOffset, float vOffset,
@@ -121,21 +111,97 @@ public class RenderContext {
         //#endif
     }
 
-    public void blitSprite(ResourceLocation hotbarOffhandLeftSprite, int x, int y, int width, int height) {
+    public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int sliceSide, int sliceTop, int txtWidth, int txtHeight) {
         //#if MC >= 12102
-        guiGraphics.blitSprite(t -> RenderType.guiTextured(t), hotbarOffhandLeftSprite, x, y, width, height);
+        guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height);
         //#elseif MC >= 12002
-        //$$ guiGraphics.blitSprite(hotbarOffhandLeftSprite, x, y, width, height);
+        //$$ guiGraphics.blitSprite(texture, x, y, width, height);
         //#else
-        //$$ throw new java.lang.RuntimeException();
+        //$$ blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight, txtWidth, txtHeight);
         //#endif
     }
 
-    public void blitSprite(ResourceLocation hotbarOffhandLeftSprite, int x, int y, int width, int height, int color) {
+    @SuppressWarnings("unused")
+    private void blitNineSliced(ResourceLocation atlasLocation, int x, int y, int width, int height, int leftSliceWidth,
+            int topSliceHeight, int rightSliceWidth, int bottomSliceHeight, int uWidth, int vHeight, int textureWidth,
+            int textureHeight) {
+        leftSliceWidth = Math.min(leftSliceWidth, width / 2);
+        rightSliceWidth = Math.min(rightSliceWidth, width / 2);
+        topSliceHeight = Math.min(topSliceHeight, height / 2);
+        bottomSliceHeight = Math.min(bottomSliceHeight, height / 2);
+        if (width == uWidth && height == vHeight) {
+            this.blit(atlasLocation, x, y, 0, 0, width, height, textureWidth, textureHeight);
+        } else if (height == vHeight) {
+            this.blit(atlasLocation, x, y, 0, 0, leftSliceWidth, height, textureWidth, textureHeight);
+            this.blitRepeating(atlasLocation, x + leftSliceWidth, y, width - rightSliceWidth - leftSliceWidth, height,
+                    leftSliceWidth, 0, uWidth - rightSliceWidth - leftSliceWidth, vHeight, textureWidth, textureHeight);
+            this.blit(atlasLocation, x + width - rightSliceWidth, y, uWidth - rightSliceWidth, 0, rightSliceWidth,
+                    height, textureWidth, textureHeight);
+        } else if (width == uWidth) {
+            this.blit(atlasLocation, x, y, 0, 0, width, topSliceHeight, textureWidth, textureHeight);
+            this.blitRepeating(atlasLocation, x, y + topSliceHeight, width, height - bottomSliceHeight - topSliceHeight,
+                    0, topSliceHeight, uWidth, vHeight - bottomSliceHeight - topSliceHeight, textureWidth,
+                    textureHeight);
+            this.blit(atlasLocation, x, y + height - bottomSliceHeight, 0, vHeight - bottomSliceHeight, width,
+                    bottomSliceHeight, textureWidth, textureHeight);
+        } else {
+            this.blit(atlasLocation, x, y, 0, 0, leftSliceWidth, topSliceHeight, textureWidth, textureHeight);
+            this.blitRepeating(atlasLocation, x + leftSliceWidth, y, width - rightSliceWidth - leftSliceWidth,
+                    topSliceHeight, leftSliceWidth, 0, uWidth - rightSliceWidth - leftSliceWidth, topSliceHeight,
+                    textureWidth, textureHeight);
+            this.blit(atlasLocation, x + width - rightSliceWidth, y, uWidth - rightSliceWidth, 0, rightSliceWidth,
+                    topSliceHeight, textureWidth, textureHeight);
+            this.blit(atlasLocation, x, y + height - bottomSliceHeight, 0, vHeight - bottomSliceHeight, leftSliceWidth,
+                    bottomSliceHeight, textureWidth, textureHeight);
+            this.blitRepeating(atlasLocation, x + leftSliceWidth, y + height - bottomSliceHeight,
+                    width - rightSliceWidth - leftSliceWidth, bottomSliceHeight, leftSliceWidth,
+                    vHeight - bottomSliceHeight, uWidth - rightSliceWidth - leftSliceWidth, bottomSliceHeight,
+                    textureWidth, textureHeight);
+            this.blit(atlasLocation, x + width - rightSliceWidth, y + height - bottomSliceHeight,
+                    uWidth - rightSliceWidth, vHeight - bottomSliceHeight, rightSliceWidth, bottomSliceHeight,
+                    textureWidth, textureHeight);
+            this.blitRepeating(atlasLocation, x, y + topSliceHeight, leftSliceWidth,
+                    height - bottomSliceHeight - topSliceHeight, 0, topSliceHeight, leftSliceWidth,
+                    vHeight - bottomSliceHeight - topSliceHeight, textureWidth, textureHeight);
+            this.blitRepeating(atlasLocation, x + leftSliceWidth, y + topSliceHeight,
+                    width - rightSliceWidth - leftSliceWidth, height - bottomSliceHeight - topSliceHeight,
+                    leftSliceWidth, topSliceHeight, uWidth - rightSliceWidth - leftSliceWidth,
+                    vHeight - bottomSliceHeight - topSliceHeight, textureWidth, textureHeight);
+            this.blitRepeating(atlasLocation, x + width - rightSliceWidth, y + topSliceHeight, leftSliceWidth,
+                    height - bottomSliceHeight - topSliceHeight, uWidth - rightSliceWidth, topSliceHeight,
+                    rightSliceWidth, vHeight - bottomSliceHeight - topSliceHeight, textureWidth, textureHeight);
+        }
+    }
+
+    private void blitRepeating(ResourceLocation atlasLocation, int x, int y, int width, int height, int uOffset,
+            int vOffset, int sourceWidth, int sourceHeight, int textureWidth, int textureHeight) {
+        int i = x;
+
+        int j;
+        for (IntIterator intIterator = slices(width, sourceWidth); intIterator.hasNext(); i += j) {
+            j = intIterator.nextInt();
+            int k = (sourceWidth - j) / 2;
+            int l = y;
+
+            int m;
+            for (IntIterator intIterator2 = slices(height, sourceHeight); intIterator2.hasNext(); l += m) {
+                m = intIterator2.nextInt();
+                int n = (sourceHeight - m) / 2;
+                this.blit(atlasLocation, i, l, uOffset + k, vOffset + n, j, m, textureWidth, textureHeight);
+            }
+        }
+    }
+
+    private static IntIterator slices(int target, int total) {
+        int i = Mth.positiveCeilDiv(target, total);
+        return new Divisor(target, i);
+    }
+
+    public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int color) {
         //#if MC >= 12102
-        guiGraphics.blitSprite(t -> RenderType.guiTextured(t), hotbarOffhandLeftSprite, x, y, width, height, color);
+        guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height, color);
         //#elseif MC >= 12002
-        //$$ guiGraphics.blitSprite(hotbarOffhandLeftSprite, x, y, width, height, color);
+        //$$ guiGraphics.blitSprite(texture, x, y, width, height, color);
         //#else
         //$$ throw new java.lang.RuntimeException();
         //#endif

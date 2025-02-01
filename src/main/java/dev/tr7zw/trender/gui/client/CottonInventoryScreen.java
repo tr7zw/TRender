@@ -229,8 +229,14 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
     }
 
     @Override
+    //#if MC >= 12002
     public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
         super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
+        //#else
+        //$$ public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount) {
+        //$$    super.mouseScrolled(mouseX, mouseY, horizontalAmount);
+        //$$ double verticalAmount = 0;
+        //#endif
 
         int containerX = (int) mouseX - leftPos;
         int containerY = (int) mouseY - topPos;

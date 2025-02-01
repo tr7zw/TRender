@@ -6,9 +6,9 @@ import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
-import dev.tr7zw.trender.gui.impl.mixin.client.SliderWidgetAccessor;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
+import dev.tr7zw.util.NMSHelper;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
@@ -164,7 +164,8 @@ public class WLabeledSlider extends WAbstractSlider {
             matrices.translate(0, height, 0);
             matrices.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
         }
-        context.blitSprite(SliderWidgetAccessor.libgui$getTexture(), 0, 0, aWidth, aHeight);
+        // FIXME
+        context.blitSprite(NMSHelper.getResourceLocation("widget/slider"), 0, 0, aWidth, aHeight, 0, 0, 0, 0);
 
         int thumbX = Math.round(coordToValueRatio * (value - min));
         int thumbY = 0;
@@ -175,7 +176,8 @@ public class WLabeledSlider extends WAbstractSlider {
 
         var thumbTextures = WidgetTextures.getLabeledSliderHandleTextures(shouldRenderInDarkMode());
         var thumbTexture = thumbTextures.get(true, dragging || hovering);
-        context.blitSprite(thumbTexture, thumbX, thumbY, thumbWidth, thumbHeight);
+        // FIXME
+        context.blitSprite(thumbTexture, thumbX, thumbY, thumbWidth, thumbHeight, 0, 0, 0, 0);
 
         if (label != null) {
             int color = isMouseInsideBounds(mouseX, mouseY) ? 0xFFFFA0 : 0xE0E0E0;
