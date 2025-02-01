@@ -91,7 +91,8 @@ public class WButton extends WWidget {
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         boolean hovered = isWithinBounds(mouseX, mouseY);
         var textures = WidgetTextures.getButtonTextures(shouldRenderInDarkMode());
-        context.blitSprite(textures.get(enabled, hovered || isFocused()), x, y, getWidth(), getHeight(), 20, 4, 200, 20);
+        context.blitSprite(textures.get(enabled, hovered || isFocused()), x, y, getWidth(), getHeight(), 20, 4, 200,
+                20);
 
         if (icon != null) {
             icon.paint(context, x + ICON_SPACING, y + (getHeight() - iconSize) / 2, iconSize);

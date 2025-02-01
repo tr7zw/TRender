@@ -25,6 +25,11 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
+//#if MC >= 12000
+//#else
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
+//#endif
+
 /**
  * A screen for a {@link SyncedGuiDescription}.
  *
@@ -285,8 +290,12 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
     }
 
     @Override
+    //#if MC >= 12000
     protected void renderBg(GuiGraphics context, float partialTicks, int mouseX, int mouseY) {
     } //This is just an AbstractContainerScreen thing; most Screens don't work this way.
+      //#else
+      //$$protected void renderBg(PoseStack context, float partialTicks, int mouseX, int mouseY) {}
+      //#endif
 
     /**
      * Paints the GUI description of this screen.
@@ -311,9 +320,15 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
     }
 
     @Override
+    //#if MC >= 12000
     public void render(GuiGraphics context, int mouseX, int mouseY, float partialTicks) {
         super.render(context, mouseX, mouseY, partialTicks);
         RenderContext renderContext = new RenderContext(context);
+        //#else
+        //$$public void render(PoseStack context, int mouseX, int mouseY, float partialTicks) {
+        //$$    super.render(context, mouseX, mouseY, partialTicks);
+        //$$    RenderContext renderContext = new RenderContext(this, context);
+        //#endif
         Lighting.setupForFlatItems(); //Needed because super.render leaves dirty state
 
         if (description != null) {
@@ -330,10 +345,17 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
     }
 
     @Override
+    //#if MC >= 12000
     protected void renderLabels(GuiGraphics context, int mouseX, int mouseY) {
         if (description != null && description.isTitleVisible()) {
             int width = description.getRootPanel().getWidth();
             RenderContext renderContext = new RenderContext(context);
+            //#else
+            //$$ protected void renderLabels(PoseStack context, int mouseX, int mouseY) {
+            //$$     if (description != null && description.isTitleVisible()) {
+            //$$         int width = description.getRootPanel().getWidth();
+            //$$         RenderContext renderContext = new RenderContext(this, context);
+            //#endif
             ScreenDrawing.drawString(renderContext, getTitle().getVisualOrderText(), description.getTitleAlignment(),
                     titleLabelX, titleLabelY, width - 2 * titleLabelX, description.getTitleColor());
         }

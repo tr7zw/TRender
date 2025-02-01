@@ -10,6 +10,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import dev.tr7zw.trender.gui.client.CottonInventoryScreen;
 import dev.tr7zw.trender.gui.client.RenderContext;
 
+//#if MC >= 12000
+//#else
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
+//#endif
+
 @Mixin(AbstractContainerScreen.class)
 abstract class HandledScreenMixin {
 
@@ -26,10 +31,19 @@ abstract class HandledScreenMixin {
     //$$    }
     //$$ }
     //#else
+    //#if MC >= 12000
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", shift = At.Shift.AFTER), allow = 1)
     private void onSuperRender(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo info) {
+        //#else
+        //$$ @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;render(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V", shift = At.Shift.AFTER), allow = 1)
+        //$$ private void onSuperRender(PoseStack poseStack, int mouseX, int mouseY, float delta, CallbackInfo info) {
+        //#endif
         if ((Object) this instanceof CottonInventoryScreen<?> cottonInventoryScreen) {
+            //#if MC >= 12000
             RenderContext renderContext = new RenderContext(context);
+            //#else
+            //$$ RenderContext renderContext = new RenderContext(((AbstractContainerScreen)(Object)this), poseStack);
+            //#endif
             cottonInventoryScreen.paintDescription(renderContext, mouseX, mouseY, delta);
         }
     }

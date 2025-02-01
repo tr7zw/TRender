@@ -28,7 +28,11 @@ public final class CottonHud {
             Window window = Minecraft.getInstance().getWindow();
             int hudWidth = window.getGuiScaledWidth();
             int hudHeight = window.getGuiScaledHeight();
+            //#if MC >= 12000
             RenderContext renderContext = new RenderContext(drawContext);
+            //#else
+            //$$ RenderContext renderContext = new RenderContext(Minecraft.getInstance().screen, drawContext);
+            //#endif
             for (WWidget widget : widgets) {
                 Positioner positioner = positioners.get(widget);
                 if (positioner != null) {

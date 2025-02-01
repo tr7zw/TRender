@@ -1,10 +1,5 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
-
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
@@ -15,6 +10,9 @@ import dev.tr7zw.trender.gui.impl.VisualLogger;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.ObservableProperty;
 import dev.tr7zw.trender.gui.widget.focus.FocusModel;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 
 /**
  * The base class for all widgets.
@@ -404,7 +402,7 @@ public class WWidget {
             return;
 
         var client = Minecraft.getInstance();
-        context.renderTooltip(client.font, builder.lines, DefaultTooltipPositioner.INSTANCE, tX + x, tY + y);
+        context.renderTooltip(client.font, builder.lines, tX + x, tY + y);
     }
 
     /**

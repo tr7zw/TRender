@@ -53,7 +53,7 @@ public class ItemIcon implements Icon {
         context.renderFakeItem(stack, 0, 0);
 
         if (isGhost()) {
-            context.fill(RenderType.guiGhostRecipeOverlay(), 0, 0, 16, 16, GHOST_OVERLAY_COLOR);
+            context.fill(0, 0, 16, 16, GHOST_OVERLAY_COLOR); // RenderType.guiGhostRecipeOverlay() ?
         }
 
         matrices.popPose();

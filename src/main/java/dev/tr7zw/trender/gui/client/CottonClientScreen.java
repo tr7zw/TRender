@@ -9,8 +9,6 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-
 import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.impl.VisualLogger;
 import dev.tr7zw.trender.gui.impl.client.CottonScreenImpl;
@@ -21,6 +19,11 @@ import dev.tr7zw.trender.gui.impl.mixin.client.ScreenAccessor;
 import dev.tr7zw.trender.gui.widget.WPanel;
 import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
+
+//#if MC >= 12000
+//#else
+//$$ import com.mojang.blaze3d.vertex.PoseStack;
+//#endif
 
 public class CottonClientScreen extends Screen implements CottonScreenImpl {
     private static final VisualLogger LOGGER = new VisualLogger(CottonInventoryScreen.class);
@@ -146,9 +149,15 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
+    //#if MC >= 12000
     public void render(GuiGraphics context, int mouseX, int mouseY, float partialTicks) {
         super.render(context, mouseX, mouseY, partialTicks);
         RenderContext renderContext = new RenderContext(context);
+        //#else
+        //$$public void render(PoseStack context, int mouseX, int mouseY, float partialTicks) {
+        //$$    super.render(context, mouseX, mouseY, partialTicks);
+        //$$    RenderContext renderContext = new RenderContext(this, context);
+        //#endif
         paint(renderContext, mouseX, mouseY, partialTicks);
 
         if (description != null) {

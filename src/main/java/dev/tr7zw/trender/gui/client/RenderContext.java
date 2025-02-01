@@ -11,14 +11,6 @@ import com.mojang.math.Divisor;
 import dev.tr7zw.trender.gui.impl.mixin.client.DrawContextAccessor;
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import lombok.AllArgsConstructor;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 //#if MC < 12102
@@ -26,7 +18,9 @@ import net.minecraft.client.gui.Font;
 //#endif
 //#if MC >= 12000
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
+import net.minecraft.client.renderer.RenderType;
 //#else
 //$$ import net.minecraft.client.gui.screens.Screen;
 //$$ import com.mojang.blaze3d.systems.RenderSystem;
@@ -36,6 +30,15 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositione
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+//#if MC < 12000
+//$$ import net.minecraft.client.renderer.MultiBufferSource;
+//$$ import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
+//#endif
 
 @AllArgsConstructor
 public class RenderContext {
@@ -111,7 +114,8 @@ public class RenderContext {
         //#endif
     }
 
-    public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int sliceSide, int sliceTop, int txtWidth, int txtHeight) {
+    public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int sliceSide, int sliceTop,
+            int txtWidth, int txtHeight) {
         //#if MC >= 12102
         guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height);
         //#elseif MC >= 12002
@@ -267,7 +271,7 @@ public class RenderContext {
         //#if MC >= 12000
         guiGraphics.drawString(font, name, x, y, color);
         //#else
-        //$$ screen.drawString(pose, font, name, x, y, color);
+        //$$ GuiComponent.drawString(pose, font, name, x, y, color);
         //#endif
     }
 
@@ -275,46 +279,63 @@ public class RenderContext {
         //#if MC >= 12000
         guiGraphics.drawCenteredString(font, name, x, y, color);
         //#else
-        //$$ screen.drawCenteredString(pose, font, name, x, y, color);
+        //$$ GuiComponent.drawCenteredString(pose, font, name, x, y, color);
         //#endif
     }
 
     public void flush() {
+        //#if MC >= 12000
         guiGraphics.flush();
-    }
-
-    public void fill(RenderType guiGhostRecipeOverlay, int i, int j, int k, int l, int ghostOverlayColor) {
-        guiGraphics.fill(guiGhostRecipeOverlay, i, j, k, l, ghostOverlayColor);
+        //#endif
     }
 
     public void drawString(Font textRenderer, String s, int x, int y, int color, boolean b) {
+        //#if MC >= 12000
         guiGraphics.drawString(textRenderer, s, x, y, color, b);
+        //#else
+        //$$GuiComponent.drawString(pose, textRenderer, s, x, y, color);
+        //#endif
     }
 
     public void drawString(Font textRenderer, FormattedCharSequence text, int x, int y, int color, boolean b) {
+        //#if MC >= 12000
         guiGraphics.drawString(textRenderer, text, x, y, color, b);
+        //#else
+        //$$GuiComponent.drawString(pose, textRenderer, text, x, y, color);
+        //#endif
     }
 
     public void renderComponentHoverEffect(Font font, @Nullable Style textStyle, int x, int y) {
+        //#if MC >= 12000
         guiGraphics.renderComponentHoverEffect(font, textStyle, x, y);
+        //#else
+        //$$ //TODO?
+        //#endif
     }
 
     public void drawString(Font textRenderer, @Nullable Component suggestion, int x, int y, int suggestionColor,
             boolean b) {
+        //#if MC >= 12000
         guiGraphics.drawString(textRenderer, suggestion, x, y, suggestionColor, b);
-    }
-
-    public void renderTooltip(Font font, List<FormattedCharSequence> lines, ClientTooltipPositioner instance, int i,
-            int j) {
-        guiGraphics.renderTooltip(font, lines, instance, i, j);
+        //#else
+        //$$ GuiComponent.drawString(pose, textRenderer, suggestion, x, y, suggestionColor);
+        //#endif
     }
 
     public BufferSource getVertexConsumers() {
+        //#if MC >= 12000
         return ((DrawContextAccessor) guiGraphics).libgui$getVertexConsumers();
+        //#else
+        //$$ return minecraft.renderBuffers().bufferSource();
+        //#endif
     }
 
     public PoseStack getPoseStack() {
+        //#if MC >= 12000
         return guiGraphics.pose();
+        //#else
+        //$$ return pose;
+        //#endif
     }
 
 }
