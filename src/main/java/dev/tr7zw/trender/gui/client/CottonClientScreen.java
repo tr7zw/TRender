@@ -158,6 +158,11 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         //$$    super.render(context, mouseX, mouseY, partialTicks);
         //$$    RenderContext renderContext = new RenderContext(this, context);
         //#endif
+        //#if MC <= 11904
+        //$$ super.renderBackground(renderContext.getPoseStack());
+        //#elseif MC <= 12001
+        //$$ super.renderBackground(context);
+        //#endif
         paint(renderContext, mouseX, mouseY, partialTicks);
 
         if (description != null) {
