@@ -18,6 +18,7 @@ replacements:
     "
 enabledFlags:
   - autopublish
+  - publishSnapshot
 rootProject:
   template: "."
 subProjects:
