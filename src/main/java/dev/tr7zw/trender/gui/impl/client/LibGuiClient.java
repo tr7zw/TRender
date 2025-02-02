@@ -28,7 +28,6 @@ public class LibGuiClient
         //            ScreenNetworkingImpl.handle(context.client(), context.player(), payload);
         //        });
 
-        //        LibGuiShaders.register();
         Proxy.proxy = new ClientProxy();
     }
 

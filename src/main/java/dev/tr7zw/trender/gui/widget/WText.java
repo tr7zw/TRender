@@ -288,5 +288,5 @@ public class WText extends WWidget {
         builder.add(NarratedElementType.TITLE, text);
     }
     //#endif
-    
+
 }

@@ -561,7 +561,8 @@ public class WTextField extends WWidget {
     //#if MC >= 11800
     @Override
     public void addNarrations(NarrationElementOutput builder) {
-        builder.add(NarratedElementType.TITLE, ComponentProvider.translatable(NarrationMessages.TEXT_FIELD_TITLE_KEY, text));
+        builder.add(NarratedElementType.TITLE,
+                ComponentProvider.translatable(NarrationMessages.TEXT_FIELD_TITLE_KEY, text));
 
         if (suggestion != null) {
             builder.add(NarratedElementType.HINT,

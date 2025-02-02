@@ -84,9 +84,12 @@ public class RenderContext {
         //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
         //$$ RenderSystem.setShaderTexture(0, atlasLocation);
         //$$ screen.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
+        //#elseif MC >= 11800
+        //$$ minecraft.getTextureManager().bind(atlasLocation);
+        //$$ GuiComponent.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
         //#else
         //$$ minecraft.getTextureManager().bind(atlasLocation);
-        //$$ screen.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
+        //$$ GuiComponent.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureHeight, textureWidth);
         //#endif
     }
 
@@ -199,7 +202,7 @@ public class RenderContext {
         int i = positiveCeilDiv(target, total);
         return new Divisor(target, i);
     }
-    
+
     private static int positiveCeilDiv(int x, int y) {
         return -Math.floorDiv(-x, y);
     }

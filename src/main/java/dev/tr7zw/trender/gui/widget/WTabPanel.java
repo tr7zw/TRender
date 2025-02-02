@@ -433,7 +433,8 @@ public class WTabPanel extends WPanel {
             Component label = data.getTitle();
 
             if (label != null) {
-                builder.add(NarratedElementType.TITLE, ComponentProvider.translatable(NarrationMessages.TAB_TITLE_KEY, label));
+                builder.add(NarratedElementType.TITLE,
+                        ComponentProvider.translatable(NarrationMessages.TAB_TITLE_KEY, label));
             }
 
             builder.add(NarratedElementType.POSITION, ComponentProvider.translatable(NarrationMessages.TAB_POSITION_KEY,

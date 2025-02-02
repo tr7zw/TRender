@@ -199,8 +199,7 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
     /** WILL MODIFY toInsert! Returns true if anything was inserted. */
     private boolean insertIntoExisting(ItemStack toInsert, Slot slot, Player player) {
         ItemStack curSlotStack = slot.getItem();
-        if (!curSlotStack.isEmpty() && NMSHelper.isSame(toInsert, curSlotStack)
-                && slot.mayPlace(toInsert)) {
+        if (!curSlotStack.isEmpty() && NMSHelper.isSame(toInsert, curSlotStack) && slot.mayPlace(toInsert)) {
             int combinedAmount = curSlotStack.getCount() + toInsert.getCount();
             int maxAmount = Math.min(toInsert.getMaxStackSize(), slot.getMaxStackSize(toInsert));
             if (combinedAmount <= maxAmount) {
