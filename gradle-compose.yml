@@ -1,5 +1,5 @@
 version: '0.0.2'
-source: "C:\\Users\\tr7zw\\workspace\\ProcessedModTemplate"
+source: "https://github.com/tr7zw/ProcessedModTemplate/tree/libUpdate"
 replacements:
   name: "TRender"
   id: "trender"
