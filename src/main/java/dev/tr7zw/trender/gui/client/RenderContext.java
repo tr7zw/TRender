@@ -32,7 +32,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 //#if MC < 12000
@@ -197,8 +196,12 @@ public class RenderContext {
     }
 
     private static IntIterator slices(int target, int total) {
-        int i = Mth.positiveCeilDiv(target, total);
+        int i = positiveCeilDiv(target, total);
         return new Divisor(target, i);
+    }
+    
+    private static int positiveCeilDiv(int x, int y) {
+        return -Math.floorDiv(-x, y);
     }
 
     private static class Divisor implements IntIterator {
@@ -336,7 +339,7 @@ public class RenderContext {
         guiGraphics.drawString(textRenderer, text, x, y, color, dropShadow);
         //#else
         //$$if(dropShadow){
-        //$$GuiComponent.drawString(pose, textRenderer, text, x, y, color);
+        //$$ textRenderer.drawShadow(pose, text, x, y, color);
         //$$} else {
         //$$ textRenderer.draw(pose, text, x, y, color);
         //$$}

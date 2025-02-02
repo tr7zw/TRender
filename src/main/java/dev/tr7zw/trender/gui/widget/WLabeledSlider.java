@@ -10,8 +10,10 @@ import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.util.ComponentProvider;
 import dev.tr7zw.util.NMSHelper;
+//#if MC >= 11800
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#endif
 import net.minecraft.network.chat.Component;
 
 /**
@@ -188,6 +190,7 @@ public class WLabeledSlider extends WAbstractSlider {
         matrices.popPose();
     }
 
+    //#if MC >= 11800
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         if (getLabel() != null) {
@@ -198,6 +201,7 @@ public class WLabeledSlider extends WAbstractSlider {
             super.addNarrations(builder);
         }
     }
+    //#endif
 
     /**
      * A label updater updates the label of a slider based on the current value.

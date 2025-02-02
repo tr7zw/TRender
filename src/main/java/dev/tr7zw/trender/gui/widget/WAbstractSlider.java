@@ -1,14 +1,17 @@
 package dev.tr7zw.trender.gui.widget;
 
+//#if MC >= 11800
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.network.chat.Component;
+//#endif
 import net.minecraft.util.Mth;
 
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
+//#if MC >= 11800
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
+//#endif
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.util.ComponentProvider;
@@ -375,12 +378,14 @@ public abstract class WAbstractSlider extends WWidget {
         return dragging;
     }
 
+    //#if MC >= 11800
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         builder.add(NarratedElementType.TITLE,
                 ComponentProvider.translatable(NarrationMessages.SLIDER_MESSAGE_KEY, value, min, max));
         builder.add(NarratedElementType.USAGE, NarrationMessages.SLIDER_USAGE);
     }
+    //#endif
 
     /**
      * Tests if the key should decrease sliders with the specified direction.

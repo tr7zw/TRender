@@ -25,8 +25,10 @@ import dev.tr7zw.trender.gui.widget.icon.Icon;
 import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+//#if MC >= 11800
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#endif
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -425,6 +427,7 @@ public class WTabPanel extends WPanel {
             data.addTooltip(tooltip);
         }
 
+        //#if MC >= 11800
         @Override
         public void addNarrations(NarrationElementOutput builder) {
             Component label = data.getTitle();
@@ -436,6 +439,7 @@ public class WTabPanel extends WPanel {
             builder.add(NarratedElementType.POSITION, ComponentProvider.translatable(NarrationMessages.TAB_POSITION_KEY,
                     tabWidgets.indexOf(this) + 1, tabWidgets.size()));
         }
+        //#endif
     }
 
     /**

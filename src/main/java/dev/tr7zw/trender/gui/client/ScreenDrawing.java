@@ -7,6 +7,8 @@ import org.joml.Matrix4f;
 //$$ import com.mojang.math.Matrix4f;
 //#endif
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
@@ -28,6 +30,11 @@ import net.minecraft.util.FormattedCharSequence;
 //$$ import com.mojang.blaze3d.vertex.BufferUploader;
 //$$ import com.mojang.blaze3d.vertex.BufferBuilder;
 //$$ import com.mojang.blaze3d.vertex.Tesselator;
+//#endif
+
+//#if MC <= 11605
+//$$ import com.mojang.blaze3d.platform.GlStateManager;
+//$$ import org.lwjgl.opengl.GL11;
 //#endif
 
 /**
@@ -248,7 +255,7 @@ public class ScreenDrawing {
         //$$ BufferUploader.drawWithShader(buffer.end());
         //$$ RenderSystem.disableBlend();
         //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
-        //#else
+        //#elseif MC >= 11700
         //$$ float r = (color >> 16 & 255) / 255.0F;
         //$$ float g = (color >> 8 & 255) / 255.0F;
         //$$ float b = (color & 255) / 255.0F;
@@ -268,6 +275,24 @@ public class ScreenDrawing {
         //$$ BufferUploader.end(buffer);
         //$$ RenderSystem.disableBlend();
         //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
+        //#else
+        //$$Minecraft.getInstance().getTextureManager().bind(texture);
+        //$$if (width <= 0) width = 1;
+        //$$if (height <= 0) height = 1;
+        //$$float r = (color >> 16 & 255) / 255.0F;
+        //$$float g = (color >> 8 & 255) / 255.0F;
+        //$$float b = (color & 255) / 255.0F;
+        //$$Tesselator tessellator = Tesselator.getInstance();
+        //$$BufferBuilder buffer = tessellator.getBuilder();
+        //$$RenderSystem.enableBlend();
+        //$$RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        //$$buffer.begin(GL11.GL_QUADS, DefaultVertexFormat.POSITION_COLOR_TEX); //I thought GL_QUADS was deprecated but okay, sure.
+        //$$buffer.vertex(x,         y + height, 0).color(r, g, b, opacity).uv(u1, v2).endVertex();
+        //$$buffer.vertex(x + width, y + height, 0).color(r, g, b, opacity).uv(u2, v2).endVertex();
+        //$$buffer.vertex(x + width, y,          0).color(r, g, b, opacity).uv(u2, v1).endVertex();
+        //$$buffer.vertex(x,         y,          0).color(r, g, b, opacity).uv(u1, v1).endVertex();
+        //$$tessellator.end();
+        //$$RenderSystem.disableBlend();
         //#endif
     }
 

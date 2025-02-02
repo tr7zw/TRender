@@ -6,8 +6,10 @@ import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
+//#if MC >= 11800
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#endif
 import net.minecraft.resources.ResourceLocation;
 
 public class WScrollBar extends WWidget {
@@ -282,9 +284,11 @@ public class WScrollBar extends WWidget {
             this.value = 0;
     }
 
+    //#if MC >= 11800
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         builder.add(NarratedElementType.TITLE, NarrationMessages.SCROLL_BAR_TITLE);
         builder.add(NarratedElementType.USAGE, NarrationMessages.SLIDER_USAGE);
     }
+    //#endif
 }

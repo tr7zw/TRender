@@ -18,7 +18,9 @@ import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+//#if MC >= 11800
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#endif
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -81,7 +83,11 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
      * @param player      the player
      */
     public CottonInventoryScreen(T description, Player player) {
+        //#if MC >= 11700
         this(description, player.getInventory());
+        //#else
+        //$$ this(description, player.inventory);
+        //#endif
     }
 
     /**
@@ -92,7 +98,11 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
      * @param title       the screen title
      */
     public CottonInventoryScreen(T description, Player player, Component title) {
+        //#if MC >= 11700
         this(description, player.getInventory(), title);
+        //#else
+        //$$ this(description, player.inventory, title);
+        //#endif
     }
 
     /*
@@ -368,8 +378,13 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
     }
 
     @Override
+    //#if MC >= 11700
     protected void containerTick() {
         super.containerTick();
+        //#else
+        //$$ public void tick() {
+        //$$ super.tick();
+        //#endif
         if (description != null) {
             WPanel root = description.getRootPanel();
             if (root != null) {
@@ -378,9 +393,11 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
         }
     }
 
+    //#if MC >= 11800
     @Override
     protected void updateNarratedWidget(NarrationElementOutput builder) {
         if (description != null)
             NarrationHelper.addNarrations(description.getRootPanel(), builder);
     }
+    //#endif
 }

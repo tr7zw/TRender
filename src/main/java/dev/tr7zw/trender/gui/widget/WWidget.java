@@ -12,7 +12,9 @@ import dev.tr7zw.trender.gui.widget.data.ObservableProperty;
 import dev.tr7zw.trender.gui.widget.focus.FocusModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+//#if MC >= 11800
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#endif
 
 /**
  * The base class for all widgets.
@@ -610,9 +612,10 @@ public class WWidget {
      * @param builder the narration builder, cannot be null
      * @since 4.2.0
      */
-
+    //#if MC >= 11800
     public void addNarrations(NarrationElementOutput builder) {
     }
+    //#endif
 
     /**
      * Tests if the provided key code is an activation key for widgets.

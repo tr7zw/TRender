@@ -9,6 +9,9 @@ import org.joml.Matrix4f;
 //#else
 //$$ import com.mojang.math.Matrix4f;
 //#endif
+//#if MC <= 11605
+//$$ import org.lwjgl.opengl.GL11;
+//#endif
 import org.lwjgl.glfw.GLFW;
 
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -28,8 +31,10 @@ import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+//#if MC >= 11800
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#endif
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -268,6 +273,7 @@ public class WTextField extends WWidget {
     }
 
     private void invertedRect(RenderContext context, int x, int y, int width, int height) {
+        //#if MC >= 11700
         Matrix4f model = context.pose().last().pose();
         RenderSystem.setShaderColor(0.0F, 0.0F, 1.0F, 1.0F);
         RenderSystem.setShader(VanillaShaders.POSITION);
@@ -305,6 +311,22 @@ public class WTextField extends WWidget {
         //$$ BufferUploader.end(buffer);
         //$$ RenderSystem.disableColorLogicOp();
         //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        //#endif
+        //#else
+        //$$Tesselator tessellator_1 = Tesselator.getInstance();
+        //$$BufferBuilder bufferBuilder_1 = tessellator_1.getBuilder();
+        //$$RenderSystem.color4f(0.0F, 0.0F, 255.0F, 255.0F);
+        //$$RenderSystem.disableTexture();
+        //$$RenderSystem.enableColorLogicOp();
+        //$$RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
+        //$$bufferBuilder_1.begin(GL11.GL_QUADS, DefaultVertexFormat.POSITION);
+        //$$bufferBuilder_1.vertex(x,       y+height, 0.0D).endVertex();
+        //$$bufferBuilder_1.vertex(x+width, y+height, 0.0D).endVertex();
+        //$$bufferBuilder_1.vertex(x+width, y,        0.0D).endVertex();
+        //$$bufferBuilder_1.vertex(x,       y,        0.0D).endVertex();
+        //$$tessellator_1.end();
+        //$$RenderSystem.disableColorLogicOp();
+        //$$RenderSystem.enableTexture();
         //#endif
     }
 
@@ -536,6 +558,7 @@ public class WTextField extends WWidget {
         return InputResult.PROCESSED;
     }
 
+    //#if MC >= 11800
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         builder.add(NarratedElementType.TITLE, ComponentProvider.translatable(NarrationMessages.TEXT_FIELD_TITLE_KEY, text));
@@ -545,4 +568,5 @@ public class WTextField extends WWidget {
                     ComponentProvider.translatable(NarrationMessages.TEXT_FIELD_SUGGESTION_KEY, suggestion));
         }
     }
+    //#endif
 }

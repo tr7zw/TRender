@@ -2,9 +2,10 @@ package dev.tr7zw.trender.gui.client;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+//#if MC >= 11800
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#endif
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
@@ -285,9 +286,11 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         return super.keyReleased(ch, keyCode, modifiers);
     }
 
+    //#if MC >= 11800
     @Override
     protected void updateNarratedWidget(NarrationElementOutput builder) {
         if (description != null)
             NarrationHelper.addNarrations(description.getRootPanel(), builder);
     }
+    //#endif
 }

@@ -8,14 +8,16 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import dev.tr7zw.trender.gui.client.RenderContext;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 //#if MC >= 11904
 import net.minecraft.core.registries.BuiltInRegistries;
 //#else
 //$$ import net.minecraft.data.BuiltinRegistries;
 //#endif
+//#if MC >= 11800
 import net.minecraft.tags.TagKey;
+import net.minecraft.core.Holder;
+//#endif
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -35,9 +37,11 @@ public class WItem extends WWidget {
         setItems(items);
     }
 
+    //#if MC >= 11800
     public WItem(TagKey<? extends ItemLike> tag) {
         this(getRenderStacks(tag));
     }
+    //#endif
 
     public WItem(ItemStack stack) {
         this(Collections.singletonList(stack));
@@ -105,6 +109,7 @@ public class WItem extends WWidget {
      * Gets the default stacks ({@link Item#getDefaultInstance()} ()}) of each item
      * in a tag.
      */
+    //#if MC >= 11800
     @SuppressWarnings("unchecked")
     private static List<ItemStack> getRenderStacks(TagKey<? extends ItemLike> tag) {
         //#if MC >= 12103
@@ -125,4 +130,5 @@ public class WItem extends WWidget {
 
         return builder.build();
     }
+    //#endif
 }

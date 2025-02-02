@@ -17,6 +17,7 @@ import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.Insets;
 import dev.tr7zw.trender.gui.widget.data.Vec2i;
+import dev.tr7zw.util.NMSHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerLevel;
@@ -71,7 +72,11 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
         super(type, syncId);
         this.blockInventory = null;
         this.playerInventory = playerInventory;
+        //#if MC >= 11800
         this.world = playerInventory.player.level();
+        //#else
+        //$$ this.world = playerInventory.player.level;
+        //#endif
         this.propertyDelegate = null;//new ArrayPropertyDelegate(1);
     }
 
@@ -93,7 +98,11 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
         super(type, syncId);
         this.blockInventory = blockInventory;
         this.playerInventory = playerInventory;
+        //#if MC >= 11800
         this.world = playerInventory.player.level();
+        //#else
+        //$$ this.world = playerInventory.player.level;
+        //#endif
         this.propertyDelegate = propertyDelegate;
         if (propertyDelegate != null && propertyDelegate.getCount() > 0)
             this.addDataSlots(propertyDelegate);
@@ -190,7 +199,7 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
     /** WILL MODIFY toInsert! Returns true if anything was inserted. */
     private boolean insertIntoExisting(ItemStack toInsert, Slot slot, Player player) {
         ItemStack curSlotStack = slot.getItem();
-        if (!curSlotStack.isEmpty() && ItemStack.isSameItemSameComponents(toInsert, curSlotStack)
+        if (!curSlotStack.isEmpty() && NMSHelper.isSame(toInsert, curSlotStack)
                 && slot.mayPlace(toInsert)) {
             int combinedAmount = curSlotStack.getCount() + toInsert.getCount();
             int maxAmount = Math.min(toInsert.getMaxStackSize(), slot.getMaxStackSize(toInsert));

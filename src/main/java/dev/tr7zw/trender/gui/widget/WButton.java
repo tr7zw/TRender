@@ -2,8 +2,6 @@ package dev.tr7zw.trender.gui.widget;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
@@ -13,8 +11,10 @@ import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
+//#if MC >= 11800
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+//#endif
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -242,6 +242,7 @@ public class WButton extends WWidget {
         return this;
     }
 
+    //#if MC >= 11800
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         builder.add(NarratedElementType.TITLE, AbstractWidget.wrapDefaultNarrationMessage(getLabel()));
@@ -254,4 +255,5 @@ public class WButton extends WWidget {
             }
         }
     }
+    //#endif
 }
