@@ -4,7 +4,11 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import org.jetbrains.annotations.Nullable;
+//#if MC >= 11904
 import org.joml.Matrix4f;
+//#else
+//$$ import com.mojang.math.Matrix4f;
+//#endif
 import org.lwjgl.glfw.GLFW;
 
 import com.mojang.blaze3d.platform.GlStateManager;

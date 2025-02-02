@@ -10,7 +10,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+//#if MC >= 11904
 import net.minecraft.core.registries.BuiltInRegistries;
+//#else
+//$$ import net.minecraft.data.BuiltinRegistries;
+//#endif
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -106,8 +110,11 @@ public class WItem extends WWidget {
         //#if MC >= 12103
         Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
                 .getValue(tag.registry().location());
-        //#else
+        //#elseif MC >= 11904
         //$$Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
+        //$$        .get(tag.registry().location());
+        //#else
+        //$$Registry<ItemLike> registry = (Registry<ItemLike>) BuiltinRegistries.REGISTRY
         //$$        .get(tag.registry().location());
         //#endif
         ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();

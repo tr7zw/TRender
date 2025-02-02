@@ -1,7 +1,11 @@
 package dev.tr7zw.trender.gui.client;
 
 import org.jetbrains.annotations.Nullable;
+//#if MC >= 11904
 import org.joml.Matrix4f;
+//#else
+//$$ import com.mojang.math.Matrix4f;
+//#endif
 
 import com.mojang.blaze3d.vertex.PoseStack;
 

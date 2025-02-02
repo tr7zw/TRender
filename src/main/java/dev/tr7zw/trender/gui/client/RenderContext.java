@@ -1,12 +1,12 @@
 package dev.tr7zw.trender.gui.client;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
 import org.jetbrains.annotations.Nullable;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Divisor;
 
 import dev.tr7zw.trender.gui.impl.mixin.client.DrawContextAccessor;
 import it.unimi.dsi.fastutil.ints.IntIterator;
@@ -201,6 +201,46 @@ public class RenderContext {
         return new Divisor(target, i);
     }
 
+    private static class Divisor implements IntIterator {
+        private final int denominator;
+        private final int quotient;
+        private final int mod;
+        private int returnedParts;
+        private int remainder;
+
+        public Divisor(int numerator, int denominator) {
+            this.denominator = denominator;
+            if (denominator > 0) {
+                this.quotient = numerator / denominator;
+                this.mod = numerator % denominator;
+            } else {
+                this.quotient = 0;
+                this.mod = 0;
+            }
+        }
+
+        public boolean hasNext() {
+            return this.returnedParts < this.denominator;
+        }
+
+        public int nextInt() {
+            if (!this.hasNext()) {
+                throw new NoSuchElementException();
+            } else {
+                int i = this.quotient;
+                this.remainder += this.mod;
+                if (this.remainder >= this.denominator) {
+                    this.remainder -= this.denominator;
+                    ++i;
+                }
+
+                ++this.returnedParts;
+                return i;
+            }
+        }
+
+    }
+
     public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int color) {
         //#if MC >= 12102
         guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height, color);
@@ -302,7 +342,7 @@ public class RenderContext {
         //$$}
         //#endif
     }
-    
+
     public void drawString(Font textRenderer, @Nullable Component suggestion, int x, int y, int suggestionColor,
             boolean b) {
         //#if MC >= 12000
@@ -319,7 +359,7 @@ public class RenderContext {
         //$$ //TODO?
         //#endif
     }
-    
+
     public void flush() {
         //#if MC >= 12000
         guiGraphics.flush();

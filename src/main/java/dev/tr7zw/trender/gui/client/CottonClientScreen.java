@@ -12,7 +12,9 @@ import org.lwjgl.opengl.GL11;
 import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.impl.VisualLogger;
 import dev.tr7zw.trender.gui.impl.client.CottonScreenImpl;
+//#if MC >= 11904
 import dev.tr7zw.trender.gui.impl.client.FocusElements;
+//#endif
 import dev.tr7zw.trender.gui.impl.client.MouseInputHandler;
 import dev.tr7zw.trender.gui.impl.client.NarrationHelper;
 import dev.tr7zw.trender.gui.impl.mixin.client.ScreenAccessor;
@@ -77,6 +79,7 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         description.addPainters();
         reposition(width, height);
 
+        //#if MC >= 11904
         if (root != null) {
             GuiEventListener rootPanelElement = FocusElements.ofPanel(root);
             ((ScreenAccessor) this).libgui$getChildren().add(rootPanelElement);
@@ -84,6 +87,7 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         } else {
             LOGGER.warn("No root panel found, keyboard navigation disabled");
         }
+        //#endif
     }
 
     @Override

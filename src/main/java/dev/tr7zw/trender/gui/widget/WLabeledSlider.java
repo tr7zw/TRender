@@ -162,7 +162,7 @@ public class WLabeledSlider extends WAbstractSlider {
         matrices.translate(x, y, 0);
         if (axis == Axis.VERTICAL) {
             matrices.translate(0, height, 0);
-            matrices.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(270));
+            matrices.mulPose(NMSHelper.ZP.rotationDegrees(270));
         }
         // FIXME
         context.blitSprite(NMSHelper.getResourceLocation("widget/slider"), 0, 0, aWidth, aHeight, 0, 0, 0, 0);
