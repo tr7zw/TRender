@@ -11,6 +11,7 @@ import org.lwjgl.glfw.GLFW;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
+import dev.tr7zw.util.ComponentProvider;
 
 import java.util.function.IntConsumer;
 
@@ -377,7 +378,7 @@ public abstract class WAbstractSlider extends WWidget {
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         builder.add(NarratedElementType.TITLE,
-                Component.translatable(NarrationMessages.SLIDER_MESSAGE_KEY, value, min, max));
+                ComponentProvider.translatable(NarrationMessages.SLIDER_MESSAGE_KEY, value, min, max));
         builder.add(NarratedElementType.USAGE, NarrationMessages.SLIDER_USAGE);
     }
 

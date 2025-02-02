@@ -10,6 +10,7 @@ import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.Texture;
+import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -219,9 +220,9 @@ public class WToggleButton extends WWidget {
         Component title;
 
         if (label != null) {
-            title = Component.translatable(NarrationMessages.TOGGLE_BUTTON_NAMED_KEY, label, onOff);
+            title = ComponentProvider.translatable(NarrationMessages.TOGGLE_BUTTON_NAMED_KEY, label, onOff);
         } else {
-            title = Component.translatable(NarrationMessages.TOGGLE_BUTTON_UNNAMED_KEY, onOff);
+            title = ComponentProvider.translatable(NarrationMessages.TOGGLE_BUTTON_UNNAMED_KEY, onOff);
         }
 
         builder.add(NarratedElementType.TITLE, title);

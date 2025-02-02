@@ -7,6 +7,7 @@ import dev.tr7zw.trender.gui.widget.WButton;
 import dev.tr7zw.trender.gui.widget.WGridPanel;
 import dev.tr7zw.trender.gui.widget.WToggleButton;
 import dev.tr7zw.trender.gui.widget.data.Insets;
+import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
@@ -18,7 +19,7 @@ public class ConfigGui extends LightweightGuiDescription {
         root.setInsets(Insets.ROOT_PANEL);
         setRootPanel(root);
 
-        WToggleButton darkmodeButton = new WToggleButton(Component.translatable("option.libgui.darkmode")) {
+        WToggleButton darkmodeButton = new WToggleButton(ComponentProvider.translatable("option.libgui.darkmode")) {
             @Override
             public void onToggle(boolean on) {
                 LibGuiClient.config.darkMode = on;

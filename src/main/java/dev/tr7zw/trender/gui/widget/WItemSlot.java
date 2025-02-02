@@ -24,6 +24,7 @@ import dev.tr7zw.trender.gui.widget.data.Rect2i;
 import dev.tr7zw.trender.gui.widget.focus.Focus;
 import dev.tr7zw.trender.gui.widget.focus.FocusModel;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
+import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -630,10 +631,10 @@ public class WItemSlot extends WWidget {
             parts.add(name);
 
         if (focusedSlot >= 0) {
-            parts.add(Component.translatable(NarrationMessages.ITEM_SLOT_TITLE_KEY, focusedSlot + 1,
+            parts.add(ComponentProvider.translatable(NarrationMessages.ITEM_SLOT_TITLE_KEY, focusedSlot + 1,
                     slotsWide * slotsHigh));
         } else if (hoveredSlot >= 0) {
-            parts.add(Component.translatable(NarrationMessages.ITEM_SLOT_TITLE_KEY, hoveredSlot + 1,
+            parts.add(ComponentProvider.translatable(NarrationMessages.ITEM_SLOT_TITLE_KEY, hoveredSlot + 1,
                     slotsWide * slotsHigh));
         }
 

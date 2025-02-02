@@ -8,6 +8,7 @@ import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
+import dev.tr7zw.util.ComponentProvider;
 import dev.tr7zw.util.NMSHelper;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -191,7 +192,7 @@ public class WLabeledSlider extends WAbstractSlider {
     public void addNarrations(NarrationElementOutput builder) {
         if (getLabel() != null) {
             builder.add(NarratedElementType.TITLE,
-                    Component.translatable(NarrationMessages.LABELED_SLIDER_TITLE_KEY, getLabel(), value, min, max));
+                    ComponentProvider.translatable(NarrationMessages.LABELED_SLIDER_TITLE_KEY, getLabel(), value, min, max));
             builder.add(NarratedElementType.USAGE, NarrationMessages.SLIDER_USAGE);
         } else {
             super.addNarrations(builder);

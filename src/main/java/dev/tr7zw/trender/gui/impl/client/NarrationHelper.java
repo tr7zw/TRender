@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import dev.tr7zw.trender.gui.widget.WPanel;
 import dev.tr7zw.trender.gui.widget.WWidget;
+import dev.tr7zw.util.ComponentProvider;
 
 public final class NarrationHelper {
     public static void addNarrations(WPanel rootPanel, NarrationElementOutput builder) {
@@ -24,7 +25,7 @@ public final class NarrationHelper {
             // replicates Screen.addElementNarrations
             if (narratableWidgets.size() > 1) {
                 builder.add(NarratedElementType.POSITION,
-                        Component.translatable(NarrationMessages.Vanilla.SCREEN_POSITION_KEY, i + 1, childCount));
+                        ComponentProvider.translatable(NarrationMessages.Vanilla.SCREEN_POSITION_KEY, i + 1, childCount));
 
                 if (child.isFocused()) {
                     builder.add(NarratedElementType.USAGE, NarrationMessages.Vanilla.COMPONENT_LIST_USAGE);

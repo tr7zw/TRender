@@ -229,7 +229,7 @@ public class ScreenDrawing {
         //$$ BufferUploader.drawWithShader(buffer.build());
         //$$ RenderSystem.disableBlend();
         //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
-        //#else
+        //#elseif MC >= 11900
         //$$ float r = (color >> 16 & 255) / 255.0F;
         //$$ float g = (color >> 8 & 255) / 255.0F;
         //$$ float b = (color & 255) / 255.0F;
@@ -246,6 +246,26 @@ public class ScreenDrawing {
         //$$ buffer.vertex(model, x + width, y,          0).uv(u2, v1).endVertex();
         //$$ buffer.vertex(model, x,         y,          0).uv(u1, v1).endVertex();
         //$$ BufferUploader.drawWithShader(buffer.end());
+        //$$ RenderSystem.disableBlend();
+        //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
+        //#else
+        //$$ float r = (color >> 16 & 255) / 255.0F;
+        //$$ float g = (color >> 8 & 255) / 255.0F;
+        //$$ float b = (color & 255) / 255.0F;
+        //$$ float a = (color >> 24 & 255) / 255.0F;
+        //$$ Matrix4f model = context.getPoseStack().last().pose();
+        //$$ RenderSystem.enableBlend();
+        //$$ RenderSystem.setShaderTexture(0, texture);
+        //$$ RenderSystem.setShaderColor(r, g, b, opacity * a);
+        //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        //$$ BufferBuilder buffer = Tesselator.getInstance().getBuilder();
+        //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        //$$ buffer.vertex(model, x,         y + height, 0).uv(u1, v2).endVertex();
+        //$$ buffer.vertex(model, x + width, y + height, 0).uv(u2, v2).endVertex();
+        //$$ buffer.vertex(model, x + width, y,          0).uv(u2, v1).endVertex();
+        //$$ buffer.vertex(model, x,         y,          0).uv(u1, v1).endVertex();
+        //$$ buffer.end();
+        //$$ BufferUploader.end(buffer);
         //$$ RenderSystem.disableBlend();
         //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
         //#endif

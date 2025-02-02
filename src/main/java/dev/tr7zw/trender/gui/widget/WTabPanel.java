@@ -22,6 +22,7 @@ import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
+import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.narration.NarratedElementType;
@@ -429,10 +430,10 @@ public class WTabPanel extends WPanel {
             Component label = data.getTitle();
 
             if (label != null) {
-                builder.add(NarratedElementType.TITLE, Component.translatable(NarrationMessages.TAB_TITLE_KEY, label));
+                builder.add(NarratedElementType.TITLE, ComponentProvider.translatable(NarrationMessages.TAB_TITLE_KEY, label));
             }
 
-            builder.add(NarratedElementType.POSITION, Component.translatable(NarrationMessages.TAB_POSITION_KEY,
+            builder.add(NarratedElementType.POSITION, ComponentProvider.translatable(NarrationMessages.TAB_POSITION_KEY,
                     tabWidgets.indexOf(this) + 1, tabWidgets.size()));
         }
     }

@@ -25,6 +25,7 @@ import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.impl.client.VanillaShaders;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
+import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.narration.NarratedElementType;
@@ -281,7 +282,7 @@ public class WTextField extends WWidget {
         BufferUploader.drawWithShader(buffer.buildOrThrow());
         RenderSystem.disableColorLogicOp();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        //#else
+        //#elseif MC >= 11900
         //$$ Tesselator tessellator = Tesselator.getInstance();
         //$$ BufferBuilder buffer = tessellator.getBuilder();
         //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
@@ -290,6 +291,18 @@ public class WTextField extends WWidget {
         //$$ buffer.vertex(model, x + width, y, 0).endVertex();
         //$$ buffer.vertex(model, x, y, 0).endVertex();
         //$$ BufferUploader.drawWithShader(buffer.end());
+        //$$ RenderSystem.disableColorLogicOp();
+        //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        //#else
+        //$$ Tesselator tessellator = Tesselator.getInstance();
+        //$$ BufferBuilder buffer = tessellator.getBuilder();
+        //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+        //$$ buffer.vertex(model, x, y + height, 0).endVertex();
+        //$$ buffer.vertex(model, x + width, y + height, 0).endVertex();
+        //$$ buffer.vertex(model, x + width, y, 0).endVertex();
+        //$$ buffer.vertex(model, x, y, 0).endVertex();
+        //$$ buffer.end();
+        //$$ BufferUploader.end(buffer);
         //$$ RenderSystem.disableColorLogicOp();
         //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         //#endif
@@ -525,11 +538,11 @@ public class WTextField extends WWidget {
 
     @Override
     public void addNarrations(NarrationElementOutput builder) {
-        builder.add(NarratedElementType.TITLE, Component.translatable(NarrationMessages.TEXT_FIELD_TITLE_KEY, text));
+        builder.add(NarratedElementType.TITLE, ComponentProvider.translatable(NarrationMessages.TEXT_FIELD_TITLE_KEY, text));
 
         if (suggestion != null) {
             builder.add(NarratedElementType.HINT,
-                    Component.translatable(NarrationMessages.TEXT_FIELD_SUGGESTION_KEY, suggestion));
+                    ComponentProvider.translatable(NarrationMessages.TEXT_FIELD_SUGGESTION_KEY, suggestion));
         }
     }
 }

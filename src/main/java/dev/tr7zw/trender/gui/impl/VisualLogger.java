@@ -10,6 +10,7 @@ import org.apache.logging.log4j.message.ParameterizedMessage;
 
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
+import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -42,9 +43,9 @@ public final class VisualLogger {
 
         // TODO
         //        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
-        var text = Component.literal(clazz.getSimpleName() + '/');
-        text.append(Component.literal(level.name()).withStyle(formatting));
-        text.append(Component.literal(": " + ParameterizedMessage.format(message, params)));
+        var text = ComponentProvider.literal(clazz.getSimpleName() + '/');
+        text.append(ComponentProvider.literal(level.name()).withStyle(formatting));
+        text.append(ComponentProvider.literal(": " + ParameterizedMessage.format(message, params)));
 
         WARNINGS.add(text);
         //        }

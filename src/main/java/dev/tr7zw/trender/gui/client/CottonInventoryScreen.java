@@ -15,11 +15,11 @@ import dev.tr7zw.trender.gui.impl.mixin.client.ScreenAccessor;
 import dev.tr7zw.trender.gui.widget.WPanel;
 import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
+import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -53,7 +53,7 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
      * @since 5.2.0
      */
     public CottonInventoryScreen(T description, Inventory inventory) {
-        this(description, inventory, CommonComponents.EMPTY);
+        this(description, inventory, ComponentProvider.EMPTY);
     }
 
     /**

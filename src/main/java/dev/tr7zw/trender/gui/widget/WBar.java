@@ -1,6 +1,5 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -12,6 +11,7 @@ import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.widget.data.Texture;
+import dev.tr7zw.util.ComponentProvider;
 
 /**
  * A bar that displays int values from a {@link ContainerData}.
@@ -222,13 +222,13 @@ public class WBar extends WWidget {
         if (tooltipLabel != null) {
             int value = (field >= 0) ? properties.get(field) : 0;
             int valMax = (max >= 0) ? properties.get(max) : maxValue;
-            information.add(Component.translatable(tooltipLabel, value, valMax));
+            information.add(ComponentProvider.translatable(tooltipLabel, value, valMax));
         }
         if (tooltipTextComponent != null) {
             try {
                 information.add(tooltipTextComponent);
             } catch (Throwable t) {
-                information.add(Component.literal(t.getLocalizedMessage()));
+                information.add(ComponentProvider.literal(t.getLocalizedMessage()));
             }
         }
     }

@@ -21,6 +21,7 @@ import dev.tr7zw.trender.gui.impl.mixin.client.ScreenAccessor;
 import dev.tr7zw.trender.gui.widget.WPanel;
 import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
+import dev.tr7zw.util.ComponentProvider;
 
 //#if MC >= 12000
 //#else
@@ -55,7 +56,7 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     private final MouseInputHandler<CottonClientScreen> mouseInputHandler = new MouseInputHandler<>(this);
 
     public CottonClientScreen(GuiDescription description) {
-        this(CommonComponents.EMPTY, description);
+        this(ComponentProvider.EMPTY, description);
     }
 
     public CottonClientScreen(Component title, GuiDescription description) {
