@@ -271,7 +271,7 @@ public class RenderContext {
         //#if MC >= 12000
         guiGraphics.drawString(font, name, x, y, color);
         //#else
-        //$$ GuiComponent.drawString(pose, font, name, x, y, color);
+        //$$ font.draw(pose, name, x, y, color);
         //#endif
     }
 
@@ -283,25 +283,32 @@ public class RenderContext {
         //#endif
     }
 
-    public void flush() {
+    public void drawString(Font textRenderer, String s, int x, int y, int color, boolean dropShadow) {
         //#if MC >= 12000
-        guiGraphics.flush();
-        //#endif
-    }
-
-    public void drawString(Font textRenderer, String s, int x, int y, int color, boolean b) {
-        //#if MC >= 12000
-        guiGraphics.drawString(textRenderer, s, x, y, color, b);
+        guiGraphics.drawString(textRenderer, s, x, y, color, dropShadow);
         //#else
         //$$GuiComponent.drawString(pose, textRenderer, s, x, y, color);
         //#endif
     }
 
-    public void drawString(Font textRenderer, FormattedCharSequence text, int x, int y, int color, boolean b) {
+    public void drawString(Font textRenderer, FormattedCharSequence text, int x, int y, int color, boolean dropShadow) {
         //#if MC >= 12000
-        guiGraphics.drawString(textRenderer, text, x, y, color, b);
+        guiGraphics.drawString(textRenderer, text, x, y, color, dropShadow);
         //#else
+        //$$if(dropShadow){
         //$$GuiComponent.drawString(pose, textRenderer, text, x, y, color);
+        //$$} else {
+        //$$ textRenderer.draw(pose, text, x, y, color);
+        //$$}
+        //#endif
+    }
+    
+    public void drawString(Font textRenderer, @Nullable Component suggestion, int x, int y, int suggestionColor,
+            boolean b) {
+        //#if MC >= 12000
+        guiGraphics.drawString(textRenderer, suggestion, x, y, suggestionColor, b);
+        //#else
+        //$$ GuiComponent.drawString(pose, textRenderer, suggestion, x, y, suggestionColor);
         //#endif
     }
 
@@ -312,13 +319,10 @@ public class RenderContext {
         //$$ //TODO?
         //#endif
     }
-
-    public void drawString(Font textRenderer, @Nullable Component suggestion, int x, int y, int suggestionColor,
-            boolean b) {
+    
+    public void flush() {
         //#if MC >= 12000
-        guiGraphics.drawString(textRenderer, suggestion, x, y, suggestionColor, b);
-        //#else
-        //$$ GuiComponent.drawString(pose, textRenderer, suggestion, x, y, suggestionColor);
+        guiGraphics.flush();
         //#endif
     }
 
