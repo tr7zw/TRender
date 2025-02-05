@@ -384,7 +384,7 @@ public class WWidget {
      * @return true if the location is within this widget, false otherwise
      */
     public boolean isWithinBounds(int x, int y) {
-        return x >= 0 && y >= 0 && x < this.width && y < this.height;
+        return x >= 0 && y >= 0 && x < this.getWidth() && y < this.getHeight();
     }
 
     /**
