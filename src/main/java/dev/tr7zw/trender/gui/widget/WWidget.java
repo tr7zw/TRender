@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 //#if MC >= 11800
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.network.chat.Component;
 //#endif
 
 /**
@@ -39,6 +40,8 @@ public class WWidget {
     protected int width = 18;
     /** The height of this widget, defaults to 18 pixels. */
     protected int height = 18;
+    @Nullable
+    protected Component tooltip;
 
     /**
      * The containing {@link GuiDescription} of this widget. Can be null if this
@@ -462,9 +465,21 @@ public class WWidget {
      * @param tooltip the builder to add tooltip lines to
      */
 
-    public void addTooltip(TooltipBuilder tooltip) {
+    public void addTooltip(TooltipBuilder tooltipBuilder) {
+        if (this.tooltip != null) {
+            tooltipBuilder.add(tooltip);
+        }
     }
-
+    
+    /**
+     * Sets a simple tooltip to this widget.
+     * 
+     * @param tooltip
+     */
+    public void setToolip(Component tooltip) {
+        this.tooltip = tooltip;
+    }
+    
     /**
      * Find the most specific child node at this location. For non-panel widgets,
      * returns this widget.
