@@ -155,8 +155,8 @@ public class WScrollPanel extends WPanel {
         Insets insets = getInsets();
         for (WWidget child : children) {
             if (child == widget) {
-                Scissors.push(context, x + insets.left(), y + insets.top(), width - insets.width(),
-                        height - insets.height());
+                Scissors.push(context, x + insets.left(), y + insets.top(), getWidth() - insets.width(),
+                        getHeight() - insets.height());
             }
 
             child.paint(context, x + child.getX(), y + child.getY(), mouseX - child.getX(), mouseY - child.getY());
@@ -175,10 +175,10 @@ public class WScrollPanel extends WPanel {
         boolean vertical = hasVerticalScrollbar();
 
         int offset = (horizontal && vertical) ? SCROLL_BAR_SIZE : 0;
-        verticalScrollBar.setSize(SCROLL_BAR_SIZE, this.height - offset);
-        verticalScrollBar.setLocation(this.width - verticalScrollBar.getWidth(), 0);
-        horizontalScrollBar.setSize(this.width - offset, SCROLL_BAR_SIZE);
-        horizontalScrollBar.setLocation(0, this.height - horizontalScrollBar.getHeight());
+        verticalScrollBar.setSize(SCROLL_BAR_SIZE, this.getHeight() - offset);
+        verticalScrollBar.setLocation(this.getWidth() - verticalScrollBar.getWidth(), 0);
+        horizontalScrollBar.setSize(this.getWidth() - offset, SCROLL_BAR_SIZE);
+        horizontalScrollBar.setLocation(0, this.getHeight() - horizontalScrollBar.getHeight());
 
         if (widget instanceof WPanel panel)
             panel.layout();
@@ -188,9 +188,9 @@ public class WScrollPanel extends WPanel {
         int y = insets.top() + (vertical ? -verticalScrollBar.getValue() : 0);
         widget.setLocation(x, y);
 
-        verticalScrollBar.setWindow(this.height - insets.height() - (horizontal ? SCROLL_BAR_SIZE : 0));
+        verticalScrollBar.setWindow(this.getHeight() - insets.height() - (horizontal ? SCROLL_BAR_SIZE : 0));
         verticalScrollBar.setMaxValue(widget.getHeight());
-        horizontalScrollBar.setWindow(this.width - insets.width() - (vertical ? SCROLL_BAR_SIZE : 0));
+        horizontalScrollBar.setWindow(this.getWidth() - insets.width() - (vertical ? SCROLL_BAR_SIZE : 0));
         horizontalScrollBar.setMaxValue(widget.getWidth());
 
         if (vertical)
@@ -200,12 +200,12 @@ public class WScrollPanel extends WPanel {
     }
 
     private boolean hasHorizontalScrollbar() {
-        return (scrollingHorizontally == TriState.DEFAULT) ? (widget.width > this.width - SCROLL_BAR_SIZE)
+        return (scrollingHorizontally == TriState.DEFAULT) ? (widget.getWidth() > this.getWidth() - SCROLL_BAR_SIZE)
                 : scrollingVertically.withDefault(false);
     }
 
     private boolean hasVerticalScrollbar() {
-        return (scrollingVertically == TriState.DEFAULT) ? (widget.height > this.height - SCROLL_BAR_SIZE)
+        return (scrollingVertically == TriState.DEFAULT) ? (widget.getHeight() > this.getHeight() - SCROLL_BAR_SIZE)
                 : scrollingVertically.withDefault(false);
     }
 

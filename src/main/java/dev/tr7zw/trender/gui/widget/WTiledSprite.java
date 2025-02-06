@@ -129,9 +129,9 @@ public class WTiledSprite extends WSprite {
     @Override
     public void paintFrame(RenderContext context, int x, int y, Texture texture) {
         // Y Direction (down)
-        for (int tileYOffset = 0; tileYOffset < height; tileYOffset += tileHeight) {
+        for (int tileYOffset = 0; tileYOffset < getHeight(); tileYOffset += tileHeight) {
             // X Direction (right)
-            for (int tileXOffset = 0; tileXOffset < width; tileXOffset += tileWidth) {
+            for (int tileXOffset = 0; tileXOffset < getWidth(); tileXOffset += tileWidth) {
                 // draw the texture
                 ScreenDrawing.texturedRect(context,
                         // at the correct position using tileXOffset and tileYOffset

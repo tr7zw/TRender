@@ -60,7 +60,7 @@ public class WDynamicLabel extends WWidget {
 
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
-        int yOffset = TextAlignment.getTextOffsetY(verticalAlignment, height, 1);
+        int yOffset = TextAlignment.getTextOffsetY(verticalAlignment, getHeight(), 1);
 
         String tr = text.get();
 

@@ -19,7 +19,7 @@ public class WPlainPanel extends WPanelWithInsets {
      */
     public void add(WWidget w, int x, int y) {
         children.add(w);
-        w.parent = this;
+        w.setParent(this);
         w.setLocation(insets.left() + x, insets.top() + y);
         if (w.canResize()) {
             w.setSize(18, 18);
@@ -40,7 +40,7 @@ public class WPlainPanel extends WPanelWithInsets {
      */
     public void add(WWidget w, int x, int y, int width, int height) {
         children.add(w);
-        w.parent = this;
+        w.setParent(this);
         w.setLocation(insets.left() + x, insets.top() + y);
         if (w.canResize()) {
             w.setSize(width, height);

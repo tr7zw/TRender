@@ -36,7 +36,7 @@ public class WSlider extends WAbstractSlider {
     protected boolean isMouseInsideBounds(int x, int y) {
         // ao = axis-opposite mouse coordinate, aoCenter = center of ao's axis
         int ao = axis == Axis.HORIZONTAL ? y : x;
-        int aoCenter = (axis == Axis.HORIZONTAL ? height : width) / 2;
+        int aoCenter = (axis == Axis.HORIZONTAL ? getHeight() : getWidth()) / 2;
 
         // Check if cursor is inside or <=2px away from track
         return ao >= aoCenter - TRACK_WIDTH / 2 - 2 && ao <= aoCenter + TRACK_WIDTH / 2 + 2;
@@ -55,31 +55,31 @@ public class WSlider extends WAbstractSlider {
             ResourceLocation texture = shouldRenderInDarkMode() ? DARK_TEXTURE : LIGHT_TEXTURE;
 
             if (axis == Axis.VERTICAL) {
-                int trackX = x + width / 2 - TRACK_WIDTH / 2;
-                thumbX = width / 2 - THUMB_SIZE / 2;
+                int trackX = x + getWidth() / 2 - TRACK_WIDTH / 2;
+                thumbX = getWidth() / 2 - THUMB_SIZE / 2;
                 thumbY = direction == Direction.UP
-                        ? (height - THUMB_SIZE) + 1 - (int) (coordToValueRatio * (value - min))
+                        ? (getHeight() - THUMB_SIZE) + 1 - (int) (coordToValueRatio * (value - min))
                         : Math.round(coordToValueRatio * (value - min));
                 thumbXOffset = 0;
 
                 ScreenDrawing.texturedRect(context, trackX, y + 1, TRACK_WIDTH, 1, texture, 16 * px, 0 * px, 22 * px,
                         1 * px, 0xFFFFFFFF);
-                ScreenDrawing.texturedRect(context, trackX, y + 2, TRACK_WIDTH, height - 2, texture, 16 * px, 1 * px,
+                ScreenDrawing.texturedRect(context, trackX, y + 2, TRACK_WIDTH, getHeight() - 2, texture, 16 * px, 1 * px,
                         22 * px, 2 * px, 0xFFFFFFFF);
-                ScreenDrawing.texturedRect(context, trackX, y + height, TRACK_WIDTH, 1, texture, 16 * px, 2 * px,
+                ScreenDrawing.texturedRect(context, trackX, y + getHeight(), TRACK_WIDTH, 1, texture, 16 * px, 2 * px,
                         22 * px, 3 * px, 0xFFFFFFFF);
             } else {
-                int trackY = y + height / 2 - TRACK_WIDTH / 2;
-                thumbX = direction == Direction.LEFT ? (width - THUMB_SIZE) - (int) (coordToValueRatio * (value - min))
+                int trackY = y + getHeight() / 2 - TRACK_WIDTH / 2;
+                thumbX = direction == Direction.LEFT ? (getWidth() - THUMB_SIZE) - (int) (coordToValueRatio * (value - min))
                         : Math.round(coordToValueRatio * (value - min));
-                thumbY = height / 2 - THUMB_SIZE / 2;
+                thumbY = getHeight() / 2 - THUMB_SIZE / 2;
                 thumbXOffset = 8;
 
                 ScreenDrawing.texturedRect(context, x, trackY, 1, TRACK_WIDTH, texture, 16 * px, 3 * px, 17 * px,
                         9 * px, 0xFFFFFFFF);
-                ScreenDrawing.texturedRect(context, x + 1, trackY, width - 2, TRACK_WIDTH, texture, 17 * px, 3 * px,
+                ScreenDrawing.texturedRect(context, x + 1, trackY, getWidth() - 2, TRACK_WIDTH, texture, 17 * px, 3 * px,
                         18 * px, 9 * px, 0xFFFFFFFF);
-                ScreenDrawing.texturedRect(context, x + width - 1, trackY, 1, TRACK_WIDTH, texture, 18 * px, 3 * px,
+                ScreenDrawing.texturedRect(context, x + getWidth() - 1, trackY, 1, TRACK_WIDTH, texture, 18 * px, 3 * px,
                         19 * px, 9 * px, 0xFFFFFFFF);
             }
 

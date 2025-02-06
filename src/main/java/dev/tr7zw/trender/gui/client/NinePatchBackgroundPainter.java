@@ -29,7 +29,7 @@ import net.minecraft.resources.ResourceLocation;
  * @since 4.0.0
  */
 public final class NinePatchBackgroundPainter implements BackgroundPainter {
-    //    private final NinePatch<ResourceLocation> ninePatch;
+    private final ResourceLocation texture;
     private int topPadding = 0;
     private int leftPadding = 0;
     private int bottomPadding = 0;
@@ -38,6 +38,10 @@ public final class NinePatchBackgroundPainter implements BackgroundPainter {
     //    public NinePatchBackgroundPainter(NinePatch<ResourceLocation> ninePatch) {
     //        this.ninePatch = ninePatch;
     //    }
+
+    public NinePatchBackgroundPainter(ResourceLocation texture) {
+        this.texture = texture;
+    }
 
     public int getTopPadding() {
         return topPadding;
@@ -99,7 +103,8 @@ public final class NinePatchBackgroundPainter implements BackgroundPainter {
     public void paintBackground(RenderContext context, int left, int top, WWidget panel) {
         var matrices = context.pose();
         matrices.pushPose();
-        matrices.translate(left - leftPadding, top - topPadding, 0);
+        //matrices.translate(left - leftPadding, top - topPadding, 0);
+        context.blitSpriteLegacy(texture, left, top, panel.getWidth() + leftPadding + rightPadding,  panel.getHeight() + topPadding + bottomPadding, 4, 4, 16, 16);
         //        ninePatch.draw(NinePatchTextureRendererImpl.INSTANCE, context, panel.getWidth() + leftPadding + rightPadding,
         //                panel.getHeight() + topPadding + bottomPadding);
         matrices.popPose();

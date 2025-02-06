@@ -149,22 +149,22 @@ public class WLabeledSlider extends WAbstractSlider {
 
     @Override
     protected boolean isMouseInsideBounds(int x, int y) {
-        return x >= 0 && x <= width && y >= 0 && y <= height;
+        return x >= 0 && x <= getWidth() && y >= 0 && y <= getHeight();
     }
 
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
-        int aWidth = axis == Axis.HORIZONTAL ? width : height;
-        int aHeight = axis == Axis.HORIZONTAL ? height : width;
-        int rotMouseX = axis == Axis.HORIZONTAL ? (direction == Direction.LEFT ? width - mouseX : mouseX)
-                : (direction == Direction.UP ? height - mouseY : mouseY);
+        int aWidth = axis == Axis.HORIZONTAL ? getWidth() : getHeight();
+        int aHeight = axis == Axis.HORIZONTAL ? getHeight() : getWidth();
+        int rotMouseX = axis == Axis.HORIZONTAL ? (direction == Direction.LEFT ? getWidth() - mouseX : mouseX)
+                : (direction == Direction.UP ? getHeight() - mouseY : mouseY);
         int rotMouseY = axis == Axis.HORIZONTAL ? mouseY : mouseX;
 
         var matrices = context.pose();
         matrices.pushPose();
         matrices.translate(x, y, 0);
         if (axis == Axis.VERTICAL) {
-            matrices.translate(0, height, 0);
+            matrices.translate(0, getHeight(), 0);
             matrices.mulPose(NMSHelper.ZP.rotationDegrees(270));
         }
         // FIXME

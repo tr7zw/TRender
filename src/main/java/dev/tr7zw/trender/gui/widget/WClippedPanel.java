@@ -13,7 +13,7 @@ public class WClippedPanel extends WPanel {
         if (getBackgroundPainter() != null)
             getBackgroundPainter().paintBackground(context, x, y, this);
 
-        Scissors.push(context, x, y, width, height);
+        Scissors.push(context, x, y, getWidth(), getHeight());
         for (WWidget child : children) {
             child.paint(context, x + child.getX(), y + child.getY(), mouseX - child.getX(), mouseY - child.getY());
         }

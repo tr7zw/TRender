@@ -60,7 +60,7 @@ public class WText extends WWidget {
 
     private void wrapLines() {
         Font font = Minecraft.getInstance().font;
-        wrappedLines = font.split(text, width);
+        wrappedLines = font.split(text, getWidth());
     }
 
     /**
@@ -74,12 +74,12 @@ public class WText extends WWidget {
     @Nullable
     public Style getTextStyleAt(int x, int y) {
         Font font = Minecraft.getInstance().font;
-        int yOffset = TextAlignment.getTextOffsetY(verticalAlignment, height, wrappedLines.size());
+        int yOffset = TextAlignment.getTextOffsetY(verticalAlignment, getHeight(), wrappedLines.size());
         int lineIndex = (y - yOffset) / font.lineHeight;
 
         if (lineIndex >= 0 && lineIndex < wrappedLines.size()) {
             FormattedCharSequence line = wrappedLines.get(lineIndex);
-            int xOffset = TextAlignment.getTextOffsetX(horizontalAlignment, width, line);
+            int xOffset = TextAlignment.getTextOffsetX(horizontalAlignment, getWidth(), line);
             return font.getSplitter().componentStyleAtWidth(line, x - xOffset);
         }
 
@@ -94,7 +94,7 @@ public class WText extends WWidget {
         }
 
         Font font = Minecraft.getInstance().font;
-        int yOffset = TextAlignment.getTextOffsetY(verticalAlignment, height, wrappedLines.size());
+        int yOffset = TextAlignment.getTextOffsetY(verticalAlignment, getHeight(), wrappedLines.size());
 
         for (int i = 0; i < wrappedLines.size(); i++) {
             FormattedCharSequence line = wrappedLines.get(i);
@@ -102,10 +102,10 @@ public class WText extends WWidget {
 
             if (getDrawShadows()) {
                 ScreenDrawing.drawStringWithShadow(context, line, horizontalAlignment, x,
-                        y + yOffset + i * font.lineHeight, width, c);
+                        y + yOffset + i * font.lineHeight, getWidth(), c);
             } else {
                 ScreenDrawing.drawString(context, line, horizontalAlignment, x, y + yOffset + i * font.lineHeight,
-                        width, c);
+                        getWidth(), c);
             }
         }
 

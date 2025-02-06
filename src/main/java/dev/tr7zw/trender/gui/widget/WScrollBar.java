@@ -103,7 +103,7 @@ public class WScrollBar extends WWidget {
      */
     public int getHandleSize() {
         float percentage = (window >= maxValue) ? 1f : window / (float) maxValue;
-        int bar = (axis == Axis.HORIZONTAL) ? width - 2 : height - 2;
+        int bar = (axis == Axis.HORIZONTAL) ? getWidth() - 2 : getHeight() - 2;
         int result = (int) (percentage * bar);
         if (result < 6)
             result = 6;
@@ -115,7 +115,7 @@ public class WScrollBar extends WWidget {
      * track from one end to the other.
      */
     public int getMovableDistance() {
-        int bar = (axis == Axis.HORIZONTAL) ? width - 2 : height - 2;
+        int bar = (axis == Axis.HORIZONTAL) ? getWidth() - 2 : getHeight() - 2;
         return bar - getHandleSize();
     }
 

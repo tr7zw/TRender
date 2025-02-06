@@ -91,7 +91,7 @@ public class WGridPanel extends WPanelWithInsets {
      */
     public void add(WWidget w, int x, int y, int width, int height) {
         children.add(w);
-        w.parent = this;
+        w.setParent(this);
         w.setLocation(x * (grid + horizontalGap) + insets.left(), y * (grid + verticalGap) + insets.top());
         if (w.canResize()) {
             w.setSize((width - 1) * (grid + horizontalGap) + grid, (height - 1) * (grid + verticalGap) + grid);

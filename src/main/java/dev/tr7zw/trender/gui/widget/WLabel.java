@@ -64,7 +64,7 @@ public class WLabel extends WWidget {
 
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
-        int yOffset = TextAlignment.getTextOffsetY(verticalAlignment, height, 1);
+        int yOffset = TextAlignment.getTextOffsetY(verticalAlignment, getHeight(), 1);
 
         if (getDrawShadows()) {
             ScreenDrawing.drawStringWithShadow(context, text.getVisualOrderText(), horizontalAlignment, x, y + yOffset,
@@ -102,7 +102,7 @@ public class WLabel extends WWidget {
     @Nullable
     public Style getTextStyleAt(int x, int y) {
         if (isWithinBounds(x, y)) {
-            int xOffset = TextAlignment.getTextOffsetX(horizontalAlignment, width, text.getVisualOrderText());
+            int xOffset = TextAlignment.getTextOffsetX(horizontalAlignment, getWidth(), text.getVisualOrderText());
             return Minecraft.getInstance().font.getSplitter().componentStyleAtWidth(text, x - xOffset);
         }
         return null;

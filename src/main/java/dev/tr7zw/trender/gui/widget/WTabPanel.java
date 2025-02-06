@@ -386,8 +386,8 @@ public class WTabPanel extends WPanel {
                 if (icon == null)
                     width = Math.max(TAB_WIDTH, width - ICON_SIZE);
 
-                if (this.width != width) {
-                    setSize(width, this.height);
+                if (this.getWidth() != width) {
+                    setSize(width, this.getHeight());
                     getParent().layout();
                 }
             }
@@ -402,13 +402,13 @@ public class WTabPanel extends WPanel {
 
             if (title != null) {
                 int titleX = (icon != null) ? iconX + ICON_SIZE + 1 : 0;
-                int titleY = (height - TAB_PADDING - renderer.lineHeight) / 2 + 1;
-                int width = (icon != null) ? this.width - iconX - ICON_SIZE : this.width;
+                int titleY = (getHeight() - TAB_PADDING - renderer.lineHeight) / 2 + 1;
+                int width = (icon != null) ? this.getWidth() - iconX - ICON_SIZE : this.getWidth();
                 HorizontalAlignment align = (icon != null) ? HorizontalAlignment.LEFT : HorizontalAlignment.CENTER;
 
                 int color;
                 if (shouldRenderInDarkMode()) {
-                    color = WLabel.DEFAULT_DARKMODE_TEXT_COLOR;
+                    color = selected ? 0xEEEEEE : 0x777777;
                 } else {
                     color = selected ? WLabel.DEFAULT_TEXT_COLOR : 0xEEEEEE;
                 }
@@ -418,7 +418,7 @@ public class WTabPanel extends WPanel {
             }
 
             if (icon != null) {
-                icon.paint(context, x + iconX, y + (height - TAB_PADDING - ICON_SIZE) / 2, ICON_SIZE);
+                icon.paint(context, x + iconX, y + (getHeight() - TAB_PADDING - ICON_SIZE) / 2, ICON_SIZE);
             }
         }
 

@@ -115,7 +115,7 @@ public class WButton extends WWidget {
             //$$context.getPoseStack().translate(0, 0, 300);
             //#endif
             ScreenDrawing.drawStringWithShadow(context, label.getVisualOrderText(), alignment, x + xOffset,
-                    y + ((getHeight() - 8) / 2), width, color); //LibGuiClient.config.darkMode ? darkmodeColor : color);
+                    y + ((getHeight() - 8) / 2), getWidth(), color); //LibGuiClient.config.darkMode ? darkmodeColor : color);
             //#if MC <= 12001
             //$$context.getPoseStack().popPose();
             //#endif

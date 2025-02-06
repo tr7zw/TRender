@@ -12,9 +12,9 @@ import dev.tr7zw.trender.gui.widget.data.ObservableProperty;
 import dev.tr7zw.trender.gui.widget.focus.FocusModel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 //#if MC >= 11800
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.network.chat.Component;
 //#endif
 
 /**
@@ -30,16 +30,16 @@ public class WWidget {
      * panel or a HUD widget.
      */
     @Nullable
-    protected WPanel parent;
+    private WPanel parent;
 
     /** The X coordinate of this widget relative to its parent. */
     protected int x = 0;
     /** The Y coordinate of this widget relative to its parent. */
     protected int y = 0;
     /** The width of this widget, defaults to 18 pixels. */
-    protected int width = 18;
+    private int width = 18;
     /** The height of this widget, defaults to 18 pixels. */
-    protected int height = 18;
+    private int height = 18;
     @Nullable
     protected Component tooltip;
 

@@ -169,7 +169,7 @@ public class WTextField extends WWidget {
             scrollOffset = cursor;
         }
         if (scrollOffset < cursor
-                && font.plainSubstrByWidth(text.substring(scrollOffset), width - TEXT_PADDING_X * 2).length()
+                && font.plainSubstrByWidth(text.substring(scrollOffset), getWidth() - TEXT_PADDING_X * 2).length()
                         + scrollOffset < cursor) {
             scrollOffset = cursor;
         }
@@ -179,7 +179,7 @@ public class WTextField extends WWidget {
 
     private void checkScrollOffset() {
         int rightMostScrollOffset = text.length()
-                - getTextRenderer().plainSubstrByWidth(text, width - TEXT_PADDING_X * 2, true).length();
+                - getTextRenderer().plainSubstrByWidth(text, getWidth() - TEXT_PADDING_X * 2, true).length();
         scrollOffset = Math.min(rightMostScrollOffset, scrollOffset);
     }
 
@@ -207,8 +207,8 @@ public class WTextField extends WWidget {
 
     protected void renderBox(RenderContext context, int x, int y) {
         int borderColor = this.isFocused() ? BORDER_COLOR_SELECTED : BORDER_COLOR_UNSELECTED;
-        ScreenDrawing.coloredRect(context, x - 1, y - 1, width + 2, height + 2, borderColor);
-        ScreenDrawing.coloredRect(context, x, y, width, height, BACKGROUND_COLOR);
+        ScreenDrawing.coloredRect(context, x - 1, y - 1, getWidth() + 2, getHeight() + 2, borderColor);
+        ScreenDrawing.coloredRect(context, x, y, getWidth(), getHeight(), BACKGROUND_COLOR);
     }
 
     protected void renderText(RenderContext context, int x, int y, String visibleText) {
@@ -260,7 +260,7 @@ public class WTextField extends WWidget {
     protected void renderTextField(RenderContext context, int x, int y) {
         checkScrollOffset();
         String visibleText = getTextRenderer().plainSubstrByWidth(this.text.substring(this.scrollOffset),
-                this.width - 2 * TEXT_PADDING_X);
+                this.getWidth() - 2 * TEXT_PADDING_X);
         renderBox(context, x, y);
         renderText(context, x, y, visibleText);
         if (this.text.isEmpty() && !this.isFocused()) {

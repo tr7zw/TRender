@@ -163,9 +163,9 @@ public abstract class WAbstractSlider extends WWidget {
 
     private void moveSlider(int x, int y) {
         int axisPos = switch (direction) {
-        case UP -> height - y;
+        case UP -> getHeight() - y;
         case DOWN -> y;
-        case LEFT -> width - x;
+        case LEFT -> getWidth() - x;
         case RIGHT -> x;
         };
 

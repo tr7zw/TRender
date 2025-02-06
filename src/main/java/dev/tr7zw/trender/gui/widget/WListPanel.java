@@ -139,8 +139,8 @@ public class WListPanel<D, W extends WWidget> extends WClippedPanel {
 
         this.children.clear();
         this.children.add(scrollBar);
-        scrollBar.setLocation(this.width - scrollBar.getWidth(), 0);
-        scrollBar.setSize(8, this.height);
+        scrollBar.setLocation(this.getWidth() - scrollBar.getWidth(), 0);
+        scrollBar.setSize(8, this.getHeight());
 
         //super.layout();
 
@@ -209,7 +209,7 @@ public class WListPanel<D, W extends WWidget> extends WClippedPanel {
 
                 //At this point, w is nonnull and configured by d
                 if (w.canResize()) {
-                    w.setSize(this.width - insets.width() - scrollBar.getWidth(), cellHeight);
+                    w.setSize(this.getWidth() - insets.width() - scrollBar.getWidth(), cellHeight);
                 }
                 w.x = insets.left();
                 w.y = insets.top() + ((cellHeight + gap) * i);

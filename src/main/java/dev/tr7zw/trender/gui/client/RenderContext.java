@@ -126,8 +126,12 @@ public class RenderContext {
         //$$ blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight, txtWidth, txtHeight);
         //#endif
     }
+    
+    public void blitSpriteLegacy(ResourceLocation texture, int x, int y, int width, int height, int sliceSide, int sliceTop,
+            int txtWidth, int txtHeight) {
+        blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight, txtWidth, txtHeight);
+    }
 
-    @SuppressWarnings("unused")
     private void blitNineSliced(ResourceLocation atlasLocation, int x, int y, int width, int height, int leftSliceWidth,
             int topSliceHeight, int rightSliceWidth, int bottomSliceHeight, int uWidth, int vHeight, int textureWidth,
             int textureHeight) {

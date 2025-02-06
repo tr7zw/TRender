@@ -140,7 +140,7 @@ public interface BackgroundPainter {
      * @see NinePatchBackgroundPainter
      */
     public static NinePatchBackgroundPainter createNinePatch(ResourceLocation texture) {
-        return new NinePatchBackgroundPainter();
+        return new NinePatchBackgroundPainter(texture);
         //return createNinePatch(new Texture(texture), builder -> builder.cornerSize(4).cornerUv(0.25f));
     }
 
