@@ -470,7 +470,7 @@ public class WWidget {
             tooltipBuilder.add(tooltip);
         }
     }
-    
+
     /**
      * Sets a simple tooltip to this widget.
      * 
@@ -479,7 +479,7 @@ public class WWidget {
     public void setToolip(Component tooltip) {
         this.tooltip = tooltip;
     }
-    
+
     /**
      * Find the most specific child node at this location. For non-panel widgets,
      * returns this widget.

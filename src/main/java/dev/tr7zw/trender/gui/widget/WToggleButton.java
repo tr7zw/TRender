@@ -10,7 +10,10 @@ import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.Texture;
+import dev.tr7zw.trender.gui.widget.icon.Icon;
 import dev.tr7zw.util.ComponentProvider;
+import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.client.Minecraft;
 //#if MC >= 11800
 import net.minecraft.client.gui.narration.NarratedElementType;
@@ -22,6 +25,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 
 public class WToggleButton extends WWidget {
+    private static final int ICON_SIZE = 16;
     // Default on/off images
     protected static final Texture DEFAULT_OFF_IMAGE = new Texture(LibGuiCommon.id("textures/widget/toggle_off.png"));
     protected static final Texture DEFAULT_ON_IMAGE = new Texture(LibGuiCommon.id("textures/widget/toggle_on.png"));
@@ -34,6 +38,10 @@ public class WToggleButton extends WWidget {
 
     @Nullable
     protected Component label = null;
+    @Nullable
+    @Getter
+    @Setter
+    private Icon icon;
 
     protected boolean isOn = false;
     @Nullable
@@ -112,9 +120,13 @@ public class WToggleButton extends WWidget {
         if (isFocused()) {
             ScreenDrawing.texturedRect(context, x, y, 18, 18, focusImage, 0xFFFFFFFF);
         }
-
+        int xPos = x + 22;
+        if (icon != null) {
+            icon.paint(context, x + 22, y + 1, ICON_SIZE);
+            xPos += ICON_SIZE + 2;
+        }
         if (label != null) {
-            ScreenDrawing.drawString(context, label.getVisualOrderText(), x + 22, y + 6,
+            ScreenDrawing.drawString(context, label.getVisualOrderText(), xPos, y + 6,
                     shouldRenderInDarkMode() ? darkmodeColor : color);
         }
     }

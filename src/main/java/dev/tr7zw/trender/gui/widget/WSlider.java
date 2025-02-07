@@ -64,23 +64,24 @@ public class WSlider extends WAbstractSlider {
 
                 ScreenDrawing.texturedRect(context, trackX, y + 1, TRACK_WIDTH, 1, texture, 16 * px, 0 * px, 22 * px,
                         1 * px, 0xFFFFFFFF);
-                ScreenDrawing.texturedRect(context, trackX, y + 2, TRACK_WIDTH, getHeight() - 2, texture, 16 * px, 1 * px,
-                        22 * px, 2 * px, 0xFFFFFFFF);
+                ScreenDrawing.texturedRect(context, trackX, y + 2, TRACK_WIDTH, getHeight() - 2, texture, 16 * px,
+                        1 * px, 22 * px, 2 * px, 0xFFFFFFFF);
                 ScreenDrawing.texturedRect(context, trackX, y + getHeight(), TRACK_WIDTH, 1, texture, 16 * px, 2 * px,
                         22 * px, 3 * px, 0xFFFFFFFF);
             } else {
                 int trackY = y + getHeight() / 2 - TRACK_WIDTH / 2;
-                thumbX = direction == Direction.LEFT ? (getWidth() - THUMB_SIZE) - (int) (coordToValueRatio * (value - min))
+                thumbX = direction == Direction.LEFT
+                        ? (getWidth() - THUMB_SIZE) - (int) (coordToValueRatio * (value - min))
                         : Math.round(coordToValueRatio * (value - min));
                 thumbY = getHeight() / 2 - THUMB_SIZE / 2;
                 thumbXOffset = 8;
 
                 ScreenDrawing.texturedRect(context, x, trackY, 1, TRACK_WIDTH, texture, 16 * px, 3 * px, 17 * px,
                         9 * px, 0xFFFFFFFF);
-                ScreenDrawing.texturedRect(context, x + 1, trackY, getWidth() - 2, TRACK_WIDTH, texture, 17 * px, 3 * px,
-                        18 * px, 9 * px, 0xFFFFFFFF);
-                ScreenDrawing.texturedRect(context, x + getWidth() - 1, trackY, 1, TRACK_WIDTH, texture, 18 * px, 3 * px,
-                        19 * px, 9 * px, 0xFFFFFFFF);
+                ScreenDrawing.texturedRect(context, x + 1, trackY, getWidth() - 2, TRACK_WIDTH, texture, 17 * px,
+                        3 * px, 18 * px, 9 * px, 0xFFFFFFFF);
+                ScreenDrawing.texturedRect(context, x + getWidth() - 1, trackY, 1, TRACK_WIDTH, texture, 18 * px,
+                        3 * px, 19 * px, 9 * px, 0xFFFFFFFF);
             }
 
             // thumbState values:

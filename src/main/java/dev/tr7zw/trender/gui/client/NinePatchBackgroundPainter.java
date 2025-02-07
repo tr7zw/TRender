@@ -104,7 +104,8 @@ public final class NinePatchBackgroundPainter implements BackgroundPainter {
         var matrices = context.pose();
         matrices.pushPose();
         //matrices.translate(left - leftPadding, top - topPadding, 0);
-        context.blitSpriteLegacy(texture, left, top, panel.getWidth() + leftPadding + rightPadding,  panel.getHeight() + topPadding + bottomPadding, 4, 4, 16, 16);
+        context.blitSpriteLegacy(texture, left, top, panel.getWidth() + leftPadding + rightPadding,
+                panel.getHeight() + topPadding + bottomPadding, 4, 4, 16, 16);
         //        ninePatch.draw(NinePatchTextureRendererImpl.INSTANCE, context, panel.getWidth() + leftPadding + rightPadding,
         //                panel.getHeight() + topPadding + bottomPadding);
         matrices.popPose();

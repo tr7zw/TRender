@@ -50,7 +50,11 @@ public class ItemIcon implements Icon {
         matrices.pushPose();
         matrices.translate(x, y, 0);
         matrices.scale(scale, scale, 1);
+        //#if MC >= 11904
         context.renderFakeItem(stack, 0, 0);
+        //#else
+        //$$ context.renderFakeItem(stack, x, y);
+        //#endif
 
         if (isGhost()) {
             context.fill(0, 0, 16, 16, GHOST_OVERLAY_COLOR); // RenderType.guiGhostRecipeOverlay() ?

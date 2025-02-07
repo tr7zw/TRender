@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import dev.tr7zw.trender.gui.GuiDescription;
@@ -13,6 +15,7 @@ import dev.tr7zw.trender.gui.impl.Proxy;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.Insets;
+import lombok.Setter;
 
 /**
  * Similar to the RecyclerView in Android, this widget represents a scrollable
@@ -68,6 +71,9 @@ public class WListPanel<D, W extends WWidget> extends WClippedPanel {
      * The widgets whose host hasn't been set yet.
      */
     private final List<W> requiresHost = new ArrayList<>();
+
+    @Setter
+    private Predicate<D> filter = (v) -> true;
 
     /**
      * Constructs a list panel.
@@ -180,22 +186,25 @@ public class WListPanel<D, W extends WWidget> extends WClippedPanel {
         //scrollBar.setLocation(this.width-scrollBar.getWidth(), 0);
         //scrollBar.setSize(8, this.height);
 
+        List<D> filteredData = new ArrayList<>(this.data);
+        filteredData.removeIf(filter.negate());
+
         //Fix up the scrollbar handle and track metrics
         scrollBar.setWindow(cellsHigh);
-        scrollBar.setMaxValue(data.size());
+        scrollBar.setMaxValue(filteredData.size());
         int scrollOffset = scrollBar.getValue();
         //System.out.println(scrollOffset);
 
-        int presentCells = Math.min(data.size() - scrollOffset, cellsHigh);
+        int presentCells = Math.min(filteredData.size() - scrollOffset, cellsHigh);
 
         if (presentCells > 0) {
             for (int i = 0; i < presentCells; i++) {
                 int index = i + scrollOffset;
-                if (index >= data.size())
+                if (index >= filteredData.size())
                     break;
                 if (index < 0)
                     continue; //THIS IS A THING THAT IS HAPPENING >:(
-                D d = data.get(index);
+                D d = filteredData.get(index);
                 W w = configured.get(d);
                 if (w == null) {
                     if (unconfigured.isEmpty()) {
@@ -288,10 +297,6 @@ public class WListPanel<D, W extends WWidget> extends WClippedPanel {
      * @since 9.1.0
      */
     public WListPanel<D, W> setGap(int gap) {
-        if (gap < 0) {
-            throw new IllegalArgumentException("Gap cannot be negative (was " + gap + ")");
-        }
-
         this.gap = gap;
         return this;
     }
