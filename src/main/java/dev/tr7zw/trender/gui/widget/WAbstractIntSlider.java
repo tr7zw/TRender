@@ -31,7 +31,7 @@ import java.util.function.IntConsumer;
  * selected a value.</li>
  * </ul>
  */
-public abstract class WAbstractSlider extends WWidget {
+public abstract class WAbstractIntSlider extends WWidget {
     /**
      * The minimum time between two draggingFinished events caused by scrolling
      * ({@link #onMouseScroll}).
@@ -77,7 +77,7 @@ public abstract class WAbstractSlider extends WWidget {
     @Nullable
     private IntConsumer draggingFinishedListener = null;
 
-    protected WAbstractSlider(int min, int max, Axis axis) {
+    protected WAbstractIntSlider(int min, int max, Axis axis) {
         if (max <= min)
             throw new IllegalArgumentException("Minimum value must be smaller than the maximum!");
 

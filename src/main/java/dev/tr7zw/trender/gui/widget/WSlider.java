@@ -12,9 +12,9 @@ import net.minecraft.resources.ResourceLocation;
 /**
  * A simple slider widget that can be used to select int values.
  *
- * @see WAbstractSlider for supported listeners
+ * @see WAbstractIntSlider for supported listeners
  */
-public class WSlider extends WAbstractSlider {
+public class WSlider extends WAbstractIntSlider {
     public static final int TRACK_WIDTH = 6;
     public static final int THUMB_SIZE = 8;
     public static final ResourceLocation LIGHT_TEXTURE = LibGuiCommon.id("textures/widget/slider_light.png");

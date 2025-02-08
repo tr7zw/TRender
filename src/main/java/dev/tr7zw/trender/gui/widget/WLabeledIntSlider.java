@@ -23,9 +23,9 @@ import net.minecraft.network.chat.Component;
  * In addition to the standard slider listeners, labeled sliders also support
  * "label updaters" that can update the label when the value is changed.
  *
- * @see WAbstractSlider for more information about listeners
+ * @see WAbstractIntSlider for more information about listeners
  */
-public class WLabeledSlider extends WAbstractSlider {
+public class WLabeledIntSlider extends WAbstractIntSlider {
     @Nullable
     private Component label = null;
     @Nullable
@@ -38,7 +38,7 @@ public class WLabeledSlider extends WAbstractSlider {
      * @param min the minimum value
      * @param max the maximum value
      */
-    public WLabeledSlider(int min, int max) {
+    public WLabeledIntSlider(int min, int max) {
         this(min, max, Axis.HORIZONTAL);
     }
 
@@ -49,7 +49,7 @@ public class WLabeledSlider extends WAbstractSlider {
      * @param max  the maximum value
      * @param axis the slider axis
      */
-    public WLabeledSlider(int min, int max, Axis axis) {
+    public WLabeledIntSlider(int min, int max, Axis axis) {
         super(min, max, axis);
     }
 
@@ -61,7 +61,7 @@ public class WLabeledSlider extends WAbstractSlider {
      * @param axis  the slider axis
      * @param label the slider label (can be null)
      */
-    public WLabeledSlider(int min, int max, Axis axis, @Nullable Component label) {
+    public WLabeledIntSlider(int min, int max, Axis axis, @Nullable Component label) {
         this(min, max, axis);
         this.label = label;
     }
@@ -73,7 +73,7 @@ public class WLabeledSlider extends WAbstractSlider {
      * @param max   the maximum value
      * @param label the slider label (can be null)
      */
-    public WLabeledSlider(int min, int max, @Nullable Component label) {
+    public WLabeledIntSlider(int min, int max, @Nullable Component label) {
         this(min, max);
         this.label = label;
     }
@@ -140,6 +140,9 @@ public class WLabeledSlider extends WAbstractSlider {
      */
     public void setLabelUpdater(@Nullable LabelUpdater labelUpdater) {
         this.labelUpdater = labelUpdater;
+        if (labelUpdater != null) {
+            label = labelUpdater.updateLabel(value);
+        }
     }
 
     @Override

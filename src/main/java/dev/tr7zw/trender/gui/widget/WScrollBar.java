@@ -190,15 +190,15 @@ public class WScrollBar extends WWidget {
 
     @Override
     public InputResult onKeyPressed(int ch, int key, int modifiers) {
-        WAbstractSlider.Direction direction = axis == Axis.HORIZONTAL ? WAbstractSlider.Direction.RIGHT
-                : WAbstractSlider.Direction.DOWN;
+        WAbstractIntSlider.Direction direction = axis == Axis.HORIZONTAL ? WAbstractIntSlider.Direction.RIGHT
+                : WAbstractIntSlider.Direction.DOWN;
 
-        if (WAbstractSlider.isIncreasingKey(ch, direction)) {
+        if (WAbstractIntSlider.isIncreasingKey(ch, direction)) {
             if (value < getMaxScrollValue()) {
                 value++;
             }
             return InputResult.PROCESSED;
-        } else if (WAbstractSlider.isDecreasingKey(ch, direction)) {
+        } else if (WAbstractIntSlider.isDecreasingKey(ch, direction)) {
             if (value > 0) {
                 value--;
             }

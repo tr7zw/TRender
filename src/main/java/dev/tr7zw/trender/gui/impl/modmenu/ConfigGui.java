@@ -1,5 +1,8 @@
 package dev.tr7zw.trender.gui.impl.modmenu;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +13,7 @@ import dev.tr7zw.trender.gui.client.LightweightGuiDescription;
 import dev.tr7zw.trender.gui.impl.client.LibGuiClient;
 import dev.tr7zw.trender.gui.widget.WButton;
 import dev.tr7zw.trender.gui.widget.WGridPanel;
+import dev.tr7zw.trender.gui.widget.WLabeledDoubleSlider;
 import dev.tr7zw.trender.gui.widget.WListPanel;
 import dev.tr7zw.trender.gui.widget.WTabPanel;
 import dev.tr7zw.trender.gui.widget.WTextField;
@@ -44,6 +48,14 @@ public class ConfigGui extends LightweightGuiDescription {
         };
         darkmodeButton.setToggle(LibGuiClient.config.darkMode);
         //        root.add(darkmodeButton, 0, 1, 6, 1);
+        
+        WLabeledDoubleSlider ds = new WLabeledDoubleSlider(0, 3, 0.2);
+        ds.setLabelUpdater(v -> {
+            DecimalFormat df = new DecimalFormat("###.##");
+            return ComponentProvider.literal("Val: " + df.format(v));
+            });
+        
+//        root.add(ds, 4, 11, 3, 1);
 
         WListPanel<String, WToggleButton> testList = new WListPanel<String, WToggleButton>(data,
                 () -> new WToggleButton(ComponentProvider.EMPTY), (s, l) -> {
