@@ -1,5 +1,9 @@
 package dev.tr7zw.trender.gui.widget;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.impl.VisualLogger;
 import dev.tr7zw.trender.gui.widget.data.Insets;
 
@@ -28,6 +32,11 @@ public class WGridPanel extends WPanelWithInsets {
      */
     protected int verticalGap = 0;
 
+    /**
+     * The widgets whose host hasn't been set yet.
+     */
+    private final List<WWidget> requiresHost = new ArrayList<>();
+    
     /**
      * Constructs a grid panel with the default grid size.
      */
@@ -97,6 +106,12 @@ public class WGridPanel extends WPanelWithInsets {
             w.setSize((width - 1) * (grid + horizontalGap) + grid, (height - 1) * (grid + verticalGap) + grid);
         }
 
+        if(host != null) {
+            w.setHost(host);
+        } else {
+            requiresHost.add(w);
+        }
+        
         expandToFit(w, insets);
     }
 
@@ -104,5 +119,18 @@ public class WGridPanel extends WPanelWithInsets {
     public WGridPanel setInsets(Insets insets) {
         super.setInsets(insets);
         return this;
+    }
+    
+    @Override
+    public void setHost(GuiDescription host) {
+        super.setHost(host);
+        setRequiredHosts(host);
+    }
+
+    private void setRequiredHosts(GuiDescription host) {
+        for (WWidget widget : requiresHost) {
+            widget.setHost(host);
+        }
+        requiresHost.clear();
     }
 }
