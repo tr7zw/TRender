@@ -467,7 +467,7 @@ public class WWidget {
 
     public void addTooltip(TooltipBuilder tooltipBuilder) {
         if (this.tooltip != null) {
-            tooltipBuilder.add(tooltip);
+            Minecraft.getInstance().font.split(tooltip, 170).forEach(f -> tooltipBuilder.add(f));
         }
     }
 
