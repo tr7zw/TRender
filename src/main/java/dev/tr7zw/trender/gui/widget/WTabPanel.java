@@ -43,7 +43,7 @@ import net.minecraft.sounds.SoundEvents;
 public class WTabPanel extends WPanel {
     private static final int TAB_PADDING = 4;
     private static final int TAB_WIDTH = 28;
-    private static final int TAB_HEIGHT = 30;
+    private static final int TAB_HEIGHT = 20;
     private static final int ICON_SIZE = 16;
     private final WBox tabRibbon = new WBox(Axis.HORIZONTAL).setSpacing(1);
     private final List<WTab> tabWidgets = new ArrayList<>();
@@ -402,7 +402,7 @@ public class WTabPanel extends WPanel {
 
             if (title != null) {
                 int titleX = (icon != null) ? iconX + ICON_SIZE + 1 : 0;
-                int titleY = (getHeight() - TAB_PADDING - renderer.lineHeight) / 2 + 1;
+                int titleY = (getHeight() - TAB_PADDING - renderer.lineHeight) / 2 + 3;
                 int width = (icon != null) ? this.getWidth() - iconX - ICON_SIZE : this.getWidth();
                 HorizontalAlignment align = (icon != null) ? HorizontalAlignment.LEFT : HorizontalAlignment.CENTER;
 
@@ -418,7 +418,7 @@ public class WTabPanel extends WPanel {
             }
 
             if (icon != null) {
-                icon.paint(context, x + iconX, y + (getHeight() - TAB_PADDING - ICON_SIZE) / 2, ICON_SIZE);
+                icon.paint(context, x + iconX, y + 1 + (getHeight() - TAB_PADDING - ICON_SIZE) / 2, ICON_SIZE);
             }
         }
 
