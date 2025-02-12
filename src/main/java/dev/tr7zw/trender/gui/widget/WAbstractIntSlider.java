@@ -15,6 +15,8 @@ import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.util.ComponentProvider;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.function.IntConsumer;
 
@@ -71,6 +73,9 @@ public abstract class WAbstractIntSlider extends WWidget {
     private boolean pendingDraggingFinishedFromKeyboard = false;
     private int draggingFinishedFromScrollingTimer = 0;
     private boolean pendingDraggingFinishedFromScrolling = false;
+    @Getter
+    @Setter
+    private boolean ignoreScrolling = false;
 
     @Nullable
     private IntConsumer valueChangeListener = null;
@@ -187,6 +192,9 @@ public abstract class WAbstractIntSlider extends WWidget {
 
     @Override
     public InputResult onMouseScroll(int x, int y, double horizontalAmount, double verticalAmount) {
+        if (ignoreScrolling) {
+            return InputResult.IGNORED;
+        }
         if (direction == Direction.LEFT || direction == Direction.DOWN) {
             verticalAmount = -verticalAmount;
         }
