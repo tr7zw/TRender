@@ -69,6 +69,7 @@ public abstract class WPanel extends WWidget {
         for (WWidget child : children) {
             if (child instanceof WPanel panel)
                 panel.layout();
+            child.refresh();
             expandToFit(child);
         }
     }

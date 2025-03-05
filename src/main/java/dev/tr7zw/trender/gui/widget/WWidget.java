@@ -10,6 +10,7 @@ import dev.tr7zw.trender.gui.impl.VisualLogger;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.ObservableProperty;
 import dev.tr7zw.trender.gui.widget.focus.FocusModel;
+import lombok.Setter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -42,6 +43,9 @@ public class WWidget {
     private int height = 18;
     @Nullable
     protected Component tooltip;
+    @Nullable
+    @Setter
+    private Runnable onRefresh;
 
     /**
      * The containing {@link GuiDescription} of this widget. Can be null if this
@@ -486,6 +490,15 @@ public class WWidget {
      */
     public WWidget hit(int x, int y) {
         return this;
+    }
+
+    /**
+     * Notify the Widget to update its state. Called from WPanel's layout method.
+     */
+    public void refresh() {
+        if (onRefresh != null) {
+            onRefresh.run();
+        }
     }
 
     /**
