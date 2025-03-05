@@ -220,6 +220,7 @@ public class WListPanel<D, W extends WWidget> extends WClippedPanel {
                 if (w.canResize()) {
                     w.setSize(this.getWidth() - insets.width() - scrollBar.getWidth(), cellHeight);
                 }
+                w.refresh();
                 w.x = insets.left();
                 w.y = insets.top() + ((cellHeight + gap) * i);
                 this.children.add(w);

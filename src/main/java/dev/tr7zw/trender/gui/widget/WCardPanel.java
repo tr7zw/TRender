@@ -146,6 +146,7 @@ public class WCardPanel extends WPanel {
         for (WWidget child : cards) {
             if (child instanceof WPanel panel)
                 panel.layout();
+            child.refresh();
             expandToFit(child);
 
             if (child == getSelectedCard()) {

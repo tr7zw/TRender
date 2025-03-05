@@ -127,6 +127,7 @@ public class WBox extends WPanelWithInsets {
 
             if (child instanceof WPanel panel)
                 panel.layout();
+            child.refresh();
             expandToFit(child, insets);
 
             if (i != children.size() - 1) {
