@@ -6,7 +6,6 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 
 import dev.tr7zw.trender.gui.client.CottonClientScreen;
 import dev.tr7zw.util.ComponentProvider;
-import net.minecraft.network.chat.Component;
 
 public class ModMenuSupport implements ModMenuApi {
     @Override

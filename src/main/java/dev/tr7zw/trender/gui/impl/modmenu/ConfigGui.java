@@ -1,7 +1,5 @@
 package dev.tr7zw.trender.gui.impl.modmenu;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,8 +33,8 @@ public class ConfigGui extends LightweightGuiDescription {
         root.setInsets(Insets.ROOT_PANEL);
         setRootPanel(root);
 
-        List<String> data = new ArrayList<String>(
-                Arrays.asList("Some", "test", "data", "with", "many", "options", "so", "it", "needs", "to", "scroll"));
+        List<String> data = new ArrayList<String>(Arrays.asList("Some", "test", "data", "with", "many", "options", "so",
+                "it", "needs", "to", "scroll.", "This", "menu", "is", "just", "for", "testing"));
 
         WToggleButton darkmodeButton = new WToggleButton(ComponentProvider.translatable("option.libgui.darkmode")) {
             @Override
@@ -48,14 +46,14 @@ public class ConfigGui extends LightweightGuiDescription {
         };
         darkmodeButton.setToggle(LibGuiClient.config.darkMode);
         //        root.add(darkmodeButton, 0, 1, 6, 1);
-        
+
         WLabeledDoubleSlider ds = new WLabeledDoubleSlider(0, 3, 0.2);
         ds.setLabelUpdater(v -> {
             DecimalFormat df = new DecimalFormat("###.##");
             return ComponentProvider.literal("Val: " + df.format(v));
-            });
-        
-//        root.add(ds, 4, 11, 3, 1);
+        });
+
+        //        root.add(ds, 4, 11, 3, 1);
 
         WListPanel<String, WToggleButton> testList = new WListPanel<String, WToggleButton>(data,
                 () -> new WToggleButton(ComponentProvider.EMPTY), (s, l) -> {

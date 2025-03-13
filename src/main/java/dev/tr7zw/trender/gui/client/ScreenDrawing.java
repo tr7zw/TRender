@@ -7,8 +7,6 @@ import org.joml.Matrix4f;
 //$$ import com.mojang.math.Matrix4f;
 //#endif
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
