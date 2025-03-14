@@ -79,7 +79,7 @@ public class RenderContext {
         guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, width, height,
                 textureWidth, textureHeight);
         //#elseif MC >= 12000
-        //$$ guiGraphics.blit(atlasLocation, x, y, y, uOffset, vOffset, width, height, textureWidth, textureHeight);
+        //$$ guiGraphics.blit(atlasLocation, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
         //#elseif MC > 11700
         //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
         //$$ RenderSystem.setShaderTexture(0, atlasLocation);
