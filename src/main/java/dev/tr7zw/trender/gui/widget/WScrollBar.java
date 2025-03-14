@@ -1,7 +1,6 @@
 package dev.tr7zw.trender.gui.widget;
 
 import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.Axis;
@@ -13,7 +12,6 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.resources.ResourceLocation;
 
 public class WScrollBar extends WWidget {
-    private static final ResourceLocation FOCUS_TEXTURE = LibGuiCommon.id("widget/scroll_bar/focus");
 
     /**
      * The default {@linkplain #getScrollingSpeed() scrolling speed for mouse
@@ -74,14 +72,14 @@ public class WScrollBar extends WWidget {
             context.blitSprite(thumbTexture, 0, 0, getHandleSize(), getHeight() - 2, 4, 4, 16, 16);
 
             if (isFocused()) {
-                context.blitSprite(FOCUS_TEXTURE, 0, 0, getHandleSize(), getHeight() - 2, 4, 4, 16, 16);
+                context.blitSprite(textures.thumbHovered(), 0, 0, getHandleSize(), getHeight() - 2, 4, 4, 16, 16);
             }
         } else {
             matrices.translate(x + 1, y + 1 + getHandlePosition(), 0);
             context.blitSprite(thumbTexture, 0, 0, getWidth() - 2, getHandleSize(), 4, 4, 16, 16);
 
             if (isFocused()) {
-                context.blitSprite(FOCUS_TEXTURE, 0, 0, getWidth() - 2, getHandleSize(), 4, 4, 16, 16);
+                context.blitSprite(textures.thumbHovered(), 0, 0, getWidth() - 2, getHandleSize(), 4, 4, 16, 16);
             }
         }
 

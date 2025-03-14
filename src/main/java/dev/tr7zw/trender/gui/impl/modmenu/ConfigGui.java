@@ -64,9 +64,13 @@ public class ConfigGui extends LightweightGuiDescription {
         testList.setSize(17 * 20, 8 * 20);
         WTabPanel wTabPanel = new WTabPanel();
         wTabPanel.add(testList, b -> b.title(ComponentProvider.literal("list")).icon(new ItemIcon(Items.PAINTING)));
-        wTabPanel.add(darkmodeButton,
+        WGridPanel test = new WGridPanel();
+        test.add(darkmodeButton, 0, 0);
+        test.add(new WLabeledDoubleSlider(0, 1, 0.05, ComponentProvider.literal("Test Slider")), 2, 1, 5, 1);
+        wTabPanel.add(test, 
                 b -> b.title(ComponentProvider.literal("Darkmode")).icon(new ItemIcon(Items.APPLE)));
         //        wTabPanel.setSize(6, 6);
+        
         wTabPanel.layout();
         root.add(wTabPanel, 0, 1);
 

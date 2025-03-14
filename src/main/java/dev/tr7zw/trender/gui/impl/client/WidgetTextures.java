@@ -3,6 +3,7 @@ package dev.tr7zw.trender.gui.impl.client;
 import static dev.tr7zw.trender.gui.impl.LibGuiCommon.id;
 
 import dev.tr7zw.util.NMSHelper;
+import lombok.Getter;
 import net.minecraft.resources.ResourceLocation;
 
 public final class WidgetTextures {
@@ -15,32 +16,44 @@ public final class WidgetTextures {
     //$$ private static final String LEGACY_PATH = "textures/gui/sprites/";
     //$$ private static final String LEGACY_SUFFIX = ".png";
     //#endif
+    
+    public static ResourceLocation getId(String path) {
+        return id(LEGACY_PATH + path + LEGACY_SUFFIX);
+    }
+    
+    public static ResourceLocation getNamespacedId(String path) {
+        return NMSHelper.getResourceLocation(NAMESPACE + ":" + LEGACY_PATH + path + LEGACY_SUFFIX);
+    }
+    
+    @Getter
+    private static final WidgetSprites SLIDER = new WidgetSprites(
+            getNamespacedId("widget/slider"),
+            getNamespacedId("widget/slider_highlighted"));
     private static final WidgetSprites DARK_LABELED_SLIDER_HANDLE = new WidgetSprites(
-            id(LEGACY_PATH + "widget/slider_handle_dark" + LEGACY_SUFFIX),
-            id(LEGACY_PATH + "widget/slider_handle_highlighted_dark" + LEGACY_SUFFIX));
+            getId("widget/slider_handle_dark"),
+            getId("widget/slider_handle_highlighted_dark"));
     private static final WidgetSprites DARK_BUTTON = new WidgetSprites(
-            id(LEGACY_PATH + "widget/button_dark" + LEGACY_SUFFIX),
-            id(LEGACY_PATH + "widget/button_disabled_dark" + LEGACY_SUFFIX),
-            id(LEGACY_PATH + "widget/button_highlighted_dark" + LEGACY_SUFFIX));
+            getId("widget/button_dark"),
+            getId("widget/button_disabled_dark"),
+            getId("widget/button_highlighted_dark"));
     private static final ScrollBarTextures LIGHT_SCROLL_BAR = new ScrollBarTextures(
-            id(LEGACY_PATH + "widget/scroll_bar/background_light" + LEGACY_SUFFIX),
-            id(LEGACY_PATH + "widget/scroll_bar/thumb_light" + LEGACY_SUFFIX),
-            id(LEGACY_PATH + "widget/scroll_bar/thumb_pressed_light" + LEGACY_SUFFIX),
-            id(LEGACY_PATH + "widget/scroll_bar/thumb_hovered_light" + LEGACY_SUFFIX));
+            getId("widget/scroll_bar/background_light"),
+            getId("widget/scroll_bar/thumb_light"),
+            getId("widget/scroll_bar/thumb_pressed_light"),
+            getId("widget/scroll_bar/thumb_hovered_light"));
     private static final ScrollBarTextures DARK_SCROLL_BAR = new ScrollBarTextures(
-            id(LEGACY_PATH + "widget/scroll_bar/background_dark" + LEGACY_SUFFIX),
-            id(LEGACY_PATH + "widget/scroll_bar/thumb_dark" + LEGACY_SUFFIX),
-            id(LEGACY_PATH + "widget/scroll_bar/thumb_pressed_dark" + LEGACY_SUFFIX),
-            id(LEGACY_PATH + "widget/scroll_bar/thumb_hovered_dark" + LEGACY_SUFFIX));
+            getId("widget/scroll_bar/background_dark"),
+            getId("widget/scroll_bar/thumb_dark"),
+            getId("widget/scroll_bar/thumb_pressed_dark"),
+            getId("widget/scroll_bar/thumb_hovered_dark"));
     private static final WidgetSprites LIGHT_LABELED_SLIDER_HANDLE = new WidgetSprites(
-            NMSHelper.getResourceLocation(NAMESPACE + ":" + LEGACY_PATH + "widget/slider_handle" + LEGACY_SUFFIX),
-            NMSHelper.getResourceLocation(
-                    NAMESPACE + ":" + LEGACY_PATH + "widget/slider_handle_highlighted" + LEGACY_SUFFIX));
+            getNamespacedId("widget/slider_handle"),
+            getNamespacedId("widget/slider_handle_highlighted"));
     private static final WidgetSprites BUTTON_LIGH = new WidgetSprites(
-            NMSHelper.getResourceLocation(NAMESPACE + ":" + LEGACY_PATH + "widget/button" + LEGACY_SUFFIX),
-            NMSHelper.getResourceLocation(NAMESPACE + ":" + LEGACY_PATH + "widget/button_disabled" + LEGACY_SUFFIX),
-            NMSHelper.getResourceLocation(NAMESPACE + ":" + LEGACY_PATH + "widget/button_highlighted" + LEGACY_SUFFIX));
-
+            getNamespacedId("widget/button"),
+            getNamespacedId("widget/button_disabled"),
+            getNamespacedId("widget/button_highlighted"));
+    
     public static WidgetSprites getButtonTextures(boolean dark) {
         return dark ? DARK_BUTTON : BUTTON_LIGH;
     }

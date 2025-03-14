@@ -15,6 +15,7 @@ import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#endif
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * A vanilla-style labeled slider widget.
@@ -174,8 +175,9 @@ public class WLabeledDoubleSlider extends WAbstractDoubleSlider {
             matrices.translate(0, getHeight(), 0);
             matrices.mulPose(NMSHelper.ZP.rotationDegrees(270));
         }
-        // FIXME
-        context.blitSprite(NMSHelper.getResourceLocation("widget/slider"), 0, 0, aWidth, aHeight, 0, 0, 0, 0);
+        
+        var background = WidgetTextures.getSLIDER();
+        context.blitSprite(this.isFocused() ? background.enabledFocused() : background.enabled(), 0, 0, aWidth, aHeight, 4, 4, 16, 16);
 
         int thumbX = (int) Math.round(coordToValueRatio * (value - min));
         int thumbY = 0;
@@ -186,8 +188,7 @@ public class WLabeledDoubleSlider extends WAbstractDoubleSlider {
 
         var thumbTextures = WidgetTextures.getLabeledSliderHandleTextures(shouldRenderInDarkMode());
         var thumbTexture = thumbTextures.get(true, dragging || hovering);
-        // FIXME
-        context.blitSprite(thumbTexture, thumbX, thumbY, thumbWidth, thumbHeight, 0, 0, 0, 0);
+        context.blitSprite(thumbTexture, thumbX, thumbY, thumbWidth, thumbHeight, 2, 2, 8, 20);
 
         if (label != null) {
             int color = isMouseInsideBounds(mouseX, mouseY) ? 0xFFFFA0 : 0xE0E0E0;

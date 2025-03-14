@@ -170,8 +170,8 @@ public class WLabeledIntSlider extends WAbstractIntSlider {
             matrices.translate(0, getHeight(), 0);
             matrices.mulPose(NMSHelper.ZP.rotationDegrees(270));
         }
-        // FIXME
-        context.blitSprite(NMSHelper.getResourceLocation("widget/slider"), 0, 0, aWidth, aHeight, 0, 0, 0, 0);
+        var background = WidgetTextures.getSLIDER();
+        context.blitSprite(this.isFocused() ? background.enabledFocused() : background.enabled(), 0, 0, aWidth, aHeight, 4, 4, 16, 16);
 
         int thumbX = Math.round(coordToValueRatio * (value - min));
         int thumbY = 0;
@@ -182,8 +182,7 @@ public class WLabeledIntSlider extends WAbstractIntSlider {
 
         var thumbTextures = WidgetTextures.getLabeledSliderHandleTextures(shouldRenderInDarkMode());
         var thumbTexture = thumbTextures.get(true, dragging || hovering);
-        // FIXME
-        context.blitSprite(thumbTexture, thumbX, thumbY, thumbWidth, thumbHeight, 0, 0, 0, 0);
+        context.blitSprite(thumbTexture, thumbX, thumbY, thumbWidth, thumbHeight, 2, 2, 8, 20);
 
         if (label != null) {
             int color = isMouseInsideBounds(mouseX, mouseY) ? 0xFFFFA0 : 0xE0E0E0;
