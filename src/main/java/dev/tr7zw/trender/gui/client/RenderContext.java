@@ -206,12 +206,12 @@ public class RenderContext {
     private static IntIterator slices(int target, int total) {
         if (total == 0) {
             return new IntIterator() {
-                
+
                 @Override
                 public boolean hasNext() {
                     return false;
                 }
-                
+
                 @Override
                 public int nextInt() {
                     return 0;

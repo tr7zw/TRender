@@ -36,14 +36,16 @@
             "links": {
                 "modmenu.discord": "https://discord.gg/UdfNaDtbwb"
             },
-            "badges": [ "library" ],
+            "badges": [
+                "library"
+            ],
             "parent": {
                 "id": "tr7zw-api-parent",
                 "name": "tr7zw Library Modules",
                 "description": "All of tr7zw's embedded library modules in one place!",
                 "icon": "tr_parent_icon.png"
-              },
-              "update_checker": false
+            },
+            "update_checker": false
         }
     }
 }

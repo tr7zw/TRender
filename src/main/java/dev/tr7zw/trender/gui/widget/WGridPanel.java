@@ -36,7 +36,7 @@ public class WGridPanel extends WPanelWithInsets {
      * The widgets whose host hasn't been set yet.
      */
     private final List<WWidget> requiresHost = new ArrayList<>();
-    
+
     /**
      * Constructs a grid panel with the default grid size.
      */
@@ -106,12 +106,12 @@ public class WGridPanel extends WPanelWithInsets {
             w.setSize((width - 1) * (grid + horizontalGap) + grid, (height - 1) * (grid + verticalGap) + grid);
         }
 
-        if(host != null) {
+        if (host != null) {
             w.setHost(host);
         } else {
             requiresHost.add(w);
         }
-        
+
         expandToFit(w, insets);
     }
 
@@ -120,7 +120,7 @@ public class WGridPanel extends WPanelWithInsets {
         super.setInsets(insets);
         return this;
     }
-    
+
     @Override
     public void setHost(GuiDescription host) {
         super.setHost(host);

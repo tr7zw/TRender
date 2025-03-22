@@ -171,7 +171,8 @@ public class WLabeledIntSlider extends WAbstractIntSlider {
             matrices.mulPose(NMSHelper.ZP.rotationDegrees(270));
         }
         var background = WidgetTextures.getSLIDER();
-        context.blitSprite(this.isFocused() ? background.enabledFocused() : background.enabled(), 0, 0, aWidth, aHeight, 4, 4, 16, 16);
+        context.blitSprite(this.isFocused() ? background.enabledFocused() : background.enabled(), 0, 0, aWidth, aHeight,
+                4, 4, 16, 16);
 
         int thumbX = Math.round(coordToValueRatio * (value - min));
         int thumbY = 0;

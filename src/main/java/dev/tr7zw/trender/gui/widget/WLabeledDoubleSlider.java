@@ -36,8 +36,8 @@ public class WLabeledDoubleSlider extends WAbstractDoubleSlider {
     /**
      * Constructs a horizontal slider with no default label.
      *
-     * @param min the minimum value
-     * @param max the maximum value
+     * @param min      the minimum value
+     * @param max      the maximum value
      * @param stepSize value step size
      */
     public WLabeledDoubleSlider(double min, double max, double stepSize) {
@@ -47,23 +47,23 @@ public class WLabeledDoubleSlider extends WAbstractDoubleSlider {
     /**
      * Constructs a slider with no default label.
      *
-     * @param min  the minimum value
-     * @param max  the maximum value
+     * @param min      the minimum value
+     * @param max      the maximum value
      * @param stepSize value step size
-     * @param axis the slider axis
+     * @param axis     the slider axis
      */
     public WLabeledDoubleSlider(double min, double max, double stepSize, Axis axis) {
-        super(min, max, stepSize,  axis);
+        super(min, max, stepSize, axis);
     }
 
     /**
      * Constructs a slider.
      *
-     * @param min   the minimum value
-     * @param max   the maximum value
+     * @param min      the minimum value
+     * @param max      the maximum value
      * @param stepSize value step size
-     * @param axis  the slider axis
-     * @param label the slider label (can be null)
+     * @param axis     the slider axis
+     * @param label    the slider label (can be null)
      */
     public WLabeledDoubleSlider(int min, int max, double stepSize, Axis axis, @Nullable Component label) {
         this(min, max, stepSize, axis);
@@ -73,10 +73,10 @@ public class WLabeledDoubleSlider extends WAbstractDoubleSlider {
     /**
      * Constructs a horizontal slider.
      *
-     * @param min   the minimum value
-     * @param max   the maximum value
+     * @param min      the minimum value
+     * @param max      the maximum value
      * @param stepSize value step size
-     * @param label the slider label (can be null)
+     * @param label    the slider label (can be null)
      */
     public WLabeledDoubleSlider(int min, int max, double stepSize, @Nullable Component label) {
         this(min, max, stepSize);
@@ -175,9 +175,10 @@ public class WLabeledDoubleSlider extends WAbstractDoubleSlider {
             matrices.translate(0, getHeight(), 0);
             matrices.mulPose(NMSHelper.ZP.rotationDegrees(270));
         }
-        
+
         var background = WidgetTextures.getSLIDER();
-        context.blitSprite(this.isFocused() ? background.enabledFocused() : background.enabled(), 0, 0, aWidth, aHeight, 4, 4, 16, 16);
+        context.blitSprite(this.isFocused() ? background.enabledFocused() : background.enabled(), 0, 0, aWidth, aHeight,
+                4, 4, 16, 16);
 
         int thumbX = (int) Math.round(coordToValueRatio * (value - min));
         int thumbY = 0;
