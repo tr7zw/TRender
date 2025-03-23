@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.systems.RenderSystem;
+//#if MC < 12105
+//$$ import com.mojang.blaze3d.systems.RenderSystem;
+//#endif
 
 import dev.tr7zw.trender.gui.client.RenderContext;
 import net.minecraft.core.Registry;
@@ -62,7 +64,9 @@ public class WItem extends WWidget {
 
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
-        RenderSystem.enableDepthTest();
+        //#if MC < 12105
+        //$$ RenderSystem.enableDepthTest();
+        //#endif
         context.renderFakeItem(items.get(current), x + getWidth() / 2 - 8, y + getHeight() / 2 - 8);
     }
 

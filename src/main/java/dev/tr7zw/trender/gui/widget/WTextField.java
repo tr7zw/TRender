@@ -4,29 +4,13 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import org.jetbrains.annotations.Nullable;
-//#if MC >= 11904
-import org.joml.Matrix4f;
-//#else
-//$$ import com.mojang.math.Matrix4f;
-//#endif
-//#if MC <= 11605
-//$$ import org.lwjgl.opengl.GL11;
-//#endif
-import org.lwjgl.glfw.GLFW;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import org.lwjgl.glfw.GLFW;
 
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.impl.client.VanillaShaders;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.util.ComponentProvider;
 import net.minecraft.client.Minecraft;
@@ -254,7 +238,7 @@ public class WTextField extends WWidget {
         int leftCaret = font.width(visibleText.substring(0, normalizedLeft));
         int selectionWidth = font.width(visibleText.substring(normalizedLeft, normalizedRight));
 
-        invertedRect(context, x + TEXT_PADDING_X + leftCaret, y + CURSOR_PADDING_Y, selectionWidth, CURSOR_HEIGHT);
+        context.invertedRect(x + TEXT_PADDING_X + leftCaret, y + CURSOR_PADDING_Y, selectionWidth, CURSOR_HEIGHT);
     }
 
     protected void renderTextField(RenderContext context, int x, int y) {
@@ -270,64 +254,6 @@ public class WTextField extends WWidget {
             renderCursor(context, x, y, visibleText);
         }
         renderSelection(context, x, y, visibleText);
-    }
-
-    private void invertedRect(RenderContext context, int x, int y, int width, int height) {
-        //#if MC >= 11700
-        Matrix4f model = context.pose().last().pose();
-        RenderSystem.setShaderColor(0.0F, 0.0F, 1.0F, 1.0F);
-        RenderSystem.setShader(VanillaShaders.POSITION);
-        RenderSystem.enableColorLogicOp();
-        RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
-        //#if MC >= 12100
-        BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-        buffer.addVertex(model, x, y + height, 0);
-        buffer.addVertex(model, x + width, y + height, 0);
-        buffer.addVertex(model, x + width, y, 0);
-        buffer.addVertex(model, x, y, 0);
-        BufferUploader.drawWithShader(buffer.buildOrThrow());
-        RenderSystem.disableColorLogicOp();
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        //#elseif MC >= 11900
-        //$$ Tesselator tessellator = Tesselator.getInstance();
-        //$$ BufferBuilder buffer = tessellator.getBuilder();
-        //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-        //$$ buffer.vertex(model, x, y + height, 0).endVertex();
-        //$$ buffer.vertex(model, x + width, y + height, 0).endVertex();
-        //$$ buffer.vertex(model, x + width, y, 0).endVertex();
-        //$$ buffer.vertex(model, x, y, 0).endVertex();
-        //$$ BufferUploader.drawWithShader(buffer.end());
-        //$$ RenderSystem.disableColorLogicOp();
-        //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        //#else
-        //$$ Tesselator tessellator = Tesselator.getInstance();
-        //$$ BufferBuilder buffer = tessellator.getBuilder();
-        //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-        //$$ buffer.vertex(model, x, y + height, 0).endVertex();
-        //$$ buffer.vertex(model, x + width, y + height, 0).endVertex();
-        //$$ buffer.vertex(model, x + width, y, 0).endVertex();
-        //$$ buffer.vertex(model, x, y, 0).endVertex();
-        //$$ buffer.end();
-        //$$ BufferUploader.end(buffer);
-        //$$ RenderSystem.disableColorLogicOp();
-        //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        //#endif
-        //#else
-        //$$Tesselator tessellator_1 = Tesselator.getInstance();
-        //$$BufferBuilder bufferBuilder_1 = tessellator_1.getBuilder();
-        //$$RenderSystem.color4f(0.0F, 0.0F, 255.0F, 255.0F);
-        //$$RenderSystem.disableTexture();
-        //$$RenderSystem.enableColorLogicOp();
-        //$$RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
-        //$$bufferBuilder_1.begin(GL11.GL_QUADS, DefaultVertexFormat.POSITION);
-        //$$bufferBuilder_1.vertex(x,       y+height, 0.0D).endVertex();
-        //$$bufferBuilder_1.vertex(x+width, y+height, 0.0D).endVertex();
-        //$$bufferBuilder_1.vertex(x+width, y,        0.0D).endVertex();
-        //$$bufferBuilder_1.vertex(x,       y,        0.0D).endVertex();
-        //$$tessellator_1.end();
-        //$$RenderSystem.disableColorLogicOp();
-        //$$RenderSystem.enableTexture();
-        //#endif
     }
 
     public WTextField setTextPredicate(Predicate<String> predicate_1) {

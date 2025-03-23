@@ -12,10 +12,19 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 21
+      - name: Get Release Changelog
+        run: |
+          # Read the event payload to get the changelog and save it to a file
+          changelog=$(jq -r '.release.body' $GITHUB_EVENT_PATH)
+          echo "$changelog" > changelog.md
+          echo "Changelog saved to changelog.md"
       - name: make gradle wrapper executable
         run: chmod +x ./gradlecw
       - name: build
-        run: ./gradlecw build -Pbuild.release=true
+        run: ./gradlecw build publishMods -Pbuild.release=true --info
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
