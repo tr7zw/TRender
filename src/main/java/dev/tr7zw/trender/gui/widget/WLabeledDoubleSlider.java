@@ -8,14 +8,13 @@ import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.util.ComponentProvider;
-import dev.tr7zw.util.NMSHelper;
+import dev.tr7zw.transition.nms.ComponentProvider;
+import dev.tr7zw.transition.nms.MathUtil;
 //#if MC >= 11800
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#endif
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 
 /**
  * A vanilla-style labeled slider widget.
@@ -173,7 +172,7 @@ public class WLabeledDoubleSlider extends WAbstractDoubleSlider {
         matrices.translate(x, y, 0);
         if (axis == Axis.VERTICAL) {
             matrices.translate(0, getHeight(), 0);
-            matrices.mulPose(NMSHelper.ZP.rotationDegrees(270));
+            matrices.mulPose(MathUtil.ZP.rotationDegrees(270));
         }
 
         var background = WidgetTextures.getSLIDER();

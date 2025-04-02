@@ -14,7 +14,7 @@ import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 //#endif
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.util.ComponentProvider;
+import dev.tr7zw.transition.nms.ComponentProvider;
 import lombok.Getter;
 import lombok.Setter;
 

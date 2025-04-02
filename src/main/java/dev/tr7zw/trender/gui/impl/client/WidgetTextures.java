@@ -2,7 +2,7 @@ package dev.tr7zw.trender.gui.impl.client;
 
 import static dev.tr7zw.trender.gui.impl.LibGuiCommon.id;
 
-import dev.tr7zw.util.NMSHelper;
+import dev.tr7zw.transition.nms.GeneralUtil;
 import lombok.Getter;
 import net.minecraft.resources.ResourceLocation;
 
@@ -22,7 +22,7 @@ public final class WidgetTextures {
     }
 
     public static ResourceLocation getNamespacedId(String path) {
-        return NMSHelper.getResourceLocation(NAMESPACE + ":" + LEGACY_PATH + path + LEGACY_SUFFIX);
+        return GeneralUtil.getResourceLocation(NAMESPACE + ":" + LEGACY_PATH + path + LEGACY_SUFFIX);
     }
 
     @Getter

@@ -5,7 +5,7 @@ import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 
 import dev.tr7zw.trender.gui.client.CottonClientScreen;
-import dev.tr7zw.util.ComponentProvider;
+import dev.tr7zw.transition.nms.ComponentProvider;
 
 public class ModMenuSupport implements ModMenuApi {
     @Override

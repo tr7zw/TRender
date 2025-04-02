@@ -22,7 +22,7 @@ import dev.tr7zw.trender.gui.impl.mixin.client.ScreenAccessor;
 import dev.tr7zw.trender.gui.widget.WPanel;
 import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.util.ComponentProvider;
+import dev.tr7zw.transition.nms.ComponentProvider;
 
 //#if MC >= 12000
 //#else

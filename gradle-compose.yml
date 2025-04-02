@@ -1,5 +1,5 @@
 version: '0.0.2'
-source: "https://github.com/tr7zw/ProcessedModTemplate/tree/master"
+source: "https://github.com/tr7zw/ProcessedModTemplate/tree/libworld"
 replacements:
   name: "TRender"
   id: "trender"
@@ -19,6 +19,7 @@ replacements:
 enabledFlags:
   - autopublish
   - publishSnapshot
+  - addTRansitionLib
 rootProject:
   template: "."
 subProjects:

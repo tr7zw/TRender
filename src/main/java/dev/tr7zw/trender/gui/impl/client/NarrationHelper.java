@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import dev.tr7zw.trender.gui.widget.WPanel;
 import dev.tr7zw.trender.gui.widget.WWidget;
-import dev.tr7zw.util.ComponentProvider;
+import dev.tr7zw.transition.nms.ComponentProvider;
 
 public final class NarrationHelper {
     //#if MC >= 11800

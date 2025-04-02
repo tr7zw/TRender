@@ -9,12 +9,12 @@ import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
+import dev.tr7zw.transition.nms.ComponentProvider;
 //#if MC >= 11800
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 //#endif
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.util.ComponentProvider;
 import lombok.Getter;
 import lombok.Setter;
 

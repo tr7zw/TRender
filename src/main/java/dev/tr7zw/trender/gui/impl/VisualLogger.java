@@ -10,7 +10,7 @@ import org.apache.logging.log4j.message.ParameterizedMessage;
 
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.util.ComponentProvider;
+import dev.tr7zw.transition.nms.ComponentProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;

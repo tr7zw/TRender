@@ -18,8 +18,8 @@ import dev.tr7zw.trender.gui.widget.WTextField;
 import dev.tr7zw.trender.gui.widget.WToggleButton;
 import dev.tr7zw.trender.gui.widget.data.Insets;
 import dev.tr7zw.trender.gui.widget.icon.ItemIcon;
-import dev.tr7zw.util.ComponentProvider;
-import dev.tr7zw.util.NMSHelper;
+import dev.tr7zw.transition.nms.ComponentProvider;
+import dev.tr7zw.transition.nms.ItemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
@@ -73,7 +73,7 @@ public class ConfigGui extends LightweightGuiDescription {
         wTabPanel.layout();
         root.add(wTabPanel, 0, 1);
 
-        List<Entry<ResourceKey<Item>, Item>> items = new ArrayList<>(NMSHelper.getItems());
+        List<Entry<ResourceKey<Item>, Item>> items = new ArrayList<>(ItemUtil.getItems());
         items.sort((a, b) -> a.getKey().location().toString().compareTo(b.getKey().location().toString()));
 
         WListPanel<Entry<ResourceKey<Item>, Item>, WToggleButton> itemList = new WListPanel<Entry<ResourceKey<Item>, Item>, WToggleButton>(

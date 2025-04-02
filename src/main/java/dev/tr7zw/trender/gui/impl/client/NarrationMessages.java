@@ -1,6 +1,6 @@
 package dev.tr7zw.trender.gui.impl.client;
 
-import dev.tr7zw.util.ComponentProvider;
+import dev.tr7zw.transition.nms.ComponentProvider;
 import net.minecraft.network.chat.Component;
 
 public final class NarrationMessages {

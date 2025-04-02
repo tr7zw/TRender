@@ -19,7 +19,7 @@ import dev.tr7zw.trender.gui.widget.WLabeledIntSlider;
 import dev.tr7zw.trender.gui.widget.WListPanel;
 import dev.tr7zw.trender.gui.widget.WToggleButton;
 import dev.tr7zw.trender.gui.widget.data.Insets;
-import dev.tr7zw.util.ComponentProvider;
+import dev.tr7zw.transition.nms.ComponentProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;

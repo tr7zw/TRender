@@ -2,9 +2,9 @@ package dev.tr7zw.trender.gui.impl;
 
 import dev.tr7zw.trender.gui.client.CottonClientScreen;
 import dev.tr7zw.trender.gui.impl.modmenu.ConfigGui;
-import dev.tr7zw.util.ComponentProvider;
-import dev.tr7zw.util.ModLoaderUtil;
-import dev.tr7zw.util.NMSHelper;
+import dev.tr7zw.transition.loader.ModLoaderUtil;
+import dev.tr7zw.transition.nms.ComponentProvider;
+import dev.tr7zw.transition.nms.GeneralUtil;
 import net.minecraft.resources.ResourceLocation;
 //#if FABRIC
 import net.fabricmc.api.ModInitializer;
@@ -18,7 +18,7 @@ public final class LibGuiCommon
     public static final String MOD_ID = "trender";
 
     public static ResourceLocation id(String path) {
-        return NMSHelper.getResourceLocation(MOD_ID, path);
+        return GeneralUtil.getResourceLocation(MOD_ID, path);
     }
 
     //#if FABRIC

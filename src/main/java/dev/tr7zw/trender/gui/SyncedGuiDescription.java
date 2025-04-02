@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 import org.jetbrains.annotations.Nullable;
 
+import dev.tr7zw.transition.nms.ItemUtil;
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
 import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.networking.NetworkSide;
@@ -17,7 +18,6 @@ import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.Insets;
 import dev.tr7zw.trender.gui.widget.data.Vec2i;
-import dev.tr7zw.util.NMSHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerLevel;
@@ -199,7 +199,7 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
     /** WILL MODIFY toInsert! Returns true if anything was inserted. */
     private boolean insertIntoExisting(ItemStack toInsert, Slot slot, Player player) {
         ItemStack curSlotStack = slot.getItem();
-        if (!curSlotStack.isEmpty() && NMSHelper.isSame(toInsert, curSlotStack) && slot.mayPlace(toInsert)) {
+        if (!curSlotStack.isEmpty() && ItemUtil.isSame(toInsert, curSlotStack) && slot.mayPlace(toInsert)) {
             int combinedAmount = curSlotStack.getCount() + toInsert.getCount();
             int maxAmount = Math.min(toInsert.getMaxStackSize(), slot.getMaxStackSize(toInsert));
             if (combinedAmount <= maxAmount) {
