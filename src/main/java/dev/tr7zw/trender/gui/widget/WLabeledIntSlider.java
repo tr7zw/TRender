@@ -8,8 +8,8 @@ import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.transition.nms.ComponentProvider;
-import dev.tr7zw.transition.nms.MathUtil;
+import dev.tr7zw.transition.mc.ComponentProvider;
+import dev.tr7zw.transition.mc.MathUtil;
 //#if MC >= 11800
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;

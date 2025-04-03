@@ -9,7 +9,7 @@ import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
-import dev.tr7zw.transition.nms.ComponentProvider;
+import dev.tr7zw.transition.mc.ComponentProvider;
 //#if MC >= 11800
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 //#endif

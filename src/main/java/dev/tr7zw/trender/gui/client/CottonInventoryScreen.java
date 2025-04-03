@@ -15,7 +15,7 @@ import dev.tr7zw.trender.gui.impl.mixin.client.ScreenAccessor;
 import dev.tr7zw.trender.gui.widget.WPanel;
 import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.transition.nms.ComponentProvider;
+import dev.tr7zw.transition.mc.ComponentProvider;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 //#if MC >= 11800

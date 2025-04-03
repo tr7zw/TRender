@@ -24,7 +24,7 @@ import dev.tr7zw.trender.gui.widget.data.Rect2i;
 import dev.tr7zw.trender.gui.widget.focus.Focus;
 import dev.tr7zw.trender.gui.widget.focus.FocusModel;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
-import dev.tr7zw.transition.nms.ComponentProvider;
+import dev.tr7zw.transition.mc.ComponentProvider;
 import net.minecraft.client.Minecraft;
 //#if MC >= 11800
 import net.minecraft.client.gui.narration.NarratedElementType;

@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 import org.jetbrains.annotations.Nullable;
 
-import dev.tr7zw.transition.nms.ItemUtil;
+import dev.tr7zw.transition.mc.ItemUtil;
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
 import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.networking.NetworkSide;

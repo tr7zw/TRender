@@ -2,7 +2,7 @@ package dev.tr7zw.trender.gui.impl.client;
 
 import static dev.tr7zw.trender.gui.impl.LibGuiCommon.id;
 
-import dev.tr7zw.transition.nms.GeneralUtil;
+import dev.tr7zw.transition.mc.GeneralUtil;
 import lombok.Getter;
 import net.minecraft.resources.ResourceLocation;
 

@@ -11,7 +11,7 @@ import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.widget.data.Texture;
-import dev.tr7zw.transition.nms.ComponentProvider;
+import dev.tr7zw.transition.mc.ComponentProvider;
 
 /**
  * A bar that displays int values from a {@link ContainerData}.

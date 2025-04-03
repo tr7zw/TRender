@@ -11,7 +11,7 @@ import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.Texture;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
-import dev.tr7zw.transition.nms.ComponentProvider;
+import dev.tr7zw.transition.mc.ComponentProvider;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
