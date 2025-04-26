@@ -163,12 +163,11 @@ public class WLabeledIntSlider extends WAbstractIntSlider {
                 : (direction == Direction.UP ? getHeight() - mouseY : mouseY);
         int rotMouseY = axis == Axis.HORIZONTAL ? mouseY : mouseX;
 
-        var matrices = context.pose();
-        matrices.pushPose();
-        matrices.translate(x, y, 0);
+        context.pushPose();
+        context.translate(x, y);
         if (axis == Axis.VERTICAL) {
-            matrices.translate(0, getHeight(), 0);
-            matrices.mulPose(MathUtil.ZP.rotationDegrees(270));
+            context.translate(0, getHeight());
+            context.rotate(MathUtil.ZP.rotationDegrees(270));
         }
         var background = WidgetTextures.getSLIDER();
         context.blitSprite(this.isFocused() ? background.enabledFocused() : background.enabled(), 0, 0, aWidth, aHeight,
@@ -190,7 +189,7 @@ public class WLabeledIntSlider extends WAbstractIntSlider {
             ScreenDrawing.drawStringWithShadow(context, label.getVisualOrderText(), labelAlignment, 2, aHeight / 2 - 4,
                     aWidth - 4, color);
         }
-        matrices.popPose();
+        context.popPose();
     }
 
     //#if MC >= 11800

@@ -165,7 +165,7 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         //$$    RenderContext renderContext = new RenderContext(this, context);
         //#endif
         //#if MC <= 11904
-        //$$ super.renderBackground(renderContext.getPoseStack());
+        //$$ super.renderBackground(renderContext.getPose());
         //#elseif MC <= 12001
         //$$ super.renderBackground(context);
         //#endif

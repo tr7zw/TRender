@@ -31,9 +31,12 @@ abstract class HandledScreenMixin {
     //$$    }
     //$$ }
     //#else
-    //#if MC >= 12000
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", shift = At.Shift.AFTER), allow = 1)
+    //#if MC >= 12106
+    @Inject(method = "renderContents", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", shift = At.Shift.AFTER), allow = 1)
     private void onSuperRender(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo info) {
+        //#elseif MC >= 12000
+        //$$@Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V", shift = At.Shift.AFTER), allow = 1)
+        //$$ private void onSuperRender(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo info) {
         //#else
         //$$ @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;render(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V", shift = At.Shift.AFTER), allow = 1)
         //$$ private void onSuperRender(PoseStack poseStack, int mouseX, int mouseY, float delta, CallbackInfo info) {

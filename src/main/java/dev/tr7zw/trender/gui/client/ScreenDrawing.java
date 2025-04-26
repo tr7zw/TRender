@@ -160,13 +160,12 @@ public class ScreenDrawing {
                 float xo = x - fullWidth * Math.min(texture.u1(), texture.u2());
                 float yo = y - fullHeight * Math.min(texture.v1(), texture.v2());
 
-                PoseStack matrices = context.pose();
-                matrices.pushPose();
-                matrices.translate(xo, yo, 0);
+                context.pushPose();
+                context.translate(xo, yo);
 
                 // Note: scale instead of drawing a (fullWidth, fullHeight) rectangle so that edges of nine-slice
                 // rectangles etc. are drawn scaled too. This matches the behavior of standalone textures.
-                matrices.scale(fullWidth / width, fullHeight / height, 1);
+                context.scale(fullWidth / width, fullHeight / height);
 
                 // Clip to the wanted area on the screen...
                 try (var frame = Scissors.push(context, x, y, width, height)) {
@@ -174,7 +173,7 @@ public class ScreenDrawing {
                     context.blitSprite(texture.image(), 0, 0, width, height, color);
                 }
 
-                matrices.popPose();
+                context.popPose();
             }
         }
         }
@@ -205,23 +204,32 @@ public class ScreenDrawing {
             width = 1;
         if (height <= 0)
             height = 1;
-
-        //#if MC >= 12103
-        float a = (color >> 24 & 255) / 255.0F;
-        color = colorAtOpacity(color, a * opacity);
-        Matrix4f model = context.pose().last().pose();
-        var renderLayer = RenderType.guiTextured(texture);
-        var buffer = context.getVertexConsumers().getBuffer(renderLayer);
-        buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
-        buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
-        buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
-        buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
+        //#if MC >= 12106
+        //        float a = (color >> 24 & 255) / 255.0F;
+        //        color = colorAtOpacity(color, a * opacity);
+        //        Matrix4f model = new Matrix4f();//context.pose().last().pose();
+        //        // FIXME ?
+        //        var buffer = context.getVertexConsumers().getBuffer(RenderType.entityTranslucent(texture));
+        //        buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
+        //        buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
+        //        buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
+        //        buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
+        //#elseif MC >= 12103
+        //$$  float a = (color >> 24 & 255) / 255.0F;
+        //$$ color = colorAtOpacity(color, a * opacity);
+        //$$ Matrix4f model = context.getPose().last().pose();
+        //$$ var renderLayer = RenderType.guiTextured(texture);
+        //$$ var buffer = context.getVertexConsumers().getBuffer(renderLayer);
+        //$$ buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
+        //$$ buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
+        //$$ buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
+        //$$ buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
         //#elseif MC >= 12100
         //$$ float r = (color >> 16 & 255) / 255.0F;
         //$$ float g = (color >> 8 & 255) / 255.0F;
         //$$ float b = (color & 255) / 255.0F;
         //$$ float a = (color >> 24 & 255) / 255.0F;
-        //$$ Matrix4f model = context.getPoseStack().last().pose();
+        //$$ Matrix4f model = context.getPose().last().pose();
         //$$ RenderSystem.enableBlend();
         //$$ RenderSystem.setShaderTexture(0, texture);
         //$$ RenderSystem.setShaderColor(r, g, b, opacity * a);
@@ -239,7 +247,7 @@ public class ScreenDrawing {
         //$$ float g = (color >> 8 & 255) / 255.0F;
         //$$ float b = (color & 255) / 255.0F;
         //$$ float a = (color >> 24 & 255) / 255.0F;
-        //$$ Matrix4f model = context.getPoseStack().last().pose();
+        //$$ Matrix4f model = context.getPose().last().pose();
         //$$ RenderSystem.enableBlend();
         //$$ RenderSystem.setShaderTexture(0, texture);
         //$$ RenderSystem.setShaderColor(r, g, b, opacity * a);
@@ -258,7 +266,7 @@ public class ScreenDrawing {
         //$$ float g = (color >> 8 & 255) / 255.0F;
         //$$ float b = (color & 255) / 255.0F;
         //$$ float a = (color >> 24 & 255) / 255.0F;
-        //$$ Matrix4f model = context.getPoseStack().last().pose();
+        //$$ Matrix4f model = context.getPose().last().pose();
         //$$ RenderSystem.enableBlend();
         //$$ RenderSystem.setShaderTexture(0, texture);
         //$$ RenderSystem.setShaderColor(r, g, b, opacity * a);

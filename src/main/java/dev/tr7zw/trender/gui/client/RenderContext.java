@@ -6,13 +6,18 @@ import java.util.function.Consumer;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+//#if MC < 12106
+//$$import com.mojang.blaze3d.vertex.PoseStack;
+//#endif
 
 import dev.tr7zw.trender.gui.impl.mixin.client.DrawContextAccessor;
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import lombok.AllArgsConstructor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+//#if MC >= 12106
+import net.minecraft.client.renderer.RenderPipelines;
+//#endif
 //#if MC < 12102
 //$$ import com.mojang.blaze3d.vertex.Tesselator;
 //#endif
@@ -20,7 +25,9 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
-import net.minecraft.client.renderer.RenderType;
+//#if MC <= 12105
+//$$ import net.minecraft.client.renderer.RenderType;
+//#endif
 //#else
 //$$ import net.minecraft.client.gui.screens.Screen;
 //$$ import com.mojang.blaze3d.systems.RenderSystem;
@@ -58,7 +65,7 @@ import net.minecraft.world.item.ItemStack;
 //#endif
 
 @AllArgsConstructor
-public class RenderContext {
+public class RenderContext implements PoseStackHelper {
 
     @SuppressWarnings("unused")
     private final static Minecraft minecraft = Minecraft.getInstance();
@@ -70,7 +77,11 @@ public class RenderContext {
     //$$ private final PoseStack pose;
     //#endif
 
-    public PoseStack pose() {
+    //#if MC >= 12106
+    public org.joml.Matrix3x2fStack getPose() {
+        //#else
+        //$$  public com.mojang.blaze3d.vertex.PoseStack getPose() {
+        //#endif
         //#if MC >= 12000
         return guiGraphics.pose();
         //#else
@@ -79,8 +90,10 @@ public class RenderContext {
     }
 
     public void drawSpecial(Consumer<MultiBufferSource> consumer) {
-        //#if MC >= 12102
-        guiGraphics.drawSpecial(consumer);
+        //#if MC >= 12106
+        consumer.accept(Minecraft.getInstance().renderBuffers().bufferSource());
+        //#elseif MC >= 12102
+        //$$ guiGraphics.drawSpecial(consumer);
         //#elseif MC >= 12100
         //$$ consumer.accept(guiGraphics.bufferSource());
         //$$ guiGraphics.bufferSource().endBatch();
@@ -93,9 +106,12 @@ public class RenderContext {
 
     public void blit(ResourceLocation atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height,
             int textureWidth, int textureHeight) {
-        //#if MC >= 12102
-        guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, width, height,
+        //#if MC >= 12106
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, atlasLocation, x, y, uOffset, vOffset, width, height,
                 textureWidth, textureHeight);
+        //#elseif MC >= 12102
+        //$$ guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, width, height,
+        //$$         textureWidth, textureHeight);
         //#elseif MC >= 12000
         //$$ guiGraphics.blit(atlasLocation, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
         //#elseif MC > 11700
@@ -117,10 +133,14 @@ public class RenderContext {
 
     public void blit(ResourceLocation atlasLocation, int x, int y, int blitOffset, float uOffset, float vOffset,
             int uWidth, int vHeight, int textureWidth, int textureHeight) {
-        //#if MC >= 12102
+        //#if MC >= 12106
         //TODO blitOffset
-        guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
                 textureWidth, textureHeight);
+        //#elseif MC >= 12102
+        //$$//TODO blitOffset
+        //$$guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
+        //$$        textureWidth, textureHeight);
         //#elseif MC >= 12000
         //$$ guiGraphics.blit(atlasLocation, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth,
         //$$        textureHeight);
@@ -136,8 +156,10 @@ public class RenderContext {
 
     public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int sliceSide, int sliceTop,
             int txtWidth, int txtHeight) {
-        //#if MC >= 12102
-        guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height);
+        //#if MC >= 12106
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height);
+        //#elseif MC >= 12102
+        //$$ guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height);
         //#elseif MC >= 12002
         //$$ guiGraphics.blitSprite(texture, x, y, width, height);
         //#else
@@ -285,8 +307,10 @@ public class RenderContext {
     }
 
     public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int color) {
-        //#if MC >= 12102
-        guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height, color);
+        //#if MC >= 12106
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height, color);
+        //#elseif MC >= 12102
+        //$$ guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height, color);
         //#elseif MC >= 12002
         //$$ guiGraphics.blitSprite(texture, x, y, width, height, color);
         //#else
@@ -295,16 +319,20 @@ public class RenderContext {
     }
 
     public void renderTooltip(Font font, List<FormattedCharSequence> split, int x, int y) {
-        //#if MC >= 12000
-        guiGraphics.renderTooltip(font, split, x, y);
+        //#if MC >= 12006
+        guiGraphics.setTooltipForNextFrame(font, split, x, y);
+        //#elseif MC >= 12000
+        //$$ guiGraphics.renderTooltip(font, split, x, y);
         //#else
         //$$ screen.renderTooltip(pose, split, x, y);
         //#endif
     }
 
     public void renderTooltip(Font font, MutableComponent translatable, int x, int y) {
-        //#if MC >= 12000
-        guiGraphics.renderTooltip(font, translatable, x, y);
+        //#if MC >= 12006
+        guiGraphics.setTooltipForNextFrame(font, translatable, x, y);
+        //#elseif MC >= 12000
+        //$$ guiGraphics.renderTooltip(font, translatable, x, y);
         //#else
         //$$ screen.renderTooltip(pose, translatable, x, y);
         //#endif
@@ -319,11 +347,13 @@ public class RenderContext {
     }
 
     public void invertedRect(int x, int y, int width, int height) {
-        //#if MC >= 12105
-        guiGraphics.fill(RenderType.guiTextHighlight(), x, y, x + width, y + height, -16776961);
+        //#if MC >= 12106
+        guiGraphics.fill(RenderPipelines.GUI_TEXT_HIGHLIGHT, x, y, x + width, y + height, -16776961);
+        //#elseif MC >= 12105
+        //$$ guiGraphics.fill(RenderType.guiTextHighlight(), x, y, x + width, y + height, -16776961);
         //#else
         //#if MC >= 11700
-        //$$ Matrix4f model = pose().last().pose();
+        //$$ Matrix4f model = getPose().last().pose();
         //$$ RenderSystem.setShaderColor(0.0F, 0.0F, 1.0F, 1.0F);
         //$$ RenderSystem.setShader(VanillaShaders.POSITION);
         //$$ RenderSystem.enableColorLogicOp();
@@ -466,25 +496,21 @@ public class RenderContext {
     }
 
     public void flush() {
+        //#if MC <= 12105
         //#if MC >= 12000
-        guiGraphics.flush();
+        //$$ guiGraphics.flush();
+        //#endif
         //#endif
     }
 
-    public BufferSource getVertexConsumers() {
-        //#if MC >= 12000
-        return ((DrawContextAccessor) guiGraphics).libgui$getVertexConsumers();
-        //#else
-        //$$ return minecraft.renderBuffers().bufferSource();
-        //#endif
-    }
-
-    public PoseStack getPoseStack() {
-        //#if MC >= 12000
-        return guiGraphics.pose();
-        //#else
-        //$$ return pose;
-        //#endif
-    }
+    //#if MC < 12106
+    //$$public BufferSource getVertexConsumers() {
+    //#if MC >= 12000
+    //$$return ((DrawContextAccessor) guiGraphics).libgui$getVertexConsumers();
+    //#else
+    //$$ return minecraft.renderBuffers().bufferSource();
+    //#endif
+    //$$}
+    //#endif
 
 }

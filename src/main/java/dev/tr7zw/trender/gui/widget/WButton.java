@@ -111,13 +111,13 @@ public class WButton extends WWidget {
                     : 0;
             // FIXME: WHY?
             //#if MC <= 12001
-            //$$context.getPoseStack().pushPose();
-            //$$context.getPoseStack().translate(0, 0, 300);
+            //$$context.getPose().pushPose();
+            //$$context.getPose().translate(0, 0, 300);
             //#endif
             ScreenDrawing.drawStringWithShadow(context, label.getVisualOrderText(), alignment, x + xOffset,
                     y + ((getHeight() - 8) / 2), getWidth(), color); //LibGuiClient.config.darkMode ? darkmodeColor : color);
             //#if MC <= 12001
-            //$$context.getPoseStack().popPose();
+            //$$context.getPose().popPose();
             //#endif
         }
     }

@@ -46,10 +46,9 @@ public class ItemIcon implements Icon {
     @Override
     public void paint(RenderContext context, int x, int y, int size) {
         float scale = size != 16 ? ((float) size / 16f) : 1f;
-        PoseStack matrices = context.pose();
-        matrices.pushPose();
-        matrices.translate(x, y, 0);
-        matrices.scale(scale, scale, 1);
+        context.pushPose();
+        context.translate(x, y);
+        context.scale(scale, scale);
         //#if MC >= 11904
         context.renderFakeItem(stack, 0, 0);
         //#else
@@ -60,7 +59,7 @@ public class ItemIcon implements Icon {
             context.fill(0, 0, 16, 16, GHOST_OVERLAY_COLOR); // RenderType.guiGhostRecipeOverlay() ?
         }
 
-        matrices.popPose();
+        context.popPose();
     }
 
     /**

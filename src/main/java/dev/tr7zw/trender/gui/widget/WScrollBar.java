@@ -48,7 +48,6 @@ public class WScrollBar extends WWidget {
 
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
-        var matrices = context.pose();
         boolean darkMode = shouldRenderInDarkMode();
         var textures = WidgetTextures.getScrollBarTextures(darkMode);
 
@@ -65,17 +64,17 @@ public class WScrollBar extends WWidget {
             thumbTexture = textures.thumbHovered();
         }
 
-        matrices.pushPose();
+        context.pushPose();
 
         if (axis == Axis.HORIZONTAL) {
-            matrices.translate(x + 1 + getHandlePosition(), y + 1, 0);
+            context.translate(x + 1 + getHandlePosition(), y + 1);
             context.blitSprite(thumbTexture, 0, 0, getHandleSize(), getHeight() - 2, 4, 4, 16, 16);
 
             if (isFocused()) {
                 context.blitSprite(textures.thumbHovered(), 0, 0, getHandleSize(), getHeight() - 2, 4, 4, 16, 16);
             }
         } else {
-            matrices.translate(x + 1, y + 1 + getHandlePosition(), 0);
+            context.translate(x + 1, y + 1 + getHandlePosition());
             context.blitSprite(thumbTexture, 0, 0, getWidth() - 2, getHandleSize(), 4, 4, 16, 16);
 
             if (isFocused()) {
@@ -83,7 +82,7 @@ public class WScrollBar extends WWidget {
             }
         }
 
-        matrices.popPose();
+        context.popPose();
     }
 
     @Override

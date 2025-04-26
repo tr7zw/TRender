@@ -1,6 +1,8 @@
 package dev.tr7zw.trender.gui.client;
 
-import com.mojang.blaze3d.platform.Lighting;
+//#if MC <= 12105
+//$$ import com.mojang.blaze3d.platform.Lighting;
+//#endif
 
 import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.SyncedGuiDescription;
@@ -343,7 +345,9 @@ public class CottonInventoryScreen<T extends SyncedGuiDescription> extends Abstr
         //$$    super.render(context, mouseX, mouseY, partialTicks);
         //$$    RenderContext renderContext = new RenderContext(this, context);
         //#endif
-        Lighting.setupForFlatItems(); //Needed because super.render leaves dirty state
+        //#if MC <= 12105
+        //$$Lighting.setupForFlatItems(); //Needed because super.render leaves dirty state
+        //#endif
 
         if (description != null) {
             WPanel root = description.getRootPanel();
