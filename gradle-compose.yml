@@ -1,5 +1,5 @@
 version: '0.0.2'
-source: "H:\\ProcessedModTemplate"
+source: "https://github.com/tr7zw/ProcessedModTemplate/tree/libworld"
 replacements:
   name: "TRender"
   id: "trender"
