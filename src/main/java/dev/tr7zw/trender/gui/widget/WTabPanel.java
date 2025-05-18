@@ -14,10 +14,13 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
+import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
+import dev.tr7zw.trender.gui.impl.client.config.GuiStyle;
+import dev.tr7zw.trender.gui.impl.client.constants.StyleConstants;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
@@ -79,7 +82,7 @@ public class WTabPanel extends WPanel {
 
         tabWidgets.add(tabWidget);
         tabWidgetsByData.put(tab, tabWidget);
-        tabRibbon.add(tabWidget, TAB_WIDTH, TAB_HEIGHT + TAB_PADDING);
+        tabRibbon.add(tabWidget, TAB_WIDTH, TAB_HEIGHT);
         mainPanel.add(tab.getWidget());
     }
 
@@ -402,23 +405,30 @@ public class WTabPanel extends WPanel {
 
             if (title != null) {
                 int titleX = (icon != null) ? iconX + ICON_SIZE + 1 : 0;
-                int titleY = (getHeight() - TAB_PADDING - renderer.lineHeight) / 2 + 3;
+                int titleY = (getHeight() - renderer.lineHeight) / 2 + 3;
                 int width = (icon != null) ? this.getWidth() - iconX - ICON_SIZE : this.getWidth();
                 HorizontalAlignment align = (icon != null) ? HorizontalAlignment.LEFT : HorizontalAlignment.CENTER;
 
                 int color;
-                if (shouldRenderInDarkMode()) {
+                if (LibGui.getGuiStyle() == GuiStyle.VANILLA_OLD) {
+                    color = selected ? 0xFFFFFF : 0xAAAAAA;
+                } else if (LibGui.getGuiStyle().isDark()) {
                     color = selected ? 0xEEEEEE : 0x777777;
                 } else {
-                    color = selected ? WLabel.DEFAULT_TEXT_COLOR : 0xEEEEEE;
+                    color = selected ? StyleConstants.DEFAULT_TEXT_COLOR : 0xEEEEEE;
                 }
 
-                ScreenDrawing.drawString(context, title.getVisualOrderText(), align, x + titleX, y + titleY, width,
-                        color);
+                if (LibGui.getGuiStyle().isFontShadow()) {
+                    ScreenDrawing.drawStringWithShadow(context, title.getVisualOrderText(), align, x + titleX, y + titleY, width,
+                            color);
+                } else {
+                    ScreenDrawing.drawString(context, title.getVisualOrderText(), align, x + titleX, y + titleY, width,
+                            color);
+                }
             }
 
             if (icon != null) {
-                icon.paint(context, x + iconX, y + 1 + (getHeight() - TAB_PADDING - ICON_SIZE) / 2, ICON_SIZE);
+                icon.paint(context, x + iconX, y + 1 + (getHeight() - ICON_SIZE) / 2, ICON_SIZE);
             }
         }
 
@@ -448,15 +458,9 @@ public class WTabPanel extends WPanel {
      */
 
     final static class Painters {
-        static final BackgroundPainter SELECTED_TAB = BackgroundPainter.createLightDarkVariants(
-                BackgroundPainter.createNinePatch(LibGuiCommon.id("textures/widget/tab/selected_light.png"))
-                        .setTopPadding(2),
-                BackgroundPainter.createNinePatch(LibGuiCommon.id("textures/widget/tab/selected_dark.png"))
-                        .setTopPadding(2));
+        static final BackgroundPainter SELECTED_TAB = BackgroundPainter.createStyleVariantsNinePatch("textures/widget/tab/selected_", p -> {});
 
-        static final BackgroundPainter UNSELECTED_TAB = BackgroundPainter.createLightDarkVariants(
-                BackgroundPainter.createNinePatch(LibGuiCommon.id("textures/widget/tab/unselected_light.png")),
-                BackgroundPainter.createNinePatch(LibGuiCommon.id("textures/widget/tab/unselected_dark.png")));
+        static final BackgroundPainter UNSELECTED_TAB = BackgroundPainter.createStyleVariantsNinePatch("textures/widget/tab/unselected_", p -> {});
 
         static final BackgroundPainter SELECTED_TAB_FOCUS_BORDER = BackgroundPainter
                 .createNinePatch(LibGuiCommon.id("textures/widget/tab/focus.png")).setTopPadding(2);

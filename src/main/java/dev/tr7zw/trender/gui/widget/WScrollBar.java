@@ -49,8 +49,7 @@ public class WScrollBar extends WWidget {
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         var matrices = context.pose();
-        boolean darkMode = shouldRenderInDarkMode();
-        var textures = WidgetTextures.getScrollBarTextures(darkMode);
+        var textures = WidgetTextures.getScrollBarTextures();
 
         context.blitSprite(textures.background(), x, y, getWidth(), getHeight(), 4, 4, 16, 16);
 

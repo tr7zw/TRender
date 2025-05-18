@@ -181,7 +181,7 @@ public class WLabeledIntSlider extends WAbstractIntSlider {
         boolean hovering = rotMouseX >= thumbX && rotMouseX <= thumbX + thumbWidth && rotMouseY >= thumbY
                 && rotMouseY <= thumbY + thumbHeight;
 
-        var thumbTextures = WidgetTextures.getLabeledSliderHandleTextures(shouldRenderInDarkMode());
+        var thumbTextures = WidgetTextures.getLabeledSliderHandleTextures();
         var thumbTexture = thumbTextures.get(true, dragging || hovering);
         context.blitSprite(thumbTexture, thumbX, thumbY, thumbWidth, thumbHeight, 2, 2, 8, 20);
 

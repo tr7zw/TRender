@@ -3,6 +3,8 @@ package dev.tr7zw.trender.gui.impl.client;
 import static dev.tr7zw.trender.gui.impl.LibGuiCommon.id;
 
 import dev.tr7zw.transition.mc.GeneralUtil;
+import dev.tr7zw.trender.gui.client.LibGui;
+import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 import lombok.Getter;
 import net.minecraft.resources.ResourceLocation;
 
@@ -42,17 +44,24 @@ public final class WidgetTextures {
             getNamespacedId("widget/slider_handle"), getNamespacedId("widget/slider_handle_highlighted"));
     private static final WidgetSprites BUTTON_LIGH = new WidgetSprites(getNamespacedId("widget/button"),
             getNamespacedId("widget/button_disabled"), getNamespacedId("widget/button_highlighted"));
-
-    public static WidgetSprites getButtonTextures(boolean dark) {
-        return dark ? DARK_BUTTON : BUTTON_LIGH;
+    public static final ResourceLocation LIGHT_TEXTURE = LibGuiCommon.id("textures/widget/slider_light.png");
+    public static final ResourceLocation DARK_TEXTURE = LibGuiCommon.id("textures/widget/slider_dark.png");
+    
+    
+    public static WidgetSprites getButtonTextures() {
+        return LibGui.getGuiStyle().isDark() ? DARK_BUTTON : BUTTON_LIGH;//DARK_BUTTON : BUTTON_LIGH;
     }
 
-    public static WidgetSprites getLabeledSliderHandleTextures(boolean dark) {
-        return dark ? DARK_LABELED_SLIDER_HANDLE : LIGHT_LABELED_SLIDER_HANDLE;
+    public static WidgetSprites getLabeledSliderHandleTextures() {
+        return LibGui.getGuiStyle().isDark() ? DARK_LABELED_SLIDER_HANDLE :  LIGHT_LABELED_SLIDER_HANDLE;//dark ? DARK_LABELED_SLIDER_HANDLE : LIGHT_LABELED_SLIDER_HANDLE;
     }
 
-    public static ScrollBarTextures getScrollBarTextures(boolean dark) {
-        return dark ? DARK_SCROLL_BAR : LIGHT_SCROLL_BAR;
+    public static ScrollBarTextures getScrollBarTextures() {
+        return LibGui.getGuiStyle().isDark() ? DARK_SCROLL_BAR : LIGHT_SCROLL_BAR;//dark ? DARK_SCROLL_BAR : LIGHT_SCROLL_BAR;
+    }
+    
+    public static ResourceLocation getSliderTextures() {
+        return LibGui.getGuiStyle().isDark() ? DARK_TEXTURE : LIGHT_TEXTURE;
     }
 
     public record ScrollBarTextures(ResourceLocation background, ResourceLocation thumb, ResourceLocation thumbPressed,

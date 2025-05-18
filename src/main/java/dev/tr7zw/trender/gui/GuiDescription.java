@@ -4,6 +4,8 @@ import net.minecraft.world.inventory.ContainerData;
 
 import org.jetbrains.annotations.Nullable;
 
+import dev.tr7zw.trender.gui.client.LibGui;
+import dev.tr7zw.trender.gui.impl.client.config.GuiStyle;
 import dev.tr7zw.trender.gui.widget.WPanel;
 import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
@@ -40,16 +42,6 @@ public interface GuiDescription {
      * @return this GUI
      */
     public GuiDescription setTitleColor(int color);
-
-    /**
-     * Sets the light and dark title colors of this GUI.
-     *
-     * @param lightColor the light-mode color
-     * @param darkColor  the dark-mode color
-     * @return this GUI
-     * @since 2.1.0
-     */
-    GuiDescription setTitleColor(int lightColor, int darkColor);
 
     /** Sets the object which manages the integer properties used by WBars */
     public GuiDescription setPropertyDelegate(ContainerData delegate);
@@ -181,19 +173,12 @@ public interface GuiDescription {
     void setTitlePos(Vec2i titlePos);
 
     /**
-     * Checks whether dark mode is used for this GUI description.
+     * Gets the style of this GUI.
      *
-     * @return
-     *         <ul>
-     *         <li>{@link TriState#TRUE} to force dark mode
-     *         <li>{@link TriState#FALSE} to force light mode
-     *         <li>{@link TriState#DEFAULT} to use the
-     *         {@linkplain dev.tr7zw.trender.gui.client.LibGui#isDarkMode() global
-     *         dark mode setting}
-     *         </ul>
-     * @since 7.1.0
+     *
+     * @return the style
      */
-    default TriState isDarkMode() {
-        return TriState.DEFAULT;
+    default GuiStyle getStyle() {
+        return LibGui.getGuiStyle();
     }
 }

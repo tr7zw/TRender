@@ -8,10 +8,8 @@ import org.jetbrains.annotations.Nullable;
 
 import dev.tr7zw.transition.mc.ItemUtil;
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.networking.NetworkSide;
 import dev.tr7zw.trender.gui.widget.WGridPanel;
-import dev.tr7zw.trender.gui.widget.WLabel;
 import dev.tr7zw.trender.gui.widget.WPanel;
 import dev.tr7zw.trender.gui.widget.WPlayerInvPanel;
 import dev.tr7zw.trender.gui.widget.WWidget;
@@ -50,8 +48,7 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
     protected ContainerData propertyDelegate;
 
     protected WPanel rootPanel = new WGridPanel().setInsets(Insets.ROOT_PANEL);
-    protected int titleColor = WLabel.DEFAULT_TEXT_COLOR;
-    protected int darkTitleColor = WLabel.DEFAULT_DARKMODE_TEXT_COLOR;
+    protected Integer titleColor = null;
     protected boolean fullscreen = false;
     protected boolean titleVisible = true;
     protected HorizontalAlignment titleAlignment = HorizontalAlignment.LEFT;
@@ -115,7 +112,7 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
     }
 
     public int getTitleColor() {
-        return (world.isClientSide && isDarkMode().withDefault(LibGui.isDarkMode())) ? darkTitleColor : titleColor;
+        return titleColor != null ? titleColor : getStyle().getTitleColor();
     }
 
     public SyncedGuiDescription setRootPanel(WPanel panel) {
@@ -126,14 +123,6 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
     @Override
     public SyncedGuiDescription setTitleColor(int color) {
         this.titleColor = color;
-        this.darkTitleColor = (color == WLabel.DEFAULT_TEXT_COLOR) ? WLabel.DEFAULT_DARKMODE_TEXT_COLOR : color;
-        return this;
-    }
-
-    @Override
-    public SyncedGuiDescription setTitleColor(int lightColor, int darkColor) {
-        this.titleColor = lightColor;
-        this.darkTitleColor = darkColor;
         return this;
     }
 

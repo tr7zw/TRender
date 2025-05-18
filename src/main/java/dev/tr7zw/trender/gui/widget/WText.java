@@ -5,9 +5,11 @@ import java.util.Objects;
 
 import org.jetbrains.annotations.Nullable;
 
+import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.TextAlignment;
+import dev.tr7zw.trender.gui.impl.client.constants.StyleConstants;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.VerticalAlignment;
@@ -29,8 +31,7 @@ import net.minecraft.util.FormattedCharSequence;
 public class WText extends WWidget {
     protected Component text;
     protected int color;
-    protected int darkmodeColor;
-    protected boolean drawShadows;
+    protected Boolean drawShadows;
     protected HorizontalAlignment horizontalAlignment = HorizontalAlignment.LEFT;
     protected VerticalAlignment verticalAlignment = VerticalAlignment.TOP;
 
@@ -38,13 +39,12 @@ public class WText extends WWidget {
     private boolean wrappingScheduled = false;
 
     public WText(Component text) {
-        this(text, WLabel.DEFAULT_TEXT_COLOR);
+        this(text, StyleConstants.DEFAULT_TEXT_COLOR);
     }
 
     public WText(Component text, int color) {
         this.text = Objects.requireNonNull(text, "text must not be null");
         this.color = color;
-        this.darkmodeColor = (color == WLabel.DEFAULT_TEXT_COLOR) ? WLabel.DEFAULT_DARKMODE_TEXT_COLOR : color;
     }
 
     @Override
@@ -98,7 +98,7 @@ public class WText extends WWidget {
 
         for (int i = 0; i < wrappedLines.size(); i++) {
             FormattedCharSequence line = wrappedLines.get(i);
-            int c = shouldRenderInDarkMode() ? darkmodeColor : color;
+            int c = color;
 
             if (getDrawShadows()) {
                 ScreenDrawing.drawStringWithShadow(context, line, horizontalAlignment, x,
@@ -171,47 +171,13 @@ public class WText extends WWidget {
     }
 
     /**
-     * Gets the dark mode color of this text widget.
-     *
-     * @return the color
-     * @since 2.0.0
-     */
-    public int getDarkmodeColor() {
-        return darkmodeColor;
-    }
-
-    /**
-     * Sets the dark mode color of this text widget.
-     *
-     * @param darkmodeColor the new color
-     * @return this text widget
-     */
-    public WText setDarkmodeColor(int darkmodeColor) {
-        this.darkmodeColor = darkmodeColor;
-        return this;
-    }
-
-    /**
-     * Sets the light and dark mode colors of this text widget.
-     *
-     * @param color         the new light color
-     * @param darkmodeColor the new dark color
-     * @return this text widget
-     */
-    public WText setColor(int color, int darkmodeColor) {
-        setColor(color);
-        setDarkmodeColor(darkmodeColor);
-        return this;
-    }
-
-    /**
      * Checks whether shadows should be drawn for this text widget.
      * 
      * @return {@code true} shadows should be drawn, {@code false} otherwise
      * @since 11.1.0
      */
     public boolean getDrawShadows() {
-        return drawShadows;
+        return drawShadows == null ? LibGui.getGuiStyle().isFontShadow() : drawShadows;
     }
 
     /**
@@ -224,17 +190,6 @@ public class WText extends WWidget {
      */
     public WText setDrawShadows(boolean drawShadows) {
         this.drawShadows = drawShadows;
-        return this;
-    }
-
-    /**
-     * Disables separate dark mode coloring by copying the dark color to be the
-     * light color.
-     *
-     * @return this text widget
-     */
-    public WText disableDarkmode() {
-        this.darkmodeColor = this.color;
         return this;
     }
 

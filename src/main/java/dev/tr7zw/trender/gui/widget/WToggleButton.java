@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import org.jetbrains.annotations.Nullable;
 
+import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.LibGuiCommon;
@@ -46,9 +47,6 @@ public class WToggleButton extends WWidget {
     protected boolean isOn = false;
     @Nullable
     protected Consumer<Boolean> onToggle = null;
-
-    protected int color = WLabel.DEFAULT_TEXT_COLOR;
-    protected int darkmodeColor = WLabel.DEFAULT_DARKMODE_TEXT_COLOR;
 
     /**
      * Constructs a toggle button with default images and no label.
@@ -127,7 +125,7 @@ public class WToggleButton extends WWidget {
         }
         if (label != null) {
             ScreenDrawing.drawString(context, label.getVisualOrderText(), xPos, y + 6,
-                    shouldRenderInDarkMode() ? darkmodeColor : color);
+                    LibGui.getGuiStyle().getTitleColor());
         }
     }
 
@@ -191,13 +189,6 @@ public class WToggleButton extends WWidget {
 
     public WToggleButton setLabel(@Nullable Component label) {
         this.label = label;
-        return this;
-    }
-
-    public WToggleButton setColor(int light, int dark) {
-        this.color = light;
-        this.darkmodeColor = dark;
-
         return this;
     }
 

@@ -1,6 +1,7 @@
 package dev.tr7zw.trender.gui.client;
 
 import dev.tr7zw.trender.gui.impl.client.LibGuiClient;
+import dev.tr7zw.trender.gui.impl.client.config.GuiStyle;
 
 /**
  * This class provides access to LibGui configuration and other global data.
@@ -11,13 +12,7 @@ public final class LibGui {
     private LibGui() {
     }
 
-    /**
-     * Returns whether LibGui is running in dark mode and widgets should use dark
-     * theming.
-     *
-     * @return true if widgets should use dark theming, false otherwise
-     */
-    public static boolean isDarkMode() {
-        return LibGuiClient.config.darkMode;
+    public static GuiStyle getGuiStyle() {
+        return LibGuiClient.config.style;
     }
 }

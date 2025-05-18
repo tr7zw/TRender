@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.LibGuiCommon;
+import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import net.minecraft.resources.ResourceLocation;
 
@@ -17,8 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 public class WSlider extends WAbstractIntSlider {
     public static final int TRACK_WIDTH = 6;
     public static final int THUMB_SIZE = 8;
-    public static final ResourceLocation LIGHT_TEXTURE = LibGuiCommon.id("textures/widget/slider_light.png");
-    public static final ResourceLocation DARK_TEXTURE = LibGuiCommon.id("textures/widget/slider_dark.png");
+
 
     @Nullable
     private BackgroundPainter backgroundPainter;
@@ -52,7 +51,7 @@ public class WSlider extends WAbstractIntSlider {
             int thumbX, thumbY;
             // thumbXOffset: thumb texture x offset in pixels
             int thumbXOffset;
-            ResourceLocation texture = shouldRenderInDarkMode() ? DARK_TEXTURE : LIGHT_TEXTURE;
+            ResourceLocation texture = WidgetTextures.getSliderTextures();
 
             if (axis == Axis.VERTICAL) {
                 int trackX = x + getWidth() / 2 - TRACK_WIDTH / 2;
