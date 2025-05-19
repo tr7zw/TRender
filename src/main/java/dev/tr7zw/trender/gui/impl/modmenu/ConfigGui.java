@@ -10,7 +10,7 @@ import dev.tr7zw.trender.gui.client.AbstractConfigScreen;
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
 import dev.tr7zw.trender.gui.impl.client.LibGuiClient;
 import dev.tr7zw.trender.gui.impl.client.config.LibGuiConfig;
-import dev.tr7zw.trender.gui.impl.client.config.GuiStyle;
+import dev.tr7zw.trender.gui.impl.client.style.GuiStyle;
 import dev.tr7zw.trender.gui.widget.WButton;
 import dev.tr7zw.trender.gui.widget.WGridPanel;
 import dev.tr7zw.trender.gui.widget.WLabeledDoubleSlider;

@@ -5,10 +5,10 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import dev.tr7zw.trender.gui.impl.LibGuiCommon;
-import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
-import dev.tr7zw.trender.gui.impl.client.config.GuiStyle;
-import dev.tr7zw.trender.gui.impl.client.constants.TextureConstants;
-import dev.tr7zw.trender.gui.impl.client.constants.TextureConstants.SpriteData;
+import dev.tr7zw.trender.gui.impl.client.style.GuiStyle;
+import dev.tr7zw.trender.gui.impl.client.style.TextureConstants;
+import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
+import dev.tr7zw.trender.gui.impl.client.style.TextureConstants.SpriteData;
 import dev.tr7zw.trender.gui.widget.WItemSlot;
 import dev.tr7zw.trender.gui.widget.WWidget;
 //import juuxel.libninepatch.NinePatch;

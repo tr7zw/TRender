@@ -1,4 +1,4 @@
-package dev.tr7zw.trender.gui.impl.client.constants;
+package dev.tr7zw.trender.gui.impl.client.style;
 
 import dev.tr7zw.trender.gui.client.LibGui;
 import lombok.experimental.UtilityClass;

@@ -9,7 +9,7 @@ import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.TextAlignment;
-import dev.tr7zw.trender.gui.impl.client.constants.StyleConstants;
+import dev.tr7zw.trender.gui.impl.client.style.StyleConstants;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.VerticalAlignment;

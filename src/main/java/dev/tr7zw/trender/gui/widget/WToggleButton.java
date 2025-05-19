@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
+import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.Texture;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
@@ -27,15 +27,10 @@ import net.minecraft.sounds.SoundEvents;
 
 public class WToggleButton extends WWidget {
     private static final int ICON_SIZE = 16;
-    // Default on/off images
-    protected static final Texture DEFAULT_OFF_IMAGE = new Texture(LibGuiCommon.id("textures/widget/toggle_off.png"));
-    protected static final Texture DEFAULT_ON_IMAGE = new Texture(LibGuiCommon.id("textures/widget/toggle_on.png"));
-    protected static final Texture DEFAULT_FOCUS_IMAGE = new Texture(
-            LibGuiCommon.id("textures/widget/toggle_focus.png"));
 
     protected Texture onImage;
     protected Texture offImage;
-    protected Texture focusImage = DEFAULT_FOCUS_IMAGE;
+    protected Texture focusImage;
 
     @Nullable
     protected Component label = null;
@@ -52,7 +47,7 @@ public class WToggleButton extends WWidget {
      * Constructs a toggle button with default images and no label.
      */
     public WToggleButton() {
-        this(DEFAULT_ON_IMAGE, DEFAULT_OFF_IMAGE);
+        
     }
 
     /**
@@ -61,7 +56,6 @@ public class WToggleButton extends WWidget {
      * @param label the button label
      */
     public WToggleButton(Component label) {
-        this(DEFAULT_ON_IMAGE, DEFAULT_OFF_IMAGE);
         this.label = label;
     }
 
@@ -114,9 +108,9 @@ public class WToggleButton extends WWidget {
 
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
-        ScreenDrawing.texturedRect(context, x, y, 18, 18, isOn ? onImage : offImage, 0xFFFFFFFF);
+        ScreenDrawing.texturedRect(context, x, y, 18, 18, isOn ? getOnImage() : getOffImage(), 0xFFFFFFFF);
         if (isFocused()) {
-            ScreenDrawing.texturedRect(context, x, y, 18, 18, focusImage, 0xFFFFFFFF);
+            ScreenDrawing.texturedRect(context, x, y, 18, 18, getFocusImage(), 0xFFFFFFFF);
         }
         int xPos = x + 22;
         if (icon != null) {
@@ -193,7 +187,7 @@ public class WToggleButton extends WWidget {
     }
 
     public Texture getOnImage() {
-        return onImage;
+        return onImage != null ? onImage : WidgetTextures.getToggleButtonTextures().get().on();
     }
 
     public WToggleButton setOnImage(Texture onImage) {
@@ -202,7 +196,7 @@ public class WToggleButton extends WWidget {
     }
 
     public Texture getOffImage() {
-        return offImage;
+        return offImage != null ? offImage : WidgetTextures.getToggleButtonTextures().get().off();
     }
 
     public WToggleButton setOffImage(Texture offImage) {
@@ -211,7 +205,7 @@ public class WToggleButton extends WWidget {
     }
 
     public Texture getFocusImage() {
-        return focusImage;
+        return focusImage != null ? focusImage : WidgetTextures.getToggleButtonTextures().get().focus();
     }
 
     public WToggleButton setFocusImage(Texture focusImage) {

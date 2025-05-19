@@ -2,7 +2,7 @@ package dev.tr7zw.trender.gui.widget;
 
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
+import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 //#if MC >= 11800
@@ -49,7 +49,7 @@ public class WScrollBar extends WWidget {
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         var matrices = context.pose();
-        var textures = WidgetTextures.getScrollBarTextures();
+        var textures = WidgetTextures.getScrollBarTextures().get();
 
         context.blitSprite(textures.background(), x, y, getWidth(), getHeight(), 4, 4, 16, 16);
 

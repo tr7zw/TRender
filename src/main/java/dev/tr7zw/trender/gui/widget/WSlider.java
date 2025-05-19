@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
+import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import net.minecraft.resources.ResourceLocation;
 
@@ -51,7 +51,7 @@ public class WSlider extends WAbstractIntSlider {
             int thumbX, thumbY;
             // thumbXOffset: thumb texture x offset in pixels
             int thumbXOffset;
-            ResourceLocation texture = WidgetTextures.getSliderTextures();
+            ResourceLocation texture = WidgetTextures.getSliderTextures().get();
 
             if (axis == Axis.VERTICAL) {
                 int trackX = x + getWidth() / 2 - TRACK_WIDTH / 2;

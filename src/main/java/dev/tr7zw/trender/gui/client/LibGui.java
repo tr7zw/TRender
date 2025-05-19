@@ -1,7 +1,7 @@
 package dev.tr7zw.trender.gui.client;
 
 import dev.tr7zw.trender.gui.impl.client.LibGuiClient;
-import dev.tr7zw.trender.gui.impl.client.config.GuiStyle;
+import dev.tr7zw.trender.gui.impl.client.style.GuiStyle;
 
 /**
  * This class provides access to LibGui configuration and other global data.

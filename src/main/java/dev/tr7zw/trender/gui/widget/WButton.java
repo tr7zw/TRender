@@ -5,8 +5,8 @@ import org.jetbrains.annotations.Nullable;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
-import dev.tr7zw.trender.gui.impl.client.constants.StyleConstants;
+import dev.tr7zw.trender.gui.impl.client.style.StyleConstants;
+import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
@@ -91,7 +91,7 @@ public class WButton extends WWidget {
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         boolean hovered = isWithinBounds(mouseX, mouseY);
-        var textures = WidgetTextures.getButtonTextures();
+        var textures = WidgetTextures.getButtonTextures().get();
         context.blitSprite(textures.get(enabled, hovered || isFocused()), x, y, getWidth(), getHeight(), 20, 4, 200,
                 20);
 

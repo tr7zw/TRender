@@ -1,6 +1,5 @@
-package dev.tr7zw.trender.gui.impl.client.config;
+package dev.tr7zw.trender.gui.impl.client.style;
 
-import dev.tr7zw.trender.gui.impl.client.constants.StyleConstants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

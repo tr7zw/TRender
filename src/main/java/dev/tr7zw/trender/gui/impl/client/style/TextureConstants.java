@@ -1,9 +1,8 @@
-package dev.tr7zw.trender.gui.impl.client.constants;
+package dev.tr7zw.trender.gui.impl.client.style;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
 import lombok.experimental.UtilityClass;
 import net.minecraft.resources.ResourceLocation;
 
