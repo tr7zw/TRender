@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dev.tr7zw.trender.gui.impl.Proxy;
+import dev.tr7zw.trender.gui.impl.client.config.LibGuiConfig;
 //#if FABRIC
 import net.fabricmc.api.ClientModInitializer;
 //#endif

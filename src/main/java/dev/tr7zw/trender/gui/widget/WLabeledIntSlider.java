@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
+import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.transition.mc.ComponentProvider;
@@ -169,7 +169,7 @@ public class WLabeledIntSlider extends WAbstractIntSlider {
             context.translate(0, getHeight());
             context.rotate(MathUtil.ZP.rotationDegrees(270));
         }
-        var background = WidgetTextures.getSLIDER();
+        var background = WidgetTextures.getValueSliderTexture().get();
         context.blitSprite(this.isFocused() ? background.enabledFocused() : background.enabled(), 0, 0, aWidth, aHeight,
                 4, 4, 16, 16);
 
@@ -180,7 +180,7 @@ public class WLabeledIntSlider extends WAbstractIntSlider {
         boolean hovering = rotMouseX >= thumbX && rotMouseX <= thumbX + thumbWidth && rotMouseY >= thumbY
                 && rotMouseY <= thumbY + thumbHeight;
 
-        var thumbTextures = WidgetTextures.getLabeledSliderHandleTextures(shouldRenderInDarkMode());
+        var thumbTextures = WidgetTextures.getLabeledSliderHandleTextures().get();
         var thumbTexture = thumbTextures.get(true, dragging || hovering);
         context.blitSprite(thumbTexture, thumbX, thumbY, thumbWidth, thumbHeight, 2, 2, 8, 20);
 

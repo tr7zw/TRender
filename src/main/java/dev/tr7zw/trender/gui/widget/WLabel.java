@@ -25,19 +25,8 @@ public class WLabel extends WWidget {
     protected Component text;
     protected HorizontalAlignment horizontalAlignment = HorizontalAlignment.LEFT;
     protected VerticalAlignment verticalAlignment = VerticalAlignment.TOP;
-    protected int color;
-    protected int darkmodeColor;
-    protected boolean drawShadows;
-
-    /**
-     * The default text color for light mode labels.
-     */
-    public static final int DEFAULT_TEXT_COLOR = 0x404040;
-
-    /**
-     * The default text color for {@linkplain LibGui#isDarkMode() dark mode} labels.
-     */
-    public static final int DEFAULT_DARKMODE_TEXT_COLOR = 0xbcbcbc;
+    protected Integer color = null;
+    protected Boolean drawShadows;
 
     /**
      * Constructs a new label.
@@ -48,7 +37,6 @@ public class WLabel extends WWidget {
     public WLabel(Component text, int color) {
         this.text = text;
         this.color = color;
-        this.darkmodeColor = (color == DEFAULT_TEXT_COLOR) ? DEFAULT_DARKMODE_TEXT_COLOR : color;
     }
 
     /**
@@ -59,7 +47,7 @@ public class WLabel extends WWidget {
      * @since 1.8.0
      */
     public WLabel(Component text) {
-        this(text, DEFAULT_TEXT_COLOR);
+        this.text = text;
     }
 
     @Override
@@ -68,10 +56,10 @@ public class WLabel extends WWidget {
 
         if (getDrawShadows()) {
             ScreenDrawing.drawStringWithShadow(context, text.getVisualOrderText(), horizontalAlignment, x, y + yOffset,
-                    this.getWidth(), shouldRenderInDarkMode() ? darkmodeColor : color);
+                    this.getWidth(), getColor());
         } else {
             ScreenDrawing.drawString(context, text.getVisualOrderText(), horizontalAlignment, x, y + yOffset,
-                    this.getWidth(), shouldRenderInDarkMode() ? darkmodeColor : color);
+                    this.getWidth(), getColor());
         }
 
         Style hoveredTextStyle = getTextStyleAt(mouseX, mouseY);
@@ -119,44 +107,12 @@ public class WLabel extends WWidget {
     }
 
     /**
-     * Gets the dark mode color of this label.
-     *
-     * @return the color
-     * @since 2.0.0
-     */
-    public int getDarkmodeColor() {
-        return darkmodeColor;
-    }
-
-    /**
-     * Sets the dark mode color of this label.
-     *
-     * @param color the new color
-     * @return this label
-     */
-    public WLabel setDarkmodeColor(int color) {
-        darkmodeColor = color;
-        return this;
-    }
-
-    /**
-     * Disables separate dark mode coloring by copying the dark color to be the
-     * light color.
-     *
-     * @return this label
-     */
-    public WLabel disableDarkmode() {
-        this.darkmodeColor = this.color;
-        return this;
-    }
-
-    /**
      * Gets the light mode color of this label.
      *
      * @return the color
      */
     public int getColor() {
-        return color;
+        return color != null ? color : LibGui.getGuiStyle().getTitleColor();
     }
 
     /**
@@ -171,26 +127,13 @@ public class WLabel extends WWidget {
     }
 
     /**
-     * Sets the light and dark mode colors of this label.
-     *
-     * @param color         the new light color
-     * @param darkmodeColor the new dark color
-     * @return this label
-     */
-    public WLabel setColor(int color, int darkmodeColor) {
-        this.color = color;
-        this.darkmodeColor = darkmodeColor;
-        return this;
-    }
-
-    /**
      * Checks whether shadows should be drawn for this label.
      * 
      * @return {@code true} shadows should be drawn, {@code false} otherwise
      * @since 11.1.0
      */
     public boolean getDrawShadows() {
-        return drawShadows;
+        return drawShadows == null ? LibGui.getGuiStyle().isFontShadow() : drawShadows;
     }
 
     /**

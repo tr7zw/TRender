@@ -1,8 +1,14 @@
 package dev.tr7zw.trender.gui.client;
 
+import java.util.EnumMap;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import dev.tr7zw.trender.gui.impl.LibGuiCommon;
+import dev.tr7zw.trender.gui.impl.client.style.GuiStyle;
+import dev.tr7zw.trender.gui.impl.client.style.TextureConstants;
+import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
+import dev.tr7zw.trender.gui.impl.client.style.TextureConstants.SpriteData;
 import dev.tr7zw.trender.gui.widget.WItemSlot;
 import dev.tr7zw.trender.gui.widget.WWidget;
 //import juuxel.libninepatch.NinePatch;
@@ -46,15 +52,7 @@ public interface BackgroundPainter {
      *
      * @since 1.5.0
      */
-    //#if MC >= 12002
-    public static BackgroundPainter VANILLA = createLightDarkVariants(
-            createGuiSprite(LibGuiCommon.id("widget/panel_light")),
-            createGuiSprite(LibGuiCommon.id("widget/panel_dark")));
-    //#else
-    //$$public static BackgroundPainter VANILLA = createLightDarkVariants(
-    //$$        createGuiSprite(LibGuiCommon.id("textures/gui/sprites/widget/panel_light.png")),
-    //$$        createGuiSprite(LibGuiCommon.id("textures/gui/sprites/widget/panel_dark.png")));
-    //#endif
+    public static BackgroundPainter VANILLA = createStyleVariants("widget/panel_", p -> {});
 
     /**
      * The {@code SLOT} background painter draws item slots or slot-like widgets.
@@ -186,12 +184,31 @@ public interface BackgroundPainter {
      * @return a new background painter that chooses between the two inputs
      * @since 1.5.0
      */
-    public static BackgroundPainter createLightDarkVariants(BackgroundPainter light, BackgroundPainter dark) {
+    public static BackgroundPainter createStyleVariants(String prefix, Consumer<BackgroundPainter> configurator) {
+        EnumMap<GuiStyle, BackgroundPainter> styleMap = new EnumMap<>(GuiStyle.class);
+        
+        for(GuiStyle style : GuiStyle.values()) {
+            BackgroundPainter painter = createGuiSprite(WidgetTextures.getId(prefix + style.getPrefix()));
+            configurator.accept(painter);
+            styleMap.put(style, painter);
+        }
+        
         return (context, left, top, panel) -> {
-            if (panel.shouldRenderInDarkMode())
-                dark.paintBackground(context, left, top, panel);
-            else
-                light.paintBackground(context, left, top, panel);
+            styleMap.get(LibGui.getGuiStyle()).paintBackground(context, left, top, panel);
+        };
+    }
+
+    public static BackgroundPainter createStyleVariantsNinePatch(String prefix, Consumer<NinePatchBackgroundPainter> configurator) {
+        EnumMap<GuiStyle, BackgroundPainter> styleMap = new EnumMap<>(GuiStyle.class);
+        
+        for(GuiStyle style : GuiStyle.values()) {
+            NinePatchBackgroundPainter painter = createNinePatch(LibGuiCommon.id(prefix + style.getPrefix() + ".png"));
+            configurator.accept(painter);
+            styleMap.put(style, painter);
+        }
+        
+        return (context, left, top, panel) -> {
+            styleMap.get(LibGui.getGuiStyle()).paintBackground(context, left, top, panel);
         };
     }
 
@@ -209,7 +226,12 @@ public interface BackgroundPainter {
      */
     static BackgroundPainter createGuiSprite(ResourceLocation texture) {
         Objects.requireNonNull(texture, "Texture cannot be null");
-        return (context, left, top, panel) -> context.blitSprite(texture, left, top, panel.getWidth(),
-                panel.getHeight(), 4, 4, 16, 16);
+        return (context, left, top, panel) -> {
+            //#if MC < 12100
+            //$$ com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+            //#endif
+            SpriteData data = TextureConstants.get(texture);
+            context.blitSprite(texture, left, top, panel.getWidth(), panel.getHeight(), data.border(), data.border(), data.width(), data.height());
+        };
     }
 }

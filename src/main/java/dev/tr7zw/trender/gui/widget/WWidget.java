@@ -4,7 +4,6 @@ import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
 import dev.tr7zw.trender.gui.GuiDescription;
-import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.impl.VisualLogger;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
@@ -660,30 +659,4 @@ public class WWidget {
         return ch == GLFW.GLFW_KEY_ENTER || ch == GLFW.GLFW_KEY_KP_ENTER || ch == GLFW.GLFW_KEY_SPACE;
     }
 
-    /**
-     * Checks if this widget should be rendered in dark mode.
-     *
-     * <p>
-     * If the widget has a host that {@linkplain GuiDescription#isDarkMode() forces
-     * dark mode}, the forced value is used. Otherwise, this method returns
-     * {@link LibGui#isDarkMode()}.
-     *
-     * <p>
-     * {@linkplain #paint Painting} should respect this value for general-purpose
-     * widgets intended for use in multiple different GUIs.
-     *
-     * @return {@code true} if this widget should be rendered in dark mode,
-     *         {@code false} otherwise
-     * @since 7.1.0
-     */
-
-    public boolean shouldRenderInDarkMode() {
-        var globalDarkMode = LibGui.isDarkMode();
-
-        if (host != null) {
-            return host.isDarkMode().withDefault(globalDarkMode);
-        }
-
-        return globalDarkMode;
-    }
 }

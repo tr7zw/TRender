@@ -6,9 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
+import dev.tr7zw.trender.gui.client.AbstractConfigScreen;
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.client.LightweightGuiDescription;
 import dev.tr7zw.trender.gui.impl.client.LibGuiClient;
+import dev.tr7zw.trender.gui.impl.client.config.LibGuiConfig;
+import dev.tr7zw.trender.gui.impl.client.style.GuiStyle;
 import dev.tr7zw.trender.gui.widget.WButton;
 import dev.tr7zw.trender.gui.widget.WGridPanel;
 import dev.tr7zw.trender.gui.widget.WLabeledDoubleSlider;
@@ -27,24 +29,28 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
-public class ConfigGui extends LightweightGuiDescription {
+public class ConfigGui extends AbstractConfigScreen {
     public ConfigGui(Screen previous) {
+        super(ComponentProvider.literal("TRender"), previous);
         WGridPanel root = new WGridPanel(20);
         root.setInsets(Insets.ROOT_PANEL);
         setRootPanel(root);
 
+        WTabPanel wTabPanel = new WTabPanel();
+        
         List<String> data = new ArrayList<String>(Arrays.asList("Some", "test", "data", "with", "many", "options", "so",
                 "it", "needs", "to", "scroll.", "This", "menu", "is", "just", "for", "testing"));
 
-        WToggleButton darkmodeButton = new WToggleButton(ComponentProvider.translatable("option.libgui.darkmode")) {
-            @Override
-            public void onToggle(boolean on) {
-                LibGuiClient.config.darkMode = on;
-                LibGuiClient.saveConfig(LibGuiClient.config);
-                data.add(on ? "On" + System.currentTimeMillis() : "Off" + System.currentTimeMillis());
-            }
-        };
-        darkmodeButton.setToggle(LibGuiClient.config.darkMode);
+        // options page
+        List<OptionInstance> options = new ArrayList<>();
+        options.add(getEnumOption("text.trender.style", GuiStyle.class, () -> LibGuiClient.config.style,
+                (v) -> LibGuiClient.config.style = v));
+
+        var optionList = createOptionList(options);
+        optionList.setGap(-1);
+        optionList.setSize(14 * 20, 9 * 20);
+
+        wTabPanel.add(optionList, b -> b.title(ComponentProvider.literal("Settings")).icon(new ItemIcon(Items.COMMAND_BLOCK)));
         //        root.add(darkmodeButton, 0, 1, 6, 1);
 
         WLabeledDoubleSlider ds = new WLabeledDoubleSlider(0, 3, 0.2);
@@ -62,12 +68,13 @@ public class ConfigGui extends LightweightGuiDescription {
                 });
         testList.setGap(0);
         testList.setSize(17 * 20, 8 * 20);
-        WTabPanel wTabPanel = new WTabPanel();
+
         wTabPanel.add(testList, b -> b.title(ComponentProvider.literal("list")).icon(new ItemIcon(Items.PAINTING)));
         WGridPanel test = new WGridPanel();
-        test.add(darkmodeButton, 0, 0);
-        test.add(new WLabeledDoubleSlider(0, 1, 0.05, ComponentProvider.literal("Test Slider")), 2, 1, 5, 1);
-        wTabPanel.add(test, b -> b.title(ComponentProvider.literal("Darkmode")).icon(new ItemIcon(Items.APPLE)));
+        WToggleButton toggle = new WToggleButton(ComponentProvider.literal("I... am a toggle"));
+        test.add(toggle, 0, 0);
+        test.add(new WLabeledDoubleSlider(0, 1, 0.05, ComponentProvider.literal("Test Slider")), 0, 1, 5, 1);
+        wTabPanel.add(test, b -> b.title(ComponentProvider.literal("Test Buttons")).icon(new ItemIcon(Items.APPLE)));
         //        wTabPanel.setSize(6, 6);
 
         wTabPanel.layout();
@@ -108,5 +115,15 @@ public class ConfigGui extends LightweightGuiDescription {
         root.setBackgroundPainter(BackgroundPainter.VANILLA);
 
         root.validate(this);
+    }
+
+    @Override
+    public void save() {
+        LibGuiClient.saveConfig(LibGuiClient.config);
+    }
+
+    @Override
+    public void reset() {
+        LibGuiClient.config = new LibGuiConfig();
     }
 }

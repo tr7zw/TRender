@@ -2,10 +2,10 @@ package dev.tr7zw.trender.gui.widget;
 
 import java.util.function.Supplier;
 
-import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.TextAlignment;
+import dev.tr7zw.trender.gui.impl.client.style.StyleConstants;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.VerticalAlignment;
 
@@ -23,18 +23,8 @@ public class WDynamicLabel extends WWidget {
     protected HorizontalAlignment horizontalAlignment = HorizontalAlignment.LEFT;
     protected VerticalAlignment verticalAlignment = VerticalAlignment.TOP;
     protected int color;
-    protected int darkmodeColor;
     protected boolean drawShadows;
 
-    /**
-     * The default text color for light mode labels.
-     */
-    public static final int DEFAULT_TEXT_COLOR = 0x404040;
-
-    /**
-     * The default text color for {@linkplain LibGui#isDarkMode() dark mode} labels.
-     */
-    public static final int DEFAULT_DARKMODE_TEXT_COLOR = 0xbcbcbc;
 
     /**
      * Constructs a new dynamic label.
@@ -45,7 +35,6 @@ public class WDynamicLabel extends WWidget {
     public WDynamicLabel(Supplier<String> text, int color) {
         this.text = text;
         this.color = color;
-        this.darkmodeColor = (color == DEFAULT_TEXT_COLOR) ? DEFAULT_DARKMODE_TEXT_COLOR : color;
     }
 
     /**
@@ -55,7 +44,7 @@ public class WDynamicLabel extends WWidget {
      * @param text the text of the label
      */
     public WDynamicLabel(Supplier<String> text) {
-        this(text, DEFAULT_TEXT_COLOR);
+        this(text, StyleConstants.DEFAULT_TEXT_COLOR);
     }
 
     @Override
@@ -66,10 +55,10 @@ public class WDynamicLabel extends WWidget {
 
         if (getDrawShadows()) {
             ScreenDrawing.drawStringWithShadow(context, tr, horizontalAlignment, x, y + yOffset, this.getWidth(),
-                    shouldRenderInDarkMode() ? darkmodeColor : color);
+                    color);
         } else {
             ScreenDrawing.drawString(context, tr, horizontalAlignment, x, y + yOffset, this.getWidth(),
-                    shouldRenderInDarkMode() ? darkmodeColor : color);
+                    color);
         }
     }
 
@@ -81,41 +70,6 @@ public class WDynamicLabel extends WWidget {
     @Override
     public void setSize(int x, int y) {
         super.setSize(x, 20);
-    }
-
-    /**
-     * Sets the dark mode color of this label.
-     *
-     * @param color the new color
-     * @return this label
-     */
-    public WDynamicLabel setDarkmodeColor(int color) {
-        darkmodeColor = color;
-        return this;
-    }
-
-    /**
-     * Disables separate dark mode coloring by copying the dark color to be the
-     * light color.
-     *
-     * @return this label
-     */
-    public WDynamicLabel disableDarkmode() {
-        this.darkmodeColor = this.color;
-        return this;
-    }
-
-    /**
-     * Sets the light and dark mode colors of this label.
-     *
-     * @param color         the new light color
-     * @param darkmodeColor the new dark color
-     * @return this label
-     */
-    public WDynamicLabel setColor(int color, int darkmodeColor) {
-        this.color = color;
-        this.darkmodeColor = darkmodeColor;
-        return this;
     }
 
     /**

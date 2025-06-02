@@ -2,6 +2,7 @@ package dev.tr7zw.trender.gui.impl.modmenu;
 
 import java.util.ArrayList;
 
+import dev.tr7zw.trender.gui.client.LibGui;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.LibGuiCommon;
@@ -27,7 +28,7 @@ public class WKirbSprite extends WWidget {
     private long lastFrame;
 
     public WKirbSprite() {
-        state = (shouldRenderInDarkMode()) ? State.ASLEEP : State.AWAKE;
+        state = (LibGui.getGuiStyle().isDark()) ? State.ASLEEP : State.AWAKE;
     }
 
     public void schedule(int[] frames) {
@@ -55,7 +56,7 @@ public class WKirbSprite extends WWidget {
         long now = System.nanoTime() / 1_000_000L;
 
         if (pendingFrames.isEmpty()) {
-            if (shouldRenderInDarkMode()) {
+            if (LibGui.getGuiStyle().isDark()) {
                 state = switch (state) {
                 case AWAKE -> State.FALLING_ASLEEP;
                 case FALLING_ASLEEP -> State.ASLEEP;

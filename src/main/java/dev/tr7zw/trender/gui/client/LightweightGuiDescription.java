@@ -6,7 +6,6 @@ import org.jetbrains.annotations.Nullable;
 import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.ValidatedSlot;
 import dev.tr7zw.trender.gui.widget.WGridPanel;
-import dev.tr7zw.trender.gui.widget.WLabel;
 import dev.tr7zw.trender.gui.widget.WPanel;
 import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
@@ -21,8 +20,7 @@ public class LightweightGuiDescription implements GuiDescription {
     protected ContainerData propertyDelegate;
     protected WWidget focus;
 
-    protected int titleColor = WLabel.DEFAULT_TEXT_COLOR;
-    protected int darkmodeTitleColor = WLabel.DEFAULT_DARKMODE_TEXT_COLOR;
+    protected Integer titleColor = null;
     protected boolean fullscreen = false;
     protected boolean titleVisible = true;
     protected HorizontalAlignment titleAlignment = HorizontalAlignment.LEFT;
@@ -36,7 +34,7 @@ public class LightweightGuiDescription implements GuiDescription {
 
     @Override
     public int getTitleColor() {
-        return isDarkMode().withDefault(LibGui.isDarkMode()) ? darkmodeTitleColor : titleColor;
+        return titleColor != null ? titleColor : getStyle().getTitleColor();
     }
 
     @Override
@@ -48,14 +46,6 @@ public class LightweightGuiDescription implements GuiDescription {
     @Override
     public GuiDescription setTitleColor(int color) {
         this.titleColor = color;
-        this.darkmodeTitleColor = (color == WLabel.DEFAULT_TEXT_COLOR) ? WLabel.DEFAULT_DARKMODE_TEXT_COLOR : color;
-        return this;
-    }
-
-    @Override
-    public GuiDescription setTitleColor(int lightColor, int darkColor) {
-        this.titleColor = lightColor;
-        this.darkmodeTitleColor = darkColor;
         return this;
     }
 

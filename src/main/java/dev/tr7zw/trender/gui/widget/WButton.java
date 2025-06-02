@@ -5,7 +5,8 @@ import org.jetbrains.annotations.Nullable;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.impl.client.WidgetTextures;
+import dev.tr7zw.trender.gui.impl.client.style.StyleConstants;
+import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
@@ -24,7 +25,7 @@ public class WButton extends WWidget {
 
     @Nullable
     private Component label;
-    protected int color = WLabel.DEFAULT_TEXT_COLOR;
+    protected int color = StyleConstants.DEFAULT_TEXT_COLOR;
     /**
      * The size (width/height) of this button's icon in pixels.
      * 
@@ -90,7 +91,7 @@ public class WButton extends WWidget {
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         boolean hovered = isWithinBounds(mouseX, mouseY);
-        var textures = WidgetTextures.getButtonTextures(shouldRenderInDarkMode());
+        var textures = WidgetTextures.getButtonTextures().get();
         context.blitSprite(textures.get(enabled, hovered || isFocused()), x, y, getWidth(), getHeight(), 20, 4, 200,
                 20);
 
