@@ -37,9 +37,9 @@ public class WTextField extends WWidget {
     private boolean editable = true;
     private int tickCount = 0;
 
-    private int disabledColor = 0x707070;
-    private int enabledColor = 0xE0E0E0;
-    private int suggestionColor = 0x808080;
+    private int disabledColor = 0xFF707070;
+    private int enabledColor = 0xFFE0E0E0;
+    private int suggestionColor = 0xFF808080;
 
     private static final int BACKGROUND_COLOR = 0xFF000000;
     private static final int BORDER_COLOR_SELECTED = 0xFFFFFFA0;

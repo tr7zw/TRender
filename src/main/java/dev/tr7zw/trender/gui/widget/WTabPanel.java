@@ -411,11 +411,11 @@ public class WTabPanel extends WPanel {
 
                 int color;
                 if (LibGui.getGuiStyle() == GuiStyle.VANILLA_OLD) {
-                    color = selected ? 0xFFFFFF : 0xAAAAAA;
+                    color = selected ? 0xFFFFFFFF : 0xFFAAAAAA;
                 } else if (LibGui.getGuiStyle().isDark()) {
-                    color = selected ? 0xEEEEEE : 0x777777;
+                    color = selected ? 0xFFEEEEEE : 0xFF777777;
                 } else {
-                    color = selected ? StyleConstants.DEFAULT_TEXT_COLOR : 0xEEEEEE;
+                    color = selected ? StyleConstants.DEFAULT_TEXT_COLOR : 0xFFEEEEEE;
                 }
 
                 if (LibGui.getGuiStyle().isFontShadow()) {

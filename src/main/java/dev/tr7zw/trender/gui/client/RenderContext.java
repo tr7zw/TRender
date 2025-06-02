@@ -134,7 +134,7 @@ public class RenderContext implements PoseStackHelper {
     public void blit(ResourceLocation atlasLocation, int x, int y, int blitOffset, float uOffset, float vOffset,
             int uWidth, int vHeight, int textureWidth, int textureHeight) {
         //#if MC >= 12106
-        //TODO blitOffset
+        //TODO blitOffset?
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
                 textureWidth, textureHeight);
         //#elseif MC >= 12102

@@ -108,9 +108,9 @@ public class WToggleButton extends WWidget {
 
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
-        ScreenDrawing.texturedRect(context, x, y, 18, 18, isOn ? getOnImage() : getOffImage(), 0xFFFFFFFF);
+        ScreenDrawing.texturedRect(context, x, y, 18, 18, isOn ? getOnImage() : getOffImage(), 0xFFFFFFFF, 18, 18);
         if (isFocused()) {
-            ScreenDrawing.texturedRect(context, x, y, 18, 18, getFocusImage(), 0xFFFFFFFF);
+            ScreenDrawing.texturedRect(context, x, y, 18, 18, getFocusImage(), 0xFFFFFFFF, 18, 18);
         }
         int xPos = x + 22;
         if (icon != null) {
@@ -118,8 +118,8 @@ public class WToggleButton extends WWidget {
             xPos += ICON_SIZE + 2;
         }
         if (label != null) {
-            ScreenDrawing.drawString(context, label.getVisualOrderText(), xPos, y + 6,
-                    LibGui.getGuiStyle().getTitleColor());
+            context.drawString(Minecraft.getInstance().font, label.getVisualOrderText(), xPos, y + 6,
+                    LibGui.getGuiStyle().getTitleColor(), false);
         }
     }
 

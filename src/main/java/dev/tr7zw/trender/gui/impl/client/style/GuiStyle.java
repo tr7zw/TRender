@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum GuiStyle {
 MODERN("modern", false, StyleConstants.DEFAULT_TEXT_COLOR, false),
 MODERN_DARK("modern_dark", true, StyleConstants.DEFAULT_DARKMODE_TEXT_COLOR, true),
-VANILLA_OLD("vanilla_old", false, 0xFFFFFF, true),
+VANILLA_OLD("vanilla_old", false, 0xFFFFFFFF, true),
 VANILLA_MODERN("vanilla_modern", true, StyleConstants.DEFAULT_DARKMODE_TEXT_COLOR, true),
 ;
     

@@ -1,18 +1,19 @@
 package dev.tr7zw.trender.gui.client;
 
 import org.jetbrains.annotations.Nullable;
+//#if MC < 12106
+//$$ import net.minecraft.client.renderer.RenderType;
 //#if MC >= 11904
-import org.joml.Matrix4f;
+//$$ import org.joml.Matrix4f;
 //#else
 //$$ import com.mojang.math.Matrix4f;
 //#endif
+//#endif
 
-import com.mojang.blaze3d.vertex.PoseStack;
 
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.Texture;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
@@ -43,42 +44,6 @@ public class ScreenDrawing {
     private ScreenDrawing() {
     }
 
-    /**
-     * Draws a textured rectangle.
-     *
-     * @param context the draw context
-     * @param x       the x coordinate of the box on-screen
-     * @param y       the y coordinate of the box on-screen
-     * @param width   the width of the box on-screen
-     * @param height  the height of the box on-screen
-     * @param texture the Identifier for the texture
-     * @param color   a color to tint the texture. This can be transparent! Use
-     *                0xFF_FFFFFF if you don't want a color tint
-     */
-    public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            ResourceLocation texture, int color) {
-        texturedRect(context, x, y, width, height, texture, 0, 0, 1, 1, color, 1.0f);
-    }
-
-    /**
-     * Draws a textured rectangle.
-     *
-     * @param context the draw context
-     * @param x       the x coordinate of the box on-screen
-     * @param y       the y coordinate of the box on-screen
-     * @param width   the width of the box on-screen
-     * @param height  the height of the box on-screen
-     * @param texture the Identifier for the texture
-     * @param color   a color to tint the texture. This can be transparent! Use
-     *                0xFF_FFFFFF if you don't want a color tint
-     * @param opacity opacity of the drawn texture. (0f is fully opaque and 1f is
-     *                fully visible)
-     * @since 2.0.0
-     */
-    public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            ResourceLocation texture, int color, float opacity) {
-        texturedRect(context, x, y, width, height, texture, 0, 0, 1, 1, color, opacity);
-    }
 
     /**
      * Draws a textured rectangle.
@@ -98,7 +63,28 @@ public class ScreenDrawing {
      */
     public static void texturedRect(RenderContext context, int x, int y, int width, int height,
             ResourceLocation texture, float u1, float v1, float u2, float v2, int color) {
-        texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, color, 1.0f);
+        texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, color, 1.0f, 64, 64);
+    }
+    
+    /**
+     * Draws a textured rectangle.
+     *
+     * @param context the draw context
+     * @param x       the x coordinate of the box on-screen
+     * @param y       the y coordinate of the box on-screen
+     * @param width   the width of the box on-screen
+     * @param height  the height of the box on-screen
+     * @param texture the Identifier for the texture
+     * @param u1      the left edge of the texture
+     * @param v1      the top edge of the texture
+     * @param u2      the right edge of the texture
+     * @param v2      the bottom edge of the texture
+     * @param color   a color to tint the texture. This can be transparent! Use
+     *                0xFF_FFFFFF if you don't want a color tint
+     */
+    public static void texturedRect(RenderContext context, int x, int y, int width, int height,
+            ResourceLocation texture, float u1, float v1, float u2, float v2, int color, int textureWidth, int textureHeight) {
+        texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, color, 1.0f, textureWidth, textureHeight);
     }
 
     /**
@@ -115,8 +101,26 @@ public class ScreenDrawing {
      * @since 3.0.0
      */
     public static void texturedRect(RenderContext context, int x, int y, int width, int height, Texture texture,
+            int color, int textureWidth, int textureHeight) {
+        texturedRect(context, x, y, width, height, texture, color, 1.0f, textureWidth, textureHeight);
+    }
+    
+    /**
+     * Draws a textured rectangle.
+     *
+     * @param context the draw context
+     * @param x       the x coordinate of the box on-screen
+     * @param y       the y coordinate of the box on-screen
+     * @param width   the width of the box on-screen
+     * @param height  the height of the box on-screen
+     * @param texture the texture
+     * @param color   a color to tint the texture. This can be transparent! Use
+     *                0xFF_FFFFFF if you don't want a color tint
+     * @since 3.0.0
+     */
+    public static void texturedRect(RenderContext context, int x, int y, int width, int height, Texture texture,
             int color) {
-        texturedRect(context, x, y, width, height, texture, color, 1.0f);
+        texturedRect(context, x, y, width, height, texture, color, 1.0f, 64, 64);
     }
 
     /**
@@ -135,11 +139,11 @@ public class ScreenDrawing {
      * @since 3.0.0
      */
     public static void texturedRect(RenderContext context, int x, int y, int width, int height, Texture texture,
-            int color, float opacity) {
+            int color, float opacity, int textureWidth, int textureHeight) {
         switch (texture.type()) {
         // Standalone textures: convert into ID + UVs
         case STANDALONE -> texturedRect(context, x, y, width, height, texture.image(), texture.u1(), texture.v1(),
-                texture.u2(), texture.v2(), color, opacity);
+                texture.u2(), texture.v2(), color, opacity, textureWidth, textureHeight);
 
         // GUI sprites: Work more carefully as we need to support tiling/nine-slice
         case GUI_SPRITE -> {
@@ -199,21 +203,21 @@ public class ScreenDrawing {
      * @since 2.0.0
      */
     public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            ResourceLocation texture, float u1, float v1, float u2, float v2, int color, float opacity) {
+            ResourceLocation texture, float u1, float v1, float u2, float v2, int color, float opacity, int textureWidth, int textureHeight) {
         if (width <= 0)
             width = 1;
         if (height <= 0)
             height = 1;
         //#if MC >= 12106
-        //        float a = (color >> 24 & 255) / 255.0F;
-        //        color = colorAtOpacity(color, a * opacity);
-        //        Matrix4f model = new Matrix4f();//context.pose().last().pose();
-        //        // FIXME ?
-        //        var buffer = context.getVertexConsumers().getBuffer(RenderType.entityTranslucent(texture));
-        //        buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
-        //        buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
-        //        buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
-        //        buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
+                float a = (color >> 24 & 255) / 255.0F;
+                color = colorAtOpacity(color, a * opacity);
+                // FIXME ?
+                context.blit(texture, x, y, textureWidth * u1, textureHeight * v1, width, height, textureWidth, textureHeight);
+//                var buffer = context.getVertexConsumers().getBuffer(RenderType.entityTranslucent(texture));
+//                buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
+//                buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
+//                buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
+//                buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
         //#elseif MC >= 12103
         //$$  float a = (color >> 24 & 255) / 255.0F;
         //$$ color = colorAtOpacity(color, a * opacity);
@@ -303,50 +307,6 @@ public class ScreenDrawing {
     }
 
     /**
-     * Draws a textured rectangle with UV values based on the width and height.
-     *
-     * <p>
-     * If the texture is 256x256, this draws the texture at one pixel per texel.
-     *
-     * @param context  the draw context
-     * @param x        the x coordinate of the box on-screen
-     * @param y        the y coordinate of the box on-screen
-     * @param width    the width of the box on-screen
-     * @param height   the height of the box on-screen
-     * @param texture  the Identifier for the texture
-     * @param textureX the x offset into the texture
-     * @param textureY the y offset into the texture
-     * @param color    a color to tint the texture. This can be transparent! Use
-     *                 0xFF_FFFFFF if you don't want a color tint
-     */
-    public static void texturedGuiRect(RenderContext context, int x, int y, int width, int height,
-            ResourceLocation texture, int textureX, int textureY, int color) {
-        float px = 1 / 256f;
-        texturedRect(context, x, y, width, height, texture, textureX * px, textureY * px, (textureX + width) * px,
-                (textureY + height) * px, color);
-    }
-
-    /**
-     * Draws a textured rectangle with UV values based on the width and height.
-     *
-     * <p>
-     * If the texture is 256x256, this draws the texture at one pixel per texel.
-     *
-     * @param context the draw context
-     * @param left    the x coordinate of the box on-screen
-     * @param top     the y coordinate of the box on-screen
-     * @param width   the width of the box on-screen
-     * @param height  the height of the box on-screen
-     * @param texture the Identifier for the texture
-     * @param color   a color to tint the texture. This can be transparent! Use
-     *                0xFF_FFFFFF if you don't want a color tint
-     */
-    public static void texturedGuiRect(RenderContext context, int left, int top, int width, int height,
-            ResourceLocation texture, int color) {
-        texturedGuiRect(context, left, top, width, height, texture, 0, 0, color);
-    }
-
-    /**
      * Draws an untextured rectangle of the specified RGB color.
      */
     public static void coloredRect(RenderContext context, int left, int top, int width, int height, int color) {
@@ -431,20 +391,6 @@ public class ScreenDrawing {
     }
 
     /**
-     * Draws a default-sized recessed itemslot panel
-     */
-    public static void drawBeveledPanel(RenderContext context, int x, int y) {
-        drawBeveledPanel(context, x, y, 18, 18, 0xFF373737, 0xFF8b8b8b, 0xFFFFFFFF);
-    }
-
-    /**
-     * Draws a default-color recessed itemslot panel of variable size
-     */
-    public static void drawBeveledPanel(RenderContext context, int x, int y, int width, int height) {
-        drawBeveledPanel(context, x, y, width, height, 0xFF373737, 0xFF8b8b8b, 0xFFFFFFFF);
-    }
-
-    /**
      * Draws a generalized-case beveled panel. Can be inset or outset depending on
      * arguments.
      *
@@ -477,6 +423,7 @@ public class ScreenDrawing {
      * @param width   the width of the string, used for aligning
      * @param color   the text color
      */
+    @Deprecated
     public static void drawString(RenderContext context, String s, HorizontalAlignment align, int x, int y, int width,
             int color) {
         var textRenderer = Minecraft.getInstance().font;

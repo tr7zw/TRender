@@ -185,7 +185,7 @@ public class WLabeledIntSlider extends WAbstractIntSlider {
         context.blitSprite(thumbTexture, thumbX, thumbY, thumbWidth, thumbHeight, 2, 2, 8, 20);
 
         if (label != null) {
-            int color = isMouseInsideBounds(mouseX, mouseY) ? 0xFFFFA0 : 0xE0E0E0;
+            int color = isMouseInsideBounds(mouseX, mouseY) ? 0xFFFFFFA0 : 0xFFE0E0E0;
             ScreenDrawing.drawStringWithShadow(context, label.getVisualOrderText(), labelAlignment, 2, aHeight / 2 - 4,
                     aWidth - 4, color);
         }

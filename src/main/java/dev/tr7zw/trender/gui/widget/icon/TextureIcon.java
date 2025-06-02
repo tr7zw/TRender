@@ -12,6 +12,8 @@ import net.minecraft.resources.ResourceLocation;
  */
 public class TextureIcon implements Icon {
     private final Texture texture;
+    private final int width;
+    private final int height;
     private float opacity = 1f;
     private int color = 0xFF_FFFFFF;
 
@@ -20,8 +22,8 @@ public class TextureIcon implements Icon {
      *
      * @param texture the identifier of the icon texture
      */
-    public TextureIcon(ResourceLocation texture) {
-        this(new Texture(texture));
+    public TextureIcon(ResourceLocation texture, int width, int height) {
+        this(new Texture(texture), width, height);
     }
 
     /**
@@ -30,8 +32,10 @@ public class TextureIcon implements Icon {
      * @param texture the identifier of the icon texture
      * @since 3.0.0
      */
-    public TextureIcon(Texture texture) {
+    public TextureIcon(Texture texture, int width, int height) {
         this.texture = texture;
+        this.width = width;
+        this.height = height;
     }
 
     /**
@@ -77,6 +81,6 @@ public class TextureIcon implements Icon {
 
     @Override
     public void paint(RenderContext context, int x, int y, int size) {
-        ScreenDrawing.texturedRect(context, x, y, size, size, texture, color, opacity);
+        ScreenDrawing.texturedRect(context, x, y, size, size, texture, color, opacity, width, height);
     }
 }

@@ -100,9 +100,9 @@ public class WButton extends WWidget {
         }
 
         if (label != null) {
-            int color = 0xE0E0E0;
+            int color = StyleConstants.BUTTON_TEXT_COLOR;
             if (!enabled) {
-                color = 0xA0A0A0;
+                color = StyleConstants.BUTTON_TEXT_COLOR_DISABLED;
             } /*
                * else if (hovered) { color = 0xFFFFA0; }
                */
