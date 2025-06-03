@@ -37,7 +37,7 @@ public class ConfigGui extends AbstractConfigScreen {
         setRootPanel(root);
 
         WTabPanel wTabPanel = new WTabPanel();
-        
+
         List<String> data = new ArrayList<String>(Arrays.asList("Some", "test", "data", "with", "many", "options", "so",
                 "it", "needs", "to", "scroll.", "This", "menu", "is", "just", "for", "testing"));
 
@@ -50,7 +50,8 @@ public class ConfigGui extends AbstractConfigScreen {
         optionList.setGap(-1);
         optionList.setSize(14 * 20, 9 * 20);
 
-        wTabPanel.add(optionList, b -> b.title(ComponentProvider.literal("Settings")).icon(new ItemIcon(Items.COMMAND_BLOCK)));
+        wTabPanel.add(optionList,
+                b -> b.title(ComponentProvider.literal("Settings")).icon(new ItemIcon(Items.COMMAND_BLOCK)));
         //        root.add(darkmodeButton, 0, 1, 6, 1);
 
         WLabeledDoubleSlider ds = new WLabeledDoubleSlider(0, 3, 0.2);

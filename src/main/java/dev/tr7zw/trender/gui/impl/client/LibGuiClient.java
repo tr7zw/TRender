@@ -3,8 +3,12 @@ package dev.tr7zw.trender.gui.impl.client;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dev.tr7zw.transition.loader.ModLoaderUtil;
+import dev.tr7zw.transition.mc.ComponentProvider;
+import dev.tr7zw.trender.gui.client.CottonClientScreen;
 import dev.tr7zw.trender.gui.impl.Proxy;
 import dev.tr7zw.trender.gui.impl.client.config.LibGuiConfig;
+import dev.tr7zw.trender.gui.impl.modmenu.ConfigGui;
 //#if FABRIC
 import net.fabricmc.api.ClientModInitializer;
 //#endif
@@ -30,6 +34,10 @@ public class LibGuiClient
         //        });
 
         Proxy.proxy = new ClientProxy();
+        ModLoaderUtil.disableDisplayTest();
+        System.out.println("[LibGui] Initializing Client...");
+        ModLoaderUtil.registerConfigScreen((screen) -> new CottonClientScreen(
+                ComponentProvider.literal("TRender"), new ConfigGui(screen)));
     }
 
     public static LibGuiConfig loadConfig() {

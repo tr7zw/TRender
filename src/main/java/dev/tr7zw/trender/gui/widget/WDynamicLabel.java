@@ -25,7 +25,6 @@ public class WDynamicLabel extends WWidget {
     protected int color;
     protected boolean drawShadows;
 
-
     /**
      * Constructs a new dynamic label.
      *
@@ -57,8 +56,7 @@ public class WDynamicLabel extends WWidget {
             ScreenDrawing.drawStringWithShadow(context, tr, horizontalAlignment, x, y + yOffset, this.getWidth(),
                     color);
         } else {
-            ScreenDrawing.drawString(context, tr, horizontalAlignment, x, y + yOffset, this.getWidth(),
-                    color);
+            ScreenDrawing.drawString(context, tr, horizontalAlignment, x, y + yOffset, this.getWidth(), color);
         }
     }
 

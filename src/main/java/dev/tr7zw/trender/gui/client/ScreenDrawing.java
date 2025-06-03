@@ -10,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 //#endif
 //#endif
 
-
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.Texture;
 import net.minecraft.client.Minecraft;
@@ -44,7 +43,6 @@ public class ScreenDrawing {
     private ScreenDrawing() {
     }
 
-
     /**
      * Draws a textured rectangle.
      *
@@ -65,7 +63,7 @@ public class ScreenDrawing {
             ResourceLocation texture, float u1, float v1, float u2, float v2, int color) {
         texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, color, 1.0f, 64, 64);
     }
-    
+
     /**
      * Draws a textured rectangle.
      *
@@ -83,7 +81,8 @@ public class ScreenDrawing {
      *                0xFF_FFFFFF if you don't want a color tint
      */
     public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            ResourceLocation texture, float u1, float v1, float u2, float v2, int color, int textureWidth, int textureHeight) {
+            ResourceLocation texture, float u1, float v1, float u2, float v2, int color, int textureWidth,
+            int textureHeight) {
         texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, color, 1.0f, textureWidth, textureHeight);
     }
 
@@ -104,7 +103,7 @@ public class ScreenDrawing {
             int color, int textureWidth, int textureHeight) {
         texturedRect(context, x, y, width, height, texture, color, 1.0f, textureWidth, textureHeight);
     }
-    
+
     /**
      * Draws a textured rectangle.
      *
@@ -203,21 +202,22 @@ public class ScreenDrawing {
      * @since 2.0.0
      */
     public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            ResourceLocation texture, float u1, float v1, float u2, float v2, int color, float opacity, int textureWidth, int textureHeight) {
+            ResourceLocation texture, float u1, float v1, float u2, float v2, int color, float opacity,
+            int textureWidth, int textureHeight) {
         if (width <= 0)
             width = 1;
         if (height <= 0)
             height = 1;
         //#if MC >= 12106
-                float a = (color >> 24 & 255) / 255.0F;
-                color = colorAtOpacity(color, a * opacity);
-                // FIXME ?
-                context.blit(texture, x, y, textureWidth * u1, textureHeight * v1, width, height, textureWidth, textureHeight);
-//                var buffer = context.getVertexConsumers().getBuffer(RenderType.entityTranslucent(texture));
-//                buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
-//                buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
-//                buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
-//                buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
+        float a = (color >> 24 & 255) / 255.0F;
+        color = colorAtOpacity(color, a * opacity);
+        // FIXME ?
+        context.blit(texture, x, y, textureWidth * u1, textureHeight * v1, width, height, textureWidth, textureHeight);
+        //                var buffer = context.getVertexConsumers().getBuffer(RenderType.entityTranslucent(texture));
+        //                buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
+        //                buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
+        //                buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
+        //                buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
         //#elseif MC >= 12103
         //$$  float a = (color >> 24 & 255) / 255.0F;
         //$$ color = colorAtOpacity(color, a * opacity);

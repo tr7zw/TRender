@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import dev.tr7zw.transition.mc.ComponentProvider;
 import dev.tr7zw.trender.gui.client.CottonClientScreen;
-import dev.tr7zw.trender.gui.impl.modmenu.ConfigGui;
+import dev.tr7zw.trender.gui.impl.modmenu.WeGotModMenuAtHome;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -25,7 +25,7 @@ public abstract class DevTitleScreenMixin extends Screen {
     private void createTestWorldButton(int l, int rowHeight, CallbackInfoReturnable<Integer> ci) {
         this.addRenderableWidget(Button.builder(Component.literal("Open Test Screen"), (button) -> {
             CottonClientScreen screen = new CottonClientScreen(
-                    ComponentProvider.translatable("options.libgui.libgui_settings"), new ConfigGui(this)) {
+                    ComponentProvider.literal("We Got Mod Menu At Home"), new WeGotModMenuAtHome()) {
                 @Override
                 public void onClose() {
                     this.minecraft.setScreen(this);

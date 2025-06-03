@@ -52,7 +52,8 @@ public interface BackgroundPainter {
      *
      * @since 1.5.0
      */
-    public static BackgroundPainter VANILLA = createStyleVariants("widget/panel_", p -> {});
+    public static BackgroundPainter VANILLA = createStyleVariants("widget/panel_", p -> {
+    });
 
     /**
      * The {@code SLOT} background painter draws item slots or slot-like widgets.
@@ -186,27 +187,28 @@ public interface BackgroundPainter {
      */
     public static BackgroundPainter createStyleVariants(String prefix, Consumer<BackgroundPainter> configurator) {
         EnumMap<GuiStyle, BackgroundPainter> styleMap = new EnumMap<>(GuiStyle.class);
-        
-        for(GuiStyle style : GuiStyle.values()) {
+
+        for (GuiStyle style : GuiStyle.values()) {
             BackgroundPainter painter = createGuiSprite(WidgetTextures.getId(prefix + style.getPrefix()));
             configurator.accept(painter);
             styleMap.put(style, painter);
         }
-        
+
         return (context, left, top, panel) -> {
             styleMap.get(LibGui.getGuiStyle()).paintBackground(context, left, top, panel);
         };
     }
 
-    public static BackgroundPainter createStyleVariantsNinePatch(String prefix, Consumer<NinePatchBackgroundPainter> configurator) {
+    public static BackgroundPainter createStyleVariantsNinePatch(String prefix,
+            Consumer<NinePatchBackgroundPainter> configurator) {
         EnumMap<GuiStyle, BackgroundPainter> styleMap = new EnumMap<>(GuiStyle.class);
-        
-        for(GuiStyle style : GuiStyle.values()) {
+
+        for (GuiStyle style : GuiStyle.values()) {
             NinePatchBackgroundPainter painter = createNinePatch(LibGuiCommon.id(prefix + style.getPrefix() + ".png"));
             configurator.accept(painter);
             styleMap.put(style, painter);
         }
-        
+
         return (context, left, top, panel) -> {
             styleMap.get(LibGui.getGuiStyle()).paintBackground(context, left, top, panel);
         };
@@ -231,7 +233,8 @@ public interface BackgroundPainter {
             //$$ com.mojang.blaze3d.systems.RenderSystem.enableBlend();
             //#endif
             SpriteData data = TextureConstants.get(texture);
-            context.blitSprite(texture, left, top, panel.getWidth(), panel.getHeight(), data.border(), data.border(), data.width(), data.height());
+            context.blitSprite(texture, left, top, panel.getWidth(), panel.getHeight(), data.border(), data.border(),
+                    data.width(), data.height());
         };
     }
 }

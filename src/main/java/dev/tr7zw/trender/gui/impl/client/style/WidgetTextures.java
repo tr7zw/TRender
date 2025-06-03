@@ -47,38 +47,40 @@ public final class WidgetTextures {
     private static final ResourceLocation LIGHT_TEXTURE = LibGuiCommon.id("textures/widget/slider_light.png");
     private static final ResourceLocation DARK_TEXTURE = LibGuiCommon.id("textures/widget/slider_dark.png");
     private static final ToggleButtonTextures TOGGLE_BUTTON_TEXTURES = new ToggleButtonTextures(
-            new Texture(LibGuiCommon.id("textures/widget/toggle_on.png")), new Texture(LibGuiCommon.id("textures/widget/toggle_off.png")),
+            new Texture(LibGuiCommon.id("textures/widget/toggle_on.png")),
+            new Texture(LibGuiCommon.id("textures/widget/toggle_off.png")),
             new Texture(LibGuiCommon.id("textures/widget/toggle_focus.png")));
     private static final ToggleButtonTextures TOGGLE_BUTTON_VANILLA_TEXTURES = new ToggleButtonTextures(
-            new Texture(LibGuiCommon.id("textures/widget/checkbox_selected.png")), new Texture(LibGuiCommon.id("textures/widget/checkbox.png")),
+            new Texture(LibGuiCommon.id("textures/widget/checkbox_selected.png")),
+            new Texture(LibGuiCommon.id("textures/widget/checkbox.png")),
             new Texture(LibGuiCommon.id("textures/widget/checkbox_highlighted.png")));
 
     @Getter
-    private static final TextureContainer<WidgetSprites> buttonTextures = new TextureContainer<>(
-            BUTTON_LIGH, DARK_BUTTON);
+    private static final TextureContainer<WidgetSprites> buttonTextures = new TextureContainer<>(BUTTON_LIGH,
+            DARK_BUTTON);
     @Getter
     private static final TextureContainer<WidgetSprites> labeledSliderHandleTextures = new TextureContainer<>(
             LIGHT_LABELED_SLIDER_HANDLE, DARK_LABELED_SLIDER_HANDLE);
     @Getter
-    private static final TextureContainer<ResourceLocation> sliderTextures = new TextureContainer<>(
-            LIGHT_TEXTURE, DARK_TEXTURE);
+    private static final TextureContainer<ResourceLocation> sliderTextures = new TextureContainer<>(LIGHT_TEXTURE,
+            DARK_TEXTURE);
     @Getter
-    private static final TextureContainer<WidgetSprites> valueSliderTexture = new TextureContainer<>(
-            SLIDER, SLIDER);
+    private static final TextureContainer<WidgetSprites> valueSliderTexture = new TextureContainer<>(SLIDER, SLIDER);
     @Getter
     private static final TextureContainer<ScrollBarTextures> scrollBarTextures = new TextureContainer<>(
             LIGHT_SCROLL_BAR, DARK_SCROLL_BAR);
     @Getter
-    private static final TextureContainer<ToggleButtonTextures> toggleButtonTextures = new TextureContainer<>(TOGGLE_BUTTON_TEXTURES, TOGGLE_BUTTON_TEXTURES);
-    
+    private static final TextureContainer<ToggleButtonTextures> toggleButtonTextures = new TextureContainer<>(
+            TOGGLE_BUTTON_TEXTURES, TOGGLE_BUTTON_TEXTURES);
+
     static {
         toggleButtonTextures.register(GuiStyle.VANILLA_MODERN, TOGGLE_BUTTON_VANILLA_TEXTURES);
         toggleButtonTextures.register(GuiStyle.VANILLA_OLD, TOGGLE_BUTTON_VANILLA_TEXTURES);
     }
-    
+
     public record ToggleButtonTextures(Texture on, Texture off, Texture focus) {
     }
-    
+
     public record ScrollBarTextures(ResourceLocation background, ResourceLocation thumb, ResourceLocation thumbPressed,
             ResourceLocation thumbHovered) {
     }

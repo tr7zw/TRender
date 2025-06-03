@@ -419,8 +419,8 @@ public class WTabPanel extends WPanel {
                 }
 
                 if (LibGui.getGuiStyle().isFontShadow()) {
-                    ScreenDrawing.drawStringWithShadow(context, title.getVisualOrderText(), align, x + titleX, y + titleY, width,
-                            color);
+                    ScreenDrawing.drawStringWithShadow(context, title.getVisualOrderText(), align, x + titleX,
+                            y + titleY, width, color);
                 } else {
                     ScreenDrawing.drawString(context, title.getVisualOrderText(), align, x + titleX, y + titleY, width,
                             color);
@@ -458,9 +458,13 @@ public class WTabPanel extends WPanel {
      */
 
     final static class Painters {
-        static final BackgroundPainter SELECTED_TAB = BackgroundPainter.createStyleVariantsNinePatch("textures/widget/tab/selected_", p -> {});
+        static final BackgroundPainter SELECTED_TAB = BackgroundPainter
+                .createStyleVariantsNinePatch("textures/widget/tab/selected_", p -> {
+                });
 
-        static final BackgroundPainter UNSELECTED_TAB = BackgroundPainter.createStyleVariantsNinePatch("textures/widget/tab/unselected_", p -> {});
+        static final BackgroundPainter UNSELECTED_TAB = BackgroundPainter
+                .createStyleVariantsNinePatch("textures/widget/tab/unselected_", p -> {
+                });
 
         static final BackgroundPainter SELECTED_TAB_FOCUS_BORDER = BackgroundPainter
                 .createNinePatch(LibGuiCommon.id("textures/widget/tab/focus.png")).setTopPadding(2);

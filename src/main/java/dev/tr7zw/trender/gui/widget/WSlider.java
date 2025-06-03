@@ -18,7 +18,6 @@ public class WSlider extends WAbstractIntSlider {
     public static final int TRACK_WIDTH = 6;
     public static final int THUMB_SIZE = 8;
 
-
     @Nullable
     private BackgroundPainter backgroundPainter;
 

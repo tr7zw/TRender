@@ -47,7 +47,7 @@ public class WToggleButton extends WWidget {
      * Constructs a toggle button with default images and no label.
      */
     public WToggleButton() {
-        
+
     }
 
     /**
