@@ -15,6 +15,7 @@ import dev.tr7zw.trender.gui.widget.WButton;
 import dev.tr7zw.trender.gui.widget.WGridPanel;
 import dev.tr7zw.trender.gui.widget.WLabeledDoubleSlider;
 import dev.tr7zw.trender.gui.widget.WListPanel;
+import dev.tr7zw.trender.gui.widget.WPlayerPreview;
 import dev.tr7zw.trender.gui.widget.WTabPanel;
 import dev.tr7zw.trender.gui.widget.WTextField;
 import dev.tr7zw.trender.gui.widget.WToggleButton;
@@ -72,9 +73,13 @@ public class ConfigGui extends AbstractConfigScreen {
 
         wTabPanel.add(testList, b -> b.title(ComponentProvider.literal("list")).icon(new ItemIcon(Items.PAINTING)));
         WGridPanel test = new WGridPanel();
+        test.setInsets(new Insets(2, 4));
         WToggleButton toggle = new WToggleButton(ComponentProvider.literal("I... am a toggle"));
         test.add(toggle, 0, 0);
         test.add(new WLabeledDoubleSlider(0, 1, 0.05, ComponentProvider.literal("Test Slider")), 0, 1, 5, 1);
+        WPlayerPreview preview = new WPlayerPreview();
+        preview.setShowBackground(true);
+        test.add(preview, 5, 3);
         wTabPanel.add(test, b -> b.title(ComponentProvider.literal("Test Buttons")).icon(new ItemIcon(Items.APPLE)));
         //        wTabPanel.setSize(6, 6);
 

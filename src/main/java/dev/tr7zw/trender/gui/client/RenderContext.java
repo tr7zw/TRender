@@ -8,11 +8,13 @@ import org.jetbrains.annotations.Nullable;
 
 //#if MC < 12106
 //$$import com.mojang.blaze3d.vertex.PoseStack;
+//$$import dev.tr7zw.trender.gui.impl.mixin.client.DrawContextAccessor;
+//$$import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
 //#endif
 
-import dev.tr7zw.trender.gui.impl.mixin.client.DrawContextAccessor;
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 //#if MC >= 12106
@@ -24,7 +26,6 @@ import net.minecraft.client.renderer.RenderPipelines;
 //#if MC >= 12000
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
 //#if MC <= 12105
 //$$ import net.minecraft.client.renderer.RenderType;
 //#endif
@@ -71,6 +72,7 @@ public class RenderContext implements PoseStackHelper {
     private final static Minecraft minecraft = Minecraft.getInstance();
 
     //#if MC >= 12000
+    @Getter
     private final GuiGraphics guiGraphics;
     //#else
     //$$ private final Screen screen;

@@ -21,7 +21,6 @@ public class WeGotModMenuAtHome extends LightweightGuiDescription {
         root.setInsets(Insets.ROOT_PANEL);
         setRootPanel(root);
         
-        System.out.println(ClientTRansitionMod.configScreenManager.getConfigScreens());
         var buttonList = new WListPanel<Function<Screen,Screen>, WButton>(
                 ClientTRansitionMod.configScreenManager.getConfigScreens(), () -> new WButton(ComponentProvider.EMPTY), (s, l) -> {
                     l.setLabel(s.apply(null).getTitle());

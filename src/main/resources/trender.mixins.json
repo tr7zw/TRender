@@ -8,7 +8,8 @@
         "client.DrawContextAccessor",
         "client.HandledScreenMixin",
         "client.ScreenAccessor",
-        "client.DevTitleScreenMixin"
+        "client.DevTitleScreenMixin",
+		"client.PauseMenuScreenMixin"
     ],
     "injectors": {
         "defaultRequire": 1
