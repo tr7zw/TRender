@@ -35,6 +35,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.FormattedCharSequence;
 
 // TODO: Different tab positions
 
@@ -324,12 +325,15 @@ public class WTabPanel extends WPanel {
                 Consumer<TooltipBuilder> tooltip = null;
 
                 if (!this.tooltip.isEmpty()) {
-                    //noinspection Convert2Lambda
                     tooltip = new Consumer<TooltipBuilder>() {
 
                         @Override
                         public void accept(TooltipBuilder builder) {
-                            builder.add(Tab.Builder.this.tooltip.toArray(new Component[0]));
+                            for (Component line : Builder.this.tooltip) {
+                                Minecraft.getInstance().font.split(line, 170).forEach((f) -> {
+                                    builder.add(new FormattedCharSequence[]{f});
+                                });
+                            }
                         }
                     };
                 }
