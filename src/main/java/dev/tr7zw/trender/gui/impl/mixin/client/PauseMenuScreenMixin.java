@@ -24,8 +24,8 @@ public abstract class PauseMenuScreenMixin extends Screen {
     @Inject(method = "createPauseMenu", at = @At("RETURN"), cancellable = true)
     private void createTestWorldButton(CallbackInfo ci) {
         this.addRenderableWidget(Button.builder(Component.literal("Open Test Screen"), (button) -> {
-            CottonClientScreen screen = new CottonClientScreen(
-                    ComponentProvider.literal("We Got Mod Menu At Home"), new WeGotModMenuAtHome()) {
+            CottonClientScreen screen = new CottonClientScreen(ComponentProvider.literal("We Got Mod Menu At Home"),
+                    new WeGotModMenuAtHome()) {
                 @Override
                 public void onClose() {
                     this.minecraft.setScreen(this);

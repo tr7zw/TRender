@@ -36,8 +36,8 @@ public class LibGuiClient
         Proxy.proxy = new ClientProxy();
         ModLoaderUtil.disableDisplayTest();
         System.out.println("[LibGui] Initializing Client...");
-        ModLoaderUtil.registerConfigScreen((screen) -> new CottonClientScreen(
-                ComponentProvider.literal("TRender"), new ConfigGui(screen)));
+        ModLoaderUtil.registerConfigScreen(
+                (screen) -> new CottonClientScreen(ComponentProvider.literal("TRender"), new ConfigGui(screen)));
     }
 
     public static LibGuiConfig loadConfig() {

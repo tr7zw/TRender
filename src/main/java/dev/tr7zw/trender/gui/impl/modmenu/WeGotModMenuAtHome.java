@@ -20,9 +20,10 @@ public class WeGotModMenuAtHome extends LightweightGuiDescription {
         WGridPanel root = new WGridPanel(20);
         root.setInsets(Insets.ROOT_PANEL);
         setRootPanel(root);
-        
-        var buttonList = new WListPanel<Function<Screen,Screen>, WButton>(
-                ClientTRansitionMod.configScreenManager.getConfigScreens(), () -> new WButton(ComponentProvider.EMPTY), (s, l) -> {
+
+        var buttonList = new WListPanel<Function<Screen, Screen>, WButton>(
+                ClientTRansitionMod.configScreenManager.getConfigScreens(), () -> new WButton(ComponentProvider.EMPTY),
+                (s, l) -> {
                     l.setLabel(s.apply(null).getTitle());
                     l.setOnClick(() -> {
                         Minecraft.getInstance().setScreen(s.apply(Minecraft.getInstance().screen));
@@ -31,7 +32,7 @@ public class WeGotModMenuAtHome extends LightweightGuiDescription {
         buttonList.setGap(2);
         buttonList.setSize(17 * 20, 8 * 20);
         root.add(buttonList, 0, 1, 10, 10);
-        
+
         WButton doneButton = new WButton(CommonComponents.GUI_DONE);
         doneButton.setOnClick(() -> {
             Minecraft.getInstance().setScreen(null);
@@ -42,5 +43,5 @@ public class WeGotModMenuAtHome extends LightweightGuiDescription {
 
         root.validate(this);
     }
-    
+
 }

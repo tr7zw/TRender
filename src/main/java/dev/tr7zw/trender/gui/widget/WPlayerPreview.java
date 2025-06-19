@@ -37,7 +37,8 @@ public class WPlayerPreview extends WWidget {
         }
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null) {
-            drawEntity(context, x + getWidth() / 2, y + getHeight() / 2, this.getWidth(), this.getHeight(), 40, rotationX, rotationY, mc.player, 0);
+            drawEntity(context, x + getWidth() / 2, y + getHeight() / 2, this.getWidth(), this.getHeight(), 40,
+                    rotationX, rotationY, mc.player, 0);
         }
     }
 
@@ -52,8 +53,8 @@ public class WPlayerPreview extends WWidget {
     }
 
     // Modified version from InventoryScreen
-    private static void drawEntity(RenderContext context, int x, int y, int width, int height, int size, float lookX, float lookY, LivingEntity livingEntity,
-            float delta) {
+    private static void drawEntity(RenderContext context, int x, int y, int width, int height, int size, float lookX,
+            float lookY, LivingEntity livingEntity, float delta) {
         float rotationModifier = 3;
         prepareViewMatrix(x, y);
         PoseStack matrixStack = new PoseStack();
@@ -96,7 +97,8 @@ public class WPlayerPreview extends WWidget {
         float o = livingEntity.getScale();
         var vector3f = new org.joml.Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + 0 * o, 0.0F);
         float p = (float) size / o;
-        context.getGuiGraphics().submitEntityRenderState(entityRenderState, p, vector3f, quaternion, quaternion2, x - width, y - height, x+width, y+height);
+        context.getGuiGraphics().submitEntityRenderState(entityRenderState, p, vector3f, quaternion, quaternion2,
+                x - width, y - height, x + width, y + height);
         //#elseif MC >= 12102
         //$$ entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, delta, matrixStack, bufferSource, 15728880);
         //#elseif MC >= 11700

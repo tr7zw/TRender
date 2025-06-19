@@ -331,7 +331,7 @@ public class WTabPanel extends WPanel {
                         public void accept(TooltipBuilder builder) {
                             for (Component line : Builder.this.tooltip) {
                                 Minecraft.getInstance().font.split(line, 170).forEach((f) -> {
-                                    builder.add(new FormattedCharSequence[]{f});
+                                    builder.add(new FormattedCharSequence[] { f });
                                 });
                             }
                         }
