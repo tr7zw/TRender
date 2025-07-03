@@ -18,6 +18,9 @@
 //$$        });
 //$$        new LibGuiCommon().onInitialize();
 //$$    }
+//$$    public LibGuiBootstrap() {
+//$$        this(FMLJavaModLoadingContext.get());
+//$$    }
 //$$    
 //$$}
 //#elseif NEOFORGE
