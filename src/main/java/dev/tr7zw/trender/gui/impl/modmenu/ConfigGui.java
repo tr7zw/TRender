@@ -108,6 +108,10 @@ public class ConfigGui extends AbstractConfigScreen {
         itemTab.add(searchField, 0, 7, 17, 1);
         wTabPanel.add(itemTab, b -> b.title(ComponentProvider.literal("Items")).icon(new ItemIcon(Items.GRASS_BLOCK)));
 
+        // Scroll test
+        wTabPanel.add(test, b -> b.title(ComponentProvider.literal("Test Buttons2")).icon(new ItemIcon(Items.ARROW)));
+        wTabPanel.add(test, b -> b.title(ComponentProvider.literal("Test Buttons3")).icon(new ItemIcon(Items.BELL)));
+
         var kirb = new WKirbSprite();
         root.add(kirb, 16, 10);
         kirb.setToolip(ComponentProvider.literal("Kirby"));

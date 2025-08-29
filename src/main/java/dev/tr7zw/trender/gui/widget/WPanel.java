@@ -145,7 +145,8 @@ public abstract class WPanel extends WWidget {
         if (backgroundPainter != null)
             backgroundPainter.paintBackground(context, x, y, this);
 
-        for (WWidget child : children) {
+        for (int i = 0; i < children.size(); i++) {
+            WWidget child = children.get(i);
             child.paint(context, x + child.getX(), y + child.getY(), mouseX - child.getX(), mouseY - child.getY());
         }
     }
