@@ -20,7 +20,7 @@ public abstract class DevTitleScreenMixin extends Screen {
         super(title);
     }
 
-    //#if MC >= 12106
+    //#if MC >= 12109
     @Inject(method = "createTestWorldButton", at = @At("RETURN"), cancellable = true)
     private void createTestWorldButton(int l, int rowHeight, CallbackInfoReturnable<Integer> ci) {
         this.addRenderableWidget(Button.builder(Component.literal("Open Test Screen"), (button) -> {
@@ -33,6 +33,7 @@ public abstract class DevTitleScreenMixin extends Screen {
             };
             this.minecraft.setScreen(screen);
         }).bounds(this.width / 2 + 2, l += rowHeight, 98, 20).build());
+        System.out.println(this.width / 2 + 2 + " " + rowHeight);
         ci.setReturnValue(l);
     }
     //#endif

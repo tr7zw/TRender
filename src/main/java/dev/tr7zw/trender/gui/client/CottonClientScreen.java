@@ -30,7 +30,7 @@ import dev.tr7zw.transition.mc.ComponentProvider;
 //#endif
 
 public class CottonClientScreen extends Screen implements CottonScreenImpl {
-    private static final VisualLogger LOGGER = new VisualLogger(CottonInventoryScreen.class);
+    private static final VisualLogger LOGGER = new VisualLogger(CottonClientScreen.class);
     protected GuiDescription description;
     protected int left = 0;
     protected int top = 0;
@@ -201,8 +201,16 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
-        super.mouseClicked(mouseX, mouseY, mouseButton);
+    //#if MC >= 12109
+    public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent mouseButtonEvent, boolean bl) {
+        super.mouseClicked(mouseButtonEvent, bl);
+        double mouseX = mouseButtonEvent.x();
+        double mouseY = mouseButtonEvent.y();
+        int mouseButton = mouseButtonEvent.button();
+        //#else
+        //$$public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+        //$$    super.mouseClicked(mouseX, mouseY, mouseButton);
+        //#endif
 
         int containerX = (int) mouseX - left;
         int containerY = (int) mouseY - top;
@@ -215,8 +223,16 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int mouseButton) {
-        super.mouseReleased(mouseX, mouseY, mouseButton);
+    //#if MC >= 12109
+    public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent mouseButtonEvent) {
+        super.mouseReleased(mouseButtonEvent);
+        double mouseX = mouseButtonEvent.x();
+        double mouseY = mouseButtonEvent.y();
+        int mouseButton = mouseButtonEvent.button();
+        //#else
+        //$$public boolean mouseReleased(double mouseX, double mouseY, int mouseButton) {
+        //$$    super.mouseReleased(mouseX, mouseY, mouseButton);
+        //#endif
 
         int containerX = (int) mouseX - left;
         int containerY = (int) mouseY - top;
@@ -226,8 +242,17 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    public boolean mouseDragged(double mouseX, double mouseY, int mouseButton, double deltaX, double deltaY) {
-        super.mouseDragged(mouseX, mouseY, mouseButton, deltaX, deltaY);
+    //#if MC >= 12109
+    public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent mouseButtonEvent, double deltaX,
+            double deltaY) {
+        super.mouseDragged(mouseButtonEvent, deltaX, deltaY);
+        double mouseX = mouseButtonEvent.x();
+        double mouseY = mouseButtonEvent.y();
+        int mouseButton = mouseButtonEvent.button();
+        //#else
+        //$$public boolean mouseDragged(double mouseX, double mouseY, int mouseButton, double deltaX, double deltaY) {
+        //$$    super.mouseDragged(mouseX, mouseY, mouseButton, deltaX, deltaY);
+        //#endif
 
         int containerX = (int) mouseX - left;
         int containerY = (int) mouseY - top;
@@ -263,33 +288,65 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    public boolean charTyped(char ch, int keyCode) {
+    //#if MC >= 12109
+    public boolean charTyped(net.minecraft.client.input.CharacterEvent characterEvent) {
+        char ch = characterEvent.codepointAsString().charAt(0);
+        int keyCode = characterEvent.codepoint();
+        //#else
+        //$$public boolean charTyped(char ch, int keyCode) {
+        //#endif
         WWidget focus = description.getFocus();
         if (focus != null && focus.onCharTyped(ch) == InputResult.PROCESSED) {
             return true;
         }
 
-        return super.charTyped(ch, keyCode);
+        //#if MC >= 12109
+        return super.charTyped(characterEvent);
+        //#else
+        //$$return super.charTyped(ch, keyCode);
+        //#endif
     }
 
     @Override
-    public boolean keyPressed(int ch, int keyCode, int modifiers) {
+    //#if MC >= 12109
+    public boolean keyPressed(net.minecraft.client.input.KeyEvent keyEvent) {
+        char ch = (char) keyEvent.key();
+        int keyCode = keyEvent.key();
+        int modifiers = keyEvent.modifiers();
+        //#else
+        //$$public boolean keyPressed(int ch, int keyCode, int modifiers) {
+        //#endif
         WWidget focus = description.getFocus();
         if (focus != null && focus.onKeyPressed(ch, keyCode, modifiers) == InputResult.PROCESSED) {
             return true;
         }
 
-        return super.keyPressed(ch, keyCode, modifiers);
+        //#if MC >= 12109
+        return super.keyPressed(keyEvent);
+        //#else
+        //$$return super.keyPressed(ch, keyCode, modifiers);
+        //#endif
     }
 
     @Override
-    public boolean keyReleased(int ch, int keyCode, int modifiers) {
+    //#if MC >= 12109
+    public boolean keyReleased(net.minecraft.client.input.KeyEvent keyEvent) {
+        char ch = (char) keyEvent.key();
+        int keyCode = keyEvent.key();
+        int modifiers = keyEvent.modifiers();
+        //#else
+        //$$public boolean keyReleased(int ch, int keyCode, int modifiers) {
+        //#endif
         WWidget focus = description.getFocus();
         if (focus != null && focus.onKeyReleased(ch, keyCode, modifiers) == InputResult.PROCESSED) {
             return true;
         }
 
-        return super.keyReleased(ch, keyCode, modifiers);
+        //#if MC >= 12109
+        return super.keyReleased(keyEvent);
+        //#else
+        //$$return super.keyReleased(ch, keyCode, modifiers);
+        //#endif
     }
 
     //#if MC >= 11800

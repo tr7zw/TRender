@@ -7,6 +7,8 @@ import org.jetbrains.annotations.Nullable;
 
 import org.lwjgl.glfw.GLFW;
 
+import com.mojang.blaze3d.platform.InputConstants;
+
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
 import dev.tr7zw.trender.gui.client.RenderContext;
 import dev.tr7zw.trender.gui.client.ScreenDrawing;
@@ -19,7 +21,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 //#endif
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 
@@ -441,18 +442,51 @@ public class WTextField extends WWidget {
         }
     }
 
+    //#if MC >= 12109
+    private com.mojang.blaze3d.platform.Window getWindow() {
+        return Minecraft.getInstance().getWindow();
+        //#else
+        //$$ private long getWindow() {
+        //$$ return Minecraft.getInstance().getWindow().getWindow();
+        //#endif
+    }
+
+    private boolean hasControlDown() {
+        return InputConstants.isKeyDown(getWindow(), 341) || InputConstants.isKeyDown(getWindow(), 345);
+    }
+
+    private boolean hasShiftDown() {
+        return InputConstants.isKeyDown(getWindow(), 340) || InputConstants.isKeyDown(getWindow(), 344);
+    }
+
+    private boolean hasAltDown() {
+        return InputConstants.isKeyDown(getWindow(), 342) || InputConstants.isKeyDown(getWindow(), 346);
+    }
+
+    private boolean isPaste(int keyCode) {
+        return keyCode == 86 && hasControlDown() && !hasShiftDown() && !hasAltDown();
+    }
+
+    private boolean isCopy(int keyCode) {
+        return keyCode == 67 && hasControlDown() && !hasShiftDown() && !hasAltDown();
+    }
+
+    private boolean isSelectAll(int keyCode) {
+        return keyCode == 65 && hasControlDown() && !hasShiftDown() && !hasAltDown();
+    }
+
     @Override
     public InputResult onKeyPressed(int ch, int key, int modifiers) {
         if (!isEditable())
             return InputResult.IGNORED;
 
-        if (Screen.isCopy(ch)) {
+        if (isCopy(ch)) {
             copySelection();
             return InputResult.PROCESSED;
-        } else if (Screen.isPaste(ch)) {
+        } else if (isPaste(ch)) {
             paste();
             return InputResult.PROCESSED;
-        } else if (Screen.isSelectAll(ch)) {
+        } else if (isSelectAll(ch)) {
             select = 0;
             cursor = text.length();
             return InputResult.PROCESSED;

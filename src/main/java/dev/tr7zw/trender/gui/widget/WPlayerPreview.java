@@ -87,8 +87,10 @@ public class WPlayerPreview extends WWidget {
         LightingUtil.prepareLightingEntity();
         EntityRenderDispatcher entityRenderDispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         MathUtil.conjugate(quaternion2);
-        entityRenderDispatcher.overrideCameraOrientation(quaternion2);
-        entityRenderDispatcher.setRenderShadow(false);
+        //#if MC < 12109
+        //$$entityRenderDispatcher.overrideCameraOrientation(quaternion2);
+        //$$entityRenderDispatcher.setRenderShadow(false);
+        //#endif
         MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
         //#if MC >= 12106
         var entityRenderer = entityRenderDispatcher.getRenderer(livingEntity);
@@ -109,7 +111,9 @@ public class WPlayerPreview extends WWidget {
         //$$ });
         //#endif
         bufferSource.endBatch();
-        entityRenderDispatcher.setRenderShadow(true);
+        //#if MC < 12109
+        //$$ entityRenderDispatcher.setRenderShadow(true);
+        //#endif
         livingEntity.yBodyRot = yBodyRot;
         livingEntity.yBodyRotO = yBodyRotO;
         EntityUtil.setYRot(livingEntity, yRot);

@@ -5,8 +5,9 @@
     "plugin": "dev.tr7zw.trender.gui.impl.LibGuiMixinPlugin",
     "client": [
         "client.DrawContextAccessor",
-        "client.HandledScreenMixin",
-        "client.ScreenAccessor"
+        "client.ScreenAccessor",
+        "client.DevTitleScreenMixin",
+        "client.PauseMenuScreenMixin"
     ],
     "injectors": {
         "defaultRequire": 1
