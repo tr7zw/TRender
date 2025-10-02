@@ -35,7 +35,11 @@
 //$$public class LibGuiBootstrap {
 //$$
 //$$    public LibGuiBootstrap() {
+//#if MC < 12109
 //$$        if(FMLEnvironment.dist == Dist.CLIENT) {
+//#else
+//$$        if(FMLEnvironment.getDist() == Dist.CLIENT) {
+//#endif
 //$$         new LibGuiClient().onInitializeClient();
 //$$        }
 //$$        new LibGuiCommon().onInitialize();
