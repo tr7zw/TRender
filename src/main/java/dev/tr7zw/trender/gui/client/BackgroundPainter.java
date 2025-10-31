@@ -1,19 +1,12 @@
 package dev.tr7zw.trender.gui.client;
 
-import java.util.EnumMap;
-import java.util.Objects;
-import java.util.function.Consumer;
-
-import dev.tr7zw.trender.gui.impl.LibGuiCommon;
-import dev.tr7zw.trender.gui.impl.client.style.GuiStyle;
-import dev.tr7zw.trender.gui.impl.client.style.TextureConstants;
-import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
-import dev.tr7zw.trender.gui.impl.client.style.TextureConstants.SpriteData;
-import dev.tr7zw.trender.gui.widget.WItemSlot;
-import dev.tr7zw.trender.gui.widget.WWidget;
-//import juuxel.libninepatch.NinePatch;
-//import juuxel.libninepatch.TextureRegion;
-import net.minecraft.resources.ResourceLocation;
+import dev.tr7zw.trender.gui.impl.*;
+import dev.tr7zw.trender.gui.impl.client.style.*;
+import dev.tr7zw.trender.gui.impl.client.style.TextureConstants.*;
+import dev.tr7zw.trender.gui.widget.*;
+import java.util.*;
+import java.util.function.*;
+import net.minecraft.resources.*;
 
 /**
  * Background painters are used to paint the background of a widget. The
@@ -226,7 +219,7 @@ public interface BackgroundPainter {
         Objects.requireNonNull(texture, "Texture cannot be null");
         return (context, left, top, panel) -> {
             //? if < 1.21.0 {
-/*
+            /*
             com.mojang.blaze3d.systems.RenderSystem.enableBlend();
             *///? }
             SpriteData data = TextureConstants.get(texture);

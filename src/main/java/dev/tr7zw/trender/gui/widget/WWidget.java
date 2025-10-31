@@ -1,20 +1,17 @@
 package dev.tr7zw.trender.gui.widget;
 
-import org.jetbrains.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
-
-import dev.tr7zw.trender.gui.GuiDescription;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.impl.VisualLogger;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.data.ObservableProperty;
-import dev.tr7zw.trender.gui.widget.focus.FocusModel;
-import lombok.Setter;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
+import dev.tr7zw.trender.gui.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import dev.tr7zw.trender.gui.widget.focus.*;
+import lombok.*;
+import net.minecraft.client.*;
+import net.minecraft.network.chat.*;
+import org.jetbrains.annotations.*;
+import org.lwjgl.glfw.*;
 //? if >= 1.18.0 {
-
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.narration.*;
 //? }
 
 /**

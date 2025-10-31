@@ -21,7 +21,7 @@ public abstract class DevTitleScreenMixin extends Screen {
     }
 
     //? if >= 1.21.9 {
-    
+
     @Inject(method = "createTestWorldButton", at = @At("RETURN"), cancellable = true)
     private void createTestWorldButton(int l, int rowHeight, CallbackInfoReturnable<Integer> ci) {
         this.addRenderableWidget(Button.builder(Component.literal("Open Test Screen"), (button) -> {

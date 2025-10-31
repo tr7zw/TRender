@@ -1,9 +1,7 @@
 package dev.tr7zw.trender.gui.impl.client.style;
 
-import java.util.EnumMap;
-import java.util.Map;
-
-import dev.tr7zw.trender.gui.client.LibGui;
+import dev.tr7zw.trender.gui.client.*;
+import java.util.*;
 
 public class TextureContainer<T> {
 

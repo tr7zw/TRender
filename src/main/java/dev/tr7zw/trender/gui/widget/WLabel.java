@@ -1,23 +1,15 @@
 package dev.tr7zw.trender.gui.widget;
 
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.client.LibGui;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.client.TextAlignment;
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.data.VerticalAlignment;
-import net.minecraft.client.Minecraft;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.screens.*;
+import net.minecraft.network.chat.*;
+import org.jetbrains.annotations.*;
 //? if >= 1.18.0 {
-
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.narration.*;
 //? }
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 
 /**
  * A single-line label widget.

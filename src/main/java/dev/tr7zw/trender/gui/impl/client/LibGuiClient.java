@@ -1,21 +1,18 @@
 package dev.tr7zw.trender.gui.impl.client;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import dev.tr7zw.transition.loader.ModLoaderUtil;
-import dev.tr7zw.transition.mc.ComponentProvider;
-import dev.tr7zw.trender.gui.client.CottonClientScreen;
-import dev.tr7zw.trender.gui.impl.Proxy;
-import dev.tr7zw.trender.gui.impl.client.config.LibGuiConfig;
-import dev.tr7zw.trender.gui.impl.modmenu.ConfigGui;
+import dev.tr7zw.transition.loader.*;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.*;
+import dev.tr7zw.trender.gui.impl.client.config.*;
+import dev.tr7zw.trender.gui.impl.modmenu.*;
+import org.apache.logging.log4j.*;
 //? if fabric {
-
-import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.*;
 //? }
 
 public class LibGuiClient
-//? if fabric {
+        //? if fabric {
 
         implements ClientModInitializer
 //? }
@@ -26,7 +23,7 @@ public class LibGuiClient
     //    public static final Jankson jankson = JanksonFactory.createJankson();
 
     //? if fabric {
-    
+
     @Override
     //? }
     public void onInitializeClient() {

@@ -1,10 +1,7 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-
-import dev.tr7zw.trender.gui.GuiDescription;
+import dev.tr7zw.trender.gui.*;
+import java.util.*;
 
 /**
  * Similar to the CardLayout in AWT, this panel displays one widget at a time

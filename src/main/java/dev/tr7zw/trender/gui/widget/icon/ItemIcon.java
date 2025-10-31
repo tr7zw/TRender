@@ -1,13 +1,10 @@
 package dev.tr7zw.trender.gui.widget.icon;
 
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import com.mojang.blaze3d.vertex.PoseStack;
-
-import dev.tr7zw.trender.gui.client.RenderContext;
-
-import java.util.Objects;
+import com.mojang.blaze3d.vertex.*;
+import dev.tr7zw.trender.gui.client.*;
+import java.util.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.world.item.*;
 
 /**
  * An icon that draws an item stack.

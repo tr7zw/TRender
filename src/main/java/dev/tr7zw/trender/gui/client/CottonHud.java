@@ -1,19 +1,13 @@
 package dev.tr7zw.trender.gui.client;
 
+import com.mojang.blaze3d.platform.*;
+import dev.tr7zw.trender.gui.widget.*;
+import java.util.*;
+import net.minecraft.client.*;
 //? if fabric {
-
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.*;
+import net.fabricmc.fabric.api.client.rendering.v1.*;
 //? }
-import net.minecraft.client.Minecraft;
-import com.mojang.blaze3d.platform.Window;
-
-import dev.tr7zw.trender.gui.widget.WWidget;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Manages widgets that are painted on the in-game HUD.
@@ -25,16 +19,16 @@ public final class CottonHud {
     static {
         //TODO
         //? if fabric {
-        
+
         HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
             Window window = Minecraft.getInstance().getWindow();
             int hudWidth = window.getGuiScaledWidth();
             int hudHeight = window.getGuiScaledHeight();
             //? if >= 1.20.0 {
-            
+
             RenderContext renderContext = new RenderContext(drawContext);
             //? } else {
-        /*
+            /*
             RenderContext renderContext = new RenderContext(Minecraft.getInstance().screen, drawContext);
             *///? }
             for (WWidget widget : widgets) {
@@ -42,11 +36,11 @@ public final class CottonHud {
                 if (positioner != null) {
                     positioner.reposition(widget, hudWidth, hudHeight);
                 }
-        
+
                 widget.paint(renderContext, widget.getX(), widget.getY(), -1, -1);
             }
         });
-        
+
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             for (WWidget widget : widgets) {
                 widget.tick();

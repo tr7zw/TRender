@@ -1,12 +1,10 @@
 package dev.tr7zw.trender.gui.client;
 
-import java.util.ArrayDeque;
-import java.util.stream.Collectors;
-
-import org.jetbrains.annotations.Nullable;
+import java.util.*;
+import java.util.stream.*;
+import net.minecraft.client.*;
+import org.jetbrains.annotations.*;
 import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.Minecraft;
 
 /**
  * Contains a stack for GL scissors for restricting the drawn area of a widget.

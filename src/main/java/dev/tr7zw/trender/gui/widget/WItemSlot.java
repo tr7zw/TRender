@@ -1,43 +1,27 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnmodifiableView;
-
-import dev.tr7zw.trender.gui.GuiDescription;
-import dev.tr7zw.trender.gui.ValidatedSlot;
-import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.impl.LibGuiCommon;
-import dev.tr7zw.trender.gui.impl.VisualLogger;
-import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.data.Rect2i;
-import dev.tr7zw.trender.gui.widget.focus.Focus;
-import dev.tr7zw.trender.gui.widget.focus.FocusModel;
-import dev.tr7zw.trender.gui.widget.icon.Icon;
-import dev.tr7zw.transition.mc.ComponentProvider;
-import net.minecraft.client.Minecraft;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import dev.tr7zw.trender.gui.widget.focus.*;
+import dev.tr7zw.trender.gui.widget.icon.*;
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
+import net.minecraft.client.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.resources.*;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.*;
+import org.jetbrains.annotations.*;
 //? if >= 1.18.0 {
-
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.narration.*;
 //? }
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.item.ItemStack;
 
 /**
  * A widget that displays an item that can be interacted with.

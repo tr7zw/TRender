@@ -1,30 +1,22 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.function.Consumer;
-
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.client.LibGui;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.data.Texture;
-import dev.tr7zw.trender.gui.widget.icon.Icon;
-import dev.tr7zw.transition.mc.ComponentProvider;
-import lombok.Getter;
-import lombok.Setter;
-import net.minecraft.client.Minecraft;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+import dev.tr7zw.trender.gui.impl.client.style.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import dev.tr7zw.trender.gui.widget.icon.*;
+import java.util.function.*;
+import lombok.*;
+import net.minecraft.client.*;
+import net.minecraft.client.resources.sounds.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.resources.*;
+import net.minecraft.sounds.*;
+import org.jetbrains.annotations.*;
 //? if >= 1.18.0 {
-
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.narration.*;
 //? }
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 
 public class WToggleButton extends WWidget {
     private static final int ICON_SIZE = 16;

@@ -1,18 +1,12 @@
 package dev.tr7zw.trender.gui.impl.client;
 
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.widget.*;
+import java.util.*;
+import java.util.stream.*;
 //? if >= 1.18.0 {
-
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.narration.*;
 //? }
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import dev.tr7zw.trender.gui.widget.WPanel;
-import dev.tr7zw.trender.gui.widget.WWidget;
-import dev.tr7zw.transition.mc.ComponentProvider;
 
 public final class NarrationHelper {
     //? if >= 1.18.0 {

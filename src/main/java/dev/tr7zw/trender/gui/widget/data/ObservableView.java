@@ -1,9 +1,8 @@
 package dev.tr7zw.trender.gui.widget.data;
 
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
-import java.util.function.Supplier;
+import java.util.*;
+import java.util.function.*;
+import org.jetbrains.annotations.*;
 
 /**
  * A read-only {@linkplain ObservableProperty observable property}.

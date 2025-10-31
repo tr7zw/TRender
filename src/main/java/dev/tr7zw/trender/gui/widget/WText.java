@@ -1,28 +1,18 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.List;
-import java.util.Objects;
-
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.client.LibGui;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.client.TextAlignment;
-import dev.tr7zw.trender.gui.impl.client.style.StyleConstants;
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.data.VerticalAlignment;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+import dev.tr7zw.trender.gui.impl.client.style.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.util.*;
+import org.jetbrains.annotations.*;
 //? if >= 1.18.0 {
-
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.narration.*;
 //? }
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
-import net.minecraft.util.FormattedCharSequence;
 
 /**
  * A multiline label widget.

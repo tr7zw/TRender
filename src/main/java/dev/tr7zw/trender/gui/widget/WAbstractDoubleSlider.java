@@ -1,26 +1,16 @@
 package dev.tr7zw.trender.gui.widget;
 
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.function.*;
+import lombok.*;
+import net.minecraft.util.*;
+import org.jetbrains.annotations.*;
+import org.lwjgl.glfw.*;
 //? if >= 1.18.0 {
-
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import dev.tr7zw.trender.gui.impl.client.*;
+import net.minecraft.client.gui.narration.*;
 //? }
-import net.minecraft.util.Mth;
-
-import org.jetbrains.annotations.Nullable;
-import org.lwjgl.glfw.GLFW;
-
-import dev.tr7zw.transition.mc.ComponentProvider;
-//? if >= 1.18.0 {
-
-import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-//? }
-import dev.tr7zw.trender.gui.widget.data.Axis;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.function.DoubleConsumer;
 
 /**
  * A base class for slider widgets that can be used to select double values.

@@ -1,6 +1,6 @@
 package dev.tr7zw.trender.gui;
 
-import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.*;
 
 /**
  * This interface can be implemented on block entity classes for providing a

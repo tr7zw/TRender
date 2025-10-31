@@ -1,15 +1,11 @@
 package dev.tr7zw.trender.gui;
 
-import net.minecraft.world.inventory.ContainerData;
-
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.client.LibGui;
-import dev.tr7zw.trender.gui.impl.client.style.GuiStyle;
-import dev.tr7zw.trender.gui.widget.WPanel;
-import dev.tr7zw.trender.gui.widget.WWidget;
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.trender.gui.widget.data.Vec2i;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.client.style.*;
+import dev.tr7zw.trender.gui.widget.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.world.inventory.*;
+import org.jetbrains.annotations.*;
 
 /**
  * A GUI description represents a GUI without depending on screens.

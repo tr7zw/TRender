@@ -1,11 +1,9 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import dev.tr7zw.trender.gui.GuiDescription;
-import dev.tr7zw.trender.gui.impl.VisualLogger;
-import dev.tr7zw.trender.gui.widget.data.Insets;
+import dev.tr7zw.trender.gui.*;
+import dev.tr7zw.trender.gui.impl.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.*;
 
 /**
  * A panel that positions children in a grid.

@@ -1,7 +1,6 @@
 package dev.tr7zw.trender.gui.widget;
 
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.Scissors;
+import dev.tr7zw.trender.gui.client.*;
 
 /**
  * A panel that is clipped to only render widgets inside its bounds.

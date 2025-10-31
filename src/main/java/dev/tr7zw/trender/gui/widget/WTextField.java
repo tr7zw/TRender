@@ -1,29 +1,20 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-
-import org.jetbrains.annotations.Nullable;
-
-import org.lwjgl.glfw.GLFW;
-
-import com.mojang.blaze3d.platform.InputConstants;
-
-import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.transition.mc.ComponentProvider;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
+import com.mojang.blaze3d.platform.*;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.function.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.util.*;
+import org.jetbrains.annotations.*;
+import org.lwjgl.glfw.*;
 //? if >= 1.18.0 {
-
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.narration.*;
 //? }
-import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
 
 public class WTextField extends WWidget {
     public static final int TEXT_PADDING_X = 4;
@@ -444,12 +435,12 @@ public class WTextField extends WWidget {
     }
 
     //? if >= 1.21.9 {
-    
+
     private com.mojang.blaze3d.platform.Window getWindow() {
         return Minecraft.getInstance().getWindow();
         //? } else {
-/*
-    private long getWindow() {
+        /*
+            private long getWindow() {
         return Minecraft.getInstance().getWindow().getWindow();
         *///? }
     }

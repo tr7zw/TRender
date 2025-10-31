@@ -21,7 +21,7 @@ public abstract class PauseMenuScreenMixin extends Screen {
     }
 
     //? if >= 1.21.6 {
-    
+
     @Inject(method = "createPauseMenu", at = @At("RETURN"), cancellable = true)
     private void createTestWorldButton(CallbackInfo ci) {
         this.addRenderableWidget(Button.builder(Component.literal("Open Test Screen"), (button) -> {

@@ -1,16 +1,13 @@
 package dev.tr7zw.trender.gui.widget;
 
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
-import dev.tr7zw.trender.gui.widget.data.Axis;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+import dev.tr7zw.trender.gui.impl.client.style.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.resources.*;
 //? if >= 1.18.0 {
-
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.narration.*;
 //? }
-import net.minecraft.resources.ResourceLocation;
 
 public class WScrollBar extends WWidget {
 

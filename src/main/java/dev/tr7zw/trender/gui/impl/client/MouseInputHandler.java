@@ -1,13 +1,10 @@
 package dev.tr7zw.trender.gui.impl.client;
 
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.widget.WWidget;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.data.ObservableProperty;
-
-import java.util.function.Function;
-import net.minecraft.client.gui.screens.Screen;
+import dev.tr7zw.trender.gui.widget.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.function.*;
+import net.minecraft.client.gui.screens.*;
+import org.jetbrains.annotations.*;
 
 /**
  * The implementation for mouse inputs.
@@ -82,10 +79,10 @@ public final class MouseInputHandler<S extends Screen & CottonScreenImpl> {
 
     public void onMouseScroll(int containerX, int containerY, double horizontalAmount, double verticalAmount) {
         //? if <= 1.20.1 {
-/*
+        /*
         double fhorizontalAmount = horizontalAmount * -1;
         *///? } else {
-        
+
         double fhorizontalAmount = horizontalAmount;
         //? }
         runTree(screen.getDescription().getRootPanel().hit(containerX, containerY),

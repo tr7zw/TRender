@@ -1,7 +1,7 @@
 package dev.tr7zw.trender.gui.widget.data;
 
-import java.util.Objects;
-import net.minecraft.resources.ResourceLocation;
+import java.util.*;
+import net.minecraft.resources.*;
 
 /**
  * Represents a texture for a widget.

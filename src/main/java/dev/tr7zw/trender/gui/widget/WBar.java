@@ -1,17 +1,14 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.inventory.ContainerData;
-
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.GuiDescription;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.widget.data.Texture;
-import dev.tr7zw.transition.mc.ComponentProvider;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.resources.*;
+import net.minecraft.util.*;
+import net.minecraft.world.inventory.*;
+import org.jetbrains.annotations.*;
 
 /**
  * A bar that displays int values from a {@link ContainerData}.

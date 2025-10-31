@@ -1,10 +1,8 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.util.FormattedCharSequence;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.util.*;
 
 /**
  * A builder for widget tooltips.

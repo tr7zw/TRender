@@ -1,45 +1,27 @@
 package dev.tr7zw.trender.gui.client;
 
-import org.jetbrains.annotations.Nullable;
+import com.mojang.blaze3d.systems.*;
+import com.mojang.blaze3d.vertex.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.client.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.resources.*;
+import net.minecraft.util.*;
+import org.jetbrains.annotations.*;
 //? if < 1.21.6 {
 /*
-import net.minecraft.client.renderer.RenderType;
-//? if >= 1.19.4 {
-
-import org.joml.Matrix4f;
-//? } else {
-/^
-import com.mojang.math.Matrix4f;
-^///? }
+import com.mojang.math.*;
+*///? }
+   //? if < 1.21.6 && >= 1.19.4 {
+   /*
+   import org.joml.Matrix4f;
    *///? }
-
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.trender.gui.widget.data.Texture;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
-
-//? if >= 1.21.3 {
-
-//? } else {
-/*
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.Tesselator;
-import net.minecraft.client.renderer.GameRenderer;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.BufferUploader;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.Tesselator;
-*///? }
-
-//? if <= 1.16.5 {
-/*
- import com.mojang.blaze3d.platform.GlStateManager;
- import org.lwjgl.opengl.GL11;
-*///? }
+   //? if <= 1.16.5 {
+   /*
+   import com.mojang.blaze3d.platform.*;
+   import org.lwjgl.opengl.GL11;
+   *///? }
 
 /**
  * {@code ScreenDrawing} contains utility methods for drawing contents on a
@@ -215,7 +197,7 @@ public class ScreenDrawing {
         if (height <= 0)
             height = 1;
         //? if >= 1.21.6 {
-        
+
         float a = (color >> 24 & 255) / 255.0F;
         color = colorAtOpacity(color, a * opacity);
         // FIXME ?
@@ -256,7 +238,7 @@ public class ScreenDrawing {
          RenderSystem.disableBlend();
          RenderSystem.setShaderColor(1, 1, 1, 1);
         *///? } else if >= 1.19.0 {
-/*
+        /*
         float r = (color >> 16 & 255) / 255.0F;
         float g = (color >> 8 & 255) / 255.0F;
         float b = (color & 255) / 255.0F;

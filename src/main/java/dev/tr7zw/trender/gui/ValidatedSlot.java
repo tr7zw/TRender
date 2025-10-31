@@ -1,17 +1,14 @@
 package dev.tr7zw.trender.gui;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-
-import dev.tr7zw.trender.gui.impl.VisualLogger;
-import dev.tr7zw.trender.gui.widget.WItemSlot;
-
-import java.util.Objects;
-import java.util.function.Predicate;
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
+import com.google.common.collect.*;
+import dev.tr7zw.trender.gui.impl.*;
+import dev.tr7zw.trender.gui.widget.*;
+import java.util.*;
+import java.util.function.*;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.*;
 
 public class ValidatedSlot extends Slot {
     /**

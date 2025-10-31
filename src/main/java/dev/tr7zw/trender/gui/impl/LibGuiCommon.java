@@ -1,14 +1,13 @@
 package dev.tr7zw.trender.gui.impl;
 
-import dev.tr7zw.transition.mc.GeneralUtil;
-import net.minecraft.resources.ResourceLocation;
+import dev.tr7zw.transition.mc.*;
+import net.minecraft.resources.*;
 //? if fabric {
-
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.*;
 //? }
 
 public final class LibGuiCommon
-//? if fabric {
+        //? if fabric {
 
         implements ModInitializer
 //? }
@@ -20,7 +19,7 @@ public final class LibGuiCommon
     }
 
     //? if fabric {
-    
+
     @Override
     //? }
     public void onInitialize() {

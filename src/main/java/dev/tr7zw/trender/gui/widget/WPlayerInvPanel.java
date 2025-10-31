@@ -1,13 +1,11 @@
 package dev.tr7zw.trender.gui.widget;
 
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Inventory;
-
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.GuiDescription;
-import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
+import dev.tr7zw.trender.gui.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.world.entity.player.*;
+import org.jetbrains.annotations.*;
 
 /**
  * A player inventory widget that has a visually separate hotbar.

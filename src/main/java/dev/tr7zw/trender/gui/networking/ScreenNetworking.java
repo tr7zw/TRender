@@ -1,10 +1,8 @@
 package dev.tr7zw.trender.gui.networking;
 
-import com.mojang.serialization.Decoder;
-import com.mojang.serialization.Encoder;
-
-import dev.tr7zw.trender.gui.SyncedGuiDescription;
-import net.minecraft.resources.ResourceLocation;
+import com.mojang.serialization.*;
+import dev.tr7zw.trender.gui.*;
+import net.minecraft.resources.*;
 
 /**
  * {@code ScreenNetworking} handles screen-related network messages sent between

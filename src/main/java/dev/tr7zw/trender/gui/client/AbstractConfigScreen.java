@@ -1,28 +1,15 @@
 package dev.tr7zw.trender.gui.client;
 
-import java.text.DecimalFormat;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.DoubleConsumer;
-import java.util.function.DoubleSupplier;
-import java.util.function.IntConsumer;
-import java.util.function.IntSupplier;
-import java.util.function.Supplier;
-
-import dev.tr7zw.trender.gui.client.AbstractConfigScreen.OptionInstance.SplitLine;
-import dev.tr7zw.trender.gui.widget.WButton;
-import dev.tr7zw.trender.gui.widget.WGridPanel;
-import dev.tr7zw.trender.gui.widget.WLabel;
-import dev.tr7zw.trender.gui.widget.WLabeledDoubleSlider;
-import dev.tr7zw.trender.gui.widget.WLabeledIntSlider;
-import dev.tr7zw.trender.gui.widget.WListPanel;
-import dev.tr7zw.trender.gui.widget.WToggleButton;
-import dev.tr7zw.trender.gui.widget.data.Insets;
-import dev.tr7zw.transition.mc.ComponentProvider;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.client.AbstractConfigScreen.OptionInstance.*;
+import dev.tr7zw.trender.gui.widget.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.text.*;
+import java.util.*;
+import java.util.function.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.screens.*;
+import net.minecraft.network.chat.*;
 
 public abstract class AbstractConfigScreen extends LightweightGuiDescription {
 

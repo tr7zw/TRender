@@ -1,13 +1,10 @@
 package dev.tr7zw.trender.gui.widget;
 
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
-import dev.tr7zw.trender.gui.widget.data.Axis;
-import net.minecraft.resources.ResourceLocation;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.client.style.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.resources.*;
+import org.jetbrains.annotations.*;
 
 /**
  * A simple slider widget that can be used to select int values.

@@ -1,6 +1,6 @@
 package dev.tr7zw.trender.gui.impl.client;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.*;
 
 public record WidgetSprites(ResourceLocation enabled, ResourceLocation disabled, ResourceLocation enabledFocused,
         ResourceLocation disabledFocused) {

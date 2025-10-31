@@ -1,8 +1,7 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.Objects;
-
-import dev.tr7zw.trender.gui.widget.data.Insets;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.*;
 
 /**
  * A panel that has {@linkplain Insets layout insets}.

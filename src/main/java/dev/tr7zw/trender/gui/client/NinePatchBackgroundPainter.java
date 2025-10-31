@@ -1,11 +1,9 @@
 package dev.tr7zw.trender.gui.client;
 
-import java.util.function.Consumer;
-
-import dev.tr7zw.trender.gui.widget.WWidget;
-import dev.tr7zw.trender.gui.widget.data.Texture;
-import net.minecraft.resources.ResourceLocation;
-//import juuxel.libninepatch.NinePatch;
+import dev.tr7zw.trender.gui.widget.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.function.*;
+import net.minecraft.resources.*;
 
 /**
  * Nine-patch background painters paint rectangles using a special nine-patch

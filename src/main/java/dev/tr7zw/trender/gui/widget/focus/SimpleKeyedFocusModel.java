@@ -1,17 +1,9 @@
 package dev.tr7zw.trender.gui.widget.focus;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.widget.data.Rect2i;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Stream;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.*;
+import java.util.stream.*;
+import org.jetbrains.annotations.*;
 
 /**
  * A {@link FocusModel} implementation that wraps a {@link List} of foci. New

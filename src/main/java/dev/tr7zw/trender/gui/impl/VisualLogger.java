@@ -1,20 +1,14 @@
 package dev.tr7zw.trender.gui.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.message.ParameterizedMessage;
-
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.transition.mc.ComponentProvider;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
-import net.minecraft.util.FormattedCharSequence;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.client.*;
+import java.util.*;
+import net.minecraft.*;
+import net.minecraft.client.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.util.*;
+import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.message.*;
 
 /**
  * A "logger" that renders its messages on the screen in dev envs.

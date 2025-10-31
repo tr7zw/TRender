@@ -1,13 +1,10 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.function.Supplier;
-
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.client.TextAlignment;
-import dev.tr7zw.trender.gui.impl.client.style.StyleConstants;
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.trender.gui.widget.data.VerticalAlignment;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+import dev.tr7zw.trender.gui.impl.client.style.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.function.*;
 
 /**
  * Dynamic labels are labels that pull their text from a

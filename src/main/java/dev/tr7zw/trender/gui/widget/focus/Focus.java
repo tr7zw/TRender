@@ -1,8 +1,7 @@
 package dev.tr7zw.trender.gui.widget.focus;
 
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.widget.data.Rect2i;
+import dev.tr7zw.trender.gui.widget.data.*;
+import org.jetbrains.annotations.*;
 
 /**
  * A focus is a focusable area in a widget.

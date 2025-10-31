@@ -1,6 +1,6 @@
 package dev.tr7zw.trender.gui.widget;
 
-import dev.tr7zw.trender.gui.widget.data.Insets;
+import dev.tr7zw.trender.gui.widget.data.*;
 
 /**
  * A panel that positions children by pixel-perfect positions.

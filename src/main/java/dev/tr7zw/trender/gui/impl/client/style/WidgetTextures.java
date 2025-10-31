@@ -1,22 +1,21 @@
 package dev.tr7zw.trender.gui.impl.client.style;
 
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.impl.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import lombok.*;
+import net.minecraft.resources.*;
 import static dev.tr7zw.trender.gui.impl.LibGuiCommon.id;
-
-import dev.tr7zw.transition.mc.GeneralUtil;
-import dev.tr7zw.trender.gui.impl.LibGuiCommon;
-import dev.tr7zw.trender.gui.impl.client.WidgetSprites;
-import dev.tr7zw.trender.gui.widget.data.Texture;
-import lombok.Getter;
-import net.minecraft.resources.ResourceLocation;
 
 public final class WidgetTextures {
     //? if >= 1.20.2 {
-    
+
     private static final String NAMESPACE = "minecraft";
     private static final String LEGACY_PATH = "";
     private static final String LEGACY_SUFFIX = "";
     //? } else {
-/*
+    /*
     private static final String NAMESPACE = "trender";
     private static final String LEGACY_PATH = "textures/gui/sprites/";
     private static final String LEGACY_SUFFIX = ".png";

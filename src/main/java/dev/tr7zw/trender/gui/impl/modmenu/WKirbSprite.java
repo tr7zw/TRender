@@ -1,13 +1,10 @@
 package dev.tr7zw.trender.gui.impl.modmenu;
 
-import java.util.ArrayList;
-
-import dev.tr7zw.trender.gui.client.LibGui;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.LibGuiCommon;
-import dev.tr7zw.trender.gui.widget.WWidget;
-import net.minecraft.resources.ResourceLocation;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.*;
+import dev.tr7zw.trender.gui.widget.*;
+import java.util.*;
+import net.minecraft.resources.*;
 
 public class WKirbSprite extends WWidget {
     private static final ResourceLocation KIRB = LibGuiCommon.id("textures/widget/kirb.png");

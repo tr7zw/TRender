@@ -1,16 +1,10 @@
 package dev.tr7zw.trender.gui.client;
 
-import net.minecraft.world.inventory.ContainerData;
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.GuiDescription;
-import dev.tr7zw.trender.gui.ValidatedSlot;
-import dev.tr7zw.trender.gui.widget.WGridPanel;
-import dev.tr7zw.trender.gui.widget.WPanel;
-import dev.tr7zw.trender.gui.widget.WWidget;
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.trender.gui.widget.data.Insets;
-import dev.tr7zw.trender.gui.widget.data.Vec2i;
+import dev.tr7zw.trender.gui.*;
+import dev.tr7zw.trender.gui.widget.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.world.inventory.*;
+import org.jetbrains.annotations.*;
 
 /**
  * A GuiDescription without any associated Minecraft classes

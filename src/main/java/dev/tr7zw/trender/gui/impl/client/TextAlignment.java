@@ -1,10 +1,9 @@
 package dev.tr7zw.trender.gui.impl.client;
 
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.trender.gui.widget.data.VerticalAlignment;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.util.FormattedCharSequence;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.util.*;
 
 public final class TextAlignment {
     public static int getTextOffsetX(HorizontalAlignment alignment, int width, FormattedCharSequence text) {

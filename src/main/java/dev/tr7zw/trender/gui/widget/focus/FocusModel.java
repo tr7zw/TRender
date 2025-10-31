@@ -1,9 +1,8 @@
 package dev.tr7zw.trender.gui.widget.focus;
 
-import java.util.stream.Stream;
-
-import dev.tr7zw.trender.gui.widget.WWidget;
-import dev.tr7zw.trender.gui.widget.data.Rect2i;
+import dev.tr7zw.trender.gui.widget.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.stream.*;
 
 /**
  * Manages the state of individual {@linkplain Focus foci} in a widget. Each

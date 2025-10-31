@@ -1,10 +1,7 @@
 package dev.tr7zw.trender.gui.widget.data;
 
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import org.jetbrains.annotations.*;
 
 /**
  * An observable mutable property. Observable properties are containers for

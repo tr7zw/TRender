@@ -1,8 +1,8 @@
 package dev.tr7zw.trender.gui;
 
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.item.*;
 
 /**
  * An empty inventory that cannot hold any items.

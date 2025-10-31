@@ -1,21 +1,12 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-import dev.tr7zw.trender.gui.GuiDescription;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.impl.Proxy;
-import dev.tr7zw.trender.gui.widget.data.Axis;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.data.Insets;
-import lombok.Setter;
+import dev.tr7zw.trender.gui.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.*;
+import java.util.function.*;
+import lombok.*;
 
 /**
  * Similar to the RecyclerView in Android, this widget represents a scrollable

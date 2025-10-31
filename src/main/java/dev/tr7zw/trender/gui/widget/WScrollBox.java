@@ -1,10 +1,8 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import dev.tr7zw.transition.mc.ComponentProvider;
-import dev.tr7zw.trender.gui.widget.data.Axis;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.*;
 
 public class WScrollBox extends WBox {
 

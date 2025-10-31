@@ -1,9 +1,8 @@
 package dev.tr7zw.trender.gui.widget;
 
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.widget.data.Texture;
-import net.minecraft.resources.ResourceLocation;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.resources.*;
 
 public class WSprite extends WWidget {
     protected int currentFrame = 0;

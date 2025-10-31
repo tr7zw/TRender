@@ -1,21 +1,15 @@
 package dev.tr7zw.trender.gui.widget;
 
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-import dev.tr7zw.trender.gui.impl.client.style.WidgetTextures;
-import dev.tr7zw.trender.gui.widget.data.Axis;
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.transition.mc.ComponentProvider;
-import dev.tr7zw.transition.mc.MathUtil;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+import dev.tr7zw.trender.gui.impl.client.style.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.network.chat.*;
+import org.jetbrains.annotations.*;
 //? if >= 1.18.0 {
-
-import net.minecraft.client.gui.narration.NarratedElementType;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.narration.*;
 //? }
-import net.minecraft.network.chat.Component;
 
 /**
  * A vanilla-style labeled slider widget.

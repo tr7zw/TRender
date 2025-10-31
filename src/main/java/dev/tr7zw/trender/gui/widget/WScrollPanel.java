@@ -1,15 +1,9 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.Objects;
-
-import dev.tr7zw.trender.gui.GuiDescription;
-import dev.tr7zw.trender.gui.TriState;
-import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.Scissors;
-import dev.tr7zw.trender.gui.widget.data.Axis;
-import dev.tr7zw.trender.gui.widget.data.InputResult;
-import dev.tr7zw.trender.gui.widget.data.Insets;
+import dev.tr7zw.trender.gui.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.*;
 
 /**
  * Similar to the JScrollPane in Swing, this widget represents a scrollable

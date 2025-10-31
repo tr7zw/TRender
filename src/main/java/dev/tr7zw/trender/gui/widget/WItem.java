@@ -1,32 +1,22 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.*;
+import dev.tr7zw.trender.gui.client.*;
+import java.util.*;
+import net.minecraft.core.*;
+import net.minecraft.data.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.*;
+//? if >= 1.18.0 {
+import net.minecraft.tags.*;
+//? }
+//? if >= 1.19.4 {
+import net.minecraft.core.registries.*;
+//? }
 //? if < 1.21.5 {
 /*
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.systems.*;
 *///? }
-
-import dev.tr7zw.trender.gui.client.RenderContext;
-import net.minecraft.core.Registry;
-//? if >= 1.19.4 {
-
-import net.minecraft.core.registries.BuiltInRegistries;
-//? } else {
-/*
-import net.minecraft.data.BuiltinRegistries;
-*///? }
-   //? if >= 1.18.0 {
-
-import net.minecraft.tags.TagKey;
-import net.minecraft.core.Holder;
-//? }
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 
 /**
  * A widget that displays an item or a list of items.
@@ -70,7 +60,7 @@ public class WItem extends WWidget {
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         //? if < 1.21.5 {
-/*
+        /*
         RenderSystem.enableDepthTest();
         *///? }
         context.renderFakeItem(items.get(current), x + getWidth() / 2 - 8, y + getHeight() / 2 - 8);
@@ -124,11 +114,11 @@ public class WItem extends WWidget {
     @SuppressWarnings("unchecked")
     private static List<ItemStack> getRenderStacks(TagKey<? extends ItemLike> tag) {
         //? if >= 1.21.3 {
-        
+
         Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
                 .getValue(tag.registry().location());
         //? } else if >= 1.19.4 {
-/*
+        /*
         Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY.get(tag.registry().location());
         *///? } else {
         /*

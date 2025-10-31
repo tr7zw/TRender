@@ -1,6 +1,6 @@
 package dev.tr7zw.trender.gui.widget.icon;
 
-import dev.tr7zw.trender.gui.client.RenderContext;
+import dev.tr7zw.trender.gui.client.*;
 
 /**
  * A square icon for a widget such as a button.

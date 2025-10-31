@@ -1,18 +1,14 @@
 package dev.tr7zw.trender.gui.impl.modmenu;
 
-import java.util.function.Function;
-
-import dev.tr7zw.transition.ClientTRansitionMod;
-import dev.tr7zw.transition.mc.ComponentProvider;
-import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.client.LightweightGuiDescription;
-import dev.tr7zw.trender.gui.widget.WButton;
-import dev.tr7zw.trender.gui.widget.WGridPanel;
-import dev.tr7zw.trender.gui.widget.WListPanel;
-import dev.tr7zw.trender.gui.widget.data.Insets;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
+import dev.tr7zw.transition.*;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.widget.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.function.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.screens.*;
+import net.minecraft.network.chat.*;
 
 public class WeGotModMenuAtHome extends LightweightGuiDescription {
 

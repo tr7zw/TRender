@@ -1,41 +1,24 @@
 package dev.tr7zw.trender.gui;
 
-import java.util.ArrayList;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
-import org.jetbrains.annotations.Nullable;
-
-import dev.tr7zw.transition.mc.ItemUtil;
-import dev.tr7zw.trender.gui.client.BackgroundPainter;
-import dev.tr7zw.trender.gui.networking.NetworkSide;
-import dev.tr7zw.trender.gui.widget.WGridPanel;
-import dev.tr7zw.trender.gui.widget.WPanel;
-import dev.tr7zw.trender.gui.widget.WPlayerInvPanel;
-import dev.tr7zw.trender.gui.widget.WWidget;
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.trender.gui.widget.data.Insets;
-import dev.tr7zw.trender.gui.widget.data.Vec2i;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.WorldlyContainerHolder;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
+import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.networking.*;
+import dev.tr7zw.trender.gui.widget.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.*;
+import java.util.function.*;
+import net.minecraft.client.*;
+import net.minecraft.network.protocol.*;
+import net.minecraft.server.level.*;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.*;
+import net.minecraft.world.level.block.state.*;
+import org.jetbrains.annotations.*;
 
 /**
  * A screen handler-based GUI description for GUIs with slots.
@@ -71,10 +54,10 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
         this.playerInventory = playerInventory;
 
         //? if >= 1.20.0 {
-        
+
         this.world = playerInventory.player.level();
         //? } else {
-/*
+        /*
         this.world = playerInventory.player.level;
         *///? }
         this.propertyDelegate = null;//new ArrayPropertyDelegate(1);
@@ -99,10 +82,10 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
         this.blockInventory = blockInventory;
         this.playerInventory = playerInventory;
         //? if >= 1.20.0 {
-        
+
         this.world = playerInventory.player.level();
         //? } else {
-/*
+        /*
         this.world = playerInventory.player.level;
         *///? }
         this.propertyDelegate = propertyDelegate;

@@ -1,7 +1,7 @@
 package dev.tr7zw.trender.gui.impl.client;
 
-import dev.tr7zw.transition.mc.ComponentProvider;
-import net.minecraft.network.chat.Component;
+import dev.tr7zw.transition.mc.*;
+import net.minecraft.network.chat.*;
 
 public final class NarrationMessages {
     public static final String ITEM_SLOT_TITLE_KEY = "widget.libgui.item_slot.narration.title";

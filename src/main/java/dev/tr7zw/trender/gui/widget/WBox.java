@@ -1,11 +1,7 @@
 package dev.tr7zw.trender.gui.widget;
 
-import java.util.Objects;
-
-import dev.tr7zw.trender.gui.widget.data.Axis;
-import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
-import dev.tr7zw.trender.gui.widget.data.Insets;
-import dev.tr7zw.trender.gui.widget.data.VerticalAlignment;
+import dev.tr7zw.trender.gui.widget.data.*;
+import java.util.*;
 
 /**
  * Similar to the BoxLayout in Swing, this widget represents a list of widgets

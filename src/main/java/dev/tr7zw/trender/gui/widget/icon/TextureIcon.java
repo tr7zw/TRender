@@ -1,9 +1,8 @@
 package dev.tr7zw.trender.gui.widget.icon;
 
-import dev.tr7zw.trender.gui.client.RenderContext;
-import dev.tr7zw.trender.gui.client.ScreenDrawing;
-import dev.tr7zw.trender.gui.widget.data.Texture;
-import net.minecraft.resources.ResourceLocation;
+import dev.tr7zw.trender.gui.client.*;
+import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.resources.*;
 
 /**
  * An icon that draws a texture.
