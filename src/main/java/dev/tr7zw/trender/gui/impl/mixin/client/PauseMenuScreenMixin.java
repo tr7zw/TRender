@@ -20,7 +20,8 @@ public abstract class PauseMenuScreenMixin extends Screen {
         super(title);
     }
 
-    //#if MC >= 12106
+    //? if >= 1.21.6 {
+    
     @Inject(method = "createPauseMenu", at = @At("RETURN"), cancellable = true)
     private void createTestWorldButton(CallbackInfo ci) {
         this.addRenderableWidget(Button.builder(Component.literal("Open Test Screen"), (button) -> {
@@ -34,6 +35,6 @@ public abstract class PauseMenuScreenMixin extends Screen {
             this.minecraft.setScreen(screen);
         }).bounds(5, 5, 98, 20).build());
     }
-    //#endif
+    //? }
 
 }

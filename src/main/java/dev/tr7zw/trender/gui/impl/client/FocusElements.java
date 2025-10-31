@@ -1,4 +1,5 @@
-//#if MC >= 11904
+//? if >= 1.19.4 {
+
 package dev.tr7zw.trender.gui.impl.client;
 
 import org.jetbrains.annotations.Nullable;
@@ -153,4 +154,4 @@ public final class FocusElements {
         }
     }
 }
-//#endif
+//? }

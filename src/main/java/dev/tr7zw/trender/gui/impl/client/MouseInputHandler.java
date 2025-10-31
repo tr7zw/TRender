@@ -81,11 +81,13 @@ public final class MouseInputHandler<S extends Screen & CottonScreenImpl> {
     }
 
     public void onMouseScroll(int containerX, int containerY, double horizontalAmount, double verticalAmount) {
-        //#if MC <= 12001
-        //$$ double fhorizontalAmount = horizontalAmount * -1;
-        //#else
+        //? if <= 1.20.1 {
+/*
+        double fhorizontalAmount = horizontalAmount * -1;
+        *///? } else {
+        
         double fhorizontalAmount = horizontalAmount;
-        //#endif
+        //? }
         runTree(screen.getDescription().getRootPanel().hit(containerX, containerY),
                 widget -> widget.onMouseScroll(containerX - widget.getAbsoluteX(), containerY - widget.getAbsoluteY(),
                         fhorizontalAmount, verticalAmount));

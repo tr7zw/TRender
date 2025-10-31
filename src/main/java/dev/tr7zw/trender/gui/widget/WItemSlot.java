@@ -26,10 +26,11 @@ import dev.tr7zw.trender.gui.widget.focus.FocusModel;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
 import dev.tr7zw.transition.mc.ComponentProvider;
 import net.minecraft.client.Minecraft;
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-//#endif
+//? }
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -625,7 +626,8 @@ public class WItemSlot extends WWidget {
         backgroundPainter = BackgroundPainter.SLOT;
     }
 
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         List<Component> parts = new ArrayList<>();
@@ -643,7 +645,7 @@ public class WItemSlot extends WWidget {
 
         builder.add(NarratedElementType.TITLE, parts.toArray(new Component[0]));
     }
-    //#endif
+    //? }
 
     /**
      * Returns a "narration name" for this slot. It's narrated before the slot

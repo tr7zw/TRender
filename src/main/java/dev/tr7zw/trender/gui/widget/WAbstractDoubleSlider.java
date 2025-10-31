@@ -1,18 +1,20 @@
 package dev.tr7zw.trender.gui.widget;
 
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-//#endif
+//? }
 import net.minecraft.util.Mth;
 
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 
 import dev.tr7zw.transition.mc.ComponentProvider;
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 import dev.tr7zw.trender.gui.impl.client.NarrationMessages;
-//#endif
+//? }
 import dev.tr7zw.trender.gui.widget.data.Axis;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import lombok.Getter;
@@ -388,14 +390,15 @@ public abstract class WAbstractDoubleSlider extends WWidget {
         return dragging;
     }
 
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         builder.add(NarratedElementType.TITLE,
                 ComponentProvider.translatable(NarrationMessages.SLIDER_MESSAGE_KEY, value, min, max));
         builder.add(NarratedElementType.USAGE, NarrationMessages.SLIDER_USAGE);
     }
-    //#endif
+    //? }
 
     /**
      * Tests if the key should decrease sliders with the specified direction.

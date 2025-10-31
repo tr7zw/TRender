@@ -12,10 +12,11 @@ import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.icon.Icon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-//#endif
+//? }
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -111,15 +112,17 @@ public class WButton extends WWidget {
                     ? ICON_SPACING + iconSize + ICON_SPACING
                     : 0;
             // FIXME: WHY?
-            //#if MC <= 12001
-            //$$context.getPose().pushPose();
-            //$$context.getPose().translate(0, 0, 300);
-            //#endif
+            //? if <= 1.20.1 {
+/*
+            context.getPose().pushPose();
+            context.getPose().translate(0, 0, 300);
+            *///? }
             ScreenDrawing.drawStringWithShadow(context, label.getVisualOrderText(), alignment, x + xOffset,
                     y + ((getHeight() - 8) / 2), getWidth(), color); //LibGuiClient.config.darkMode ? darkmodeColor : color);
-            //#if MC <= 12001
-            //$$context.getPose().popPose();
-            //#endif
+            //? if <= 1.20.1 {
+/*
+            context.getPose().popPose();
+            *///? }
         }
     }
 
@@ -243,7 +246,8 @@ public class WButton extends WWidget {
         return this;
     }
 
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         builder.add(NarratedElementType.TITLE, AbstractWidget.wrapDefaultNarrationMessage(getLabel()));
@@ -256,5 +260,5 @@ public class WButton extends WWidget {
             }
         }
     }
-    //#endif
+    //? }
 }

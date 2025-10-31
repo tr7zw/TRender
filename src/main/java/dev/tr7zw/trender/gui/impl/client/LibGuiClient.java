@@ -9,23 +9,26 @@ import dev.tr7zw.trender.gui.client.CottonClientScreen;
 import dev.tr7zw.trender.gui.impl.Proxy;
 import dev.tr7zw.trender.gui.impl.client.config.LibGuiConfig;
 import dev.tr7zw.trender.gui.impl.modmenu.ConfigGui;
-//#if FABRIC
+//? if fabric {
+
 import net.fabricmc.api.ClientModInitializer;
-//#endif
+//? }
 
 public class LibGuiClient
-        //#if FABRIC
+//? if fabric {
+
         implements ClientModInitializer
-//#endif
+//? }
 {
     public static final Logger logger = LogManager.getLogger();
     public static volatile LibGuiConfig config;
 
     //    public static final Jankson jankson = JanksonFactory.createJankson();
 
-    //#if FABRIC
+    //? if fabric {
+    
     @Override
-    //#endif
+    //? }
     public void onInitializeClient() {
         config = loadConfig();
 

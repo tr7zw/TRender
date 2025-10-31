@@ -1,9 +1,10 @@
 package dev.tr7zw.trender.gui.client;
 
-//#if FABRIC
+//? if fabric {
+
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-//#endif
+//? }
 import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.platform.Window;
 
@@ -23,32 +24,35 @@ public final class CottonHud {
 
     static {
         //TODO
-        //#if FABRIC
+        //? if fabric {
+        
         HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
             Window window = Minecraft.getInstance().getWindow();
             int hudWidth = window.getGuiScaledWidth();
             int hudHeight = window.getGuiScaledHeight();
-            //#if MC >= 12000
+            //? if >= 1.20.0 {
+            
             RenderContext renderContext = new RenderContext(drawContext);
-            //#else
-            //$$ RenderContext renderContext = new RenderContext(Minecraft.getInstance().screen, drawContext);
-            //#endif
+            //? } else {
+        /*
+            RenderContext renderContext = new RenderContext(Minecraft.getInstance().screen, drawContext);
+            *///? }
             for (WWidget widget : widgets) {
                 Positioner positioner = positioners.get(widget);
                 if (positioner != null) {
                     positioner.reposition(widget, hudWidth, hudHeight);
                 }
-
+        
                 widget.paint(renderContext, widget.getX(), widget.getY(), -1, -1);
             }
         });
-
+        
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             for (WWidget widget : widgets) {
                 widget.tick();
             }
         });
-        //#endif
+        //? }
     }
 
     /**

@@ -69,11 +69,14 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
         super(type, syncId);
         this.blockInventory = null;
         this.playerInventory = playerInventory;
-        //#if MC >= 11800
+
+        //? if >= 1.20.0 {
+        
         this.world = playerInventory.player.level();
-        //#else
-        //$$ this.world = playerInventory.player.level;
-        //#endif
+        //? } else {
+/*
+        this.world = playerInventory.player.level;
+        *///? }
         this.propertyDelegate = null;//new ArrayPropertyDelegate(1);
     }
 
@@ -95,11 +98,13 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
         super(type, syncId);
         this.blockInventory = blockInventory;
         this.playerInventory = playerInventory;
-        //#if MC >= 11800
+        //? if >= 1.20.0 {
+        
         this.world = playerInventory.player.level();
-        //#else
-        //$$ this.world = playerInventory.player.level;
-        //#endif
+        //? } else {
+/*
+        this.world = playerInventory.player.level;
+        *///? }
         this.propertyDelegate = propertyDelegate;
         if (propertyDelegate != null && propertyDelegate.getCount() > 0)
             this.addDataSlots(propertyDelegate);
@@ -172,11 +177,13 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
             }
 
             if (slotStack.isEmpty()) {
-                //#if MC >= 11904
+                //? if >= 1.19.4 {
+
                 slot.setByPlayer(ItemStack.EMPTY);
-                //#else
-                //$$ slot.set(ItemStack.EMPTY);
-                //#endif
+                //? } else {
+                /*
+                slot.set(ItemStack.EMPTY);
+                *///? }
             } else {
                 slot.setChanged();
             }
@@ -211,17 +218,21 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
         ItemStack curSlotStack = slot.getItem();
         if (curSlotStack.isEmpty() && slot.mayPlace(toInsert)) {
             if (toInsert.getCount() > slot.getMaxStackSize(toInsert)) {
-                //#if MC >= 11904
+                //? if >= 1.19.4 {
+
                 slot.setByPlayer(toInsert.split(slot.getMaxStackSize(toInsert)));
-                //#else
-                //$$ slot.set(toInsert.split(slot.getMaxStackSize(toInsert)));
-                //#endif
+                //? } else {
+                /*
+                slot.set(toInsert.split(slot.getMaxStackSize(toInsert)));
+                *///? }
             } else {
-                //#if MC >= 11904
+                //? if >= 1.19.4 {
+
                 slot.setByPlayer(toInsert.split(toInsert.getCount()));
-                //#else
-                //$$ slot.set(toInsert.split(slot.getMaxStackSize(toInsert)));
-                //#endif
+                //? } else {
+                /*
+                slot.set(toInsert.split(slot.getMaxStackSize(toInsert)));
+                *///? }
             }
 
             slot.setChanged();

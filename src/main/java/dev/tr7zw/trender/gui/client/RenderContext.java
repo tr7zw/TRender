@@ -6,35 +6,41 @@ import java.util.function.Consumer;
 
 import org.jetbrains.annotations.Nullable;
 
-//#if MC < 12106
-//$$import com.mojang.blaze3d.vertex.PoseStack;
-//$$import dev.tr7zw.trender.gui.impl.mixin.client.DrawContextAccessor;
-//$$import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
-//#endif
+//? if < 1.21.6 {
+/*
+import com.mojang.blaze3d.vertex.PoseStack;
+import dev.tr7zw.trender.gui.impl.mixin.client.DrawContextAccessor;
+import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
+*///? }
 
 import it.unimi.dsi.fastutil.ints.IntIterator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-//#if MC >= 12106
+//? if >= 1.21.6 {
+
 import net.minecraft.client.renderer.RenderPipelines;
-//#endif
-//#if MC < 12102
-//$$ import com.mojang.blaze3d.vertex.Tesselator;
-//#endif
-//#if MC >= 12000
+//? }
+   //? if < 1.21.2 {
+/*
+import com.mojang.blaze3d.vertex.Tesselator;
+*///? }
+//? if >= 1.20.0 {
+
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
-//#if MC <= 12105
-//$$ import net.minecraft.client.renderer.RenderType;
-//#endif
-//#else
-//$$ import net.minecraft.client.gui.screens.Screen;
-//$$ import com.mojang.blaze3d.systems.RenderSystem;
-//$$ import net.minecraft.client.renderer.GameRenderer;
-//$$ import net.minecraft.client.gui.GuiComponent;
-//#endif
+//? if <= 1.21.5 {
+/*
+import net.minecraft.client.renderer.RenderType;
+*///? }
+//? } else {
+/*
+import net.minecraft.client.gui.screens.Screen;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.gui.GuiComponent;
+*///? }
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -42,28 +48,34 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-//#if MC < 12000
-//$$ import net.minecraft.client.renderer.MultiBufferSource;
-//$$ import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
-//#endif
-//#if MC < 12105
-//$$ import com.mojang.blaze3d.vertex.BufferUploader;
-//$$ import com.mojang.blaze3d.platform.GlStateManager;
-//$$ import dev.tr7zw.trender.gui.impl.client.VanillaShaders;
-//$$ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-//$$ import com.mojang.blaze3d.vertex.Tesselator;
-//$$ import com.mojang.blaze3d.vertex.VertexFormat;
-//$$ import com.mojang.blaze3d.systems.RenderSystem;
-//$$ import com.mojang.blaze3d.vertex.BufferBuilder;
-//#if MC >= 11904
-//$$ import org.joml.Matrix4f;
-//#else
-//$$ import com.mojang.math.Matrix4f;
-//#endif
-//#if MC <= 11605
-//$$ import org.lwjgl.opengl.GL11;
-//#endif
-//#endif
+//? if < 1.20.0 {
+/*
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
+*///? }
+
+//? if < 1.21.5 {
+/*
+import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.platform.GlStateManager;
+import dev.tr7zw.trender.gui.impl.client.VanillaShaders;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+//? if >= 1.19.4 {
+
+import org.joml.Matrix4f;
+//? } else {
+/^
+import com.mojang.math.Matrix4f;
+^///? }
+   //? if <= 1.16.5 {
+   /^
+     import org.lwjgl.opengl.GL11;
+    ^///? }
+   *///? }
 
 @AllArgsConstructor
 public class RenderContext implements PoseStackHelper {
@@ -71,62 +83,79 @@ public class RenderContext implements PoseStackHelper {
     @SuppressWarnings("unused")
     private final static Minecraft minecraft = Minecraft.getInstance();
 
-    //#if MC >= 12000
+    //? if >= 1.20.0 {
+    
     @Getter
     private final GuiGraphics guiGraphics;
-    //#else
-    //$$ private final Screen screen;
-    //$$ private final PoseStack pose;
-    //#endif
+    //? } else {
+/*
+    private final Screen screen;
+    private final PoseStack pose;
+    *///? }
 
-    //#if MC >= 12106
+    //? if >= 1.21.6 {
+    
     public org.joml.Matrix3x2fStack getPose() {
-        //#else
-        //$$  public com.mojang.blaze3d.vertex.PoseStack getPose() {
-        //#endif
-        //#if MC >= 12000
+        //? } else {
+/*
+    public com.mojang.blaze3d.vertex.PoseStack getPose() {
+        *///? }
+        //? if >= 1.20.0 {
+        
         return guiGraphics.pose();
-        //#else
-        //$$ return pose;
-        //#endif
+        //? } else {
+/*
+        return pose;
+        *///? }
     }
 
     public void drawSpecial(Consumer<MultiBufferSource> consumer) {
-        //#if MC >= 12106
+        //? if >= 1.21.6 {
+        
         consumer.accept(Minecraft.getInstance().renderBuffers().bufferSource());
-        //#elseif MC >= 12102
-        //$$ guiGraphics.drawSpecial(consumer);
-        //#elseif MC >= 12100
-        //$$ consumer.accept(guiGraphics.bufferSource());
-        //$$ guiGraphics.bufferSource().endBatch();
-        //#else
-        //$$ net.minecraft.client.renderer.MultiBufferSource.BufferSource bs = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
-        //$$ consumer.accept(bs);
-        //$$ bs.endBatch();
-        //#endif
+        //? } else if >= 1.21.2 {
+        /*
+         guiGraphics.drawSpecial(consumer);
+        *///? } else if >= 1.21.0 {
+        /*
+         consumer.accept(guiGraphics.bufferSource());
+         guiGraphics.bufferSource().endBatch();
+        *///? } else {
+/*
+        net.minecraft.client.renderer.MultiBufferSource.BufferSource bs = MultiBufferSource
+                .immediate(Tesselator.getInstance().getBuilder());
+        consumer.accept(bs);
+        bs.endBatch();
+        *///? }
     }
 
     public void blit(ResourceLocation atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height,
             int textureWidth, int textureHeight) {
-        //#if MC >= 12106
+        //? if >= 1.21.6 {
+        
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, atlasLocation, x, y, uOffset, vOffset, width, height,
                 textureWidth, textureHeight);
-        //#elseif MC >= 12102
-        //$$ guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, width, height,
-        //$$         textureWidth, textureHeight);
-        //#elseif MC >= 12000
-        //$$ guiGraphics.blit(atlasLocation, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
-        //#elseif MC > 11700
-        //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        //$$ RenderSystem.setShaderTexture(0, atlasLocation);
-        //$$ screen.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
-        //#elseif MC >= 11800
-        //$$ minecraft.getTextureManager().bind(atlasLocation);
-        //$$ GuiComponent.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
-        //#else
-        //$$ minecraft.getTextureManager().bind(atlasLocation);
-        //$$ GuiComponent.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureHeight, textureWidth);
-        //#endif
+        //? } else if >= 1.21.2 {
+        /*
+         guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, width, height,
+                 textureWidth, textureHeight);
+        *///? } else if >= 1.20.0 {
+        /*
+        guiGraphics.blit(atlasLocation, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
+        *///? } else if > 1.17.0 {
+/*
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderTexture(0, atlasLocation);
+        screen.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
+        *///? } else if >= 1.18.0 {
+
+        // minecraft.getTextureManager().bind(atlasLocation);
+        // GuiComponent.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
+        //? } else {
+        /*
+         minecraft.getTextureManager().bind(atlasLocation);
+         GuiComponent.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureHeight, textureWidth);
+        *///? }
     }
 
     public void blit(ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight) {
@@ -135,38 +164,48 @@ public class RenderContext implements PoseStackHelper {
 
     public void blit(ResourceLocation atlasLocation, int x, int y, int blitOffset, float uOffset, float vOffset,
             int uWidth, int vHeight, int textureWidth, int textureHeight) {
-        //#if MC >= 12106
+        //? if >= 1.21.6 {
+        
         //TODO blitOffset?
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
                 textureWidth, textureHeight);
-        //#elseif MC >= 12102
-        //$$//TODO blitOffset
-        //$$guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
-        //$$        textureWidth, textureHeight);
-        //#elseif MC >= 12000
-        //$$ guiGraphics.blit(atlasLocation, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth,
-        //$$        textureHeight);
-        //#elseif MC > 11700
-        //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        //$$ RenderSystem.setShaderTexture(0, atlasLocation);
-        //$$ GuiComponent.blit(pose, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
-        //#else
-        //$$ minecraft.getTextureManager().bind(atlasLocation);
-        //$$ GuiComponent.blit(pose, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
-        //#endif
+        //? } else if >= 1.21.2 {
+        /*
+         //TODO blitOffset
+         guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
+                textureWidth, textureHeight);
+        *///? } else if >= 1.20.0 {
+        /*
+        guiGraphics.blit(atlasLocation, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth,
+                textureHeight);
+        *///? } else if > 1.17.0 {
+/*
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderTexture(0, atlasLocation);
+        GuiComponent.blit(pose, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
+        *///? } else {
+        /*
+         minecraft.getTextureManager().bind(atlasLocation);
+         GuiComponent.blit(pose, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
+        *///? }
     }
 
     public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int sliceSide, int sliceTop,
             int txtWidth, int txtHeight) {
-        //#if MC >= 12106
+        //? if >= 1.21.6 {
+        
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height);
-        //#elseif MC >= 12102
-        //$$ guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height);
-        //#elseif MC >= 12002
-        //$$ guiGraphics.blitSprite(texture, x, y, width, height);
-        //#else
-        //$$ blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight, txtWidth, txtHeight);
-        //#endif
+        //? } else if >= 1.21.2 {
+        /*
+         guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height);
+        *///? } else if >= 1.20.2 {
+        /*
+         guiGraphics.blitSprite(texture, x, y, width, height);
+        *///? } else {
+/*
+        blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight,
+                txtWidth, txtHeight);
+        *///? }
     }
 
     public void blitSpriteLegacy(ResourceLocation texture, int x, int y, int width, int height, int sliceSide,
@@ -309,210 +348,258 @@ public class RenderContext implements PoseStackHelper {
     }
 
     public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int color) {
-        //#if MC >= 12106
+        //? if >= 1.21.6 {
+        
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height, color);
-        //#elseif MC >= 12102
-        //$$ guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height, color);
-        //#elseif MC >= 12002
-        //$$ guiGraphics.blitSprite(texture, x, y, width, height, color);
-        //#else
-        //$$ throw new java.lang.RuntimeException();
-        //#endif
+        //? } else if >= 1.21.2 {
+        /*
+         guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height, color);
+        *///? } else if >= 1.20.2 {
+        /*
+         guiGraphics.blitSprite(texture, x, y, width, height, color);
+        *///? } else {
+/*
+        throw new java.lang.RuntimeException();
+        *///? }
     }
 
     public void renderTooltip(Font font, List<FormattedCharSequence> split, int x, int y) {
-        //#if MC >= 12006
+        //? if >= 1.21.6 {
+        
         guiGraphics.setTooltipForNextFrame(font, split, x, y);
-        //#elseif MC >= 12000
-        //$$ guiGraphics.renderTooltip(font, split, x, y);
-        //#else
-        //$$ screen.renderTooltip(pose, split, x, y);
-        //#endif
+        //? } else if >= 1.20.0 {
+        /*
+        guiGraphics.renderTooltip(font, split, x, y);
+        *///? } else {
+/*
+        screen.renderTooltip(pose, split, x, y);
+        *///? }
     }
 
     public void renderTooltip(Font font, MutableComponent translatable, int x, int y) {
-        //#if MC >= 12006
+        //? if >= 1.21.6 {
+        
         guiGraphics.setTooltipForNextFrame(font, translatable, x, y);
-        //#elseif MC >= 12000
-        //$$ guiGraphics.renderTooltip(font, translatable, x, y);
-        //#else
-        //$$ screen.renderTooltip(pose, translatable, x, y);
-        //#endif
+        //? } else if >= 1.20.0 {
+        /*
+        guiGraphics.renderTooltip(font, translatable, x, y);
+        *///? } else {
+/*
+        screen.renderTooltip(pose, translatable, x, y);
+        *///? }
     }
 
     public void fill(int minX, int minY, int maxX, int maxY, int color) {
-        //#if MC >= 12000
+        //? if >= 1.20.0 {
+        
         guiGraphics.fill(minX, minY, maxX, maxY, color);
-        //#else
-        //$$ GuiComponent.fill(pose, minX, minY, maxX, maxY, color);
-        //#endif
+        //? } else {
+/*
+        GuiComponent.fill(pose, minX, minY, maxX, maxY, color);
+        *///? }
     }
 
     public void invertedRect(int x, int y, int width, int height) {
-        //#if MC >= 12106
+        //? if >= 1.21.6 {
+        
         guiGraphics.fill(RenderPipelines.GUI_TEXT_HIGHLIGHT, x, y, x + width, y + height, -16776961);
-        //#elseif MC >= 12105
-        //$$ guiGraphics.fill(RenderType.guiTextHighlight(), x, y, x + width, y + height, -16776961);
-        //#else
-        //#if MC >= 11700
-        //$$ Matrix4f model = getPose().last().pose();
-        //$$ RenderSystem.setShaderColor(0.0F, 0.0F, 1.0F, 1.0F);
-        //$$ RenderSystem.setShader(VanillaShaders.POSITION);
-        //$$ RenderSystem.enableColorLogicOp();
-        //$$ RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
-        //#if MC >= 12100
-        //$$  BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-        //$$  buffer.addVertex(model, x, y + height, 0);
-        //$$  buffer.addVertex(model, x + width, y + height, 0);
-        //$$ buffer.addVertex(model, x + width, y, 0);
-        //$$ buffer.addVertex(model, x, y, 0);
-        //$$ BufferUploader.drawWithShader(buffer.buildOrThrow());
-        //$$ RenderSystem.disableColorLogicOp();
-        //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        //#elseif MC >= 11900
-        //$$ Tesselator tessellator = Tesselator.getInstance();
-        //$$ BufferBuilder buffer = tessellator.getBuilder();
-        //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-        //$$ buffer.vertex(model, x, y + height, 0).endVertex();
-        //$$ buffer.vertex(model, x + width, y + height, 0).endVertex();
-        //$$ buffer.vertex(model, x + width, y, 0).endVertex();
-        //$$ buffer.vertex(model, x, y, 0).endVertex();
-        //$$ BufferUploader.drawWithShader(buffer.end());
-        //$$ RenderSystem.disableColorLogicOp();
-        //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        //#else
-        //$$ Tesselator tessellator = Tesselator.getInstance();
-        //$$ BufferBuilder buffer = tessellator.getBuilder();
-        //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
-        //$$ buffer.vertex(model, x, y + height, 0).endVertex();
-        //$$ buffer.vertex(model, x + width, y + height, 0).endVertex();
-        //$$ buffer.vertex(model, x + width, y, 0).endVertex();
-        //$$ buffer.vertex(model, x, y, 0).endVertex();
-        //$$ buffer.end();
-        //$$ BufferUploader.end(buffer);
-        //$$ RenderSystem.disableColorLogicOp();
-        //$$ RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        //#endif
-        //#else
-        //$$Tesselator tessellator_1 = Tesselator.getInstance();
-        //$$BufferBuilder bufferBuilder_1 = tessellator_1.getBuilder();
-        //$$RenderSystem.color4f(0.0F, 0.0F, 255.0F, 255.0F);
-        //$$RenderSystem.disableTexture();
-        //$$RenderSystem.enableColorLogicOp();
-        //$$RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
-        //$$bufferBuilder_1.begin(GL11.GL_QUADS, DefaultVertexFormat.POSITION);
-        //$$bufferBuilder_1.vertex(x,       y+height, 0.0D).endVertex();
-        //$$bufferBuilder_1.vertex(x+width, y+height, 0.0D).endVertex();
-        //$$bufferBuilder_1.vertex(x+width, y,        0.0D).endVertex();
-        //$$bufferBuilder_1.vertex(x,       y,        0.0D).endVertex();
-        //$$tessellator_1.end();
-        //$$RenderSystem.disableColorLogicOp();
-        //$$RenderSystem.enableTexture();
-        //#endif
-        //#endif
+        //? } else if >= 1.21.5 {
+        /*
+         guiGraphics.fill(RenderType.guiTextHighlight(), x, y, x + width, y + height, -16776961);
+        *///? } else {
+/*
+        //? if >= 1.17.0 {
+
+        Matrix4f model = getPose().last().pose();
+        RenderSystem.setShaderColor(0.0F, 0.0F, 1.0F, 1.0F);
+        RenderSystem.setShader(VanillaShaders.POSITION);
+        RenderSystem.enableColorLogicOp();
+        RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
+        //? if >= 1.21.0 {
+        
+           BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+           buffer.addVertex(model, x, y + height, 0);
+           buffer.addVertex(model, x + width, y + height, 0);
+          buffer.addVertex(model, x + width, y, 0);
+          buffer.addVertex(model, x, y, 0);
+          BufferUploader.drawWithShader(buffer.buildOrThrow());
+          RenderSystem.disableColorLogicOp();
+          RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+         //? } else if >= 1.19.0 {
+/^
+        Tesselator tessellator = Tesselator.getInstance();
+        BufferBuilder buffer = tessellator.getBuilder();
+        buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+        buffer.vertex(model, x, y + height, 0).endVertex();
+        buffer.vertex(model, x + width, y + height, 0).endVertex();
+        buffer.vertex(model, x + width, y, 0).endVertex();
+        buffer.vertex(model, x, y, 0).endVertex();
+        BufferUploader.drawWithShader(buffer.end());
+        RenderSystem.disableColorLogicOp();
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        ^///? } else {
+        /^
+        Tesselator tessellator = Tesselator.getInstance();
+        BufferBuilder buffer = tessellator.getBuilder();
+        buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
+        buffer.vertex(model, x, y + height, 0).endVertex();
+        buffer.vertex(model, x + width, y + height, 0).endVertex();
+        buffer.vertex(model, x + width, y, 0).endVertex();
+        buffer.vertex(model, x, y, 0).endVertex();
+        buffer.end();
+        BufferUploader.end(buffer);
+        RenderSystem.disableColorLogicOp();
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        ^///? }
+           //? } else {
+           /^
+             Tesselator tessellator_1 = Tesselator.getInstance();
+             BufferBuilder bufferBuilder_1 = tessellator_1.getBuilder();
+             RenderSystem.color4f(0.0F, 0.0F, 255.0F, 255.0F);
+             RenderSystem.disableTexture();
+             RenderSystem.enableColorLogicOp();
+             RenderSystem.logicOp(GlStateManager.LogicOp.OR_REVERSE);
+             bufferBuilder_1.begin(GL11.GL_QUADS, DefaultVertexFormat.POSITION);
+             bufferBuilder_1.vertex(x,       y+height, 0.0D).endVertex();
+             bufferBuilder_1.vertex(x+width, y+height, 0.0D).endVertex();
+             bufferBuilder_1.vertex(x+width, y,        0.0D).endVertex();
+             bufferBuilder_1.vertex(x,       y,        0.0D).endVertex();
+             tessellator_1.end();
+             RenderSystem.disableColorLogicOp();
+             RenderSystem.enableTexture();
+            ^///? }
+           *///? }
     }
 
     public void renderFakeItem(ItemStack itemStack, int x, int y) {
-        //#if MC >= 12000
+        //? if >= 1.20.0 {
+        
         guiGraphics.renderFakeItem(itemStack, x, y);
-        //#elseif MC > 11903
-        //$$ minecraft.getItemRenderer().renderAndDecorateFakeItem(pose, itemStack, x, y);
-        //#else
-        //$$ minecraft.getItemRenderer().renderAndDecorateFakeItem(itemStack, x, y);
-        //#endif
+        //? } else if > 1.19.3 {
+/*
+        minecraft.getItemRenderer().renderAndDecorateFakeItem(pose, itemStack, x, y);
+        *///? } else {
+        /*
+        minecraft.getItemRenderer().renderAndDecorateFakeItem(itemStack, x, y);
+        *///? }
     }
 
     public void renderItemDecorations(Font font, ItemStack itemStack, int x, int y) {
-        //#if MC >= 12000
+        //? if >= 1.20.0 {
+        
         guiGraphics.renderItemDecorations(font, itemStack, x, y);
-        //#elseif MC > 11903
-        //$$ minecraft.getItemRenderer().renderGuiItemDecorations(pose, font, itemStack, x, y);
-        //#else
-        //$$ minecraft.getItemRenderer().renderGuiItemDecorations(font, itemStack, x, y);
-        //#endif
+        //? } else if > 1.19.3 {
+/*
+        minecraft.getItemRenderer().renderGuiItemDecorations(pose, font, itemStack, x, y);
+        *///? } else {
+        /*
+        minecraft.getItemRenderer().renderGuiItemDecorations(font, itemStack, x, y);
+        *///? }
     }
 
     public void renderItem(Player player, ItemStack itemStack, int x, int y, int seed) {
-        //#if MC >= 12000
+        //? if >= 1.20.0 {
+        
         guiGraphics.renderItem(player, itemStack, x, y, seed);
-        //#elseif MC > 11903
-        //$$ minecraft.getItemRenderer().renderAndDecorateItem(pose, player, itemStack, x, y, seed);
-        //#elseif MC > 11700
-        //$$ minecraft.getItemRenderer().renderAndDecorateItem(player, itemStack, x, y, seed);
-        //#else
-        //$$ minecraft.getItemRenderer().renderAndDecorateItem(player, itemStack, x, y);
-        //#endif
+        //? } else if > 1.19.3 {
+/*
+        minecraft.getItemRenderer().renderAndDecorateItem(pose, player, itemStack, x, y, seed);
+        *///? } else if > 1.17.0 {
+        /*
+        minecraft.getItemRenderer().renderAndDecorateItem(player, itemStack, x, y, seed);
+        *///? } else {
+        /*
+         minecraft.getItemRenderer().renderAndDecorateItem(player, itemStack, x, y);
+        *///? }
     }
 
     public void drawString(Font font, Component name, int x, int y, int color) {
-        //#if MC >= 12000
+        //? if >= 1.20.0 {
+        
         guiGraphics.drawString(font, name, x, y, color);
-        //#else
-        //$$ font.draw(pose, name, x, y, color);
-        //#endif
+        //? } else {
+/*
+        font.draw(pose, name, x, y, color);
+        *///? }
     }
 
     public void drawCenteredString(Font font, Component name, int x, int y, int color) {
-        //#if MC >= 12000
+        //? if >= 1.20.0 {
+        
         guiGraphics.drawCenteredString(font, name, x, y, color);
-        //#else
-        //$$ GuiComponent.drawCenteredString(pose, font, name, x, y, color);
-        //#endif
+        //? } else {
+/*
+        GuiComponent.drawCenteredString(pose, font, name, x, y, color);
+        *///? }
     }
 
     public void drawString(Font textRenderer, String s, int x, int y, int color, boolean dropShadow) {
-        //#if MC >= 12000
+        //? if >= 1.20.0 {
+        
         guiGraphics.drawString(textRenderer, s, x, y, color, dropShadow);
-        //#else
-        //$$GuiComponent.drawString(pose, textRenderer, s, x, y, color);
-        //#endif
+        //? } else {
+/*
+        GuiComponent.drawString(pose, textRenderer, s, x, y, color);
+        *///? }
     }
 
     public void drawString(Font textRenderer, FormattedCharSequence text, int x, int y, int color, boolean dropShadow) {
-        //#if MC >= 12000
+        //? if >= 1.20.0 {
+        
         guiGraphics.drawString(textRenderer, text, x, y, color, dropShadow);
-        //#else
-        //$$if(dropShadow){
-        //$$ textRenderer.drawShadow(pose, text, x, y, color);
-        //$$} else {
-        //$$ textRenderer.draw(pose, text, x, y, color);
-        //$$}
-        //#endif
+        //? } else {
+/*
+        if (dropShadow) {
+            textRenderer.drawShadow(pose, text, x, y, color);
+        } else {
+            textRenderer.draw(pose, text, x, y, color);
+        }
+        *///? }
     }
 
     public void drawString(Font textRenderer, @Nullable Component suggestion, int x, int y, int suggestionColor,
             boolean b) {
-        //#if MC >= 12000
+        //? if >= 1.20.0 {
+        
         guiGraphics.drawString(textRenderer, suggestion, x, y, suggestionColor, b);
-        //#else
-        //$$ GuiComponent.drawString(pose, textRenderer, suggestion, x, y, suggestionColor);
-        //#endif
+        //? } else {
+/*
+        GuiComponent.drawString(pose, textRenderer, suggestion, x, y, suggestionColor);
+        *///? }
     }
 
     public void renderComponentHoverEffect(Font font, @Nullable Style textStyle, int x, int y) {
-        //#if MC >= 12000
+        //? if >= 1.20.0 {
+        
         guiGraphics.renderComponentHoverEffect(font, textStyle, x, y);
-        //#else
-        //$$ //TODO?
-        //#endif
+        //? } else {
+/*
+        //TODO?
+        return;
+        *///? }
     }
 
     public void flush() {
-        //#if MC <= 12105
-        //#if MC >= 12000
-        //$$ guiGraphics.flush();
-        //#endif
-        //#endif
+        //? if <= 1.21.5 {
+/*
+        //? if >= 1.20.0 {
+        
+        guiGraphics.flush();
+        //? }
+           *///? }
     }
 
-    //#if MC < 12106
-    //$$public BufferSource getVertexConsumers() {
-    //#if MC >= 12000
-    //$$return ((DrawContextAccessor) guiGraphics).libgui$getVertexConsumers();
-    //#else
-    //$$ return minecraft.renderBuffers().bufferSource();
-    //#endif
-    //$$}
-    //#endif
+    //? if < 1.21.6 {
+/*
+    public BufferSource getVertexConsumers() {
+        //? if >= 1.20.0 {
+        
+        return ((DrawContextAccessor) guiGraphics).libgui$getVertexConsumers();
+        //? } else {
+/^
+        return minecraft.renderBuffers().bufferSource();
+        ^///? }
+    }
+    *///? }
 
 }

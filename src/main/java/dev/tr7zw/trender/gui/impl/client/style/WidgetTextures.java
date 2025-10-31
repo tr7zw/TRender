@@ -10,15 +10,17 @@ import lombok.Getter;
 import net.minecraft.resources.ResourceLocation;
 
 public final class WidgetTextures {
-    //#if MC >= 12002
+    //? if >= 1.20.2 {
+    
     private static final String NAMESPACE = "minecraft";
     private static final String LEGACY_PATH = "";
     private static final String LEGACY_SUFFIX = "";
-    //#else
-    //$$ private static final String NAMESPACE = "trender";
-    //$$ private static final String LEGACY_PATH = "textures/gui/sprites/";
-    //$$ private static final String LEGACY_SUFFIX = ".png";
-    //#endif
+    //? } else {
+/*
+    private static final String NAMESPACE = "trender";
+    private static final String LEGACY_PATH = "textures/gui/sprites/";
+    private static final String LEGACY_SUFFIX = ".png";
+    *///? }
 
     public static ResourceLocation getId(String path) {
         return id(LEGACY_PATH + path + LEGACY_SUFFIX);

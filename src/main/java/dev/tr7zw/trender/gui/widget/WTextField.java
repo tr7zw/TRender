@@ -17,10 +17,11 @@ import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.transition.mc.ComponentProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-//#endif
+//? }
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 
@@ -442,13 +443,15 @@ public class WTextField extends WWidget {
         }
     }
 
-    //#if MC >= 12109
+    //? if >= 1.21.9 {
+    
     private com.mojang.blaze3d.platform.Window getWindow() {
         return Minecraft.getInstance().getWindow();
-        //#else
-        //$$ private long getWindow() {
-        //$$ return Minecraft.getInstance().getWindow().getWindow();
-        //#endif
+        //? } else {
+/*
+    private long getWindow() {
+        return Minecraft.getInstance().getWindow().getWindow();
+        *///? }
     }
 
     private boolean hasControlDown() {
@@ -518,7 +521,8 @@ public class WTextField extends WWidget {
         return InputResult.PROCESSED;
     }
 
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         builder.add(NarratedElementType.TITLE,
@@ -529,5 +533,5 @@ public class WTextField extends WWidget {
                     ComponentProvider.translatable(NarrationMessages.TEXT_FIELD_SUGGESTION_KEY, suggestion));
         }
     }
-    //#endif
+    //? }
 }

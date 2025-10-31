@@ -1,6 +1,5 @@
 package dev.tr7zw.trender.gui.widget.icon;
 
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -49,11 +48,13 @@ public class ItemIcon implements Icon {
         context.pushPose();
         context.translate(x, y);
         context.scale(scale, scale);
-        //#if MC >= 11904
+        //? if >= 1.19.4 {
+
         context.renderFakeItem(stack, 0, 0);
-        //#else
-        //$$ context.renderFakeItem(stack, x, y);
-        //#endif
+        //? } else {
+        /*
+        context.renderFakeItem(stack, x, y);
+        *///? }
 
         if (isGhost()) {
             context.fill(0, 0, 16, 16, GHOST_OVERLAY_COLOR); // RenderType.guiGhostRecipeOverlay() ?

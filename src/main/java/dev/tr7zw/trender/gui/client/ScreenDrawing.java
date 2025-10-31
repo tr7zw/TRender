@@ -1,14 +1,17 @@
 package dev.tr7zw.trender.gui.client;
 
 import org.jetbrains.annotations.Nullable;
-//#if MC < 12106
-//$$ import net.minecraft.client.renderer.RenderType;
-//#if MC >= 11904
-//$$ import org.joml.Matrix4f;
-//#else
-//$$ import com.mojang.math.Matrix4f;
-//#endif
-//#endif
+//? if < 1.21.6 {
+/*
+import net.minecraft.client.renderer.RenderType;
+//? if >= 1.19.4 {
+
+import org.joml.Matrix4f;
+//? } else {
+/^
+import com.mojang.math.Matrix4f;
+^///? }
+   *///? }
 
 import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.Texture;
@@ -17,23 +20,26 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 
-//#if MC >= 12103
-//#else
-//$$ import com.mojang.blaze3d.systems.RenderSystem;
-//$$ import com.mojang.blaze3d.vertex.BufferBuilder;
-//$$ import com.mojang.blaze3d.vertex.Tesselator;
-//$$ import net.minecraft.client.renderer.GameRenderer;
-//$$ import com.mojang.blaze3d.vertex.VertexFormat;
-//$$ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-//$$ import com.mojang.blaze3d.vertex.BufferUploader;
-//$$ import com.mojang.blaze3d.vertex.BufferBuilder;
-//$$ import com.mojang.blaze3d.vertex.Tesselator;
-//#endif
+//? if >= 1.21.3 {
 
-//#if MC <= 11605
-//$$ import com.mojang.blaze3d.platform.GlStateManager;
-//$$ import org.lwjgl.opengl.GL11;
-//#endif
+//? } else {
+/*
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Tesselator;
+import net.minecraft.client.renderer.GameRenderer;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Tesselator;
+*///? }
+
+//? if <= 1.16.5 {
+/*
+ import com.mojang.blaze3d.platform.GlStateManager;
+ import org.lwjgl.opengl.GL11;
+*///? }
 
 /**
  * {@code ScreenDrawing} contains utility methods for drawing contents on a
@@ -208,7 +214,8 @@ public class ScreenDrawing {
             width = 1;
         if (height <= 0)
             height = 1;
-        //#if MC >= 12106
+        //? if >= 1.21.6 {
+        
         float a = (color >> 24 & 255) / 255.0F;
         color = colorAtOpacity(color, a * opacity);
         // FIXME ?
@@ -218,92 +225,97 @@ public class ScreenDrawing {
         //                buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
         //                buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
         //                buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
-        //#elseif MC >= 12103
-        //$$  float a = (color >> 24 & 255) / 255.0F;
-        //$$ color = colorAtOpacity(color, a * opacity);
-        //$$ Matrix4f model = context.getPose().last().pose();
-        //$$ var renderLayer = RenderType.guiTextured(texture);
-        //$$ var buffer = context.getVertexConsumers().getBuffer(renderLayer);
-        //$$ buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
-        //$$ buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
-        //$$ buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
-        //$$ buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
-        //#elseif MC >= 12100
-        //$$ float r = (color >> 16 & 255) / 255.0F;
-        //$$ float g = (color >> 8 & 255) / 255.0F;
-        //$$ float b = (color & 255) / 255.0F;
-        //$$ float a = (color >> 24 & 255) / 255.0F;
-        //$$ Matrix4f model = context.getPose().last().pose();
-        //$$ RenderSystem.enableBlend();
-        //$$ RenderSystem.setShaderTexture(0, texture);
-        //$$ RenderSystem.setShaderColor(r, g, b, opacity * a);
-        //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        //$$ BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        //$$ buffer.addVertex(model, x,         y + height, 0).setUv(u1, v2);
-        //$$ buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2);
-        //$$ buffer.addVertex(model, x + width, y,          0).setUv(u2, v1);
-        //$$ buffer.addVertex(model, x,         y,          0).setUv(u1, v1);
-        //$$ BufferUploader.drawWithShader(buffer.build());
-        //$$ RenderSystem.disableBlend();
-        //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
-        //#elseif MC >= 11900
-        //$$ float r = (color >> 16 & 255) / 255.0F;
-        //$$ float g = (color >> 8 & 255) / 255.0F;
-        //$$ float b = (color & 255) / 255.0F;
-        //$$ float a = (color >> 24 & 255) / 255.0F;
-        //$$ Matrix4f model = context.getPose().last().pose();
-        //$$ RenderSystem.enableBlend();
-        //$$ RenderSystem.setShaderTexture(0, texture);
-        //$$ RenderSystem.setShaderColor(r, g, b, opacity * a);
-        //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        //$$ BufferBuilder buffer = Tesselator.getInstance().getBuilder();
-        //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        //$$ buffer.vertex(model, x,         y + height, 0).uv(u1, v2).endVertex();
-        //$$ buffer.vertex(model, x + width, y + height, 0).uv(u2, v2).endVertex();
-        //$$ buffer.vertex(model, x + width, y,          0).uv(u2, v1).endVertex();
-        //$$ buffer.vertex(model, x,         y,          0).uv(u1, v1).endVertex();
-        //$$ BufferUploader.drawWithShader(buffer.end());
-        //$$ RenderSystem.disableBlend();
-        //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
-        //#elseif MC >= 11700
-        //$$ float r = (color >> 16 & 255) / 255.0F;
-        //$$ float g = (color >> 8 & 255) / 255.0F;
-        //$$ float b = (color & 255) / 255.0F;
-        //$$ float a = (color >> 24 & 255) / 255.0F;
-        //$$ Matrix4f model = context.getPose().last().pose();
-        //$$ RenderSystem.enableBlend();
-        //$$ RenderSystem.setShaderTexture(0, texture);
-        //$$ RenderSystem.setShaderColor(r, g, b, opacity * a);
-        //$$ RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        //$$ BufferBuilder buffer = Tesselator.getInstance().getBuilder();
-        //$$ buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        //$$ buffer.vertex(model, x,         y + height, 0).uv(u1, v2).endVertex();
-        //$$ buffer.vertex(model, x + width, y + height, 0).uv(u2, v2).endVertex();
-        //$$ buffer.vertex(model, x + width, y,          0).uv(u2, v1).endVertex();
-        //$$ buffer.vertex(model, x,         y,          0).uv(u1, v1).endVertex();
-        //$$ buffer.end();
-        //$$ BufferUploader.end(buffer);
-        //$$ RenderSystem.disableBlend();
-        //$$ RenderSystem.setShaderColor(1, 1, 1, 1);
-        //#else
-        //$$Minecraft.getInstance().getTextureManager().bind(texture);
-        //$$if (width <= 0) width = 1;
-        //$$if (height <= 0) height = 1;
-        //$$float r = (color >> 16 & 255) / 255.0F;
-        //$$float g = (color >> 8 & 255) / 255.0F;
-        //$$float b = (color & 255) / 255.0F;
-        //$$Tesselator tessellator = Tesselator.getInstance();
-        //$$BufferBuilder buffer = tessellator.getBuilder();
-        //$$RenderSystem.enableBlend();
-        //$$RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        //$$buffer.begin(GL11.GL_QUADS, DefaultVertexFormat.POSITION_COLOR_TEX); //I thought GL_QUADS was deprecated but okay, sure.
-        //$$buffer.vertex(x,         y + height, 0).color(r, g, b, opacity).uv(u1, v2).endVertex();
-        //$$buffer.vertex(x + width, y + height, 0).color(r, g, b, opacity).uv(u2, v2).endVertex();
-        //$$buffer.vertex(x + width, y,          0).color(r, g, b, opacity).uv(u2, v1).endVertex();
-        //$$buffer.vertex(x,         y,          0).color(r, g, b, opacity).uv(u1, v1).endVertex();
-        //$$tessellator.end();
-        //$$RenderSystem.disableBlend();
-        //#endif
+        //? } else if >= 1.21.3 {
+        /*
+          float a = (color >> 24 & 255) / 255.0F;
+         color = colorAtOpacity(color, a * opacity);
+         Matrix4f model = context.getPose().last().pose();
+         var renderLayer = RenderType.guiTextured(texture);
+         var buffer = context.getVertexConsumers().getBuffer(renderLayer);
+         buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
+         buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
+         buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
+         buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
+        *///? } else if >= 1.21.0 {
+        /*
+         float r = (color >> 16 & 255) / 255.0F;
+         float g = (color >> 8 & 255) / 255.0F;
+         float b = (color & 255) / 255.0F;
+         float a = (color >> 24 & 255) / 255.0F;
+         Matrix4f model = context.getPose().last().pose();
+         RenderSystem.enableBlend();
+         RenderSystem.setShaderTexture(0, texture);
+         RenderSystem.setShaderColor(r, g, b, opacity * a);
+         RenderSystem.setShader(GameRenderer::getPositionTexShader);
+         BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+         buffer.addVertex(model, x,         y + height, 0).setUv(u1, v2);
+         buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2);
+         buffer.addVertex(model, x + width, y,          0).setUv(u2, v1);
+         buffer.addVertex(model, x,         y,          0).setUv(u1, v1);
+         BufferUploader.drawWithShader(buffer.build());
+         RenderSystem.disableBlend();
+         RenderSystem.setShaderColor(1, 1, 1, 1);
+        *///? } else if >= 1.19.0 {
+/*
+        float r = (color >> 16 & 255) / 255.0F;
+        float g = (color >> 8 & 255) / 255.0F;
+        float b = (color & 255) / 255.0F;
+        float a = (color >> 24 & 255) / 255.0F;
+        Matrix4f model = context.getPose().last().pose();
+        RenderSystem.enableBlend();
+        RenderSystem.setShaderTexture(0, texture);
+        RenderSystem.setShaderColor(r, g, b, opacity * a);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        BufferBuilder buffer = Tesselator.getInstance().getBuilder();
+        buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        buffer.vertex(model, x, y + height, 0).uv(u1, v2).endVertex();
+        buffer.vertex(model, x + width, y + height, 0).uv(u2, v2).endVertex();
+        buffer.vertex(model, x + width, y, 0).uv(u2, v1).endVertex();
+        buffer.vertex(model, x, y, 0).uv(u1, v1).endVertex();
+        BufferUploader.drawWithShader(buffer.end());
+        RenderSystem.disableBlend();
+        RenderSystem.setShaderColor(1, 1, 1, 1);
+        *///? } else if >= 1.17.0 {
+        /*
+        float r = (color >> 16 & 255) / 255.0F;
+        float g = (color >> 8 & 255) / 255.0F;
+        float b = (color & 255) / 255.0F;
+        float a = (color >> 24 & 255) / 255.0F;
+        Matrix4f model = context.getPose().last().pose();
+        RenderSystem.enableBlend();
+        RenderSystem.setShaderTexture(0, texture);
+        RenderSystem.setShaderColor(r, g, b, opacity * a);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        BufferBuilder buffer = Tesselator.getInstance().getBuilder();
+        buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        buffer.vertex(model, x, y + height, 0).uv(u1, v2).endVertex();
+        buffer.vertex(model, x + width, y + height, 0).uv(u2, v2).endVertex();
+        buffer.vertex(model, x + width, y, 0).uv(u2, v1).endVertex();
+        buffer.vertex(model, x, y, 0).uv(u1, v1).endVertex();
+        buffer.end();
+        BufferUploader.end(buffer);
+        RenderSystem.disableBlend();
+        RenderSystem.setShaderColor(1, 1, 1, 1);
+        *///? } else {
+        /*
+         Minecraft.getInstance().getTextureManager().bind(texture);
+         if (width <= 0) width = 1;
+         if (height <= 0) height = 1;
+         float r = (color >> 16 & 255) / 255.0F;
+         float g = (color >> 8 & 255) / 255.0F;
+         float b = (color & 255) / 255.0F;
+         Tesselator tessellator = Tesselator.getInstance();
+         BufferBuilder buffer = tessellator.getBuilder();
+         RenderSystem.enableBlend();
+         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+         buffer.begin(GL11.GL_QUADS, DefaultVertexFormat.POSITION_COLOR_TEX); //I thought GL_QUADS was deprecated but okay, sure.
+         buffer.vertex(x,         y + height, 0).color(r, g, b, opacity).uv(u1, v2).endVertex();
+         buffer.vertex(x + width, y + height, 0).color(r, g, b, opacity).uv(u2, v2).endVertex();
+         buffer.vertex(x + width, y,          0).color(r, g, b, opacity).uv(u2, v1).endVertex();
+         buffer.vertex(x,         y,          0).color(r, g, b, opacity).uv(u1, v1).endVertex();
+         tessellator.end();
+         RenderSystem.disableBlend();
+        *///? }
     }
 
     /**

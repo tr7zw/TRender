@@ -10,10 +10,11 @@ import dev.tr7zw.trender.gui.widget.data.HorizontalAlignment;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.trender.gui.widget.data.VerticalAlignment;
 import net.minecraft.client.Minecraft;
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-//#endif
+//? }
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -211,10 +212,11 @@ public class WLabel extends WWidget {
         return this;
     }
 
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         builder.add(NarratedElementType.TITLE, text);
     }
-    //#endif
+    //? }
 }

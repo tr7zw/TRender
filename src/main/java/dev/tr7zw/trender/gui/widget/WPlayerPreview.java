@@ -15,9 +15,10 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
-//#if MC < 12102
-//$$import com.mojang.blaze3d.systems.RenderSystem;
-//#endif
+//? if < 1.21.2 {
+/*
+import com.mojang.blaze3d.systems.RenderSystem;
+*///? }
 
 @Setter
 @Getter
@@ -46,9 +47,10 @@ public class WPlayerPreview extends WWidget {
     public InputResult onMouseDrag(int x, int y, int button, double deltaX, double deltaY) {
         rotationX -= deltaX;
         // FIXME: Breaks in 1.21.6, so disabled for now
-        //#if MC < 12106
-        //$$ rotationY -= deltaY;
-        //#endif
+        //? if < 1.21.6 {
+/*
+        rotationY -= deltaY;
+        *///? }
         return InputResult.PROCESSED;
     }
 
@@ -87,12 +89,14 @@ public class WPlayerPreview extends WWidget {
         LightingUtil.prepareLightingEntity();
         EntityRenderDispatcher entityRenderDispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         MathUtil.conjugate(quaternion2);
-        //#if MC < 12109
-        //$$entityRenderDispatcher.overrideCameraOrientation(quaternion2);
-        //$$entityRenderDispatcher.setRenderShadow(false);
-        //#endif
+        //? if < 1.21.9 {
+/*
+        entityRenderDispatcher.overrideCameraOrientation(quaternion2);
+        entityRenderDispatcher.setRenderShadow(false);
+        *///? }
         MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-        //#if MC >= 12106
+        //? if >= 1.21.6 {
+        
         var entityRenderer = entityRenderDispatcher.getRenderer(livingEntity);
         var entityRenderState = entityRenderer.createRenderState(livingEntity, 1.0F);
         entityRenderState.hitboxesRenderState = null;
@@ -101,19 +105,23 @@ public class WPlayerPreview extends WWidget {
         float p = (float) size / o;
         context.getGuiGraphics().submitEntityRenderState(entityRenderState, p, vector3f, quaternion, quaternion2,
                 x - width, y - height, x + width, y + height);
-        //#elseif MC >= 12102
-        //$$ entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, delta, matrixStack, bufferSource, 15728880);
-        //#elseif MC >= 11700
-        //$$entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
-        //#else
-        //$$ RenderSystem.runAsFancy(() -> {
-        //$$    entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
-        //$$ });
-        //#endif
+        //? } else if >= 1.21.2 {
+        /*
+         entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, delta, matrixStack, bufferSource, 15728880);
+        *///? } else if >= 1.17.0 {
+/*
+        entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
+        *///? } else {
+        /*
+         RenderSystem.runAsFancy(() -> {
+            entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
+         });
+        *///? }
         bufferSource.endBatch();
-        //#if MC < 12109
-        //$$ entityRenderDispatcher.setRenderShadow(true);
-        //#endif
+        //? if < 1.21.9 {
+/*
+        entityRenderDispatcher.setRenderShadow(true);
+        *///? }
         livingEntity.yBodyRot = yBodyRot;
         livingEntity.yBodyRotO = yBodyRotO;
         EntityUtil.setYRot(livingEntity, yRot);
@@ -127,25 +135,25 @@ public class WPlayerPreview extends WWidget {
     }
 
     private static void resetViewMatrix() {
-        //#if MC >= 12102
-        // nothing
-        //#elseif MC >= 11700
-        //$$ RenderSystem.applyModelViewMatrix();
-        //#else
-        //$$ RenderSystem.popMatrix();
-        //#endif
+        //?  if >= 1.17.0 && < 1.21.2 {
+/*
+        RenderSystem.applyModelViewMatrix();
+        *///? } else if < 1.17.0 {
+        /*
+         RenderSystem.popMatrix();
+        *///? }
     }
 
     private static void prepareViewMatrix(double xpos, double ypos) {
-        //#if MC >= 12102
-        // nothing
-        //#elseif MC >= 11700
-        //$$ RenderSystem.applyModelViewMatrix();
-        //#else
-        //$$ RenderSystem.pushMatrix();
-        //$$ RenderSystem.translatef((float)xpos, (float)ypos, 1050.0F);
-        //$$ RenderSystem.scalef(1.0F, 1.0F, -1.0F);
-        //#endif
+        //? if >= 1.17.0 && < 1.21.2 {
+/*
+        RenderSystem.applyModelViewMatrix();
+        *///? } else if < 1.17.0 {
+        /*
+         RenderSystem.pushMatrix();
+         RenderSystem.translatef((float)xpos, (float)ypos, 1050.0F);
+         RenderSystem.scalef(1.0F, 1.0F, -1.0F);
+        *///? }
     }
 
 }

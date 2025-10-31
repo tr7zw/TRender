@@ -5,21 +5,25 @@ import java.util.List;
 import java.util.Objects;
 
 import com.google.common.collect.ImmutableList;
-//#if MC < 12105
-//$$ import com.mojang.blaze3d.systems.RenderSystem;
-//#endif
+//? if < 1.21.5 {
+/*
+import com.mojang.blaze3d.systems.RenderSystem;
+*///? }
 
 import dev.tr7zw.trender.gui.client.RenderContext;
 import net.minecraft.core.Registry;
-//#if MC >= 11904
+//? if >= 1.19.4 {
+
 import net.minecraft.core.registries.BuiltInRegistries;
-//#else
-//$$ import net.minecraft.data.BuiltinRegistries;
-//#endif
-//#if MC >= 11800
+//? } else {
+/*
+import net.minecraft.data.BuiltinRegistries;
+*///? }
+   //? if >= 1.18.0 {
+
 import net.minecraft.tags.TagKey;
 import net.minecraft.core.Holder;
-//#endif
+//? }
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -39,11 +43,12 @@ public class WItem extends WWidget {
         setItems(items);
     }
 
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     public WItem(TagKey<? extends ItemLike> tag) {
         this(getRenderStacks(tag));
     }
-    //#endif
+    //? }
 
     public WItem(ItemStack stack) {
         this(Collections.singletonList(stack));
@@ -64,9 +69,10 @@ public class WItem extends WWidget {
 
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
-        //#if MC < 12105
-        //$$ RenderSystem.enableDepthTest();
-        //#endif
+        //? if < 1.21.5 {
+/*
+        RenderSystem.enableDepthTest();
+        *///? }
         context.renderFakeItem(items.get(current), x + getWidth() / 2 - 8, y + getHeight() / 2 - 8);
     }
 
@@ -113,19 +119,21 @@ public class WItem extends WWidget {
      * Gets the default stacks ({@link Item#getDefaultInstance()} ()}) of each item
      * in a tag.
      */
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     @SuppressWarnings("unchecked")
     private static List<ItemStack> getRenderStacks(TagKey<? extends ItemLike> tag) {
-        //#if MC >= 12103
+        //? if >= 1.21.3 {
+        
         Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
                 .getValue(tag.registry().location());
-        //#elseif MC >= 11904
-        //$$Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
-        //$$        .get(tag.registry().location());
-        //#else
-        //$$Registry<ItemLike> registry = (Registry<ItemLike>) BuiltinRegistries.REGISTRY
-        //$$        .get(tag.registry().location());
-        //#endif
+        //? } else if >= 1.19.4 {
+/*
+        Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY.get(tag.registry().location());
+        *///? } else {
+        /*
+        Registry<ItemLike> registry = (Registry<ItemLike>) BuiltinRegistries.REGISTRY.get(tag.registry().location());
+        *///? }
         ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
 
         for (Holder<ItemLike> item : registry.getTagOrEmpty((TagKey<ItemLike>) tag)) {
@@ -134,5 +142,5 @@ public class WItem extends WWidget {
 
         return builder.build();
     }
-    //#endif
+    //? }
 }

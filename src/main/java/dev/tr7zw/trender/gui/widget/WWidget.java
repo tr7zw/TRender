@@ -11,11 +11,11 @@ import dev.tr7zw.trender.gui.widget.data.ObservableProperty;
 import dev.tr7zw.trender.gui.widget.focus.FocusModel;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-//#endif
+//? }
 
 /**
  * The base class for all widgets.
@@ -465,7 +465,7 @@ public class WWidget {
      * Adds lines to this widget's tooltip. If the lines remain empty after this
      * call, no tooltip will be drawn.
      *
-     * @param tooltip the builder to add tooltip lines to
+     * @param tooltipBuilder the builder to add tooltip lines to
      */
 
     public void addTooltip(TooltipBuilder tooltipBuilder) {
@@ -579,11 +579,6 @@ public class WWidget {
      * if the cursor is within the bounds, as well as {@link #canHover()} to enable
      * hovering at all.
      *
-     * <p>
-     * Hovering is used by LibGui itself mostly for narration support. For
-     * rendering, it might be preferable that you check the mouse coordinates in
-     * {@link #paint(GuiGraphics, int, int, int, int) paint()} directly. That lets
-     * you react to different parts of the widget being hovered over.
      *
      * @return the {@code hovered} property
      * @since 4.2.0
@@ -639,10 +634,11 @@ public class WWidget {
      * @param builder the narration builder, cannot be null
      * @since 4.2.0
      */
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     public void addNarrations(NarrationElementOutput builder) {
     }
-    //#endif
+    //? }
 
     /**
      * Tests if the provided key code is an activation key for widgets.

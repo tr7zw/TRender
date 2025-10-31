@@ -13,7 +13,6 @@ import dev.tr7zw.trender.gui.widget.WItemSlot;
 import dev.tr7zw.trender.gui.widget.WWidget;
 //import juuxel.libninepatch.NinePatch;
 //import juuxel.libninepatch.TextureRegion;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -101,7 +100,6 @@ public interface BackgroundPainter {
      *
      * @param panelColor the panel background color
      * @return a colorful gui panel painter
-     * @see ScreenDrawing#drawGuiPanel(GuiGraphics, int, int, int, int, int)
      */
     public static BackgroundPainter createColorful(int panelColor) {
         return (context, left, top, panel) -> {
@@ -180,8 +178,6 @@ public interface BackgroundPainter {
      * {@code dark} background painter depending on the
      * {@linkplain WWidget#shouldRenderInDarkMode current setting}.
      *
-     * @param light the light mode background painter
-     * @param dark  the dark mode background painter
      * @return a new background painter that chooses between the two inputs
      * @since 1.5.0
      */
@@ -229,9 +225,10 @@ public interface BackgroundPainter {
     static BackgroundPainter createGuiSprite(ResourceLocation texture) {
         Objects.requireNonNull(texture, "Texture cannot be null");
         return (context, left, top, panel) -> {
-            //#if MC < 12100
-            //$$ com.mojang.blaze3d.systems.RenderSystem.enableBlend();
-            //#endif
+            //? if < 1.21.0 {
+/*
+            com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+            *///? }
             SpriteData data = TextureConstants.get(texture);
             context.blitSprite(texture, left, top, panel.getWidth(), panel.getHeight(), data.border(), data.border(),
                     data.width(), data.height());

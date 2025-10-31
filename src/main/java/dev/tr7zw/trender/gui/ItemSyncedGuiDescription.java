@@ -1,4 +1,5 @@
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 package dev.tr7zw.trender.gui;
 
 import java.util.Objects;
@@ -70,4 +71,4 @@ public class ItemSyncedGuiDescription extends SyncedGuiDescription {
         return ItemStack.matches(ownerStack, owner.get());
     }
 }
-//#endif
+//? }

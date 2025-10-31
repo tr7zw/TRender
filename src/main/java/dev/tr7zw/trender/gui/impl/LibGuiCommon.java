@@ -2,14 +2,16 @@ package dev.tr7zw.trender.gui.impl;
 
 import dev.tr7zw.transition.mc.GeneralUtil;
 import net.minecraft.resources.ResourceLocation;
-//#if FABRIC
+//? if fabric {
+
 import net.fabricmc.api.ModInitializer;
-//#endif
+//? }
 
 public final class LibGuiCommon
-        //#if FABRIC
+//? if fabric {
+
         implements ModInitializer
-//#endif
+//? }
 {
     public static final String MOD_ID = "trender";
 
@@ -17,9 +19,10 @@ public final class LibGuiCommon
         return GeneralUtil.getResourceLocation(MOD_ID, path);
     }
 
-    //#if FABRIC
+    //? if fabric {
+    
     @Override
-    //#endif
+    //? }
     public void onInitialize() {
 
     }

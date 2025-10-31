@@ -20,7 +20,8 @@ public abstract class DevTitleScreenMixin extends Screen {
         super(title);
     }
 
-    //#if MC >= 12109
+    //? if >= 1.21.9 {
+    
     @Inject(method = "createTestWorldButton", at = @At("RETURN"), cancellable = true)
     private void createTestWorldButton(int l, int rowHeight, CallbackInfoReturnable<Integer> ci) {
         this.addRenderableWidget(Button.builder(Component.literal("Open Test Screen"), (button) -> {
@@ -36,6 +37,6 @@ public abstract class DevTitleScreenMixin extends Screen {
         System.out.println(this.width / 2 + 2 + " " + rowHeight);
         ci.setReturnValue(l);
     }
-    //#endif
+    //? }
 
 }

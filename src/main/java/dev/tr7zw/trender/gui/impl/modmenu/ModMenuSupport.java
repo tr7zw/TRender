@@ -1,4 +1,5 @@
-//#if FABRIC
+//? if fabric {
+
 package dev.tr7zw.trender.gui.impl.modmenu;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
@@ -19,4 +20,4 @@ public class ModMenuSupport implements ModMenuApi {
         };
     }
 }
-//#endif
+//? }

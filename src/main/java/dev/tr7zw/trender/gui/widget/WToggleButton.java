@@ -16,10 +16,11 @@ import dev.tr7zw.transition.mc.ComponentProvider;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-//#endif
+//? }
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -213,7 +214,8 @@ public class WToggleButton extends WWidget {
         return this;
     }
 
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     @Override
     public void addNarrations(NarrationElementOutput builder) {
         Component onOff = isOn ? NarrationMessages.TOGGLE_BUTTON_ON : NarrationMessages.TOGGLE_BUTTON_OFF;
@@ -233,5 +235,5 @@ public class WToggleButton extends WWidget {
             builder.add(NarratedElementType.USAGE, NarrationMessages.Vanilla.BUTTON_USAGE_HOVERED);
         }
     }
-    //#endif
+    //? }
 }

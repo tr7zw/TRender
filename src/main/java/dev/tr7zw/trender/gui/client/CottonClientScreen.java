@@ -1,10 +1,10 @@
 package dev.tr7zw.trender.gui.client;
 
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-//#endif
+//? }
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
@@ -13,9 +13,10 @@ import org.lwjgl.opengl.GL11;
 import dev.tr7zw.trender.gui.GuiDescription;
 import dev.tr7zw.trender.gui.impl.VisualLogger;
 import dev.tr7zw.trender.gui.impl.client.CottonScreenImpl;
-//#if MC >= 11904
+//? if >= 1.19.4 {
+
 import dev.tr7zw.trender.gui.impl.client.FocusElements;
-//#endif
+//? }
 import dev.tr7zw.trender.gui.impl.client.MouseInputHandler;
 import dev.tr7zw.trender.gui.impl.client.NarrationHelper;
 import dev.tr7zw.trender.gui.impl.mixin.client.ScreenAccessor;
@@ -24,10 +25,12 @@ import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.trender.gui.widget.data.InputResult;
 import dev.tr7zw.transition.mc.ComponentProvider;
 
-//#if MC >= 12000
-//#else
-//$$ import com.mojang.blaze3d.vertex.PoseStack;
-//#endif
+//? if >= 1.20.0 {
+
+//? } else {
+/*
+import com.mojang.blaze3d.vertex.PoseStack;
+*///? }
 
 public class CottonClientScreen extends Screen implements CottonScreenImpl {
     private static final VisualLogger LOGGER = new VisualLogger(CottonClientScreen.class);
@@ -81,7 +84,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         description.addPainters();
         reposition(width, height);
 
-        //#if MC >= 11904
+        //? if >= 1.19.4 {
+
         if (root != null) {
             GuiEventListener rootPanelElement = FocusElements.ofPanel(root);
             ((ScreenAccessor) this).libgui$getChildren().add(rootPanelElement);
@@ -89,7 +93,7 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         } else {
             LOGGER.warn("No root panel found, keyboard navigation disabled");
         }
-        //#endif
+        //? }
     }
 
     @Override
@@ -161,20 +165,24 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    //#if MC >= 12000
-    public void render(GuiGraphics context, int mouseX, int mouseY, float partialTicks) {
+    //? if >= 1.20.0 {
+    
+    public void render(net.minecraft.client.gui.GuiGraphics context, int mouseX, int mouseY, float partialTicks) {
         super.render(context, mouseX, mouseY, partialTicks);
         RenderContext renderContext = new RenderContext(context);
-        //#else
-        //$$public void render(PoseStack context, int mouseX, int mouseY, float partialTicks) {
-        //$$    super.render(context, mouseX, mouseY, partialTicks);
-        //$$    RenderContext renderContext = new RenderContext(this, context);
-        //#endif
-        //#if MC <= 11904
-        //$$ super.renderBackground(renderContext.getPose());
-        //#elseif MC <= 12001
-        //$$ super.renderBackground(context);
-        //#endif
+        //? } else {
+/*
+    public void render(PoseStack context, int mouseX, int mouseY, float partialTicks) {
+        super.render(context, mouseX, mouseY, partialTicks);
+        RenderContext renderContext = new RenderContext(this, context);
+        *///? }
+        //? if <= 1.19.4 {
+/*
+        super.renderBackground(renderContext.getPose());
+        *///? } else if <= 1.20.1 {
+        /*
+        super.renderBackground(context);
+        *///? }
         paint(renderContext, mouseX, mouseY, partialTicks);
 
         if (description != null) {
@@ -201,16 +209,18 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    //#if MC >= 12109
+    //? if >= 1.21.9 {
+    
     public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent mouseButtonEvent, boolean bl) {
         super.mouseClicked(mouseButtonEvent, bl);
         double mouseX = mouseButtonEvent.x();
         double mouseY = mouseButtonEvent.y();
         int mouseButton = mouseButtonEvent.button();
-        //#else
-        //$$public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
-        //$$    super.mouseClicked(mouseX, mouseY, mouseButton);
-        //#endif
+        //? } else {
+/*
+    public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+        *///? }
 
         int containerX = (int) mouseX - left;
         int containerY = (int) mouseY - top;
@@ -223,16 +233,18 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    //#if MC >= 12109
+    //? if >= 1.21.9 {
+    
     public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent mouseButtonEvent) {
         super.mouseReleased(mouseButtonEvent);
         double mouseX = mouseButtonEvent.x();
         double mouseY = mouseButtonEvent.y();
         int mouseButton = mouseButtonEvent.button();
-        //#else
-        //$$public boolean mouseReleased(double mouseX, double mouseY, int mouseButton) {
-        //$$    super.mouseReleased(mouseX, mouseY, mouseButton);
-        //#endif
+        //? } else {
+/*
+    public boolean mouseReleased(double mouseX, double mouseY, int mouseButton) {
+        super.mouseReleased(mouseX, mouseY, mouseButton);
+        *///? }
 
         int containerX = (int) mouseX - left;
         int containerY = (int) mouseY - top;
@@ -242,17 +254,19 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    //#if MC >= 12109
+    //? if >= 1.21.9 {
+    
     public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent mouseButtonEvent, double deltaX,
             double deltaY) {
         super.mouseDragged(mouseButtonEvent, deltaX, deltaY);
         double mouseX = mouseButtonEvent.x();
         double mouseY = mouseButtonEvent.y();
         int mouseButton = mouseButtonEvent.button();
-        //#else
-        //$$public boolean mouseDragged(double mouseX, double mouseY, int mouseButton, double deltaX, double deltaY) {
-        //$$    super.mouseDragged(mouseX, mouseY, mouseButton, deltaX, deltaY);
-        //#endif
+        //? } else {
+/*
+    public boolean mouseDragged(double mouseX, double mouseY, int mouseButton, double deltaX, double deltaY) {
+        super.mouseDragged(mouseX, mouseY, mouseButton, deltaX, deltaY);
+        *///? }
 
         int containerX = (int) mouseX - left;
         int containerY = (int) mouseY - top;
@@ -262,14 +276,16 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    //#if MC >= 12002
+    //? if >= 1.20.2 {
+    
     public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
         super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
-        //#else
-        //$$ public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount) {
-        //$$    super.mouseScrolled(mouseX, mouseY, horizontalAmount);
-        //$$ double verticalAmount = 0;
-        //#endif
+        //? } else {
+/*
+    public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount) {
+        super.mouseScrolled(mouseX, mouseY, horizontalAmount);
+        double verticalAmount = 0;
+        *///? }
 
         int containerX = (int) mouseX - left;
         int containerY = (int) mouseY - top;
@@ -288,72 +304,85 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    //#if MC >= 12109
+    //? if >= 1.21.9 {
+    
     public boolean charTyped(net.minecraft.client.input.CharacterEvent characterEvent) {
         char ch = characterEvent.codepointAsString().charAt(0);
         int keyCode = characterEvent.codepoint();
-        //#else
-        //$$public boolean charTyped(char ch, int keyCode) {
-        //#endif
+        //? } else {
+/*
+    public boolean charTyped(char ch, int keyCode) {
+        *///? }
         WWidget focus = description.getFocus();
         if (focus != null && focus.onCharTyped(ch) == InputResult.PROCESSED) {
             return true;
         }
 
-        //#if MC >= 12109
+        //? if >= 1.21.9 {
+        
         return super.charTyped(characterEvent);
-        //#else
-        //$$return super.charTyped(ch, keyCode);
-        //#endif
+        //? } else {
+/*
+        return super.charTyped(ch, keyCode);
+        *///? }
     }
 
     @Override
-    //#if MC >= 12109
+    //? if >= 1.21.9 {
+    
     public boolean keyPressed(net.minecraft.client.input.KeyEvent keyEvent) {
         char ch = (char) keyEvent.key();
         int keyCode = keyEvent.key();
         int modifiers = keyEvent.modifiers();
-        //#else
-        //$$public boolean keyPressed(int ch, int keyCode, int modifiers) {
-        //#endif
+        //? } else {
+/*
+    public boolean keyPressed(int ch, int keyCode, int modifiers) {
+        *///? }
         WWidget focus = description.getFocus();
         if (focus != null && focus.onKeyPressed(ch, keyCode, modifiers) == InputResult.PROCESSED) {
             return true;
         }
 
-        //#if MC >= 12109
+        //? if >= 1.21.9 {
+        
         return super.keyPressed(keyEvent);
-        //#else
-        //$$return super.keyPressed(ch, keyCode, modifiers);
-        //#endif
+        //? } else {
+/*
+        return super.keyPressed(ch, keyCode, modifiers);
+        *///? }
     }
 
     @Override
-    //#if MC >= 12109
+    //? if >= 1.21.9 {
+    
     public boolean keyReleased(net.minecraft.client.input.KeyEvent keyEvent) {
         char ch = (char) keyEvent.key();
         int keyCode = keyEvent.key();
         int modifiers = keyEvent.modifiers();
-        //#else
-        //$$public boolean keyReleased(int ch, int keyCode, int modifiers) {
-        //#endif
+        //? } else {
+/*
+    public boolean keyReleased(int ch, int keyCode, int modifiers) {
+        *///? }
         WWidget focus = description.getFocus();
         if (focus != null && focus.onKeyReleased(ch, keyCode, modifiers) == InputResult.PROCESSED) {
             return true;
         }
 
-        //#if MC >= 12109
+        //? if >= 1.21.9 {
+        
         return super.keyReleased(keyEvent);
-        //#else
-        //$$return super.keyReleased(ch, keyCode, modifiers);
-        //#endif
+        //? } else {
+/*
+        return super.keyReleased(ch, keyCode, modifiers);
+        *///? }
     }
 
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     @Override
     protected void updateNarratedWidget(NarrationElementOutput builder) {
         if (description != null)
             NarrationHelper.addNarrations(description.getRootPanel(), builder);
     }
-    //#endif
+    //? }
 }

@@ -1,9 +1,10 @@
 package dev.tr7zw.trender.gui.impl.client;
 
-//#if MC >= 11800
+//? if >= 1.18.0 {
+
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-//#endif
+//? }
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +15,8 @@ import dev.tr7zw.trender.gui.widget.WWidget;
 import dev.tr7zw.transition.mc.ComponentProvider;
 
 public final class NarrationHelper {
-    //#if MC >= 11800
+    //? if >= 1.18.0 {
+
     public static void addNarrations(WPanel rootPanel, NarrationElementOutput builder) {
         List<WWidget> narratableWidgets = getAllWidgets(rootPanel).filter(WWidget::isNarratable)
                 .collect(Collectors.toList());
@@ -37,7 +39,7 @@ public final class NarrationHelper {
             child.addNarrations(builder.nest());
         }
     }
-    //#endif
+    //? }
 
     private static Stream<WWidget> getAllWidgets(WPanel panel) {
         return Stream.concat(Stream.of(panel), panel.streamChildren().flatMap(widget -> {
