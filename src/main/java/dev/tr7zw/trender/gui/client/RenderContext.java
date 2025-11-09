@@ -55,6 +55,9 @@ public class RenderContext implements PoseStackHelper {
 
     //? if >= 1.21.6 {
 
+    // keep track of how much gets rendered
+    
+
     public org.joml.Matrix3x2fStack getPose() {
         //? } else {
         /*

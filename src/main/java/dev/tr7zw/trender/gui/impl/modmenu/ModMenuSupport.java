@@ -11,7 +11,7 @@ import dev.tr7zw.transition.mc.ComponentProvider;
 public class ModMenuSupport implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return screen -> new CottonClientScreen(ComponentProvider.translatable("options.libgui.libgui_settings"),
+        return screen -> new CottonClientScreen(ComponentProvider.translatable("text.trender.name"),
                 new ConfigGui(screen)) {
             @Override
             public void onClose() {

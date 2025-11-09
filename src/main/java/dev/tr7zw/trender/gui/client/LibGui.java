@@ -13,6 +13,6 @@ public final class LibGui {
     }
 
     public static GuiStyle getGuiStyle() {
-        return LibGuiClient.config.style;
+        return LibGuiClient.config.getConfig().style;
     }
 }
