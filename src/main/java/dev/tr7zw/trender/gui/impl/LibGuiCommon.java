@@ -14,7 +14,7 @@ public final class LibGuiCommon
 {
     public static final String MOD_ID = "trender";
 
-    public static ResourceLocation id(String path) {
+    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ id(String path) {
         return GeneralUtil.getResourceLocation(MOD_ID, path);
     }
 

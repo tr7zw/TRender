@@ -26,11 +26,11 @@ public class ConfigGui extends AbstractConfigScreen {
 
         var inst = ClientTRansitionMod.config;
         List<OptionInstance> generalOptions = new ArrayList<>();
-        generalOptions.add(getEnumOption("text.trender.style", GuiStyle.class, () -> LibGuiClient.config.getConfig().style,
-                (v) -> LibGuiClient.config.getConfig().style = v));
-        generalOptions.add(getOnOffOption("text.trender.sendstacktraces", () -> inst.getConfig().userConsentedToSendCrashReports,
-                b -> inst.getConfig().userConsentedToSendCrashReports = b));
-
+        generalOptions.add(getEnumOption("text.trender.style", GuiStyle.class,
+                () -> LibGuiClient.config.getConfig().style, (v) -> LibGuiClient.config.getConfig().style = v));
+        generalOptions.add(
+                getOnOffOption("text.trender.sendstacktraces", () -> inst.getConfig().userConsentedToSendCrashReports,
+                        b -> inst.getConfig().userConsentedToSendCrashReports = b));
 
         var generalOptionList = createOptionList(generalOptions);
         generalOptionList.setGap(-1);

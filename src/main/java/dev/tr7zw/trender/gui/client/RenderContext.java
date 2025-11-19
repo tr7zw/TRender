@@ -56,7 +56,6 @@ public class RenderContext implements PoseStackHelper {
     //? if >= 1.21.6 {
 
     // keep track of how much gets rendered
-    
 
     public org.joml.Matrix3x2fStack getPose() {
         //? } else {
@@ -92,8 +91,8 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blit(ResourceLocation atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height,
-            int textureWidth, int textureHeight) {
+    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ atlasLocation, int x,
+            int y, float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight) {
         //? if >= 1.21.6 {
 
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, atlasLocation, x, y, uOffset, vOffset, width, height,
@@ -121,12 +120,14 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blit(ResourceLocation atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight) {
+    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ atlasLocation, int x,
+            int y, int uOffset, int vOffset, int uWidth, int vHeight) {
         blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight, 64, 64);
     }
 
-    public void blit(ResourceLocation atlasLocation, int x, int y, int blitOffset, float uOffset, float vOffset,
-            int uWidth, int vHeight, int textureWidth, int textureHeight) {
+    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ atlasLocation, int x,
+            int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth,
+            int textureHeight) {
         //? if >= 1.21.6 {
 
         //TODO blitOffset?
@@ -153,8 +154,8 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int sliceSide, int sliceTop,
-            int txtWidth, int txtHeight) {
+    public void blitSprite(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture, int x,
+            int y, int width, int height, int sliceSide, int sliceTop, int txtWidth, int txtHeight) {
         //? if >= 1.21.6 {
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height);
@@ -171,15 +172,15 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blitSpriteLegacy(ResourceLocation texture, int x, int y, int width, int height, int sliceSide,
-            int sliceTop, int txtWidth, int txtHeight) {
+    public void blitSpriteLegacy(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture, int x,
+            int y, int width, int height, int sliceSide, int sliceTop, int txtWidth, int txtHeight) {
         blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight,
                 txtWidth, txtHeight);
     }
 
-    private void blitNineSliced(ResourceLocation atlasLocation, int x, int y, int width, int height, int leftSliceWidth,
-            int topSliceHeight, int rightSliceWidth, int bottomSliceHeight, int uWidth, int vHeight, int textureWidth,
-            int textureHeight) {
+    private void blitNineSliced(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ atlasLocation,
+            int x, int y, int width, int height, int leftSliceWidth, int topSliceHeight, int rightSliceWidth,
+            int bottomSliceHeight, int uWidth, int vHeight, int textureWidth, int textureHeight) {
         leftSliceWidth = Math.min(leftSliceWidth, width / 2);
         rightSliceWidth = Math.min(rightSliceWidth, width / 2);
         topSliceHeight = Math.min(topSliceHeight, height / 2);
@@ -228,8 +229,9 @@ public class RenderContext implements PoseStackHelper {
         }
     }
 
-    private void blitRepeating(ResourceLocation atlasLocation, int x, int y, int width, int height, int uOffset,
-            int vOffset, int sourceWidth, int sourceHeight, int textureWidth, int textureHeight) {
+    private void blitRepeating(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ atlasLocation,
+            int x, int y, int width, int height, int uOffset, int vOffset, int sourceWidth, int sourceHeight,
+            int textureWidth, int textureHeight) {
         int i = x;
 
         int j;
@@ -310,7 +312,8 @@ public class RenderContext implements PoseStackHelper {
 
     }
 
-    public void blitSprite(ResourceLocation texture, int x, int y, int width, int height, int color) {
+    public void blitSprite(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture, int x,
+            int y, int width, int height, int color) {
         //? if >= 1.21.6 {
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height, color);

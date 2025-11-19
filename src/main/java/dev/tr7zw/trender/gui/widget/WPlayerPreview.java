@@ -94,7 +94,14 @@ public class WPlayerPreview extends WWidget {
 
         var entityRenderer = entityRenderDispatcher.getRenderer(livingEntity);
         var entityRenderState = entityRenderer.createRenderState(livingEntity, 1.0F);
+        //? if >= 1.21.11 {
+
+        entityRenderState.boundingBoxHeight = 0;
+        entityRenderState.boundingBoxWidth = 0;
+        //? } else {
+        /*
         entityRenderState.hitboxesRenderState = null;
+        *///? }
         float o = livingEntity.getScale();
         var vector3f = new org.joml.Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + 0 * o, 0.0F);
         float p = (float) size / o;

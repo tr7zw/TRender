@@ -50,7 +50,7 @@ public class WScrollBar extends WWidget {
 
         context.blitSprite(textures.background(), x, y, getWidth(), getHeight(), 4, 4, 16, 16);
 
-        ResourceLocation thumbTexture = textures.thumb();
+        /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ thumbTexture = textures.thumb();
 
         if (maxValue <= 0)
             return;

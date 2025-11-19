@@ -7,7 +7,8 @@ import java.util.*;
 import net.minecraft.resources.*;
 
 public class WKirbSprite extends WWidget {
-    private static final ResourceLocation KIRB = LibGuiCommon.id("textures/widget/kirb.png");
+    private static final /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ KIRB = LibGuiCommon
+            .id("textures/widget/kirb.png");
 
     private static final float PX = 1f / 416f;
     private static final float KIRB_WIDTH = 32 * PX;

@@ -129,7 +129,8 @@ public interface BackgroundPainter {
      * @since 1.5.0
      * @see NinePatchBackgroundPainter
      */
-    public static NinePatchBackgroundPainter createNinePatch(ResourceLocation texture) {
+    public static NinePatchBackgroundPainter createNinePatch(
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture) {
         return new NinePatchBackgroundPainter(texture);
         //return createNinePatch(new Texture(texture), builder -> builder.cornerSize(4).cornerUv(0.25f));
     }
@@ -215,7 +216,8 @@ public interface BackgroundPainter {
      * @return a new background painter that uses a GUI sprite
      * @since 9.0.0
      */
-    static BackgroundPainter createGuiSprite(ResourceLocation texture) {
+    static BackgroundPainter createGuiSprite(
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture) {
         Objects.requireNonNull(texture, "Texture cannot be null");
         return (context, left, top, panel) -> {
             //? if < 1.21.0 {

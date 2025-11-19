@@ -113,11 +113,15 @@ public class WItem extends WWidget {
 
     @SuppressWarnings("unchecked")
     private static List<ItemStack> getRenderStacks(TagKey<? extends ItemLike> tag) {
-        //? if >= 1.21.3 {
+        //? if >= 1.21.11 {
 
         Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
+                .getValue(tag.registry().identifier());
+        //? } else if >= 1.21.3 {
+        /*
+        Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
                 .getValue(tag.registry().location());
-        //? } else if >= 1.19.4 {
+        *///? } else if >= 1.19.4 {
         /*
         Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY.get(tag.registry().location());
         *///? } else {

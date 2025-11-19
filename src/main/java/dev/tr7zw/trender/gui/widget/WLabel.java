@@ -2,8 +2,11 @@ package dev.tr7zw.trender.gui.widget;
 
 import dev.tr7zw.trender.gui.client.*;
 import dev.tr7zw.trender.gui.impl.client.*;
+import dev.tr7zw.trender.gui.impl.client.TextAlignment;
+import dev.tr7zw.trender.gui.impl.mixin.client.*;
 import dev.tr7zw.trender.gui.widget.data.*;
 import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.*;
 import org.jetbrains.annotations.*;
@@ -65,7 +68,14 @@ public class WLabel extends WWidget {
         if (hoveredTextStyle != null) {
             Screen screen = Minecraft.getInstance().screen;
             if (screen != null) {
+                //? if >= 1.21.11 {
+                ((ScreenAccessor) (Object) Minecraft.getInstance().screen).libgui$defaultHandleGameClickEvent(
+                        hoveredTextStyle.getClickEvent(), Minecraft.getInstance(), Minecraft.getInstance().screen);
+                return InputResult.PROCESSED;
+                //? } else {
+                /*
                 return InputResult.of(screen.handleComponentClicked(hoveredTextStyle));
+                *///? }
             }
         }
 
@@ -84,7 +94,19 @@ public class WLabel extends WWidget {
     public Style getTextStyleAt(int x, int y) {
         if (isWithinBounds(x, y)) {
             int xOffset = TextAlignment.getTextOffsetX(horizontalAlignment, getWidth(), text.getVisualOrderText());
+            //? if >= 1.21.11 {
+
+            Minecraft minecraft = Minecraft.getInstance();
+            Font font = minecraft.font;
+            ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
+                    font, x, y);
+            minecraft.gui.getChat().captureClickableText(clickableStyleFinder,
+                    minecraft.getWindow().getGuiScaledHeight(), minecraft.gui.getGuiTicks(), true);
+            return clickableStyleFinder.result();
+            //? } else {
+            /*
             return Minecraft.getInstance().font.getSplitter().componentStyleAtWidth(text, x - xOffset);
+            *///? }
         }
         return null;
     }

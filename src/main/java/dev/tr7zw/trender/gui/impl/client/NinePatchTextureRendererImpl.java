@@ -20,13 +20,13 @@
 //    INSTANCE;
 //
 //    //@Override
-//    public void draw(ResourceLocation texture, RenderContext context, int x, int y, int width, int height, float u1,
+//    public void draw(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/texture, RenderContext context, int x, int y, int width, int height, float u1,
 //            float v1, float u2, float v2) {
 //        ScreenDrawing.texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, 0xFF_FFFFFF);
 //    }
 //
 //    //@Override
-//    public void drawTiled(ResourceLocation texture, RenderContext context, int x, int y, int regionWidth,
+//    public void drawTiled(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/texture, RenderContext context, int x, int y, int regionWidth,
 //            int regionHeight, int tileWidth, int tileHeight, float u1, float v1, float u2, float v2) {
 //        Matrix4f positionMatrix = context.pose().last().pose();
 //        onRenderThread(() -> {

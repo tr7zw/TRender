@@ -70,7 +70,8 @@ public class WItemSlot extends WWidget {
      *
      * @since 6.2.0
      */
-    public static final ResourceLocation SLOT_TEXTURE = LibGuiCommon.id("textures/widget/item_slot.png");
+    public static final /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ SLOT_TEXTURE = LibGuiCommon
+            .id("textures/widget/item_slot.png");
 
     private static final VisualLogger LOGGER = new VisualLogger(WItemSlot.class);
     private final List<ValidatedSlot> peers = new ArrayList<>();

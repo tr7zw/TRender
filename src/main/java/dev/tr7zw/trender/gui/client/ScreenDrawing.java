@@ -48,7 +48,8 @@ public class ScreenDrawing {
      *                0xFF_FFFFFF if you don't want a color tint
      */
     public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            ResourceLocation texture, float u1, float v1, float u2, float v2, int color) {
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture, float u1, float v1,
+            float u2, float v2, int color) {
         texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, color, 1.0f, 64, 64);
     }
 
@@ -69,8 +70,8 @@ public class ScreenDrawing {
      *                0xFF_FFFFFF if you don't want a color tint
      */
     public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            ResourceLocation texture, float u1, float v1, float u2, float v2, int color, int textureWidth,
-            int textureHeight) {
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture, float u1, float v1,
+            float u2, float v2, int color, int textureWidth, int textureHeight) {
         texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, color, 1.0f, textureWidth, textureHeight);
     }
 
@@ -190,8 +191,8 @@ public class ScreenDrawing {
      * @since 2.0.0
      */
     public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            ResourceLocation texture, float u1, float v1, float u2, float v2, int color, float opacity,
-            int textureWidth, int textureHeight) {
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture, float u1, float v1,
+            float u2, float v2, int color, float opacity, int textureWidth, int textureHeight) {
         if (width <= 0)
             width = 1;
         if (height <= 0)

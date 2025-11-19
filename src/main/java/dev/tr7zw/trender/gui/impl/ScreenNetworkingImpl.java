@@ -36,7 +36,7 @@
 //    // Matches the one used in PacketCodecs.codec() etc
 //    private static final long MAX_NBT_SIZE = 0x200000L;
 //
-//    public record ScreenMessage(int syncId, ResourceLocation message, Tag nbt) implements CustomPacketPayload {
+//    public record ScreenMessage(int syncId, /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/message, Tag nbt) implements CustomPacketPayload {
 //
 //        public static final Type<ScreenMessage> ID = new Type<>(LibGuiCommon.id("screen_message"));
 //        public static final StreamCodec<RegistryFriendlyByteBuf, ScreenMessage> CODEC = StreamCodec.composite(
@@ -67,7 +67,7 @@
 //    }
 //
 //    @Override
-//    public <D> void receive(ResourceLocation message, Decoder<D> decoder, MessageReceiver<D> receiver) {
+//    public <D> void receive(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/message, Decoder<D> decoder, MessageReceiver<D> receiver) {
 //        Objects.requireNonNull(message, "message");
 //        Objects.requireNonNull(decoder, "decoder");
 //        Objects.requireNonNull(receiver, "receiver");
@@ -80,7 +80,7 @@
 //    }
 //
 //    @Override
-//    public <D> void send(ResourceLocation message, Encoder<D> encoder, D data) {
+//    public <D> void send(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/message, Encoder<D> encoder, D data) {
 //        Objects.requireNonNull(message, "message");
 //        Objects.requireNonNull(encoder, "encoder");
 //
@@ -172,12 +172,12 @@
 //        }
 //
 //        @Override
-//        public <D> void receive(ResourceLocation message, Decoder<D> decoder, MessageReceiver<D> receiver) {
+//        public <D> void receive(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/message, Decoder<D> decoder, MessageReceiver<D> receiver) {
 //            // NO-OP
 //        }
 //
 //        @Override
-//        public <D> void send(ResourceLocation message, Encoder<D> encoder, D data) {
+//        public <D> void send(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/message, Encoder<D> encoder, D data) {
 //            // NO-OP
 //        }
 //    }

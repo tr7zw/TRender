@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lombok.experimental.UtilityClass;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.*;
 
 @UtilityClass
 public class TextureConstants {
@@ -12,14 +12,15 @@ public class TextureConstants {
     public record SpriteData(int width, int height, int border) {
     }
 
-    private static final Map<ResourceLocation, SpriteData> DATA = new HashMap<>();
+    private static final Map</*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/, SpriteData> DATA = new HashMap<>();
     private static final SpriteData DEFAULT = new SpriteData(16, 16, 4);
 
-    public static void register(ResourceLocation location, int width, int height, int border) {
+    public static void register(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ location,
+            int width, int height, int border) {
         DATA.put(location, new SpriteData(width, height, border));
     }
 
-    public static SpriteData get(ResourceLocation location) {
+    public static SpriteData get(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ location) {
         return DATA.getOrDefault(location, DEFAULT);
     }
 
