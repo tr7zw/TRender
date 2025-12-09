@@ -3,7 +3,7 @@ source: "https://github.com/tr7zw/ProcessedModTemplate/tree/stonecutter"
 replacements:
   name: "TRender"
   id: "trender"
-  version: "1.0.9"
+  version: "1.0.10"
   description: "Multi version rendering library based on CottonMC LibGui"
   homepageUrl: "https://github.com/tr7zw/TRender"
   sourcesUrl: "https://github.com/tr7zw/TRender"
