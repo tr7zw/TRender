@@ -18,35 +18,35 @@ public final class CottonHud {
 
     static {
         //TODO
-        //? if fabric {
+        //? if fabric && < 26.0 {
 
-        HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
+        /*HudRenderCallback.EVENT.register((drawContext, tickDelta) -> {
             Window window = Minecraft.getInstance().getWindow();
             int hudWidth = window.getGuiScaledWidth();
             int hudHeight = window.getGuiScaledHeight();
             //? if >= 1.20.0 {
-
+        
             RenderContext renderContext = new RenderContext(drawContext);
             //? } else {
-            /*
+            /^
             RenderContext renderContext = new RenderContext(Minecraft.getInstance().screen, drawContext);
-            *///? }
+            ^///? }
             for (WWidget widget : widgets) {
                 Positioner positioner = positioners.get(widget);
                 if (positioner != null) {
                     positioner.reposition(widget, hudWidth, hudHeight);
                 }
-
+        
                 widget.paint(renderContext, widget.getX(), widget.getY(), -1, -1);
             }
         });
-
+        
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             for (WWidget widget : widgets) {
                 widget.tick();
             }
         });
-        //? }
+        *///? }
     }
 
     /**

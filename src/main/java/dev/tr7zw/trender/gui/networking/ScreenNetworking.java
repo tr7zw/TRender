@@ -71,8 +71,8 @@ public interface ScreenNetworking {
      * @throws IllegalStateException if the message has already been registered
      * @throws NullPointerException  if any parameter is null
      */
-    <D> void receive(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ message,
-            Decoder<D> decoder, MessageReceiver<D> receiver);
+    <D> void receive(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ message, Decoder<D> decoder,
+            MessageReceiver<D> receiver);
 
     /**
      * Sends a screen message to the other side of the connection.
@@ -86,7 +86,7 @@ public interface ScreenNetworking {
      * @param data    the message data
      * @throws NullPointerException if the message ID or the encoder is null
      */
-    <D> void send(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ message, Encoder<D> encoder,
+    <D> void send(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ message, Encoder<D> encoder,
             D data);
 
     /**

@@ -21,7 +21,7 @@ public class WTiledSprite extends WSprite {
      * @param image      The image to tile
      */
     public WTiledSprite(int tileWidth, int tileHeight,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ image) {
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image) {
         super(image);
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
@@ -36,7 +36,7 @@ public class WTiledSprite extends WSprite {
      * @param frames     The locations of the frames of the animation.
      */
     public WTiledSprite(int tileWidth, int tileHeight, int frameTime,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/... frames) {
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/... frames) {
         super(frameTime, frames);
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;

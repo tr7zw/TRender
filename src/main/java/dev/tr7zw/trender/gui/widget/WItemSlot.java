@@ -70,7 +70,7 @@ public class WItemSlot extends WWidget {
      *
      * @since 6.2.0
      */
-    public static final /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ SLOT_TEXTURE = LibGuiCommon
+    public static final /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ SLOT_TEXTURE = LibGuiCommon
             .id("textures/widget/item_slot.png");
 
     private static final VisualLogger LOGGER = new VisualLogger(WItemSlot.class);
@@ -424,15 +424,17 @@ public class WItemSlot extends WWidget {
 
     @Override
     public InputResult onKeyPressed(int ch, int key, int modifiers) {
+        // Unused, fixme if needed
+        /*
         if (isActivationKey(ch) && host instanceof AbstractContainerMenu handler && focusedSlot >= 0) {
             Minecraft client = Minecraft.getInstance();
-
+        
             ValidatedSlot peer = peers.get(focusedSlot);
             client.gameMode.handleInventoryMouseClick(handler.containerId, peer.index, 0, ClickType.PICKUP,
                     client.player);
             return InputResult.PROCESSED;
         }
-
+        */
         return InputResult.IGNORED;
     }
 

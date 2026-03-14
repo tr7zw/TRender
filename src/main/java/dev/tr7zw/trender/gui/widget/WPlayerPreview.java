@@ -105,20 +105,27 @@ public class WPlayerPreview extends WWidget {
         float o = livingEntity.getScale();
         var vector3f = new org.joml.Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + 0 * o, 0.0F);
         float p = (float) size / o;
-        context.getGuiGraphics().submitEntityRenderState(entityRenderState, p, vector3f, quaternion, quaternion2,
+        //? if >= 26.0 {
+
+        context.getGuiGraphics().entity(entityRenderState, p, vector3f, quaternion, quaternion2, x - width, y - height,
+                x + width, y + height);
+        //? } else {
+
+        /*context.getGuiGraphics().submitEntityRenderState(entityRenderState, p, vector3f, quaternion, quaternion2,
                 x - width, y - height, x + width, y + height);
-        //? } else if >= 1.21.2 {
-        /*
-         entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, delta, matrixStack, bufferSource, 15728880);
-        *///? } else if >= 1.17.0 {
-        /*
-        entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
-        *///? } else {
-        /*
-         RenderSystem.runAsFancy(() -> {
+         *///? }
+            //? } else if >= 1.21.2 {
+            /*
+             entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, delta, matrixStack, bufferSource, 15728880);
+            *///? } else if >= 1.17.0 {
+            /*
             entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
-         });
-        *///? }
+            *///? } else {
+            /*
+             RenderSystem.runAsFancy(() -> {
+                entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
+             });
+            *///? }
         bufferSource.endBatch();
         //? if < 1.21.9 {
         /*

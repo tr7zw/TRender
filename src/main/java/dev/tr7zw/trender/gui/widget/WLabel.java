@@ -7,6 +7,7 @@ import dev.tr7zw.trender.gui.impl.mixin.client.*;
 import dev.tr7zw.trender.gui.widget.data.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.*;
 import org.jetbrains.annotations.*;
@@ -94,16 +95,26 @@ public class WLabel extends WWidget {
     public Style getTextStyleAt(int x, int y) {
         if (isWithinBounds(x, y)) {
             int xOffset = TextAlignment.getTextOffsetX(horizontalAlignment, getWidth(), text.getVisualOrderText());
-            //? if >= 1.21.11 {
+            //? if >= 26.0 {
 
             Minecraft minecraft = Minecraft.getInstance();
             Font font = minecraft.font;
             ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
                     font, x, y);
             minecraft.gui.getChat().captureClickableText(clickableStyleFinder,
+                    minecraft.getWindow().getGuiScaledHeight(), minecraft.gui.getGuiTicks(),
+                    ChatComponent.DisplayMode.FOREGROUND);
+            return clickableStyleFinder.result();
+            //? } else if >= 1.21.11 {
+
+            /*Minecraft minecraft = Minecraft.getInstance();
+            Font font = minecraft.font;
+            ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
+                    font, x, y);
+            minecraft.gui.getChat().captureClickableText(clickableStyleFinder,
                     minecraft.getWindow().getGuiScaledHeight(), minecraft.gui.getGuiTicks(), true);
             return clickableStyleFinder.result();
-            //? } else {
+            *///? } else {
             /*
             return Minecraft.getInstance().font.getSplitter().componentStyleAtWidth(text, x - xOffset);
             *///? }

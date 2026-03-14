@@ -21,8 +21,6 @@ public class LibGuiClient
     public static final Logger logger = LogManager.getLogger();
     public static volatile ConfigManager<LibGuiConfig> config = new ConfigManager<>("trender", LibGuiConfig::new, null);
 
-    //    public static final Jankson jankson = JanksonFactory.createJankson();
-
     //? if fabric {
 
     @Override

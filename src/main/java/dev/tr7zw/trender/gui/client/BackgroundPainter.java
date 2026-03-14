@@ -130,7 +130,7 @@ public interface BackgroundPainter {
      * @see NinePatchBackgroundPainter
      */
     public static NinePatchBackgroundPainter createNinePatch(
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture) {
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture) {
         return new NinePatchBackgroundPainter(texture);
         //return createNinePatch(new Texture(texture), builder -> builder.cornerSize(4).cornerUv(0.25f));
     }
@@ -155,12 +155,12 @@ public interface BackgroundPainter {
      *                                  standalone}
      */
     //    public static NinePatchBackgroundPainter createNinePatch(Texture texture,
-    //            Consumer<NinePatch.Builder<ResourceLocation>> configurator) {
+    //            Consumer<NinePatch.Builder<Identifier>> configurator) {
     //        if (texture.type() != Texture.Type.STANDALONE) {
     //            throw new IllegalArgumentException("Non-standalone texture " + texture + " cannot be used for nine-patch");
     //        }
     //
-    //        TextureRegion<ResourceLocation> region = new TextureRegion<>(texture.image(), texture.u1(), texture.v1(),
+    //        TextureRegion<Identifier> region = new TextureRegion<>(texture.image(), texture.u1(), texture.v1(),
     //                texture.u2(), texture.v2());
     //        var builder = NinePatch.builder(region);
     //        configurator.accept(builder);
@@ -210,14 +210,14 @@ public interface BackgroundPainter {
      * <p>
      * This method can be used to draw tiled or nine-slice GUI sprites from resource
      * packs as a simpler and more data-driven alternative to
-     * {@link #createNinePatch(ResourceLocation)}.
+     * {@link #createNinePatch(Identifier)}.
      *
      * @param texture the texture ID
      * @return a new background painter that uses a GUI sprite
      * @since 9.0.0
      */
     static BackgroundPainter createGuiSprite(
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture) {
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture) {
         Objects.requireNonNull(texture, "Texture cannot be null");
         return (context, left, top, panel) -> {
             //? if < 1.21.0 {

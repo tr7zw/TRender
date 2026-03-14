@@ -1,0 +1,35 @@
+stonecutter {
+    swaps["render_fake_item"] = 
+          eval(current.version, ">= 26.0") ? "guiGraphics.fakeItem(itemStack, x, y);"
+        : eval(current.version, ">= 1.20.0") ? "guiGraphics.renderFakeItem(itemStack, x, y);"
+        : eval(current.version, "> 1.19.3") ? "minecraft.getItemRenderer().renderAndDecorateFakeItem(pose, itemStack, x, y);"
+        : "minecraft.getItemRenderer().renderAndDecorateFakeItem(itemStack, x, y);"
+
+    swaps["render_item_decorations"] = 
+          eval(current.version, ">= 26.0") ? "guiGraphics.itemDecorations(font, itemStack, x, y);"
+        : eval(current.version, ">= 1.20.0") ? "guiGraphics.renderItemDecorations(font, itemStack, x, y);"
+        : eval(current.version, "> 1.19.3") ? "minecraft.getItemRenderer().renderGuiItemDecorations(pose, font, itemStack, x, y);"
+        : "minecraft.getItemRenderer().renderGuiItemDecorations(font, itemStack, x, y);"
+
+    swaps["render_item"] = 
+          eval(current.version, ">= 26.0") ? "guiGraphics.item(player, itemStack, x, y, seed);"
+        : eval(current.version, ">= 1.20.0") ? "guiGraphics.renderItem(player, itemStack, x, y, seed);"
+        : eval(current.version, "> 1.19.3") ? "minecraft.getItemRenderer().renderAndDecorateItem(pose, player, itemStack, x, y, seed);"
+        : eval(current.version, "> 1.17.0") ? "minecraft.getItemRenderer().renderAndDecorateItem(player, itemStack, x, y, seed);"
+        : "minecraft.getItemRenderer().renderAndDecorateItem(player, itemStack, x, y);"
+
+    swaps["draw_string"] = 
+          eval(current.version, ">= 26.0") ? "guiGraphics.text(font, name, x, y, color);"
+        : eval(current.version, ">= 1.20.0") ? "guiGraphics.drawString(font, name, x, y, color);"
+        : "font.draw(pose, name, x, y, color);"
+
+    swaps["draw_centered_string"] = 
+          eval(current.version, ">= 26.0") ? "guiGraphics.centeredText(font, name, x, y, color);"
+        : eval(current.version, ">= 1.20.0") ? "guiGraphics.drawCenteredString(font, name, x, y, color);"
+        : "GuiComponent.drawCenteredString(pose, font, name, x, y, color);"
+
+    swaps["draw_string_shadow"] = 
+          eval(current.version, ">= 26.0") ? "guiGraphics.text(textRenderer, s, x, y, color, dropShadow);"
+        : eval(current.version, ">= 1.20.0") ? "guiGraphics.drawString(textRenderer, s, x, y, color, dropShadow);"
+        : "GuiComponent.drawString(pose, textRenderer, s, x, y, color);"
+}

@@ -14,7 +14,7 @@ import net.minecraft.resources.*;
  *
  * <p>
  * Nine-patch background painters can be created using
- * {@link BackgroundPainter#createNinePatch(ResourceLocation)},
+ * {@link BackgroundPainter#createNinePatch(Identifier)},
  * {@link #createNinePatch(Texture, Consumer)}, or with the constructor
  * directly. The latter two let you customise the look of the background more
  * finely.
@@ -27,17 +27,17 @@ import net.minecraft.resources.*;
  * @since 4.0.0
  */
 public final class NinePatchBackgroundPainter implements BackgroundPainter {
-    private final /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture;
+    private final /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture;
     private int topPadding = 0;
     private int leftPadding = 0;
     private int bottomPadding = 0;
     private int rightPadding = 0;
 
-    //    public NinePatchBackgroundPainter(NinePatch<ResourceLocation> ninePatch) {
+    //    public NinePatchBackgroundPainter(NinePatch<Identifier> ninePatch) {
     //        this.ninePatch = ninePatch;
     //    }
 
-    public NinePatchBackgroundPainter(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture) {
+    public NinePatchBackgroundPainter(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture) {
         this.texture = texture;
     }
 

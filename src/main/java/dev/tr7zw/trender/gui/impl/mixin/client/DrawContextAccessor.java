@@ -4,7 +4,7 @@ import org.spongepowered.asm.mixin.*;
 
 //? if >= 1.20.0 {
 
-@Mixin(net.minecraft.client.gui.GuiGraphics.class)
+@Mixin(net.minecraft.client.gui.GuiGraphicsExtractor.class)
 //? } else {
 /*
 @Mixin(net.minecraft.client.renderer.MultiBufferSource.BufferSource.class)

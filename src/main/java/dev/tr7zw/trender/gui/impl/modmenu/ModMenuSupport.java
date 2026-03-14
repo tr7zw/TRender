@@ -7,12 +7,13 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 
 import dev.tr7zw.trender.gui.client.CottonClientScreen;
 import dev.tr7zw.transition.mc.ComponentProvider;
+import net.minecraft.client.gui.screens.*;
 
 public class ModMenuSupport implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return screen -> new CottonClientScreen(ComponentProvider.translatable("text.trender.name"),
-                new ConfigGui(screen)) {
+                new ConfigGui((Screen) (Object) screen)) {
             @Override
             public void onClose() {
                 this.minecraft.setScreen(screen);

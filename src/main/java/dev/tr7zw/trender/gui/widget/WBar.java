@@ -52,8 +52,7 @@ public class WBar extends WWidget {
      * <p>
      * This constant will only be used if {@link #max} is negative.
      *
-     * @see #withConstantMaximum(ResourceLocation, ResourceLocation, int, int,
-     *      Direction)
+     * @see #withConstantMaximum(Identifier, Identifier, int, int, Direction)
      */
     protected int maxValue;
 
@@ -100,13 +99,13 @@ public class WBar extends WWidget {
         this.direction = dir;
     }
 
-    public WBar(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ bg,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ bar, int field, int maxField) {
+    public WBar(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bg,
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bar, int field, int maxField) {
         this(bg, bar, field, maxField, Direction.UP);
     }
 
-    public WBar(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ bg,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ bar, int field, int maxField,
+    public WBar(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bg,
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bar, int field, int maxField,
             Direction dir) {
         this(new Texture(bg), new Texture(bar), field, maxField, dir);
     }
@@ -278,8 +277,8 @@ public class WBar extends WWidget {
      * @param dir      the direction the bar should grow towards
      * @return a new WBar with a constant maximum value
      */
-    public static WBar withConstantMaximum(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ bg,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ bar, int field, int maxValue,
+    public static WBar withConstantMaximum(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bg,
+            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bar, int field, int maxValue,
             Direction dir) {
         WBar result = new WBar(bg, bar, field, -1, dir);
         result.maxValue = maxValue;

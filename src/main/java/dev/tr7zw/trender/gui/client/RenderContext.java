@@ -1,6 +1,7 @@
 package dev.tr7zw.trender.gui.client;
 
 import com.mojang.blaze3d.systems.*;
+import dev.tr7zw.trender.gui.impl.mixin.client.*;
 import it.unimi.dsi.fastutil.ints.*;
 import java.util.*;
 import java.util.function.*;
@@ -46,7 +47,7 @@ public class RenderContext implements PoseStackHelper {
     //? if >= 1.20.0 {
 
     @Getter
-    private final GuiGraphics guiGraphics;
+    private final GuiGraphicsExtractor guiGraphics;
     //? } else {
     /*
     private final Screen screen;
@@ -91,8 +92,8 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ atlasLocation, int x,
-            int y, float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight) {
+    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ atlasLocation, int x, int y,
+            float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight) {
         //? if >= 1.21.6 {
 
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, atlasLocation, x, y, uOffset, vOffset, width, height,
@@ -120,13 +121,13 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ atlasLocation, int x,
-            int y, int uOffset, int vOffset, int uWidth, int vHeight) {
+    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ atlasLocation, int x, int y,
+            int uOffset, int vOffset, int uWidth, int vHeight) {
         blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight, 64, 64);
     }
 
-    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ atlasLocation, int x,
-            int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth,
+    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ atlasLocation, int x, int y,
+            int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth,
             int textureHeight) {
         //? if >= 1.21.6 {
 
@@ -154,8 +155,8 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blitSprite(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture, int x,
-            int y, int width, int height, int sliceSide, int sliceTop, int txtWidth, int txtHeight) {
+    public void blitSprite(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture, int x, int y,
+            int width, int height, int sliceSide, int sliceTop, int txtWidth, int txtHeight) {
         //? if >= 1.21.6 {
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height);
@@ -172,14 +173,14 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blitSpriteLegacy(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture, int x,
+    public void blitSpriteLegacy(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture, int x,
             int y, int width, int height, int sliceSide, int sliceTop, int txtWidth, int txtHeight) {
         blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight,
                 txtWidth, txtHeight);
     }
 
-    private void blitNineSliced(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ atlasLocation,
-            int x, int y, int width, int height, int leftSliceWidth, int topSliceHeight, int rightSliceWidth,
+    private void blitNineSliced(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ atlasLocation, int x,
+            int y, int width, int height, int leftSliceWidth, int topSliceHeight, int rightSliceWidth,
             int bottomSliceHeight, int uWidth, int vHeight, int textureWidth, int textureHeight) {
         leftSliceWidth = Math.min(leftSliceWidth, width / 2);
         rightSliceWidth = Math.min(rightSliceWidth, width / 2);
@@ -229,9 +230,9 @@ public class RenderContext implements PoseStackHelper {
         }
     }
 
-    private void blitRepeating(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ atlasLocation,
-            int x, int y, int width, int height, int uOffset, int vOffset, int sourceWidth, int sourceHeight,
-            int textureWidth, int textureHeight) {
+    private void blitRepeating(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ atlasLocation, int x,
+            int y, int width, int height, int uOffset, int vOffset, int sourceWidth, int sourceHeight, int textureWidth,
+            int textureHeight) {
         int i = x;
 
         int j;
@@ -312,8 +313,8 @@ public class RenderContext implements PoseStackHelper {
 
     }
 
-    public void blitSprite(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ texture, int x,
-            int y, int width, int height, int color) {
+    public void blitSprite(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture, int x, int y,
+            int width, int height, int color) {
         //? if >= 1.21.6 {
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height, color);
@@ -438,82 +439,43 @@ public class RenderContext implements PoseStackHelper {
     }
 
     public void renderFakeItem(ItemStack itemStack, int x, int y) {
-        //? if >= 1.20.0 {
-
-        guiGraphics.renderFakeItem(itemStack, x, y);
-        //? } else if > 1.19.3 {
-        /*
-        minecraft.getItemRenderer().renderAndDecorateFakeItem(pose, itemStack, x, y);
-        *///? } else {
-        /*
-        minecraft.getItemRenderer().renderAndDecorateFakeItem(itemStack, x, y);
-        *///? }
+        //$ render_fake_item
+        guiGraphics.fakeItem(itemStack, x, y);
     }
 
     public void renderItemDecorations(Font font, ItemStack itemStack, int x, int y) {
-        //? if >= 1.20.0 {
-
-        guiGraphics.renderItemDecorations(font, itemStack, x, y);
-        //? } else if > 1.19.3 {
-        /*
-        minecraft.getItemRenderer().renderGuiItemDecorations(pose, font, itemStack, x, y);
-        *///? } else {
-        /*
-        minecraft.getItemRenderer().renderGuiItemDecorations(font, itemStack, x, y);
-        *///? }
+        //$ render_item_decorations
+        guiGraphics.itemDecorations(font, itemStack, x, y);
     }
 
     public void renderItem(Player player, ItemStack itemStack, int x, int y, int seed) {
-        //? if >= 1.20.0 {
-
-        guiGraphics.renderItem(player, itemStack, x, y, seed);
-        //? } else if > 1.19.3 {
-        /*
-        minecraft.getItemRenderer().renderAndDecorateItem(pose, player, itemStack, x, y, seed);
-        *///? } else if > 1.17.0 {
-        /*
-        minecraft.getItemRenderer().renderAndDecorateItem(player, itemStack, x, y, seed);
-        *///? } else {
-        /*
-         minecraft.getItemRenderer().renderAndDecorateItem(player, itemStack, x, y);
-        *///? }
+        //$ render_item
+        guiGraphics.item(player, itemStack, x, y, seed);
     }
 
     public void drawString(Font font, Component name, int x, int y, int color) {
-        //? if >= 1.20.0 {
-
-        guiGraphics.drawString(font, name, x, y, color);
-        //? } else {
-        /*
-        font.draw(pose, name, x, y, color);
-        *///? }
+        //$ draw_string
+        guiGraphics.text(font, name, x, y, color);
     }
 
     public void drawCenteredString(Font font, Component name, int x, int y, int color) {
-        //? if >= 1.20.0 {
-
-        guiGraphics.drawCenteredString(font, name, x, y, color);
-        //? } else {
-        /*
-        GuiComponent.drawCenteredString(pose, font, name, x, y, color);
-        *///? }
+        //$ draw_centered_string
+        guiGraphics.centeredText(font, name, x, y, color);
     }
 
     public void drawString(Font textRenderer, String s, int x, int y, int color, boolean dropShadow) {
-        //? if >= 1.20.0 {
-
-        guiGraphics.drawString(textRenderer, s, x, y, color, dropShadow);
-        //? } else {
-        /*
-        GuiComponent.drawString(pose, textRenderer, s, x, y, color);
-        *///? }
+        //$ draw_string_shadow
+        guiGraphics.text(textRenderer, s, x, y, color, dropShadow);
     }
 
     public void drawString(Font textRenderer, FormattedCharSequence text, int x, int y, int color, boolean dropShadow) {
-        //? if >= 1.20.0 {
+        //? if >= 26.0 {
 
-        guiGraphics.drawString(textRenderer, text, x, y, color, dropShadow);
-        //? } else {
+        guiGraphics.text(textRenderer, text, x, y, color, dropShadow);
+        //? } else if >= 1.20.0 {
+
+        /*guiGraphics.drawString(textRenderer, text, x, y, color, dropShadow);
+        *///? } else {
         /*
         if (dropShadow) {
             textRenderer.drawShadow(pose, text, x, y, color);
@@ -523,22 +485,19 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void drawString(Font textRenderer, @Nullable Component suggestion, int x, int y, int suggestionColor,
-            boolean b) {
-        //? if >= 1.20.0 {
-
-        guiGraphics.drawString(textRenderer, suggestion, x, y, suggestionColor, b);
-        //? } else {
-        /*
-        GuiComponent.drawString(pose, textRenderer, suggestion, x, y, suggestionColor);
-        *///? }
+    public void drawString(Font textRenderer, @Nullable Component s, int x, int y, int color, boolean dropShadow) {
+        //$ draw_string_shadow
+        guiGraphics.text(textRenderer, s, x, y, color, dropShadow);
     }
 
     public void renderComponentHoverEffect(Font font, @Nullable Style textStyle, int x, int y) {
-        //? if >= 1.20.0 {
+        //? if >= 26.0 {
 
-        guiGraphics.renderComponentHoverEffect(font, textStyle, x, y);
-        //? } else {
+        // FIXME ??? There isnt even text text here, does this method even do anything?
+        //? } else if >= 1.20.0 {
+
+        /*guiGraphics.renderComponentHoverEffect(font, textStyle, x, y);
+        *///? } else {
         /*
         //TODO?
         return;

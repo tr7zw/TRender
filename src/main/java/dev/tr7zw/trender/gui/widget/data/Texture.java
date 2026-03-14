@@ -47,7 +47,7 @@ import net.minecraft.resources.*;
  * when the {@link #type() type} is {@link Type#STANDALONE}. GUI sprites need
  * specialised code for drawing them, and they need to be drawn with specific
  * {@code Texture}-accepting methods or
- * {@link net.minecraft.client.gui.GuiGraphics}.
+ * {@link net.minecraft.client.gui.GuiGraphicsExtractor}.
  *
  * <p>
  * GUI sprite textures don't currently support flipping the texture by flipping
@@ -61,8 +61,8 @@ import net.minecraft.resources.*;
  * @param v2    the end V-coordinate, between 0 and 1
  * @since 3.0.0
  */
-public record Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ image, Type type,
-        float u1, float v1, float u2, float v2) {
+public record Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image, Type type, float u1,
+        float v1, float u2, float v2) {
 
     /**
      * Constructs a new texture that uses the full image.
@@ -71,7 +71,7 @@ public record Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLoca
      * @param type  the type
      * @throws NullPointerException if the image or the type is null
      */
-    public Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ image, Type type) {
+    public Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image, Type type) {
         this(image, type, 0, 0, 1, 1);
     }
 
@@ -85,7 +85,7 @@ public record Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLoca
      * @param v2    the end V-coordinate, between 0 and 1
      * @throws NullPointerException if the image is null
      */
-    public Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ image, float u1, float v1,
+    public Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image, float u1, float v1,
             float u2, float v2) {
         this(image, Type.STANDALONE, u1, v1, u2, v2);
     }
@@ -96,7 +96,7 @@ public record Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLoca
      * @param image the image
      * @throws NullPointerException if the image is null
      */
-    public Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/ image) {
+    public Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image) {
         this(image, Type.STANDALONE, 0, 0, 1, 1);
     }
 

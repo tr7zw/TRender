@@ -150,12 +150,19 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    //? if >= 1.20.0 {
+    //? if >= 26.0 {
 
-    public void render(net.minecraft.client.gui.GuiGraphics context, int mouseX, int mouseY, float partialTicks) {
+    public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor context, int mouseX, int mouseY,
+            float partialTicks) {
+        super.extractRenderState(context, mouseX, mouseY, partialTicks);
+        RenderContext renderContext = new RenderContext(context);
+        //? } else if >= 1.20.0 {
+
+        /*public void render(net.minecraft.client.gui.GuiGraphicsExtractor context, int mouseX, int mouseY,
+            float partialTicks) {
         super.render(context, mouseX, mouseY, partialTicks);
         RenderContext renderContext = new RenderContext(context);
-        //? } else {
+        *///? } else {
         /*
             public void render(PoseStack context, int mouseX, int mouseY, float partialTicks) {
         super.render(context, mouseX, mouseY, partialTicks);
