@@ -27,13 +27,13 @@ public class WeGotModMenuAtHome extends LightweightGuiDescription {
                 });
         buttonList.setGap(2);
         buttonList.setSize(17 * 20, 8 * 20);
-        root.add(buttonList, 0, 1, 10, 10);
+        root.add(buttonList, 0, 1, 10, 9);
 
         WButton doneButton = new WButton(CommonComponents.GUI_DONE);
         doneButton.setOnClick(() -> {
             Minecraft.getInstance().setScreen(null);
         });
-        root.add(doneButton, 0, 12, 3, 1);
+        root.add(doneButton, 0, 10, 3, 1);
 
         root.setBackgroundPainter(BackgroundPainter.VANILLA);
 
