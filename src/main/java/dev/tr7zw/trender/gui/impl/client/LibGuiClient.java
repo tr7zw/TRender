@@ -10,10 +10,10 @@ import dev.tr7zw.trender.gui.impl.client.config.*;
 import dev.tr7zw.trender.gui.impl.modmenu.*;
 import net.minecraft.client.*;
 import org.apache.logging.log4j.*;
+import java.util.*;
 //? if fabric {
 import net.fabricmc.api.*;
 
-import java.util.*;
 //? }
 
 public class LibGuiClient
