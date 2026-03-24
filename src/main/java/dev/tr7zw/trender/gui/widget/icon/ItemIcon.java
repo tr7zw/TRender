@@ -1,6 +1,7 @@
 package dev.tr7zw.trender.gui.widget.icon;
 
 import com.mojang.blaze3d.vertex.*;
+import dev.tr7zw.transition.mc.*;
 import dev.tr7zw.trender.gui.client.*;
 import java.util.*;
 import net.minecraft.client.renderer.*;
@@ -36,7 +37,17 @@ public class ItemIcon implements Icon {
      * @since 3.2.0
      */
     public ItemIcon(Item item) {
+        //? if >= 26.1 {
+
+        if (GeneralUtil.getWorld() == null) {
+            this.stack = ItemStack.EMPTY;
+        } else {
+            this.stack = new ItemStack(Objects.requireNonNull(item, "item"));
+        }
+        //? } else {
+        /*
         this(Objects.requireNonNull(item, "item").getDefaultInstance());
+            *///? }
     }
 
     @Override
