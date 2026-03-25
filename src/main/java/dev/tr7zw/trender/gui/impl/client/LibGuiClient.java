@@ -46,8 +46,10 @@ public class LibGuiClient
             };
             Minecraft.getInstance().setScreen(screen);
         };
-        CodeManager.getInstance().registerCode(new String(Base64.getDecoder().decode("c2V0dGluZ3MgcGxz")), openSettings);
-        CodeManager.getInstance().registerCode(new String(Base64.getDecoder().decode("aW5zdGFsbCBtb2RtZW51")), openSettings);
+        CodeManager.getInstance().registerCode(new String(Base64.getDecoder().decode("c2V0dGluZ3MgcGxz")),
+                openSettings);
+        CodeManager.getInstance().registerCode(new String(Base64.getDecoder().decode("aW5zdGFsbCBtb2RtZW51")),
+                openSettings);
     }
 
 }

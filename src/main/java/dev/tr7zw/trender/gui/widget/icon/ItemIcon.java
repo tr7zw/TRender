@@ -39,11 +39,13 @@ public class ItemIcon implements Icon {
     public ItemIcon(Item item) {
         //? if >= 26.1 {
 
-        if (GeneralUtil.getWorld() == null) {
-            this.stack = ItemStack.EMPTY;
-        } else {
-            this.stack = new ItemStack(Objects.requireNonNull(item, "item"));
+        ItemStack tmpStack = ItemStack.EMPTY;
+        try {
+            tmpStack = new ItemStack(Objects.requireNonNull(item, "item"));
+        } catch (Exception ex) {
+            // ignore, happens when the item registry is not yet available (e.g. before loading a world)
         }
+        this.stack = tmpStack;
         //? } else {
         /*
         this(Objects.requireNonNull(item, "item").getDefaultInstance());

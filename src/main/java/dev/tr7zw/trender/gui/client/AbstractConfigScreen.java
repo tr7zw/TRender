@@ -7,9 +7,14 @@ import dev.tr7zw.trender.gui.widget.data.*;
 import java.text.*;
 import java.util.*;
 import java.util.function.*;
+
+import dev.tr7zw.trender.gui.widget.icon.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.*;
+import net.minecraft.resources.*;
+import net.minecraft.world.item.*;
+import org.jetbrains.annotations.*;
 
 public abstract class AbstractConfigScreen extends LightweightGuiDescription {
 
@@ -35,6 +40,52 @@ public abstract class AbstractConfigScreen extends LightweightGuiDescription {
     public abstract void save();
 
     public abstract void reset();
+
+    public WGridPanel createItemTab(Function<Map.Entry<ResourceKey<Item>, Item>, Boolean> isToggled,
+            BiConsumer<Boolean, Map.Entry<ResourceKey<Item>, Item>> toggleHandler) {
+        List<Map.Entry<ResourceKey<Item>, Item>> items = new ArrayList<>(ItemUtil.getItems());
+        //? if >= 1.21.11 {
+        items.sort(Comparator.comparing(a -> a.getKey().identifier().toString()));
+        //? } else {
+        /*
+        items.sort((a, b) -> a.getKey().location().toString().compareTo(b.getKey().location().toString()));
+        *///? }
+        WListPanel<Map.Entry<ResourceKey<Item>, Item>, WToggleButton> itemList = new WListPanel<Map.Entry<ResourceKey<Item>, Item>, WToggleButton>(
+                items, () -> new WToggleButton(ComponentProvider.EMPTY), (s, l) -> {
+                    l.setLabel(getItemName(s));
+                    l.setToolip(ComponentProvider.literal(getKeyAsString(s)));
+                    l.setIcon(new ItemIcon(s.getValue()));
+                    l.setToggle(isToggled.apply(s));
+                    l.setOnToggle(b -> toggleHandler.accept(b, s));
+                });
+        itemList.setGap(-1);
+        itemList.setInsets(new Insets(2, 4));
+        WGridPanel itemTab = new WGridPanel(20);
+        itemTab.add(itemList, 0, 0, 17, 7);
+        WTextField searchField = new WTextField();
+        searchField.setChangedListener(s -> {
+            itemList.setFilter(e -> getFilterStringItem(e).toLowerCase().contains(s.toLowerCase()));
+            itemList.layout();
+        });
+        itemTab.add(searchField, 0, 7, 17, 1);
+        return itemTab;
+    }
+
+    private static Component getItemName(Map.Entry<ResourceKey<Item>, Item> entry) {
+        try {
+            return entry.getValue().getName(entry.getValue().getDefaultInstance());
+        } catch (Exception ex) {
+            return ComponentProvider.literal(getKeyAsString(entry));
+        }
+    }
+
+    private static @NotNull String getKeyAsString(Map.Entry<ResourceKey<Item>, Item> entry) {
+        return entry.getKey()/*? >= 1.21.11 {*/.identifier() /*?} else {*//* .location() *//*?}*/.toString();
+    }
+
+    private static @NotNull String getFilterStringItem(Map.Entry<ResourceKey<Item>, Item> entry) {
+        return getKeyAsString(entry) + " " + getItemName(entry);
+    }
 
     public WListPanel<OptionInstance, WGridPanel> createOptionList(List<OptionInstance> options) {
         return new WListPanel<OptionInstance, WGridPanel>(options, () -> new WGridPanel(), (option, panel) -> {

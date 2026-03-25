@@ -74,43 +74,8 @@ public class TestingConfigGui extends AbstractConfigScreen {
         wTabPanel.layout();
         root.add(wTabPanel, 0, 1);
 
-        List<Entry<ResourceKey<Item>, Item>> items = new ArrayList<>(ItemUtil.getItems());
-
-        //? if >= 1.21.11 {
-        items.sort((a, b) -> a.getKey().identifier().toString().compareTo(b.getKey().identifier().toString()));
-        //? } else {
-        /*
-        items.sort((a, b) -> a.getKey().location().toString().compareTo(b.getKey().location().toString()));
-        *///? }
-
-        WListPanel<Entry<ResourceKey<Item>, Item>, WToggleButton> itemList = new WListPanel<Entry<ResourceKey<Item>, Item>, WToggleButton>(
-                items, () -> new WToggleButton(ComponentProvider.EMPTY), (s, l) -> {
-                    l.setLabel(s.getValue().getName(s.getValue().getDefaultInstance()));
-                    //? if >= 1.21.11 {
-                    l.setToolip(ComponentProvider.literal(s.getKey().identifier().toString()));
-                    //? } else {
-                    /*
-                    l.setToolip(ComponentProvider.literal(s.getKey().location().toString()));
-                    *///? }
-                    l.setIcon(new ItemIcon(s.getValue()));
-                });
-        itemList.setGap(-1);
-        itemList.setInsets(new Insets(2, 4));
-        //itemList.setSize(17*20, 8*20);
-        WGridPanel itemTab = new WGridPanel(20);
-        itemTab.add(itemList, 0, 0, 17, 7);
-        WTextField searchField = new WTextField();
-        searchField.setChangedListener(s -> {
-            //? if >= 1.21.11 {
-            itemList.setFilter(e -> e.getKey().identifier().toString().toLowerCase().contains(s.toLowerCase()));
-            //? } else {
-            /*
-            itemList.setFilter(e -> e.getKey().location().toString().toLowerCase().contains(s.toLowerCase()));
-            *///? }
-            itemList.layout();
-        });
-        itemTab.add(searchField, 0, 7, 17, 1);
-        wTabPanel.add(itemTab, b -> b.title(ComponentProvider.literal("Items")).icon(new ItemIcon(Items.GRASS_BLOCK)));
+        wTabPanel.add(createItemTab(b -> false, (b, i) -> System.out.println(i.getValue() + " = " + b)),
+                b -> b.title(ComponentProvider.literal("Items")).icon(new ItemIcon(Items.GRASS_BLOCK)));
 
         // Scroll test
         wTabPanel.add(test, b -> b.title(ComponentProvider.literal("Test Buttons2")).icon(new ItemIcon(Items.ARROW)));
