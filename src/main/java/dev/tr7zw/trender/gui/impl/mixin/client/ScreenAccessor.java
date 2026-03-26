@@ -16,6 +16,8 @@ public interface ScreenAccessor {
 
     //? if >= 1.21.11 {
     @Invoker("defaultHandleGameClickEvent")
-    static void libgui$defaultHandleGameClickEvent(ClickEvent clickEvent, Minecraft minecraft, Screen screen);
+    static void libgui$defaultHandleGameClickEvent(ClickEvent clickEvent, Minecraft minecraft, Screen screen) {
+        throw new AssertionError("Mixin invoker stub");
+    }
     //? }
 }
