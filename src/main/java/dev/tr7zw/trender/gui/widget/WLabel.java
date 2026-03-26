@@ -71,7 +71,7 @@ public class WLabel extends WWidget {
             if (screen != null) {
                 //? if >= 1.21.11 {
                 ScreenAccessor.libgui$defaultHandleGameClickEvent(
-                        hoveredTextStyle.getClickEvent(), Minecraft.getInstance(), Minecraft.getInstance().screen);
+                        hoveredTextStyle.getClickEvent(), Minecraft.getInstance(), screen);
                 return InputResult.PROCESSED;
                 //? } else {
                 /*
