@@ -134,7 +134,7 @@ public class WText extends WWidget {
         Style hoveredTextStyle = getTextStyleAt(x, y);
         if (hoveredTextStyle != null) {
             //? if >= 1.21.11 {
-            ((ScreenAccessor) (Object) Minecraft.getInstance().screen).libgui$defaultHandleGameClickEvent(
+            ScreenAccessor.libgui$defaultHandleGameClickEvent(
                     hoveredTextStyle.getClickEvent(), Minecraft.getInstance(), Minecraft.getInstance().screen);
             boolean processed = true;
             //? } else {
