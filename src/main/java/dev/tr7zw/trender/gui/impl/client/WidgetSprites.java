@@ -2,22 +2,17 @@ package dev.tr7zw.trender.gui.impl.client;
 
 import net.minecraft.resources.*;
 
-public record WidgetSprites(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ enabled,
-        /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ disabled,
-        /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ enabledFocused,
-        /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ disabledFocused) {
-    public WidgetSprites(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ enabled,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ disabled) {
+public record WidgetSprites(Identifier enabled, Identifier disabled, Identifier enabledFocused,
+        Identifier disabledFocused) {
+    public WidgetSprites(Identifier enabled, Identifier disabled) {
         this(enabled, enabled, disabled, disabled);
     }
 
-    public WidgetSprites(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ enabled,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ disabled,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ enabledFocused) {
+    public WidgetSprites(Identifier enabled, Identifier disabled, Identifier enabledFocused) {
         this(enabled, disabled, enabledFocused, disabled);
     }
 
-    public /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ get(boolean enabled, boolean focused) {
+    public Identifier get(boolean enabled, boolean focused) {
         if (enabled) {
             return focused ? this.enabledFocused : this.enabled;
         } else {

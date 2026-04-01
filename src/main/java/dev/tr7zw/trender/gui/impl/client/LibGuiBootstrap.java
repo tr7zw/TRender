@@ -26,29 +26,29 @@ public class LibGuiBootstrap {
 
 }
 *///? } else if neoforge {
-/*
- package dev.tr7zw.trender.gui.impl.client;
 
- import net.neoforged.api.distmarker.Dist;
- import net.neoforged.fml.loading.FMLEnvironment;
- import net.neoforged.fml.common.Mod;
- import dev.tr7zw.trender.gui.impl.LibGuiCommon;
+/*package dev.tr7zw.trender.gui.impl.client;
 
- @Mod("trender")
- public class LibGuiBootstrap {
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.fml.common.Mod;
+import dev.tr7zw.trender.gui.impl.LibGuiCommon;
 
-    public LibGuiBootstrap() {
- //? if < 1.21.9 {
-/^
-         if(FMLEnvironment.dist == Dist.CLIENT) {
- ^///? } else {
+@Mod("trender")
+public class LibGuiBootstrap {
 
-         if(FMLEnvironment.getDist() == Dist.CLIENT) {
- //? }
-         new LibGuiClient().onInitializeClient();
-        }
-        new LibGuiCommon().onInitialize();
-    }
-    
- }
+   public LibGuiBootstrap() {
+//? if < 1.21.9 {
+
+        /^if(FMLEnvironment.dist == Dist.CLIENT) {
+^///? } else {
+
+        if(FMLEnvironment.getDist() == Dist.CLIENT) {
+//? }
+        new LibGuiClient().onInitializeClient();
+       }
+       new LibGuiCommon().onInitialize();
+   }
+   
+}
 *///? }

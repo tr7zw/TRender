@@ -58,8 +58,7 @@ public class WToggleButton extends WWidget {
      * @param onImage  the toggled on image
      * @param offImage the toggled off image
      */
-    public WToggleButton(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ onImage,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ offImage) {
+    public WToggleButton(Identifier onImage, Identifier offImage) {
         this(new Texture(onImage), new Texture(offImage));
     }
 
@@ -70,8 +69,7 @@ public class WToggleButton extends WWidget {
      * @param offImage the toggled off image
      * @param label    the button label
      */
-    public WToggleButton(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ onImage,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ offImage, Component label) {
+    public WToggleButton(Identifier onImage, Identifier offImage, Component label) {
         this(new Texture(onImage), new Texture(offImage), label);
     }
 

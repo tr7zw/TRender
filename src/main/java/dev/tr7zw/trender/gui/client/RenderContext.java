@@ -17,22 +17,22 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import org.jetbrains.annotations.*;
 //? if < 1.21.6 {
-/*
-import com.mojang.blaze3d.vertex.*;
+
+/*import com.mojang.blaze3d.vertex.*;
 import dev.tr7zw.trender.gui.impl.mixin.client.*;
 import net.minecraft.client.renderer.MultiBufferSource.*;
 *///? }
    //? if < 1.21.5 {
-   /*
-   import com.mojang.blaze3d.platform.*;
-   import com.mojang.blaze3d.vertex.*;
-   import com.mojang.math.*;
-   import dev.tr7zw.trender.gui.impl.client.*;
-   *///? }
+
+/*import com.mojang.blaze3d.platform.*;
+import com.mojang.blaze3d.vertex.*;
+import com.mojang.math.*;
+import dev.tr7zw.trender.gui.impl.client.*;
+*///? }
    //? if < 1.21.5 && >= 1.19.4 {
-   /*
-   import org.joml.Matrix4f;
-   *///? }
+
+/*import org.joml.Matrix4f;
+*///? }
    //? if <= 1.16.5 {
    /*
    import org.lwjgl.opengl.GL11;
@@ -60,8 +60,8 @@ public class RenderContext implements PoseStackHelper {
 
     public org.joml.Matrix3x2fStack getPose() {
         //? } else {
-        /*
-            public com.mojang.blaze3d.vertex.PoseStack getPose() {
+
+        /*public com.mojang.blaze3d.vertex.PoseStack getPose() {
         *///? }
            //? if >= 1.20.0 {
 
@@ -80,9 +80,9 @@ public class RenderContext implements PoseStackHelper {
         /*
          guiGraphics.drawSpecial(consumer);
         *///? } else if >= 1.21.0 {
-        /*
-         consumer.accept(guiGraphics.bufferSource());
-         guiGraphics.bufferSource().endBatch();
+
+        /*consumer.accept(guiGraphics.bufferSource());
+        guiGraphics.bufferSource().endBatch();
         *///? } else {
         /*
         net.minecraft.client.renderer.MultiBufferSource.BufferSource bs = MultiBufferSource
@@ -92,8 +92,8 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ atlasLocation, int x, int y,
-            float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight) {
+    public void blit(Identifier atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height,
+            int textureWidth, int textureHeight) {
         //? if >= 1.21.6 {
 
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, atlasLocation, x, y, uOffset, vOffset, width, height,
@@ -103,8 +103,8 @@ public class RenderContext implements PoseStackHelper {
          guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, width, height,
                  textureWidth, textureHeight);
         *///? } else if >= 1.20.0 {
-        /*
-        guiGraphics.blit(atlasLocation, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
+
+        /*guiGraphics.blit(atlasLocation, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
         *///? } else if > 1.17.0 {
         /*
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
@@ -121,14 +121,12 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ atlasLocation, int x, int y,
-            int uOffset, int vOffset, int uWidth, int vHeight) {
+    public void blit(Identifier atlasLocation, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight) {
         blit(atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight, 64, 64);
     }
 
-    public void blit(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ atlasLocation, int x, int y,
-            int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth,
-            int textureHeight) {
+    public void blit(Identifier atlasLocation, int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth,
+            int vHeight, int textureWidth, int textureHeight) {
         //? if >= 1.21.6 {
 
         //TODO blitOffset?
@@ -140,8 +138,8 @@ public class RenderContext implements PoseStackHelper {
          guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
                 textureWidth, textureHeight);
         *///? } else if >= 1.20.0 {
-        /*
-        guiGraphics.blit(atlasLocation, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth,
+
+        /*guiGraphics.blit(atlasLocation, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth,
                 textureHeight);
         *///? } else if > 1.17.0 {
         /*
@@ -155,8 +153,8 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blitSprite(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture, int x, int y,
-            int width, int height, int sliceSide, int sliceTop, int txtWidth, int txtHeight) {
+    public void blitSprite(Identifier texture, int x, int y, int width, int height, int sliceSide, int sliceTop,
+            int txtWidth, int txtHeight) {
         //? if >= 1.21.6 {
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height);
@@ -164,8 +162,8 @@ public class RenderContext implements PoseStackHelper {
         /*
          guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height);
         *///? } else if >= 1.20.2 {
-        /*
-         guiGraphics.blitSprite(texture, x, y, width, height);
+
+        /*guiGraphics.blitSprite(texture, x, y, width, height);
         *///? } else {
         /*
         blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight,
@@ -173,15 +171,15 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void blitSpriteLegacy(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture, int x,
-            int y, int width, int height, int sliceSide, int sliceTop, int txtWidth, int txtHeight) {
+    public void blitSpriteLegacy(Identifier texture, int x, int y, int width, int height, int sliceSide, int sliceTop,
+            int txtWidth, int txtHeight) {
         blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight,
                 txtWidth, txtHeight);
     }
 
-    private void blitNineSliced(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ atlasLocation, int x,
-            int y, int width, int height, int leftSliceWidth, int topSliceHeight, int rightSliceWidth,
-            int bottomSliceHeight, int uWidth, int vHeight, int textureWidth, int textureHeight) {
+    private void blitNineSliced(Identifier atlasLocation, int x, int y, int width, int height, int leftSliceWidth,
+            int topSliceHeight, int rightSliceWidth, int bottomSliceHeight, int uWidth, int vHeight, int textureWidth,
+            int textureHeight) {
         leftSliceWidth = Math.min(leftSliceWidth, width / 2);
         rightSliceWidth = Math.min(rightSliceWidth, width / 2);
         topSliceHeight = Math.min(topSliceHeight, height / 2);
@@ -230,9 +228,8 @@ public class RenderContext implements PoseStackHelper {
         }
     }
 
-    private void blitRepeating(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ atlasLocation, int x,
-            int y, int width, int height, int uOffset, int vOffset, int sourceWidth, int sourceHeight, int textureWidth,
-            int textureHeight) {
+    private void blitRepeating(Identifier atlasLocation, int x, int y, int width, int height, int uOffset, int vOffset,
+            int sourceWidth, int sourceHeight, int textureWidth, int textureHeight) {
         int i = x;
 
         int j;
@@ -313,8 +310,7 @@ public class RenderContext implements PoseStackHelper {
 
     }
 
-    public void blitSprite(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture, int x, int y,
-            int width, int height, int color) {
+    public void blitSprite(Identifier texture, int x, int y, int width, int height, int color) {
         //? if >= 1.21.6 {
 
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height, color);
@@ -322,8 +318,8 @@ public class RenderContext implements PoseStackHelper {
         /*
          guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height, color);
         *///? } else if >= 1.20.2 {
-        /*
-         guiGraphics.blitSprite(texture, x, y, width, height, color);
+
+        /*guiGraphics.blitSprite(texture, x, y, width, height, color);
         *///? } else {
         /*
         throw new java.lang.RuntimeException();
@@ -335,8 +331,8 @@ public class RenderContext implements PoseStackHelper {
 
         guiGraphics.setTooltipForNextFrame(font, split, x, y);
         //? } else if >= 1.20.0 {
-        /*
-        guiGraphics.renderTooltip(font, split, x, y);
+
+        /*guiGraphics.renderTooltip(font, split, x, y);
         *///? } else {
         /*
         screen.renderTooltip(pose, split, x, y);
@@ -348,8 +344,8 @@ public class RenderContext implements PoseStackHelper {
 
         guiGraphics.setTooltipForNextFrame(font, translatable, x, y);
         //? } else if >= 1.20.0 {
-        /*
-        guiGraphics.renderTooltip(font, translatable, x, y);
+
+        /*guiGraphics.renderTooltip(font, translatable, x, y);
         *///? } else {
         /*
         screen.renderTooltip(pose, translatable, x, y);
@@ -374,8 +370,8 @@ public class RenderContext implements PoseStackHelper {
         /*
          guiGraphics.fill(RenderType.guiTextHighlight(), x, y, x + width, y + height, -16776961);
         *///? } else {
-        /*
-        //? if >= 1.17.0 {
+
+        /*//? if >= 1.17.0 {
         
         Matrix4f model = getPose().last().pose();
         RenderSystem.setShaderColor(0.0F, 0.0F, 1.0F, 1.0F);
@@ -493,7 +489,7 @@ public class RenderContext implements PoseStackHelper {
     public void renderComponentHoverEffect(Font font, @Nullable Style textStyle, int x, int y) {
         //? if >= 26.0 {
 
-        // FIXME ??? There isnt even text text here, does this method even do anything?
+        //FIXME ??? There isnt even text text here, does this method even do anything?
         //? } else if >= 1.20.0 {
 
         /*guiGraphics.renderComponentHoverEffect(font, textStyle, x, y);
@@ -506,8 +502,8 @@ public class RenderContext implements PoseStackHelper {
 
     public void flush() {
         //? if <= 1.21.5 {
-        /*
-        //? if >= 1.20.0 {
+
+        /*//? if >= 1.20.0 {
         
         guiGraphics.flush();
         //? }
@@ -515,8 +511,8 @@ public class RenderContext implements PoseStackHelper {
     }
 
     //? if < 1.21.6 {
-    /*
-    public BufferSource getVertexConsumers() {
+
+    /*public BufferSource getVertexConsumers() {
         //? if >= 1.20.0 {
         
         return ((DrawContextAccessor) guiGraphics).libgui$getVertexConsumers();

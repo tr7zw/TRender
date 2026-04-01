@@ -27,7 +27,7 @@ import net.minecraft.resources.*;
  * @since 4.0.0
  */
 public final class NinePatchBackgroundPainter implements BackgroundPainter {
-    private final /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture;
+    private final Identifier texture;
     private int topPadding = 0;
     private int leftPadding = 0;
     private int bottomPadding = 0;
@@ -37,7 +37,7 @@ public final class NinePatchBackgroundPainter implements BackgroundPainter {
     //        this.ninePatch = ninePatch;
     //    }
 
-    public NinePatchBackgroundPainter(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture) {
+    public NinePatchBackgroundPainter(Identifier texture) {
         this.texture = texture;
     }
 

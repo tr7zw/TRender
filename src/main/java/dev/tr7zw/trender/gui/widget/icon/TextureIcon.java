@@ -21,8 +21,7 @@ public class TextureIcon implements Icon {
      *
      * @param texture the identifier of the icon texture
      */
-    public TextureIcon(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture, int width,
-            int height) {
+    public TextureIcon(Identifier texture, int width, int height) {
         this(new Texture(texture), width, height);
     }
 

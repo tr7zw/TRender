@@ -99,14 +99,11 @@ public class WBar extends WWidget {
         this.direction = dir;
     }
 
-    public WBar(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bg,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bar, int field, int maxField) {
+    public WBar(Identifier bg, Identifier bar, int field, int maxField) {
         this(bg, bar, field, maxField, Direction.UP);
     }
 
-    public WBar(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bg,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bar, int field, int maxField,
-            Direction dir) {
+    public WBar(Identifier bg, Identifier bar, int field, int maxField, Direction dir) {
         this(new Texture(bg), new Texture(bar), field, maxField, dir);
     }
 
@@ -277,9 +274,7 @@ public class WBar extends WWidget {
      * @param dir      the direction the bar should grow towards
      * @return a new WBar with a constant maximum value
      */
-    public static WBar withConstantMaximum(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bg,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ bar, int field, int maxValue,
-            Direction dir) {
+    public static WBar withConstantMaximum(Identifier bg, Identifier bar, int field, int maxValue, Direction dir) {
         WBar result = new WBar(bg, bar, field, -1, dir);
         result.maxValue = maxValue;
         return result;

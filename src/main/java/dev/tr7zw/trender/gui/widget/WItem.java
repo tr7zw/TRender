@@ -14,8 +14,8 @@ import net.minecraft.tags.*;
 import net.minecraft.core.registries.*;
 //? }
 //? if < 1.21.5 {
-/*
-import com.mojang.blaze3d.systems.*;
+
+/*import com.mojang.blaze3d.systems.*;
 *///? }
 
 /**
@@ -60,8 +60,8 @@ public class WItem extends WWidget {
     @Override
     public void paint(RenderContext context, int x, int y, int mouseX, int mouseY) {
         //? if < 1.21.5 {
-        /*
-        RenderSystem.enableDepthTest();
+
+        /*RenderSystem.enableDepthTest();
         *///? }
         context.renderFakeItem(items.get(current), x + getWidth() / 2 - 8, y + getHeight() / 2 - 8);
     }
@@ -122,8 +122,8 @@ public class WItem extends WWidget {
         Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
                 .getValue(tag.registry().location());
         *///? } else if >= 1.19.4 {
-        /*
-        Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY.get(tag.registry().location());
+
+        /*Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY.get(tag.registry().location());
         *///? } else {
         /*
         Registry<ItemLike> registry = (Registry<ItemLike>) BuiltinRegistries.REGISTRY.get(tag.registry().location());

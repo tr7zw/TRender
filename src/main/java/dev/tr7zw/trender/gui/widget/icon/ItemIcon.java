@@ -47,8 +47,8 @@ public class ItemIcon implements Icon {
         }
         this.stack = tmpStack;
         //? } else {
-        /*
-        this(Objects.requireNonNull(item, "item").getDefaultInstance());
+
+        /*this(Objects.requireNonNull(item, "item").getDefaultInstance());
             *///? }
     }
 

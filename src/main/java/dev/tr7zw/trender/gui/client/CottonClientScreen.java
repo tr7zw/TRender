@@ -209,8 +209,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         double mouseY = mouseButtonEvent.y();
         int mouseButton = mouseButtonEvent.button();
         //? } else {
-        /*
-            public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
+
+        /*public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         *///? }
 
@@ -233,8 +233,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         double mouseY = mouseButtonEvent.y();
         int mouseButton = mouseButtonEvent.button();
         //? } else {
-        /*
-            public boolean mouseReleased(double mouseX, double mouseY, int mouseButton) {
+
+        /*public boolean mouseReleased(double mouseX, double mouseY, int mouseButton) {
         super.mouseReleased(mouseX, mouseY, mouseButton);
         *///? }
 
@@ -255,8 +255,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         double mouseY = mouseButtonEvent.y();
         int mouseButton = mouseButtonEvent.button();
         //? } else {
-        /*
-            public boolean mouseDragged(double mouseX, double mouseY, int mouseButton, double deltaX, double deltaY) {
+
+        /*public boolean mouseDragged(double mouseX, double mouseY, int mouseButton, double deltaX, double deltaY) {
         super.mouseDragged(mouseX, mouseY, mouseButton, deltaX, deltaY);
         *///? }
 
@@ -302,8 +302,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         char ch = characterEvent.codepointAsString().charAt(0);
         int keyCode = characterEvent.codepoint();
         //? } else {
-        /*
-            public boolean charTyped(char ch, int keyCode) {
+
+        /*public boolean charTyped(char ch, int keyCode) {
         *///? }
         WWidget focus = description.getFocus();
         if (focus != null && focus.onCharTyped(ch) == InputResult.PROCESSED) {
@@ -314,8 +314,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
 
         return super.charTyped(characterEvent);
         //? } else {
-        /*
-        return super.charTyped(ch, keyCode);
+
+        /*return super.charTyped(ch, keyCode);
         *///? }
     }
 
@@ -327,8 +327,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         int keyCode = keyEvent.key();
         int modifiers = keyEvent.modifiers();
         //? } else {
-        /*
-            public boolean keyPressed(int ch, int keyCode, int modifiers) {
+
+        /*public boolean keyPressed(int ch, int keyCode, int modifiers) {
         *///? }
         WWidget focus = description.getFocus();
         if (focus != null && focus.onKeyPressed(ch, keyCode, modifiers) == InputResult.PROCESSED) {
@@ -339,8 +339,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
 
         return super.keyPressed(keyEvent);
         //? } else {
-        /*
-        return super.keyPressed(ch, keyCode, modifiers);
+
+        /*return super.keyPressed(ch, keyCode, modifiers);
         *///? }
     }
 
@@ -352,8 +352,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         int keyCode = keyEvent.key();
         int modifiers = keyEvent.modifiers();
         //? } else {
-        /*
-            public boolean keyReleased(int ch, int keyCode, int modifiers) {
+
+        /*public boolean keyReleased(int ch, int keyCode, int modifiers) {
         *///? }
         WWidget focus = description.getFocus();
         if (focus != null && focus.onKeyReleased(ch, keyCode, modifiers) == InputResult.PROCESSED) {
@@ -364,8 +364,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
 
         return super.keyReleased(keyEvent);
         //? } else {
-        /*
-        return super.keyReleased(ch, keyCode, modifiers);
+
+        /*return super.keyReleased(ch, keyCode, modifiers);
         *///? }
     }
 

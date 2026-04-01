@@ -47,8 +47,7 @@ public class WSlider extends WAbstractIntSlider {
             int thumbX, thumbY;
             // thumbXOffset: thumb texture x offset in pixels
             int thumbXOffset;
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture = WidgetTextures
-                    .getSliderTextures().get();
+            Identifier texture = WidgetTextures.getSliderTextures().get();
 
             if (axis == Axis.VERTICAL) {
                 int trackX = x + getWidth() / 2 - TRACK_WIDTH / 2;

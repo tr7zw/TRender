@@ -6,8 +6,8 @@ public interface PoseStackHelper {
 
     public org.joml.Matrix3x2fStack getPose();
     //? } else {
-    /*
-    public com.mojang.blaze3d.vertex.PoseStack getPose();
+
+    /*public com.mojang.blaze3d.vertex.PoseStack getPose();
     *///? }
 
     public default void pushPose() {
@@ -15,8 +15,8 @@ public interface PoseStackHelper {
 
         getPose().pushMatrix();
         //? } else {
-        /*
-        getPose().pushPose();
+
+        /*getPose().pushPose();
         *///? }
     }
 
@@ -25,8 +25,8 @@ public interface PoseStackHelper {
 
         getPose().popMatrix();
         //? } else {
-        /*
-        getPose().popPose();
+
+        /*getPose().popPose();
         *///? }
     }
 
@@ -35,8 +35,8 @@ public interface PoseStackHelper {
 
         getPose().translate(x, y);
         //? } else {
-        /*
-        getPose().translate(x, y, 0);
+
+        /*getPose().translate(x, y, 0);
         *///? }
     }
 
@@ -45,8 +45,8 @@ public interface PoseStackHelper {
 
         getPose().scale(x, y);
         //? } else {
-        /*
-        getPose().scale(x, y, 1);
+
+        /*getPose().scale(x, y, 1);
         *///? }
     }
 
@@ -57,8 +57,8 @@ public interface PoseStackHelper {
 
         getPose().rotate(quaternion.angle());
         //? } else {
-        /*
-        getPose().mulPose(quaternion);
+
+        /*getPose().mulPose(quaternion);
         *///? }
     }
     //? } else {

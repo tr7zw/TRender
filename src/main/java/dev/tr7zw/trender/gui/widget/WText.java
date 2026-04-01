@@ -91,8 +91,8 @@ public class WText extends WWidget {
                     minecraft.getWindow().getGuiScaledHeight(), minecraft.gui.getGuiTicks(), true);
             return clickableStyleFinder.result();
             *///? } else {
-            /*
-                    return font.getSplitter().componentStyleAtWidth(line, x - xOffset);
+
+            /*return font.getSplitter().componentStyleAtWidth(line, x - xOffset);
             *///? }
         }
 
@@ -138,8 +138,8 @@ public class WText extends WWidget {
                     hoveredTextStyle.getClickEvent(), Minecraft.getInstance(), Minecraft.getInstance().screen);
             boolean processed = true;
             //? } else {
-            /*
-            boolean processed = Minecraft.getInstance().screen.handleComponentClicked(hoveredTextStyle);
+
+            /*boolean processed = Minecraft.getInstance().screen.handleComponentClicked(hoveredTextStyle);
             *///? }
             return InputResult.of(processed);
         }

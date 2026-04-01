@@ -74,8 +74,8 @@ public class WLabel extends WWidget {
                         hoveredTextStyle.getClickEvent(), Minecraft.getInstance(), Minecraft.getInstance().screen);
                 return InputResult.PROCESSED;
                 //? } else {
-                /*
-                return InputResult.of(screen.handleComponentClicked(hoveredTextStyle));
+
+                /*return InputResult.of(screen.handleComponentClicked(hoveredTextStyle));
                 *///? }
             }
         }
@@ -115,8 +115,8 @@ public class WLabel extends WWidget {
                     minecraft.getWindow().getGuiScaledHeight(), minecraft.gui.getGuiTicks(), true);
             return clickableStyleFinder.result();
             *///? } else {
-            /*
-            return Minecraft.getInstance().font.getSplitter().componentStyleAtWidth(text, x - xOffset);
+
+            /*return Minecraft.getInstance().font.getSplitter().componentStyleAtWidth(text, x - xOffset);
             *///? }
         }
         return null;

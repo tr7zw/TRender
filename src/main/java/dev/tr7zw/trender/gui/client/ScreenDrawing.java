@@ -10,13 +10,13 @@ import net.minecraft.resources.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
 //? if < 1.21.6 {
-/*
-import com.mojang.math.*;
+
+/*import com.mojang.math.*;
 *///? }
    //? if < 1.21.6 && >= 1.19.4 {
-   /*
-   import org.joml.Matrix4f;
-   *///? }
+
+/*import org.joml.Matrix4f;
+*///? }
    //? if <= 1.16.5 {
    /*
    import com.mojang.blaze3d.platform.*;
@@ -47,9 +47,8 @@ public class ScreenDrawing {
      * @param color   a color to tint the texture. This can be transparent! Use
      *                0xFF_FFFFFF if you don't want a color tint
      */
-    public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture, float u1, float v1, float u2,
-            float v2, int color) {
+    public static void texturedRect(RenderContext context, int x, int y, int width, int height, Identifier texture,
+            float u1, float v1, float u2, float v2, int color) {
         texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, color, 1.0f, 64, 64);
     }
 
@@ -69,9 +68,8 @@ public class ScreenDrawing {
      * @param color   a color to tint the texture. This can be transparent! Use
      *                0xFF_FFFFFF if you don't want a color tint
      */
-    public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture, float u1, float v1, float u2,
-            float v2, int color, int textureWidth, int textureHeight) {
+    public static void texturedRect(RenderContext context, int x, int y, int width, int height, Identifier texture,
+            float u1, float v1, float u2, float v2, int color, int textureWidth, int textureHeight) {
         texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, color, 1.0f, textureWidth, textureHeight);
     }
 
@@ -190,9 +188,8 @@ public class ScreenDrawing {
      *                fully visible)
      * @since 2.0.0
      */
-    public static void texturedRect(RenderContext context, int x, int y, int width, int height,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ texture, float u1, float v1, float u2,
-            float v2, int color, float opacity, int textureWidth, int textureHeight) {
+    public static void texturedRect(RenderContext context, int x, int y, int width, int height, Identifier texture,
+            float u1, float v1, float u2, float v2, int color, float opacity, int textureWidth, int textureHeight) {
         if (width <= 0)
             width = 1;
         if (height <= 0)
@@ -220,24 +217,24 @@ public class ScreenDrawing {
          buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
          buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
         *///? } else if >= 1.21.0 {
-        /*
-         float r = (color >> 16 & 255) / 255.0F;
-         float g = (color >> 8 & 255) / 255.0F;
-         float b = (color & 255) / 255.0F;
-         float a = (color >> 24 & 255) / 255.0F;
-         Matrix4f model = context.getPose().last().pose();
-         RenderSystem.enableBlend();
-         RenderSystem.setShaderTexture(0, texture);
-         RenderSystem.setShaderColor(r, g, b, opacity * a);
-         RenderSystem.setShader(GameRenderer::getPositionTexShader);
-         BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-         buffer.addVertex(model, x,         y + height, 0).setUv(u1, v2);
-         buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2);
-         buffer.addVertex(model, x + width, y,          0).setUv(u2, v1);
-         buffer.addVertex(model, x,         y,          0).setUv(u1, v1);
-         BufferUploader.drawWithShader(buffer.build());
-         RenderSystem.disableBlend();
-         RenderSystem.setShaderColor(1, 1, 1, 1);
+
+        /*float r = (color >> 16 & 255) / 255.0F;
+        float g = (color >> 8 & 255) / 255.0F;
+        float b = (color & 255) / 255.0F;
+        float a = (color >> 24 & 255) / 255.0F;
+        Matrix4f model = context.getPose().last().pose();
+        RenderSystem.enableBlend();
+        RenderSystem.setShaderTexture(0, texture);
+        RenderSystem.setShaderColor(r, g, b, opacity * a);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        buffer.addVertex(model, x,         y + height, 0).setUv(u1, v2);
+        buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2);
+        buffer.addVertex(model, x + width, y,          0).setUv(u2, v1);
+        buffer.addVertex(model, x,         y,          0).setUv(u1, v1);
+        BufferUploader.drawWithShader(buffer.build());
+        RenderSystem.disableBlend();
+        RenderSystem.setShaderColor(1, 1, 1, 1);
         *///? } else if >= 1.19.0 {
         /*
         float r = (color >> 16 & 255) / 255.0F;

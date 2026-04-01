@@ -11,8 +11,8 @@ import net.minecraft.client.renderer.entity.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.phys.*;
 //? if < 1.21.2 {
-/*
-import com.mojang.blaze3d.systems.*;
+
+/*import com.mojang.blaze3d.systems.*;
 *///? }
 
 @Setter
@@ -43,8 +43,8 @@ public class WPlayerPreview extends WWidget {
         rotationX -= deltaX;
         // FIXME: Breaks in 1.21.6, so disabled for now
         //? if < 1.21.6 {
-        /*
-        rotationY -= deltaY;
+
+        /*rotationY -= deltaY;
         *///? }
         return InputResult.PROCESSED;
     }
@@ -85,8 +85,8 @@ public class WPlayerPreview extends WWidget {
         EntityRenderDispatcher entityRenderDispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
         MathUtil.conjugate(quaternion2);
         //? if < 1.21.9 {
-        /*
-        entityRenderDispatcher.overrideCameraOrientation(quaternion2);
+
+        /*entityRenderDispatcher.overrideCameraOrientation(quaternion2);
         entityRenderDispatcher.setRenderShadow(false);
         *///? }
         MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
@@ -99,8 +99,8 @@ public class WPlayerPreview extends WWidget {
         entityRenderState.boundingBoxHeight = 0;
         entityRenderState.boundingBoxWidth = 0;
         //? } else {
-        /*
-        entityRenderState.hitboxesRenderState = null;
+
+        /*entityRenderState.hitboxesRenderState = null;
         *///? }
         float o = livingEntity.getScale();
         var vector3f = new org.joml.Vector3f(0.0F, livingEntity.getBbHeight() / 2.0F + 0 * o, 0.0F);
@@ -118,18 +118,18 @@ public class WPlayerPreview extends WWidget {
             /*
              entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, delta, matrixStack, bufferSource, 15728880);
             *///? } else if >= 1.17.0 {
-            /*
+
+        /*entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
+        *///? } else {
+        /*
+         RenderSystem.runAsFancy(() -> {
             entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
-            *///? } else {
-            /*
-             RenderSystem.runAsFancy(() -> {
-                entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
-             });
-            *///? }
+         });
+        *///? }
         bufferSource.endBatch();
         //? if < 1.21.9 {
-        /*
-        entityRenderDispatcher.setRenderShadow(true);
+
+        /*entityRenderDispatcher.setRenderShadow(true);
         *///? }
         livingEntity.yBodyRot = yBodyRot;
         livingEntity.yBodyRotO = yBodyRotO;
@@ -145,8 +145,8 @@ public class WPlayerPreview extends WWidget {
 
     private static void resetViewMatrix() {
         //?  if >= 1.17.0 && < 1.21.2 {
-        /*
-        RenderSystem.applyModelViewMatrix();
+
+        /*RenderSystem.applyModelViewMatrix();
         *///? } else if < 1.17.0 {
         /*
          RenderSystem.popMatrix();
@@ -155,8 +155,8 @@ public class WPlayerPreview extends WWidget {
 
     private static void prepareViewMatrix(double xpos, double ypos) {
         //? if >= 1.17.0 && < 1.21.2 {
-        /*
-        RenderSystem.applyModelViewMatrix();
+
+        /*RenderSystem.applyModelViewMatrix();
         *///? } else if < 1.17.0 {
         /*
          RenderSystem.pushMatrix();

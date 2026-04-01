@@ -10,23 +10,23 @@
 //import dev.tr7zw.trender.gui.client.ScreenDrawing;
 //import dev.tr7zw.trender.gui.impl.mixin.client.DrawContextAccessor;
 //import net.minecraft.client.renderer.CompiledShaderProgram;
-//import net.minecraft.resources.ResourceLocation;
+//import net.minecraft.resources.Identifier;
 //
 ///**
 // * An implementation of LibNinePatch's {@link ContextualTextureRenderer} for
 // * identifiers.
 // */
-//public enum NinePatchTextureRendererImpl /* implements ContextualTextureRenderer<ResourceLocation, GuiGraphics> */ {
+//public enum NinePatchTextureRendererImpl /* implements ContextualTextureRenderer<Identifier, GuiGraphicsExtractor> */ {
 //    INSTANCE;
 //
 //    //@Override
-//    public void draw(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/texture, RenderContext context, int x, int y, int width, int height, float u1,
+//    public void draw(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/texture, RenderContext context, int x, int y, int width, int height, float u1,
 //            float v1, float u2, float v2) {
 //        ScreenDrawing.texturedRect(context, x, y, width, height, texture, u1, v1, u2, v2, 0xFF_FFFFFF);
 //    }
 //
 //    //@Override
-//    public void drawTiled(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/texture, RenderContext context, int x, int y, int regionWidth,
+//    public void drawTiled(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/texture, RenderContext context, int x, int y, int regionWidth,
 //            int regionHeight, int tileWidth, int tileHeight, float u1, float v1, float u2, float v2) {
 //        Matrix4f positionMatrix = context.pose().last().pose();
 //        onRenderThread(() -> {

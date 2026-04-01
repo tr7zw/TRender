@@ -12,15 +12,14 @@ public class TextureConstants {
     public record SpriteData(int width, int height, int border) {
     }
 
-    private static final Map</*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/, SpriteData> DATA = new HashMap<>();
+    private static final Map<Identifier, SpriteData> DATA = new HashMap<>();
     private static final SpriteData DEFAULT = new SpriteData(16, 16, 4);
 
-    public static void register(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ location, int width,
-            int height, int border) {
+    public static void register(Identifier location, int width, int height, int border) {
         DATA.put(location, new SpriteData(width, height, border));
     }
 
-    public static SpriteData get(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ location) {
+    public static SpriteData get(Identifier location) {
         return DATA.getOrDefault(location, DEFAULT);
     }
 

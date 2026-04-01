@@ -21,11 +21,11 @@ public final class WidgetTextures {
     private static final String LEGACY_SUFFIX = ".png";
     *///? }
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ getId(String path) {
+    public static Identifier getId(String path) {
         return id(LEGACY_PATH + path + LEGACY_SUFFIX);
     }
 
-    public static /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ getNamespacedId(String path) {
+    public static Identifier getNamespacedId(String path) {
         return GeneralUtil.getResourceLocation(NAMESPACE + ":" + LEGACY_PATH + path + LEGACY_SUFFIX);
     }
 
@@ -45,10 +45,8 @@ public final class WidgetTextures {
             getNamespacedId("widget/button_disabled"), getNamespacedId("widget/button_highlighted"));
     private static final WidgetSprites DARK_BUTTON = new WidgetSprites(getId("widget/button_dark"),
             getId("widget/button_disabled_dark"), getId("widget/button_highlighted_dark"));
-    private static final /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ LIGHT_TEXTURE = LibGuiCommon
-            .id("textures/widget/slider_light.png");
-    private static final /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ DARK_TEXTURE = LibGuiCommon
-            .id("textures/widget/slider_dark.png");
+    private static final Identifier LIGHT_TEXTURE = LibGuiCommon.id("textures/widget/slider_light.png");
+    private static final Identifier DARK_TEXTURE = LibGuiCommon.id("textures/widget/slider_dark.png");
     private static final ToggleButtonTextures TOGGLE_BUTTON_TEXTURES = new ToggleButtonTextures(
             new Texture(LibGuiCommon.id("textures/widget/toggle_on.png")),
             new Texture(LibGuiCommon.id("textures/widget/toggle_off.png")),
@@ -65,8 +63,8 @@ public final class WidgetTextures {
     private static final TextureContainer<WidgetSprites> labeledSliderHandleTextures = new TextureContainer<>(
             LIGHT_LABELED_SLIDER_HANDLE, DARK_LABELED_SLIDER_HANDLE);
     @Getter
-    private static final TextureContainer</*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/> sliderTextures = new TextureContainer<>(
-            LIGHT_TEXTURE, DARK_TEXTURE);
+    private static final TextureContainer<Identifier> sliderTextures = new TextureContainer<>(LIGHT_TEXTURE,
+            DARK_TEXTURE);
     @Getter
     private static final TextureContainer<WidgetSprites> valueSliderTexture = new TextureContainer<>(SLIDER, SLIDER);
     @Getter
@@ -84,9 +82,7 @@ public final class WidgetTextures {
     public record ToggleButtonTextures(Texture on, Texture off, Texture focus) {
     }
 
-    public record ScrollBarTextures(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ background,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ thumb,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ thumbPressed,
-            /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ thumbHovered) {
+    public record ScrollBarTextures(Identifier background, Identifier thumb, Identifier thumbPressed,
+            Identifier thumbHovered) {
     }
 }

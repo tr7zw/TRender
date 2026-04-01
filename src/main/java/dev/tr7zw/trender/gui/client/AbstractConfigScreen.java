@@ -47,8 +47,8 @@ public abstract class AbstractConfigScreen extends LightweightGuiDescription {
         //? if >= 1.21.11 {
         items.sort(Comparator.comparing(a -> a.getKey().identifier().toString()));
         //? } else {
-        /*
-        items.sort((a, b) -> a.getKey().location().toString().compareTo(b.getKey().location().toString()));
+
+        /*items.sort((a, b) -> a.getKey().location().toString().compareTo(b.getKey().location().toString()));
         *///? }
         WListPanel<Map.Entry<ResourceKey<Item>, Item>, WToggleButton> itemList = new WListPanel<Map.Entry<ResourceKey<Item>, Item>, WToggleButton>(
                 items, () -> new WToggleButton(ComponentProvider.EMPTY), (s, l) -> {
@@ -80,7 +80,7 @@ public abstract class AbstractConfigScreen extends LightweightGuiDescription {
     }
 
     private static @NotNull String getKeyAsString(Map.Entry<ResourceKey<Item>, Item> entry) {
-        return entry.getKey()/*? >= 1.21.11 {*/.identifier() /*?} else {*//* .location() *//*?}*/.toString();
+        return entry.getKey()/*? >= 1.21.11 {*/.identifier() /*?} else {*/ /*.location() *//*?}*/.toString();
     }
 
     private static @NotNull String getFilterStringItem(Map.Entry<ResourceKey<Item>, Item> entry) {

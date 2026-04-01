@@ -61,8 +61,7 @@ import net.minecraft.resources.*;
  * @param v2    the end V-coordinate, between 0 and 1
  * @since 3.0.0
  */
-public record Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image, Type type, float u1,
-        float v1, float u2, float v2) {
+public record Texture(Identifier image, Type type, float u1, float v1, float u2, float v2) {
 
     /**
      * Constructs a new texture that uses the full image.
@@ -71,7 +70,7 @@ public record Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *
      * @param type  the type
      * @throws NullPointerException if the image or the type is null
      */
-    public Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image, Type type) {
+    public Texture(Identifier image, Type type) {
         this(image, type, 0, 0, 1, 1);
     }
 
@@ -85,8 +84,7 @@ public record Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *
      * @param v2    the end V-coordinate, between 0 and 1
      * @throws NullPointerException if the image is null
      */
-    public Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image, float u1, float v1,
-            float u2, float v2) {
+    public Texture(Identifier image, float u1, float v1, float u2, float v2) {
         this(image, Type.STANDALONE, u1, v1, u2, v2);
     }
 
@@ -96,7 +94,7 @@ public record Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *
      * @param image the image
      * @throws NullPointerException if the image is null
      */
-    public Texture(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image) {
+    public Texture(Identifier image) {
         this(image, Type.STANDALONE, 0, 0, 1, 1);
     }
 

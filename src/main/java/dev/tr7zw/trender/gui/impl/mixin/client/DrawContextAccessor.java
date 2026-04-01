@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.*;
 *///? }
 public interface DrawContextAccessor {
     //? if < 1.21.6 {
-    /*
-    //? if >= 1.20.0 {
+
+    /*//? if >= 1.20.0 {
     
     @org.spongepowered.asm.mixin.gen.Accessor("bufferSource")
     net.minecraft.client.renderer.MultiBufferSource.BufferSource libgui$getVertexConsumers();

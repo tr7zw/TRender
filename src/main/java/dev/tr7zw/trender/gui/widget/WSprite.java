@@ -29,7 +29,7 @@ public class WSprite extends WWidget {
      * 
      * @param image The location of the image to display.
      */
-    public WSprite(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image) {
+    public WSprite(Identifier image) {
         this(new Texture(image));
     }
 
@@ -42,8 +42,7 @@ public class WSprite extends WWidget {
      * @param u2    the right edge of the texture
      * @param v2    the bottom edge of the texture
      */
-    public WSprite(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image, float u1, float v1,
-            float u2, float v2) {
+    public WSprite(Identifier image, float u1, float v1, float u2, float v2) {
         this(new Texture(image, u1, v1, u2, v2));
     }
 
@@ -53,7 +52,7 @@ public class WSprite extends WWidget {
      * @param frameTime How long in milliseconds to display for. (1 tick = 50 ms)
      * @param frames    The locations of the frames of the animation.
      */
-    public WSprite(int frameTime, /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/... frames) {
+    public WSprite(int frameTime, Identifier... frames) {
         this.frameTime = frameTime;
         this.frames = new Texture[frames.length];
 
@@ -85,7 +84,7 @@ public class WSprite extends WWidget {
      * @param image the new image
      * @return this sprite
      */
-    public WSprite setImage(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/ image) {
+    public WSprite setImage(Identifier image) {
         return setImage(new Texture(image));
     }
 
@@ -95,7 +94,7 @@ public class WSprite extends WWidget {
      * @param frames the frames
      * @return this sprite
      */
-    public WSprite setFrames(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/... frames) {
+    public WSprite setFrames(Identifier... frames) {
         Texture[] textures = new Texture[frames.length];
         for (int i = 0; i < frames.length; i++) {
             textures[i] = new Texture(frames[i]);

@@ -439,8 +439,8 @@ public class WTextField extends WWidget {
     private com.mojang.blaze3d.platform.Window getWindow() {
         return Minecraft.getInstance().getWindow();
         //? } else {
-        /*
-            private long getWindow() {
+
+        /*private long getWindow() {
         return Minecraft.getInstance().getWindow().getWindow();
         *///? }
     }

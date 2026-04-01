@@ -28,7 +28,7 @@
 //import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 //import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 //import net.minecraft.resources.RegistryOps;
-//import net.minecraft.resources.ResourceLocation;
+//import net.minecraft.resources.Identifier;
 //import net.minecraft.world.entity.player.Player;
 //import net.minecraft.world.inventory.AbstractContainerMenu;
 //
@@ -36,11 +36,11 @@
 //    // Matches the one used in PacketCodecs.codec() etc
 //    private static final long MAX_NBT_SIZE = 0x200000L;
 //
-//    public record ScreenMessage(int syncId, /*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/message, Tag nbt) implements CustomPacketPayload {
+//    public record ScreenMessage(int syncId, /*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/message, Tag nbt) implements CustomPacketPayload {
 //
 //        public static final Type<ScreenMessage> ID = new Type<>(LibGuiCommon.id("screen_message"));
 //        public static final StreamCodec<RegistryFriendlyByteBuf, ScreenMessage> CODEC = StreamCodec.composite(
-//                ByteBufCodecs.INT, ScreenMessage::syncId, ResourceLocation.STREAM_CODEC, ScreenMessage::message,
+//                ByteBufCodecs.INT, ScreenMessage::syncId, Identifier.STREAM_CODEC, ScreenMessage::message,
 //                ByteBufCodecs.tagCodec(() -> NbtAccounter.create(MAX_NBT_SIZE)), ScreenMessage::nbt,
 //                ScreenMessage::new);
 //
@@ -53,7 +53,7 @@
 //    private static final Logger LOGGER = LoggerFactory.getLogger(ScreenNetworkingImpl.class);
 //    private static final Map<SyncedGuiDescription, ScreenNetworkingImpl> instanceCache = new WeakHashMap<>();
 //
-//    private final Map<ResourceLocation, ReceiverData<?>> receivers = new HashMap<>();
+//    private final Map<Identifier, ReceiverData<?>> receivers = new HashMap<>();
 //    private final SyncedGuiDescription description;
 //    private final NetworkSide side;
 //
@@ -67,7 +67,7 @@
 //    }
 //
 //    @Override
-//    public <D> void receive(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/message, Decoder<D> decoder, MessageReceiver<D> receiver) {
+//    public <D> void receive(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/message, Decoder<D> decoder, MessageReceiver<D> receiver) {
 //        Objects.requireNonNull(message, "message");
 //        Objects.requireNonNull(decoder, "decoder");
 //        Objects.requireNonNull(receiver, "receiver");
@@ -80,7 +80,7 @@
 //    }
 //
 //    @Override
-//    public <D> void send(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/message, Encoder<D> encoder, D data) {
+//    public <D> void send(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/message, Encoder<D> encoder, D data) {
 //        Objects.requireNonNull(message, "message");
 //        Objects.requireNonNull(encoder, "encoder");
 //
@@ -172,12 +172,12 @@
 //        }
 //
 //        @Override
-//        public <D> void receive(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/message, Decoder<D> decoder, MessageReceiver<D> receiver) {
+//        public <D> void receive(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/message, Decoder<D> decoder, MessageReceiver<D> receiver) {
 //            // NO-OP
 //        }
 //
 //        @Override
-//        public <D> void send(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* ResourceLocation *//*?}*/message, Encoder<D> encoder, D data) {
+//        public <D> void send(/*? >= 1.21.11 {*/ Identifier /*?} else {*//* Identifier *//*?}*/message, Encoder<D> encoder, D data) {
 //            // NO-OP
 //        }
 //    }
