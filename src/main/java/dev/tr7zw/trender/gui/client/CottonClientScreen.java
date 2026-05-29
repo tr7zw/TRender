@@ -1,6 +1,5 @@
 package dev.tr7zw.trender.gui.client;
 
-import com.mojang.blaze3d.vertex.*;
 import dev.tr7zw.transition.mc.*;
 import dev.tr7zw.trender.gui.*;
 import dev.tr7zw.trender.gui.impl.*;
@@ -8,6 +7,7 @@ import dev.tr7zw.trender.gui.impl.client.*;
 import dev.tr7zw.trender.gui.impl.mixin.client.*;
 import dev.tr7zw.trender.gui.widget.*;
 import dev.tr7zw.trender.gui.widget.data.*;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.*;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.*;
@@ -52,6 +52,20 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         super(title);
         this.description = description;
         description.getRootPanel().validate(description);
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public <T extends GuiEventListener & Renderable & NarratableEntry> @NotNull T addRenderableWidget(
+            @NotNull T widget) {
+        return super.addRenderableWidget(widget);
     }
 
     @Override

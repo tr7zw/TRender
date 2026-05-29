@@ -9,6 +9,7 @@ import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.*;
 //? if < 1.21.2 {
 
@@ -21,9 +22,15 @@ public class WPlayerPreview extends WWidget {
     private int rotationX = 0;
     private int rotationY = 0;
     private boolean showBackground = false;
+    private final Player player;
+
+    public WPlayerPreview(Player player) {
+        this.player = player;
+        setSize(60, 90);
+    }
 
     public WPlayerPreview() {
-        setSize(60, 90);
+        this(Minecraft.getInstance().player);
     }
 
     @Override
@@ -34,7 +41,7 @@ public class WPlayerPreview extends WWidget {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null) {
             drawEntity(context, x + getWidth() / 2, y + getHeight() / 2, this.getWidth(), this.getHeight(), 40,
-                    rotationX, rotationY, mc.player, 0);
+                    rotationX, rotationY, player, 0);
         }
     }
 
