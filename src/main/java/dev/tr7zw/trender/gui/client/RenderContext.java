@@ -75,13 +75,13 @@ public class RenderContext implements PoseStackHelper {
     //? if < 26.2 {
     /*public void drawSpecial(Consumer<MultiBufferSource> consumer) {
         //? if >= 1.21.6 {
-
+    
         consumer.accept(Minecraft.getInstance().renderBuffers().bufferSource());
         //? } else if >= 1.21.2 {
         /^
          guiGraphics.drawSpecial(consumer);
         ^///? } else if >= 1.21.0 {
-
+    
         /^consumer.accept(guiGraphics.bufferSource());
         guiGraphics.bufferSource().endBatch();
         ^///? } else {

@@ -37,7 +37,9 @@ public class LibGuiClient
         System.out.println("[TRender] Initializing Client...");
         ModLoaderUtil.registerConfigScreen(
                 (screen) -> new CottonClientScreen(ComponentProvider.literal("TRender"), new ConfigGui(screen)));
-        ClientTRansitionMod.configScreenManager.registerConfigScreen((screen) -> new CottonClientScreen(ComponentProvider.literal("TRenderTest"), new TestingConfigGui(screen)));
+        ClientTRansitionMod.configScreenManager
+                .registerConfigScreen((screen) -> new CottonClientScreen(ComponentProvider.literal("TRenderTest"),
+                        new TestingConfigGui(screen)));
         Runnable openSettings = () -> {
             CottonClientScreen screen = new CottonClientScreen(ComponentProvider.literal("We Got Mod Menu At Home"),
                     new WeGotModMenuAtHome()) {
