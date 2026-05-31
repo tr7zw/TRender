@@ -1,5 +1,6 @@
 package dev.tr7zw.trender.gui.widget;
 
+import dev.tr7zw.transition.mc.*;
 import dev.tr7zw.trender.gui.client.*;
 import dev.tr7zw.trender.gui.impl.client.*;
 import dev.tr7zw.trender.gui.impl.client.TextAlignment;
@@ -67,11 +68,11 @@ public class WLabel extends WWidget {
     public InputResult onClick(int x, int y, int button) {
         Style hoveredTextStyle = getTextStyleAt(x, y);
         if (hoveredTextStyle != null) {
-            Screen screen = Minecraft.getInstance().screen;
+            Screen screen = GeneralUtil.getScreen();
             if (screen != null) {
                 //? if >= 1.21.11 {
-                ScreenAccessor.libgui$defaultHandleGameClickEvent(
-                        hoveredTextStyle.getClickEvent(), Minecraft.getInstance(), screen);
+                ScreenAccessor.libgui$defaultHandleGameClickEvent(hoveredTextStyle.getClickEvent(),
+                        Minecraft.getInstance(), screen);
                 return InputResult.PROCESSED;
                 //? } else {
 
@@ -95,8 +96,18 @@ public class WLabel extends WWidget {
     public Style getTextStyleAt(int x, int y) {
         if (isWithinBounds(x, y)) {
             int xOffset = TextAlignment.getTextOffsetX(horizontalAlignment, getWidth(), text.getVisualOrderText());
-            //? if >= 26.0 {
+            //? if >= 26.2 {
 
+            Minecraft minecraft = Minecraft.getInstance();
+            Font font = minecraft.font;
+            ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
+                    font, x, y);
+            minecraft.gui.hud.getChat().captureClickableText(clickableStyleFinder,
+                    minecraft.getWindow().getGuiScaledHeight(), minecraft.gui.hud.getGuiTicks(),
+                    ChatComponent.DisplayMode.FOREGROUND);
+            return clickableStyleFinder.result();
+            //? } else if >= 26.0 {
+            /*
             Minecraft minecraft = Minecraft.getInstance();
             Font font = minecraft.font;
             ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
@@ -105,7 +116,7 @@ public class WLabel extends WWidget {
                     minecraft.getWindow().getGuiScaledHeight(), minecraft.gui.getGuiTicks(),
                     ChatComponent.DisplayMode.FOREGROUND);
             return clickableStyleFinder.result();
-            //? } else if >= 1.21.11 {
+            *///? } else if >= 1.21.11 {
 
             /*Minecraft minecraft = Minecraft.getInstance();
             Font font = minecraft.font;

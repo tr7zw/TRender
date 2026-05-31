@@ -43,7 +43,7 @@ public class ConfigGui extends AbstractConfigScreen {
         WButton doneButton = new WButton(CommonComponents.GUI_DONE);
         doneButton.setOnClick(() -> {
             save();
-            Minecraft.getInstance().setScreen(previous);
+            GeneralUtil.setScreen(previous);
         });
         root.add(doneButton, 0, 27, 6, 2);
 

@@ -5,8 +5,8 @@ package dev.tr7zw.trender.gui.impl.modmenu;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 
+import dev.tr7zw.transition.mc.*;
 import dev.tr7zw.trender.gui.client.CottonClientScreen;
-import dev.tr7zw.transition.mc.ComponentProvider;
 import net.minecraft.client.gui.screens.*;
 
 public class ModMenuSupport implements ModMenuApi {
@@ -16,7 +16,7 @@ public class ModMenuSupport implements ModMenuApi {
                 new ConfigGui((Screen) (Object) screen)) {
             @Override
             public void onClose() {
-                this.minecraft.setScreen(screen);
+                GeneralUtil.setScreen(screen);
             }
         };
     }

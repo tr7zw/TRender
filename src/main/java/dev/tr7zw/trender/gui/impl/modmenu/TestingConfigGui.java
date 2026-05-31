@@ -87,7 +87,7 @@ public class TestingConfigGui extends AbstractConfigScreen {
 
         WButton doneButton = new WButton(CommonComponents.GUI_DONE);
         doneButton.setOnClick(() -> {
-            Minecraft.getInstance().setScreen(previous);
+            GeneralUtil.setScreen(previous);
         });
         root.add(doneButton, 0, 11, 3, 1);
 

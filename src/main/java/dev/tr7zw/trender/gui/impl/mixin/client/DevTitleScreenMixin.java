@@ -1,11 +1,11 @@
 package dev.tr7zw.trender.gui.impl.mixin.client;
 
+import dev.tr7zw.transition.mc.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import dev.tr7zw.transition.mc.ComponentProvider;
 import dev.tr7zw.trender.gui.client.CottonClientScreen;
 import dev.tr7zw.trender.gui.impl.modmenu.WeGotModMenuAtHome;
 import net.minecraft.client.gui.components.Button;
@@ -20,22 +20,22 @@ public abstract class DevTitleScreenMixin extends Screen {
         super(title);
     }
 
-    //? if >= 1.21.9 {
+    //? if >= 26.2 {
 
-    @Inject(method = "createTestWorldButton", at = @At("RETURN"), cancellable = true)
-    private void createTestWorldButton(int l, int rowHeight, CallbackInfoReturnable<Integer> ci) {
+    @Inject(method = "createNormalMenuOptions", at = @At("RETURN"), cancellable = true)
+    private void createTestWorldButton(int topPos, final int spacing, CallbackInfoReturnable<Integer> ci) {
         this.addRenderableWidget(Button.builder(Component.literal("Open Test Screen"), (button) -> {
             CottonClientScreen screen = new CottonClientScreen(ComponentProvider.literal("We Got Mod Menu At Home"),
                     new WeGotModMenuAtHome()) {
                 @Override
                 public void onClose() {
-                    this.minecraft.setScreen(this);
+                    GeneralUtil.setScreen(this);
                 }
             };
-            this.minecraft.setScreen(screen);
-        }).bounds(this.width / 2 + 2, l += rowHeight, 98, 20).build());
-        System.out.println(this.width / 2 + 2 + " " + rowHeight);
-        ci.setReturnValue(l);
+            GeneralUtil.setScreen(screen);
+        }).bounds(this.width / 2 + 2, topPos += spacing, 98, 20).build());
+        System.out.println(this.width / 2 + 2 + " " + spacing);
+        ci.setReturnValue(topPos);
     }
     //? }
 

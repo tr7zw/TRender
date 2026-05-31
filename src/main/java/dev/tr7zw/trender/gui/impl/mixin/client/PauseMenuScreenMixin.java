@@ -1,11 +1,11 @@
 package dev.tr7zw.trender.gui.impl.mixin.client;
 
+import dev.tr7zw.transition.mc.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import dev.tr7zw.transition.mc.ComponentProvider;
 import dev.tr7zw.trender.gui.client.CottonClientScreen;
 import dev.tr7zw.trender.gui.impl.modmenu.WeGotModMenuAtHome;
 import net.minecraft.client.gui.components.Button;
@@ -29,10 +29,10 @@ public abstract class PauseMenuScreenMixin extends Screen {
                     new WeGotModMenuAtHome()) {
                 @Override
                 public void onClose() {
-                    this.minecraft.setScreen(this);
+                    GeneralUtil.setScreen(this);
                 }
             };
-            this.minecraft.setScreen(screen);
+            GeneralUtil.setScreen(screen);
         }).bounds(5, 5, 98, 20).build());
     }
     //? }

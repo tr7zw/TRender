@@ -1,5 +1,6 @@
 package dev.tr7zw.trender.gui.widget;
 
+import dev.tr7zw.transition.mc.*;
 import dev.tr7zw.trender.gui.client.*;
 import dev.tr7zw.trender.gui.impl.client.*;
 import dev.tr7zw.trender.gui.impl.client.TextAlignment;
@@ -75,15 +76,23 @@ public class WText extends WWidget {
         if (lineIndex >= 0 && lineIndex < wrappedLines.size()) {
             FormattedCharSequence line = wrappedLines.get(lineIndex);
             int xOffset = TextAlignment.getTextOffsetX(horizontalAlignment, getWidth(), line);
-            //? if >= 26.0 {
+            //? if >= 26.2 {
 
+            ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
+                    font, x, y);
+            minecraft.gui.hud.getChat().captureClickableText(clickableStyleFinder,
+                    minecraft.getWindow().getGuiScaledHeight(), minecraft.gui.hud.getGuiTicks(),
+                    ChatComponent.DisplayMode.FOREGROUND);
+            return clickableStyleFinder.result();
+            //? } else  >= 26.0 {
+            /*
             ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
                     font, x, y);
             minecraft.gui.getChat().captureClickableText(clickableStyleFinder,
                     minecraft.getWindow().getGuiScaledHeight(), minecraft.gui.getGuiTicks(),
                     ChatComponent.DisplayMode.FOREGROUND);
             return clickableStyleFinder.result();
-            //? } else if >= 1.21.11 {
+            *///? } else if >= 1.21.11 {
 
             /*ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
                     font, x, y);
@@ -134,8 +143,8 @@ public class WText extends WWidget {
         Style hoveredTextStyle = getTextStyleAt(x, y);
         if (hoveredTextStyle != null) {
             //? if >= 1.21.11 {
-            ScreenAccessor.libgui$defaultHandleGameClickEvent(
-                    hoveredTextStyle.getClickEvent(), Minecraft.getInstance(), Minecraft.getInstance().screen);
+            ScreenAccessor.libgui$defaultHandleGameClickEvent(hoveredTextStyle.getClickEvent(), Minecraft.getInstance(),
+                    GeneralUtil.getScreen());
             boolean processed = true;
             //? } else {
 

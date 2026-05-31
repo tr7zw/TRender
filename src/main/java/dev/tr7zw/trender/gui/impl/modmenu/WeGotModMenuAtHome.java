@@ -22,7 +22,7 @@ public class WeGotModMenuAtHome extends LightweightGuiDescription {
                 (s, l) -> {
                     l.setLabel(s.apply(null).getTitle());
                     l.setOnClick(() -> {
-                        Minecraft.getInstance().setScreen(s.apply(Minecraft.getInstance().screen));
+                        GeneralUtil.setScreen(s.apply(GeneralUtil.getScreen()));
                     });
                 });
         buttonList.setGap(2);
@@ -31,7 +31,7 @@ public class WeGotModMenuAtHome extends LightweightGuiDescription {
 
         WButton doneButton = new WButton(CommonComponents.GUI_DONE);
         doneButton.setOnClick(() -> {
-            Minecraft.getInstance().setScreen(null);
+            GeneralUtil.setScreen(null);
         });
         root.add(doneButton, 0, 10, 3, 1);
 

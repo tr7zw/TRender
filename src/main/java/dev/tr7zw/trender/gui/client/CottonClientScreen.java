@@ -128,10 +128,17 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         if (description != null) {
             WPanel root = description.getRootPanel();
             if (root != null) {
+                // FIXME
+                //? if < 26.2 {
+                /*
                 GL11.glEnable(GL11.GL_SCISSOR_TEST);
+                *///? }
                 Scissors.refreshScissors();
                 root.paint(context, left, top, mouseX - left, mouseY - top);
+                //? if < 26.2 {
+                /*
                 GL11.glDisable(GL11.GL_SCISSOR_TEST);
+                *///? }
                 Scissors.checkStackIsEmpty();
             }
 

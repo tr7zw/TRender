@@ -89,7 +89,10 @@ public class WPlayerPreview extends WWidget {
         /*entityRenderDispatcher.overrideCameraOrientation(quaternion2);
         entityRenderDispatcher.setRenderShadow(false);
         *///? }
+        //? if < 26.0 {
+        /*
         MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
+        *///? }
         //? if >= 1.21.6 {
 
         var entityRenderer = entityRenderDispatcher.getRenderer(livingEntity);
@@ -126,7 +129,10 @@ public class WPlayerPreview extends WWidget {
             entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
          });
         *///? }
+        //? if < 26.0 {
+        /*
         bufferSource.endBatch();
+        *///? }
         //? if < 1.21.9 {
 
         /*entityRenderDispatcher.setRenderShadow(true);

@@ -32,7 +32,7 @@ public abstract class AbstractConfigScreen extends LightweightGuiDescription {
             @Override
             public void onClose() {
                 save();
-                this.minecraft.setScreen(previous);
+                GeneralUtil.setScreen(previous);
             }
         };
     }

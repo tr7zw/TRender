@@ -1,5 +1,6 @@
 package dev.tr7zw.trender.gui.impl.client;
 
+import dev.tr7zw.transition.*;
 import dev.tr7zw.transition.config.*;
 import dev.tr7zw.transition.loader.*;
 import dev.tr7zw.transition.manager.*;
@@ -33,18 +34,19 @@ public class LibGuiClient
 
         Proxy.proxy = new ClientProxy();
         ModLoaderUtil.disableDisplayTest();
-        System.out.println("[LibGui] Initializing Client...");
+        System.out.println("[TRender] Initializing Client...");
         ModLoaderUtil.registerConfigScreen(
                 (screen) -> new CottonClientScreen(ComponentProvider.literal("TRender"), new ConfigGui(screen)));
+        ClientTRansitionMod.configScreenManager.registerConfigScreen((screen) -> new CottonClientScreen(ComponentProvider.literal("TRenderTest"), new TestingConfigGui(screen)));
         Runnable openSettings = () -> {
             CottonClientScreen screen = new CottonClientScreen(ComponentProvider.literal("We Got Mod Menu At Home"),
                     new WeGotModMenuAtHome()) {
                 @Override
                 public void onClose() {
-                    this.minecraft.setScreen(null);
+                    GeneralUtil.setScreen(null);
                 }
             };
-            Minecraft.getInstance().setScreen(screen);
+            GeneralUtil.setScreen(screen);
         };
         CodeManager.getInstance().registerCode(new String(Base64.getDecoder().decode("c2V0dGluZ3MgcGxz")),
                 openSettings);

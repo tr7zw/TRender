@@ -72,25 +72,27 @@ public class RenderContext implements PoseStackHelper {
         *///? }
     }
 
-    public void drawSpecial(Consumer<MultiBufferSource> consumer) {
+    //? if < 26.2 {
+    /*public void drawSpecial(Consumer<MultiBufferSource> consumer) {
         //? if >= 1.21.6 {
 
         consumer.accept(Minecraft.getInstance().renderBuffers().bufferSource());
         //? } else if >= 1.21.2 {
-        /*
+        /^
          guiGraphics.drawSpecial(consumer);
-        *///? } else if >= 1.21.0 {
+        ^///? } else if >= 1.21.0 {
 
-        /*consumer.accept(guiGraphics.bufferSource());
+        /^consumer.accept(guiGraphics.bufferSource());
         guiGraphics.bufferSource().endBatch();
-        *///? } else {
-        /*
+        ^///? } else {
+        /^
         net.minecraft.client.renderer.MultiBufferSource.BufferSource bs = MultiBufferSource
                 .immediate(Tesselator.getInstance().getBuilder());
         consumer.accept(bs);
         bs.endBatch();
-        *///? }
+        ^///? }
     }
+    *///? }
 
     public void blit(Identifier atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height,
             int textureWidth, int textureHeight) {
@@ -487,9 +489,9 @@ public class RenderContext implements PoseStackHelper {
     }
 
     public void renderComponentHoverEffect(Font font, @Nullable Style textStyle, int x, int y) {
+        // FIXME ??? There isnt even text text here, does this method even do anything?
         //? if >= 26.0 {
 
-        //FIXME ??? There isnt even text text here, does this method even do anything?
         //? } else if >= 1.20.0 {
 
         /*guiGraphics.renderComponentHoverEffect(font, textStyle, x, y);

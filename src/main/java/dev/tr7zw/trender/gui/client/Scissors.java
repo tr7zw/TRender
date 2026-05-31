@@ -75,7 +75,11 @@ public final class Scissors {
 
         if (STACK.isEmpty()) {
             // Just use the full window framebuffer as a scissor
+            // FIXME
+            //? if < 26.2 {
+            /*
             GL11.glScissor(0, 0, mc.getWindow().getWidth(), mc.getWindow().getHeight());
+             *///? }
             return;
         }
 
@@ -105,7 +109,11 @@ public final class Scissors {
         int scaledHeight = (int) (height * scale);
 
         // Expression for Y coordinate adapted from vini2003's Spinnery (code snippet released under WTFPL)
+        // FIXME
+        //? if < 26.2 {
+        /*
         GL11.glScissor((int) (x * scale), (int) (windowHeight - (y * scale) - scaledHeight), scaledWidth, scaledHeight);
+        *///? }
     }
 
     /**
