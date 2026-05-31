@@ -1,5 +1,5 @@
 version: '0.0.2'
-source: "https://github.com/tr7zw/ProcessedModTemplate/tree/master"
+source: "https://github.com/tr7zw/ProcessedModTemplate/tree/ddf71559d50641819614ee3c38c276c0fa64abbf"
 replacements:
   name: "TRender"
   id: "trender"
