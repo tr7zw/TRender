@@ -62,8 +62,8 @@ public interface PoseStackHelper {
         *///? }
     }
     //? } else {
-    /*
-    public default void rotate(com.mojang.math.Quaternion quaternion) {
+
+    /*public default void rotate(com.mojang.math.Quaternion quaternion) {
         getPose().mulPose(quaternion);
     }
     *///? }

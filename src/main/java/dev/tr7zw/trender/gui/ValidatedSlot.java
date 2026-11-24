@@ -28,7 +28,12 @@ public class ValidatedSlot extends Slot {
     private boolean visible = true;
 
     public ValidatedSlot(Container inventory, int index, int x, int y) {
+        //? if >= 26.4 {
+        super(inventory, index, x, y, Section.CONTAINER);
+        //? } else {
+        /*
         super(inventory, index, x, y);
+        *///? }
         if (inventory == null)
             throw new IllegalArgumentException("Can't make an itemslot from a null inventory!");
         this.slotNumber = index;

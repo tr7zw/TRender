@@ -15,8 +15,8 @@ public final class WidgetTextures {
     private static final String LEGACY_PATH = "";
     private static final String LEGACY_SUFFIX = "";
     //? } else {
-    /*
-    private static final String NAMESPACE = "trender";
+
+    /*private static final String NAMESPACE = "trender";
     private static final String LEGACY_PATH = "textures/gui/sprites/";
     private static final String LEGACY_SUFFIX = ".png";
     *///? }

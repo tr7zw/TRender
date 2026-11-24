@@ -107,15 +107,15 @@ public class WButton extends WWidget {
                     : 0;
             // FIXME: WHY?
             //? if <= 1.20.1 {
-            /*
-            context.getPose().pushPose();
+
+            /*context.getPose().pushPose();
             context.getPose().translate(0, 0, 300);
             *///? }
             ScreenDrawing.drawStringWithShadow(context, label.getVisualOrderText(), alignment, x + xOffset,
                     y + ((getHeight() - 8) / 2), getWidth(), color); //LibGuiClient.config.darkMode ? darkmodeColor : color);
             //? if <= 1.20.1 {
-            /*
-            context.getPose().popPose();
+
+            /*context.getPose().popPose();
             *///? }
         }
     }
@@ -125,8 +125,7 @@ public class WButton extends WWidget {
         super.onClick(x, y, button);
 
         if (enabled && isWithinBounds(x, y)) {
-            Minecraft.getInstance().getSoundManager()
-                    .play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+            UISound.playButtonClick();
 
             if (onClick != null)
                 onClick.run();

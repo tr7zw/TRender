@@ -118,15 +118,15 @@ public class WItem extends WWidget {
         Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
                 .getValue(tag.registry().identifier());
         //? } else if >= 1.21.3 {
-        /*
-        Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
+
+        /*Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY
                 .getValue(tag.registry().location());
         *///? } else if >= 1.19.4 {
 
         /*Registry<ItemLike> registry = (Registry<ItemLike>) BuiltInRegistries.REGISTRY.get(tag.registry().location());
         *///? } else {
-        /*
-        Registry<ItemLike> registry = (Registry<ItemLike>) BuiltinRegistries.REGISTRY.get(tag.registry().location());
+
+        /*Registry<ItemLike> registry = (Registry<ItemLike>) BuiltinRegistries.REGISTRY.get(tag.registry().location());
         *///? }
         ImmutableList.Builder<ItemStack> builder = ImmutableList.builder();
 

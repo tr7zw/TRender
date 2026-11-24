@@ -6,8 +6,8 @@ import org.spongepowered.asm.mixin.*;
 
 @Mixin(net.minecraft.client.gui.GuiGraphicsExtractor.class)
 //? } else {
-/*
-@Mixin(net.minecraft.client.renderer.MultiBufferSource.BufferSource.class)
+
+/*@Mixin(net.minecraft.client.renderer.MultiBufferSource.BufferSource.class)
 *///? }
 public interface DrawContextAccessor {
     //? if < 1.21.6 {

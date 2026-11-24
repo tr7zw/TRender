@@ -18,10 +18,10 @@ import org.jetbrains.annotations.*;
 /*import org.joml.Matrix4f;
 *///? }
    //? if <= 1.16.5 {
-   /*
-   import com.mojang.blaze3d.platform.*;
-   import org.lwjgl.opengl.GL11;
-   *///? }
+
+/*import com.mojang.blaze3d.platform.*;
+import org.lwjgl.opengl.GL11;
+*///? }
 
 /**
  * {@code ScreenDrawing} contains utility methods for drawing contents on a
@@ -206,16 +206,16 @@ public class ScreenDrawing {
         //                buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
         //                buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
         //? } else if >= 1.21.3 {
-        /*
-          float a = (color >> 24 & 255) / 255.0F;
-         color = colorAtOpacity(color, a * opacity);
-         Matrix4f model = context.getPose().last().pose();
-         var renderLayer = RenderType.guiTextured(texture);
-         var buffer = context.getVertexConsumers().getBuffer(renderLayer);
-         buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
-         buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
-         buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
-         buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
+
+        /*float a = (color >> 24 & 255) / 255.0F;
+        color = colorAtOpacity(color, a * opacity);
+        Matrix4f model = context.getPose().last().pose();
+        var renderLayer = RenderType.guiTextured(texture);
+        var buffer = context.getVertexConsumers().getBuffer(renderLayer);
+        buffer.addVertex(model, x, y + height, 0).setUv(u1, v2).setColor(color);
+        buffer.addVertex(model, x + width, y + height, 0).setUv(u2, v2).setColor(color);
+        buffer.addVertex(model, x + width, y, 0).setUv(u2, v1).setColor(color);
+        buffer.addVertex(model, x, y, 0).setUv(u1, v1).setColor(color);
         *///? } else if >= 1.21.0 {
 
         /*float r = (color >> 16 & 255) / 255.0F;
@@ -236,8 +236,8 @@ public class ScreenDrawing {
         RenderSystem.disableBlend();
         RenderSystem.setShaderColor(1, 1, 1, 1);
         *///? } else if >= 1.19.0 {
-        /*
-        float r = (color >> 16 & 255) / 255.0F;
+
+        /*float r = (color >> 16 & 255) / 255.0F;
         float g = (color >> 8 & 255) / 255.0F;
         float b = (color & 255) / 255.0F;
         float a = (color >> 24 & 255) / 255.0F;
@@ -256,8 +256,8 @@ public class ScreenDrawing {
         RenderSystem.disableBlend();
         RenderSystem.setShaderColor(1, 1, 1, 1);
         *///? } else if >= 1.17.0 {
-        /*
-        float r = (color >> 16 & 255) / 255.0F;
+
+        /*float r = (color >> 16 & 255) / 255.0F;
         float g = (color >> 8 & 255) / 255.0F;
         float b = (color & 255) / 255.0F;
         float a = (color >> 24 & 255) / 255.0F;
@@ -277,24 +277,24 @@ public class ScreenDrawing {
         RenderSystem.disableBlend();
         RenderSystem.setShaderColor(1, 1, 1, 1);
         *///? } else {
-        /*
-         Minecraft.getInstance().getTextureManager().bind(texture);
-         if (width <= 0) width = 1;
-         if (height <= 0) height = 1;
-         float r = (color >> 16 & 255) / 255.0F;
-         float g = (color >> 8 & 255) / 255.0F;
-         float b = (color & 255) / 255.0F;
-         Tesselator tessellator = Tesselator.getInstance();
-         BufferBuilder buffer = tessellator.getBuilder();
-         RenderSystem.enableBlend();
-         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-         buffer.begin(GL11.GL_QUADS, DefaultVertexFormat.POSITION_COLOR_TEX); //I thought GL_QUADS was deprecated but okay, sure.
-         buffer.vertex(x,         y + height, 0).color(r, g, b, opacity).uv(u1, v2).endVertex();
-         buffer.vertex(x + width, y + height, 0).color(r, g, b, opacity).uv(u2, v2).endVertex();
-         buffer.vertex(x + width, y,          0).color(r, g, b, opacity).uv(u2, v1).endVertex();
-         buffer.vertex(x,         y,          0).color(r, g, b, opacity).uv(u1, v1).endVertex();
-         tessellator.end();
-         RenderSystem.disableBlend();
+
+        /*Minecraft.getInstance().getTextureManager().bind(texture);
+        if (width <= 0) width = 1;
+        if (height <= 0) height = 1;
+        float r = (color >> 16 & 255) / 255.0F;
+        float g = (color >> 8 & 255) / 255.0F;
+        float b = (color & 255) / 255.0F;
+        Tesselator tessellator = Tesselator.getInstance();
+        BufferBuilder buffer = tessellator.getBuilder();
+        RenderSystem.enableBlend();
+        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        buffer.begin(GL11.GL_QUADS, DefaultVertexFormat.POSITION_COLOR_TEX); //I thought GL_QUADS was deprecated but okay, sure.
+        buffer.vertex(x,         y + height, 0).color(r, g, b, opacity).uv(u1, v2).endVertex();
+        buffer.vertex(x + width, y + height, 0).color(r, g, b, opacity).uv(u2, v2).endVertex();
+        buffer.vertex(x + width, y,          0).color(r, g, b, opacity).uv(u2, v1).endVertex();
+        buffer.vertex(x,         y,          0).color(r, g, b, opacity).uv(u1, v1).endVertex();
+        tessellator.end();
+        RenderSystem.disableBlend();
         *///? }
     }
 

@@ -62,8 +62,8 @@ public class ItemIcon implements Icon {
 
         context.renderFakeItem(stack, 0, 0);
         //? } else {
-        /*
-        context.renderFakeItem(stack, x, y);
+
+        /*context.renderFakeItem(stack, x, y);
         *///? }
 
         if (isGhost()) {

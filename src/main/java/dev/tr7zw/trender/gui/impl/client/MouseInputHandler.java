@@ -79,8 +79,8 @@ public final class MouseInputHandler<S extends Screen & CottonScreenImpl> {
 
     public void onMouseScroll(int containerX, int containerY, double horizontalAmount, double verticalAmount) {
         //? if <= 1.20.1 {
-        /*
-        double fhorizontalAmount = horizontalAmount * -1;
+
+        /*double fhorizontalAmount = horizontalAmount * -1;
         *///? } else {
 
         double fhorizontalAmount = horizontalAmount;

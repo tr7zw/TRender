@@ -1,6 +1,6 @@
 //? if forge {
-/*
-package dev.tr7zw.trender.gui.impl.client;
+
+/*package dev.tr7zw.trender.gui.impl.client;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;

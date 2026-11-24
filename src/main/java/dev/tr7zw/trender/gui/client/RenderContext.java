@@ -10,6 +10,10 @@ import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.screens.*;
 import net.minecraft.client.renderer.*;
+//? if >= 26.4 {
+import net.minecraft.client.renderer.pipeline.*;
+import net.minecraft.client.renderer.pipeline.variant.*;
+//? }
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
 import net.minecraft.util.*;
@@ -34,9 +38,9 @@ import dev.tr7zw.trender.gui.impl.client.*;
 /*import org.joml.Matrix4f;
 *///? }
    //? if <= 1.16.5 {
-   /*
-   import org.lwjgl.opengl.GL11;
-   *///? }
+
+/*import org.lwjgl.opengl.GL11;
+*///? }
 
 @AllArgsConstructor
 public class RenderContext implements PoseStackHelper {
@@ -49,8 +53,8 @@ public class RenderContext implements PoseStackHelper {
     @Getter
     private final GuiGraphicsExtractor guiGraphics;
     //? } else {
-    /*
-    private final Screen screen;
+
+    /*private final Screen screen;
     private final PoseStack pose;
     *///? }
 
@@ -67,8 +71,8 @@ public class RenderContext implements PoseStackHelper {
 
         return guiGraphics.pose();
         //? } else {
-        /*
-        return pose;
+
+        /*return pose;
         *///? }
     }
 
@@ -78,15 +82,15 @@ public class RenderContext implements PoseStackHelper {
     
         consumer.accept(Minecraft.getInstance().renderBuffers().bufferSource());
         //? } else if >= 1.21.2 {
-        /^
-         guiGraphics.drawSpecial(consumer);
+        
+         /^guiGraphics.drawSpecial(consumer);
         ^///? } else if >= 1.21.0 {
     
         /^consumer.accept(guiGraphics.bufferSource());
         guiGraphics.bufferSource().endBatch();
         ^///? } else {
-        /^
-        net.minecraft.client.renderer.MultiBufferSource.BufferSource bs = MultiBufferSource
+        
+        /^net.minecraft.client.renderer.MultiBufferSource.BufferSource bs = MultiBufferSource
                 .immediate(Tesselator.getInstance().getBuilder());
         consumer.accept(bs);
         bs.endBatch();
@@ -96,30 +100,35 @@ public class RenderContext implements PoseStackHelper {
 
     public void blit(Identifier atlasLocation, int x, int y, float uOffset, float vOffset, int width, int height,
             int textureWidth, int textureHeight) {
-        //? if >= 1.21.6 {
 
+        //? if >= 26.4 {
+
+        guiGraphics.blit(GuiPipeline.TEXTURED, atlasLocation, x, y, uOffset, vOffset, width, height, textureWidth,
+                textureHeight);
+        //? } elif >= 1.21.6 {
+        /*
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, atlasLocation, x, y, uOffset, vOffset, width, height,
                 textureWidth, textureHeight);
-        //? } else if >= 1.21.2 {
-        /*
-         guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, width, height,
-                 textureWidth, textureHeight);
-        *///? } else if >= 1.20.0 {
+        *///? } elif >= 1.21.2 {
+
+        /*guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, width, height,
+                textureWidth, textureHeight);
+        *///? } elif >= 1.20.0 {
 
         /*guiGraphics.blit(atlasLocation, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
-        *///? } else if > 1.17.0 {
-        /*
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        *///? } elif > 1.17.0 {
+
+        /*RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, atlasLocation);
         screen.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
-        *///? } else if >= 1.18.0 {
+        *///? } elif >= 1.18.0 {
 
-        // minecraft.getTextureManager().bind(atlasLocation);
-        // GuiComponent.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
-        //? } else {
-        /*
-         minecraft.getTextureManager().bind(atlasLocation);
-         GuiComponent.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureHeight, textureWidth);
+        /*minecraft.getTextureManager().bind(atlasLocation);
+        GuiComponent.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureWidth, textureHeight);
+        *///? } else {
+
+        /*minecraft.getTextureManager().bind(atlasLocation);
+        GuiComponent.blit(pose, x, y, 0, uOffset, vOffset, width, height, textureHeight, textureWidth);
         *///? }
     }
 
@@ -129,46 +138,52 @@ public class RenderContext implements PoseStackHelper {
 
     public void blit(Identifier atlasLocation, int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth,
             int vHeight, int textureWidth, int textureHeight) {
-        //? if >= 1.21.6 {
-
         //TODO blitOffset?
+        //? if >= 26.4 {
+
+        guiGraphics.blit(GuiPipeline.TEXTURED, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth,
+                textureHeight);
+        //? } elif >= 1.21.6 {
+        /*
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
                 textureWidth, textureHeight);
-        //? } else if >= 1.21.2 {
+        *///? } elif >= 1.21.2 {
         /*
-         //TODO blitOffset
-         guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
-                textureWidth, textureHeight);
-        *///? } else if >= 1.20.0 {
+        guiGraphics.blit(t -> RenderType.guiTextured(t), atlasLocation, x, y, uOffset, vOffset, uWidth, vHeight,
+               textureWidth, textureHeight);
+        *///? } elif >= 1.20.0 {
 
         /*guiGraphics.blit(atlasLocation, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth,
                 textureHeight);
-        *///? } else if > 1.17.0 {
-        /*
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        *///? } elif > 1.17.0 {
+
+        /*RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, atlasLocation);
         GuiComponent.blit(pose, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
         *///? } else {
-        /*
-         minecraft.getTextureManager().bind(atlasLocation);
-         GuiComponent.blit(pose, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
+
+        /*minecraft.getTextureManager().bind(atlasLocation);
+        GuiComponent.blit(pose, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
         *///? }
     }
 
     public void blitSprite(Identifier texture, int x, int y, int width, int height, int sliceSide, int sliceTop,
             int txtWidth, int txtHeight) {
-        //? if >= 1.21.6 {
+        //? if >= 26.4 {
 
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height);
-        //? } else if >= 1.21.2 {
+        guiGraphics.blitSprite(GuiPipeline.TEXTURED, texture, x, y, width, height);
+        //? } elif >= 1.21.6 {
         /*
-         guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height);
-        *///? } else if >= 1.20.2 {
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height);
+        *///? } elif >= 1.21.2 {
+
+        /*guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height);
+        *///? } elif >= 1.20.2 {
 
         /*guiGraphics.blitSprite(texture, x, y, width, height);
         *///? } else {
-        /*
-        blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight,
+
+        /*blitNineSliced(texture, x, y, width, height, sliceSide, sliceTop, sliceSide, sliceTop, txtWidth, txtHeight,
                 txtWidth, txtHeight);
         *///? }
     }
@@ -313,18 +328,21 @@ public class RenderContext implements PoseStackHelper {
     }
 
     public void blitSprite(Identifier texture, int x, int y, int width, int height, int color) {
-        //? if >= 1.21.6 {
+        //? if >= 26.4 {
 
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height, color);
-        //? } else if >= 1.21.2 {
+        guiGraphics.blitSprite(GuiPipeline.TEXTURED, texture, x, y, width, height, color);
+        //? } elif >= 1.21.6 {
         /*
-         guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height, color);
-        *///? } else if >= 1.20.2 {
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, texture, x, y, width, height, color);
+        *///? } elif >= 1.21.2 {
+
+        /*guiGraphics.blitSprite(t -> RenderType.guiTextured(t), texture, x, y, width, height, color);
+        *///? } elif >= 1.20.2 {
 
         /*guiGraphics.blitSprite(texture, x, y, width, height, color);
         *///? } else {
-        /*
-        throw new java.lang.RuntimeException();
+
+        /*throw new java.lang.RuntimeException();
         *///? }
     }
 
@@ -336,8 +354,8 @@ public class RenderContext implements PoseStackHelper {
 
         /*guiGraphics.renderTooltip(font, split, x, y);
         *///? } else {
-        /*
-        screen.renderTooltip(pose, split, x, y);
+
+        /*screen.renderTooltip(pose, split, x, y);
         *///? }
     }
 
@@ -349,8 +367,8 @@ public class RenderContext implements PoseStackHelper {
 
         /*guiGraphics.renderTooltip(font, translatable, x, y);
         *///? } else {
-        /*
-        screen.renderTooltip(pose, translatable, x, y);
+
+        /*screen.renderTooltip(pose, translatable, x, y);
         *///? }
     }
 
@@ -359,18 +377,21 @@ public class RenderContext implements PoseStackHelper {
 
         guiGraphics.fill(minX, minY, maxX, maxY, color);
         //? } else {
-        /*
-        GuiComponent.fill(pose, minX, minY, maxX, maxY, color);
+
+        /*GuiComponent.fill(pose, minX, minY, maxX, maxY, color);
         *///? }
     }
 
     public void invertedRect(int x, int y, int width, int height) {
-        //? if >= 1.21.6 {
+        //? if >= 26.4 {
 
-        guiGraphics.fill(RenderPipelines.GUI_TEXT_HIGHLIGHT, x, y, x + width, y + height, -16776961);
-        //? } else if >= 1.21.5 {
+        guiGraphics.fill(GuiPipeline.TEXT_HIGHLIGHT, x, y, x + width, y + height, -16776961);
+        //? } elif >= 1.21.6 {
         /*
-         guiGraphics.fill(RenderType.guiTextHighlight(), x, y, x + width, y + height, -16776961);
+        guiGraphics.fill(RenderPipelines.GUI_TEXT_HIGHLIGHT, x, y, x + width, y + height, -16776961);
+        *///? } elif >= 1.21.5 {
+
+        /*guiGraphics.fill(RenderType.guiTextHighlight(), x, y, x + width, y + height, -16776961);
         *///? } else {
 
         /*//? if >= 1.17.0 {
@@ -391,8 +412,8 @@ public class RenderContext implements PoseStackHelper {
           RenderSystem.disableColorLogicOp();
           RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
          //? } else if >= 1.19.0 {
-        /^
-        Tesselator tessellator = Tesselator.getInstance();
+        
+        /^Tesselator tessellator = Tesselator.getInstance();
         BufferBuilder buffer = tessellator.getBuilder();
         buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
         buffer.vertex(model, x, y + height, 0).endVertex();
@@ -403,8 +424,8 @@ public class RenderContext implements PoseStackHelper {
         RenderSystem.disableColorLogicOp();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         ^///? } else {
-        /^
-        Tesselator tessellator = Tesselator.getInstance();
+        
+        /^Tesselator tessellator = Tesselator.getInstance();
         BufferBuilder buffer = tessellator.getBuilder();
         buffer.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION);
         buffer.vertex(model, x, y + height, 0).endVertex();
@@ -417,8 +438,8 @@ public class RenderContext implements PoseStackHelper {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         ^///? }
            //? } else {
-           /^
-             Tesselator tessellator_1 = Tesselator.getInstance();
+           
+             /^Tesselator tessellator_1 = Tesselator.getInstance();
              BufferBuilder bufferBuilder_1 = tessellator_1.getBuilder();
              RenderSystem.color4f(0.0F, 0.0F, 255.0F, 255.0F);
              RenderSystem.disableTexture();
@@ -474,8 +495,8 @@ public class RenderContext implements PoseStackHelper {
 
         /*guiGraphics.drawString(textRenderer, text, x, y, color, dropShadow);
         *///? } else {
-        /*
-        if (dropShadow) {
+
+        /*if (dropShadow) {
             textRenderer.drawShadow(pose, text, x, y, color);
         } else {
             textRenderer.draw(pose, text, x, y, color);
@@ -496,8 +517,8 @@ public class RenderContext implements PoseStackHelper {
 
         /*guiGraphics.renderComponentHoverEffect(font, textStyle, x, y);
         *///? } else {
-        /*
-        //TODO?
+
+        /*//TODO?
         return;
         *///? }
     }
@@ -519,8 +540,8 @@ public class RenderContext implements PoseStackHelper {
         
         return ((DrawContextAccessor) guiGraphics).libgui$getVertexConsumers();
         //? } else {
-    /^
-        return minecraft.renderBuffers().bufferSource();
+    
+        /^return minecraft.renderBuffers().bufferSource();
         ^///? }
     }
     *///? }

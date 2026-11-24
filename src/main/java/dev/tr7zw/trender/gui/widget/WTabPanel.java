@@ -346,8 +346,7 @@ public class WTabPanel extends WPanel {
         public InputResult onClick(int x, int y, int button) {
             super.onClick(x, y, button);
 
-            Minecraft.getInstance().getSoundManager()
-                    .play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+            UISound.playButtonClick();
 
             setSelectedIndex(tabWidgets.indexOf(this));
             return InputResult.PROCESSED;

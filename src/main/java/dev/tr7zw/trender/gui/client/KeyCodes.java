@@ -4,10 +4,10 @@ package dev.tr7zw.trender.gui.client;
 
 import org.lwjgl.sdl.*;
 //? } else {
-/*
-import org.lwjgl.glfw.*;
-*/
-//? }
+
+/*import org.lwjgl.glfw.*;
+
+*///? }
 
 // Keycodes in GLFW or SDL format, depending on the Minecraft version
 public class KeyCodes {
@@ -38,8 +38,8 @@ public class KeyCodes {
     public static final int KEY_A = SDLScancode.SDL_SCANCODE_A;
 
     //? } else {
-    /*
-    public static final int ENTER = GLFW.GLFW_KEY_ENTER;
+
+    /*public static final int ENTER = GLFW.GLFW_KEY_ENTER;
     public static final int KP_ENTER = GLFW.GLFW_KEY_KP_ENTER;
     public static final int SPACE = GLFW.GLFW_KEY_SPACE;
     public static final int MOD_CONTROL = GLFW.GLFW_MOD_CONTROL;
@@ -62,7 +62,7 @@ public class KeyCodes {
     public static final int KEY_C = GLFW.GLFW_KEY_C;
     public static final int KEY_A = GLFW.GLFW_KEY_A;
     
-    */
-    //? }
+    
+    *///? }
 
 }

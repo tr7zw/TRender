@@ -118,7 +118,7 @@ public class WTextField extends WWidget {
     }
 
     private int clampCursor(int cursor) {
-        return Mth.clamp(cursor, 0, text.length());
+        return Math.clamp(cursor, 0, text.length());
     }
 
     public void setCursorPos(int location) {
@@ -448,30 +448,30 @@ public class WTextField extends WWidget {
         //? if >= 26.3 {
         return InputConstants.isKeyDown(KeyCodes.LCONTROL) || InputConstants.isKeyDown(KeyCodes.RCONTROL);
         //? } else {
-        /*
-        return InputConstants.isKeyDown(getWindow(), 341) || InputConstants.isKeyDown(getWindow(), 345);
-         */
-        //? }
+
+        /*return InputConstants.isKeyDown(getWindow(), 341) || InputConstants.isKeyDown(getWindow(), 345);
+         
+        *///? }
     }
 
     private boolean hasShiftDown() {
         //? if >= 26.3 {
         return InputConstants.isKeyDown(KeyCodes.LSHIFT) || InputConstants.isKeyDown(KeyCodes.RSHIFT);
         //? } else {
-        /*
-        return InputConstants.isKeyDown(getWindow(), 340) || InputConstants.isKeyDown(getWindow(), 344);
-         */
-        //? }
+
+        /*return InputConstants.isKeyDown(getWindow(), 340) || InputConstants.isKeyDown(getWindow(), 344);
+         
+        *///? }
     }
 
     private boolean hasAltDown() {
         //? if >= 26.3 {
         return InputConstants.isKeyDown(KeyCodes.LALT) || InputConstants.isKeyDown(KeyCodes.RALT);
         //? } else {
-        /*
-        return InputConstants.isKeyDown(getWindow(), 342) || InputConstants.isKeyDown(getWindow(), 346);
-         */
-        //? }
+
+        /*return InputConstants.isKeyDown(getWindow(), 342) || InputConstants.isKeyDown(getWindow(), 346);
+         
+        *///? }
 
     }
 

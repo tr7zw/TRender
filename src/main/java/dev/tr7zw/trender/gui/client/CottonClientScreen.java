@@ -133,14 +133,14 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
             if (root != null) {
                 // FIXME
                 //? if < 26.2 {
-                /*
-                GL11.glEnable(GL11.GL_SCISSOR_TEST);
+
+                /*GL11.glEnable(GL11.GL_SCISSOR_TEST);
                 *///? }
                 Scissors.refreshScissors();
                 root.paint(context, left, top, mouseX - left, mouseY - top);
                 //? if < 26.2 {
-                /*
-                GL11.glDisable(GL11.GL_SCISSOR_TEST);
+
+                /*GL11.glDisable(GL11.GL_SCISSOR_TEST);
                 *///? }
                 Scissors.checkStackIsEmpty();
             }
@@ -160,31 +160,38 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    //? if >= 26.0 {
-
-    public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor context, int mouseX, int mouseY,
+    //? if >= 26.4 {
+    public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor context) {
+        super.extractRenderState(context);
+        RenderContext renderContext = new RenderContext(context);
+        int mouseX = context.mouseX();
+        int mouseY = context.mouseY();
+        float partialTicks = context.partialTicks();
+        //? } else  if >= 26.0 {
+        /*
+        public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor context, int mouseX, int mouseY,
             float partialTicks) {
         super.extractRenderState(context, mouseX, mouseY, partialTicks);
         RenderContext renderContext = new RenderContext(context);
-        //? } else if >= 1.20.0 {
+        *///? } else if >= 1.20.0 {
 
         /*public void render(net.minecraft.client.gui.GuiGraphicsExtractor context, int mouseX, int mouseY,
             float partialTicks) {
         super.render(context, mouseX, mouseY, partialTicks);
         RenderContext renderContext = new RenderContext(context);
         *///? } else {
-        /*
-            public void render(PoseStack context, int mouseX, int mouseY, float partialTicks) {
+
+        /*public void render(PoseStack context, int mouseX, int mouseY, float partialTicks) {
         super.render(context, mouseX, mouseY, partialTicks);
         RenderContext renderContext = new RenderContext(this, context);
         *///? }
            //? if <= 1.19.4 {
-           /*
-           super.renderBackground(renderContext.getPose());
-           *///? } else if <= 1.20.1 {
-           /*
-           super.renderBackground(context);
-           *///? }
+
+        /*super.renderBackground(renderContext.getPose());
+        *///? } else if <= 1.20.1 {
+
+        /*super.renderBackground(context);
+        *///? }
         paint(renderContext, mouseX, mouseY, partialTicks);
 
         if (description != null) {
@@ -283,8 +290,8 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount, double verticalAmount) {
         super.mouseScrolled(mouseX, mouseY, horizontalAmount, verticalAmount);
         //? } else {
-        /*
-            public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount) {
+
+        /*public boolean mouseScrolled(double mouseX, double mouseY, double horizontalAmount) {
         super.mouseScrolled(mouseX, mouseY, horizontalAmount);
         double verticalAmount = 0;
         *///? }

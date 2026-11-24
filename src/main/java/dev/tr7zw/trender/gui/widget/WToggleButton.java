@@ -128,7 +128,7 @@ public class WToggleButton extends WWidget {
 
     @Override
     public InputResult onClick(int x, int y, int button) {
-        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+        UISound.playButtonClick();
 
         this.isOn = !this.isOn;
         onToggle(this.isOn);

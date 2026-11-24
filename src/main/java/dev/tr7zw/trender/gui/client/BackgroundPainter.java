@@ -219,8 +219,8 @@ public interface BackgroundPainter {
         Objects.requireNonNull(texture, "Texture cannot be null");
         return (context, left, top, panel) -> {
             //? if < 1.21.0 {
-            /*
-            com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+
+            /*com.mojang.blaze3d.systems.RenderSystem.enableBlend();
             *///? }
             SpriteData data = TextureConstants.get(texture);
             context.blitSprite(texture, left, top, panel.getWidth(), panel.getHeight(), data.border(), data.border(),

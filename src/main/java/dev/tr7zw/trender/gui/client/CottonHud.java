@@ -28,8 +28,8 @@ public final class CottonHud {
         
             RenderContext renderContext = new RenderContext(drawContext);
             //? } else {
-            /^
-            RenderContext renderContext = new RenderContext(Minecraft.getInstance().screen, drawContext);
+            
+            /^RenderContext renderContext = new RenderContext(Minecraft.getInstance().screen, drawContext);
             ^///? }
             for (WWidget widget : widgets) {
                 Positioner positioner = positioners.get(widget);

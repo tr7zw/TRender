@@ -64,10 +64,10 @@ public class WPlayerPreview extends WWidget {
         //? if >= 26.3 {
         matrixStack.rotate(quaternion);
         //? } else {
-        /*
-        matrixStack.mulPose(quaternion);
-         */
-        //? }
+
+        /*matrixStack.mulPose(quaternion);
+         
+        *///? }
         matrixStack.translate(0.0D, -1, 0D);
         float yBodyRot = livingEntity.yBodyRot;
         float yRot = EntityUtil.getYRot(livingEntity);
@@ -96,9 +96,9 @@ public class WPlayerPreview extends WWidget {
         entityRenderDispatcher.setRenderShadow(false);
         *///? }
            //? if < 26.0 {
-           /*
-           MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-           *///? }
+
+        /*MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
+        *///? }
            //? if >= 1.21.6 {
 
         var entityRenderer = entityRenderDispatcher.getRenderer(livingEntity);
@@ -124,21 +124,21 @@ public class WPlayerPreview extends WWidget {
                 x - width, y - height, x + width, y + height);
          *///? }
             //? } else if >= 1.21.2 {
-            /*
-             entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, delta, matrixStack, bufferSource, 15728880);
-            *///? } else if >= 1.17.0 {
+
+        /*entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, delta, matrixStack, bufferSource, 15728880);
+        *///? } else if >= 1.17.0 {
 
         /*entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
         *///? } else {
-        /*
-         RenderSystem.runAsFancy(() -> {
-            entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
-         });
+
+        /*RenderSystem.runAsFancy(() -> {
+           entityRenderDispatcher.render(livingEntity, 0.0D, 0.0D, 0.0D, 0.0F, delta, matrixStack, bufferSource, 15728880);
+        });
         *///? }
            //? if < 26.0 {
-           /*
-           bufferSource.endBatch();
-           *///? }
+
+        /*bufferSource.endBatch();
+        *///? }
            //? if < 1.21.9 {
 
         /*entityRenderDispatcher.setRenderShadow(true);
@@ -160,8 +160,8 @@ public class WPlayerPreview extends WWidget {
 
         /*RenderSystem.applyModelViewMatrix();
         *///? } else if < 1.17.0 {
-        /*
-         RenderSystem.popMatrix();
+
+        /*RenderSystem.popMatrix();
         *///? }
     }
 
@@ -170,10 +170,10 @@ public class WPlayerPreview extends WWidget {
 
         /*RenderSystem.applyModelViewMatrix();
         *///? } else if < 1.17.0 {
-        /*
-         RenderSystem.pushMatrix();
-         RenderSystem.translatef((float)xpos, (float)ypos, 1050.0F);
-         RenderSystem.scalef(1.0F, 1.0F, -1.0F);
+
+        /*RenderSystem.pushMatrix();
+        RenderSystem.translatef((float)xpos, (float)ypos, 1050.0F);
+        RenderSystem.scalef(1.0F, 1.0F, -1.0F);
         *///? }
     }
 

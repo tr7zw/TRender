@@ -9,7 +9,7 @@ public class LibGuiConfig {
 
     public GuiStyle style = GuiStyle.VANILLA_MODERN;
     //? } else {
-    /*
-    public GuiStyle style = GuiStyle.VANILLA_OLD;
+
+    /*public GuiStyle style = GuiStyle.VANILLA_OLD;
     *///? }
 }

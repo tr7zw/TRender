@@ -107,8 +107,8 @@ public class WLabel extends WWidget {
                     ChatComponent.DisplayMode.FOREGROUND);
             return clickableStyleFinder.result();
             //? } else if >= 26.0 {
-            /*
-            Minecraft minecraft = Minecraft.getInstance();
+
+            /*Minecraft minecraft = Minecraft.getInstance();
             Font font = minecraft.font;
             ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
                     font, x, y);

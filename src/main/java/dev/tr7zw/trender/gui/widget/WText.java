@@ -85,8 +85,8 @@ public class WText extends WWidget {
                     ChatComponent.DisplayMode.FOREGROUND);
             return clickableStyleFinder.result();
             //? } else  >= 26.0 {
-            /*
-            ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
+
+            /*ActiveTextCollector.ClickableStyleFinder clickableStyleFinder = new ActiveTextCollector.ClickableStyleFinder(
                     font, x, y);
             minecraft.gui.getChat().captureClickableText(clickableStyleFinder,
                     minecraft.getWindow().getGuiScaledHeight(), minecraft.gui.getGuiTicks(),

@@ -57,8 +57,8 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
 
         this.world = playerInventory.player.level();
         //? } else {
-        /*
-        this.world = playerInventory.player.level;
+
+        /*this.world = playerInventory.player.level;
         *///? }
         this.propertyDelegate = null;//new ArrayPropertyDelegate(1);
     }
@@ -85,8 +85,8 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
 
         this.world = playerInventory.player.level();
         //? } else {
-        /*
-        this.world = playerInventory.player.level;
+
+        /*this.world = playerInventory.player.level;
         *///? }
         this.propertyDelegate = propertyDelegate;
         if (propertyDelegate != null && propertyDelegate.getCount() > 0)
@@ -164,8 +164,8 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
 
                 slot.setByPlayer(ItemStack.EMPTY);
                 //? } else {
-                /*
-                slot.set(ItemStack.EMPTY);
+
+                /*slot.set(ItemStack.EMPTY);
                 *///? }
             } else {
                 slot.setChanged();
@@ -205,16 +205,16 @@ public class SyncedGuiDescription extends AbstractContainerMenu implements GuiDe
 
                 slot.setByPlayer(toInsert.split(slot.getMaxStackSize(toInsert)));
                 //? } else {
-                /*
-                slot.set(toInsert.split(slot.getMaxStackSize(toInsert)));
+
+                /*slot.set(toInsert.split(slot.getMaxStackSize(toInsert)));
                 *///? }
             } else {
                 //? if >= 1.19.4 {
 
                 slot.setByPlayer(toInsert.split(toInsert.getCount()));
                 //? } else {
-                /*
-                slot.set(toInsert.split(slot.getMaxStackSize(toInsert)));
+
+                /*slot.set(toInsert.split(slot.getMaxStackSize(toInsert)));
                 *///? }
             }
 
