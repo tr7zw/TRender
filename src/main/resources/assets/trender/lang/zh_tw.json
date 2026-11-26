@@ -1,0 +1,13 @@
+{
+    "modmenu.descriptionTranslation.trender": "基於 CottonMC LibGui 的多版本渲染函式庫",
+    "text.trender.name": "Trender",
+    "text.trender.tab.general_options": "選項",
+    "text.trender.style": "介面樣式",
+    "text.trender.style.tooltip": "變更 tr7zw 旗下所有模組的介面樣式。",
+    "text.trender.style.MODERN": "現代",
+    "text.trender.style.MODERN_DARK": "現代深色",
+    "text.trender.style.VANILLA_OLD": "舊版原版",
+    "text.trender.style.VANILLA_MODERN": "現代原版",
+    "text.trender.sendstacktraces": "傳送堆疊追蹤",
+    "text.trender.sendstacktraces.tooltip": "啟用後，日誌或遊戲當機中包含 tr7zw 旗下模組參考的堆疊追蹤資訊，將透過 Sentry（Sentry.io）傳送給模組作者，以協助更快修復錯誤。不會收集或傳送任何個人資訊。（開啟後需重新啟動遊戲）"
+}
